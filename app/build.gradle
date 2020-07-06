@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+apply from: "../config_build.gradle"
+
+android {
+
+    defaultConfig {
+        applicationId "com.victor.cherry"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    if (isModule.toBoolean()) {
+        implementation project(':lib_common')
+        implementation project(':lib_coremodel')
+    } else {
+        implementation project(':module_home')
+        implementation project(':module_mine')
+    }
+}

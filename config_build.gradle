@@ -1,0 +1,82 @@
+/**
+ * 关于整个项目(app/module)的通用gradle配置
+ */
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
+    //这个是ARouter需要配置的kapt
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../docs/victor_keystore.jks')
+            storePassword "android"
+            keyAlias "victor"
+            keyPassword "android"
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
+            buildConfigField "boolean", "MODEL_ONLINE", "true"
+            buildConfigField "boolean", "MODEL_DEBUG", "false"
+        }
+        debug {
+            signingConfig signingConfigs.release
+            buildConfigField "boolean", "MODEL_ONLINE", "false"
+            buildConfigField "boolean", "MODEL_DEBUG", "true"
+        }
+    }
+
+    //不进行代码静态检测
+    lintOptions {
+        abortOnError false
+    }
+
+    //支持java8
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //开启databinding
+    dataBinding {
+        enabled = true
+    }
+
+    //生成libs目录
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation deps.arouter.runtime
+    kapt deps.arouter.compiler
+}

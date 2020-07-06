@@ -1,0 +1,7 @@
+include ':module_mine'
+include ':module_home'
+include ':lib_coremodel'
+include ':lib_common'
+include ':lib_opensource'
+include ':app'
+rootProject.name = "Cherry"

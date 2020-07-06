@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.victor.module.home">
+
+    <application
+        android:label="@string/module_home"
+        android:name="com.victor.lib.common.app.App"
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".view.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
