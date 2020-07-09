@@ -1,7 +1,6 @@
 apply from: "../module_build.gradle"
 
 android {
-
 }
 
 dependencies {

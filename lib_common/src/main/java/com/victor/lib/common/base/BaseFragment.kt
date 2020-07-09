@@ -1,10 +1,14 @@
 package com.victor.lib.common.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import com.victor.lib.common.R
 
 /*
  * -----------------------------------------------------------------
@@ -26,6 +30,7 @@ abstract class BaseFragment : Fragment() {
     protected var rootView: View? = null
     //Fragment对用户可见的标记
     var isVisibleToUser: Boolean = false
+    var viewDataBinding : ViewDataBinding? = null;
 
     protected abstract fun getLayoutResource(): Int
     abstract fun handleBackEvent(): Boolean
@@ -52,9 +57,17 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (rootView == null) {
-            rootView = inflater.inflate(getLayoutResource(), container, false)
+        if (viewDataBinding == null) {
+            viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutResource(),container, false)
         }
+        if (rootView == null) {
+            if (viewDataBinding == null) {
+                rootView = inflater.inflate(getLayoutResource(), container, false)
+            } else {
+                rootView = viewDataBinding!!.root
+            }
+        }
+
         if (rootView!!.getParent() != null) {
             val parent = rootView!!.getParent() as ViewGroup
             parent!!.removeView(rootView)

@@ -1,10 +1,17 @@
 package com.victor.module.home.view
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.victor.cherry.viewmodel.HomeViewModel
+import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.module.home.R
+import com.victor.module.home.databinding.FragmentHomeBinding
 
 /*
  * -----------------------------------------------------------------
@@ -18,7 +25,7 @@ import com.victor.module.home.R
  */
 @Route(path = ARouterPath.HomeFgt)
 class HomeFragment: BaseFragment() {
-
+    private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
     companion object {
         fun newInstance(): HomeFragment {
             return newInstance(0)
@@ -34,6 +41,25 @@ class HomeFragment: BaseFragment() {
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_home
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val binding = viewDataBinding as FragmentHomeBinding?
+
+        // Set the LifecycleOwner to be able to observe LiveData objects
+        binding?.lifecycleOwner = this
+
+        // Bind ViewModel
+        binding?.viewmodel = viewmodel
     }
 
     override fun handleBackEvent(): Boolean {

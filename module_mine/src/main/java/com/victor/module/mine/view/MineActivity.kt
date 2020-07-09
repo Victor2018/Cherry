@@ -1,6 +1,6 @@
 package com.victor.module.mine.view
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity

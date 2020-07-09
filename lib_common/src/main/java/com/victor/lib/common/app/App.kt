@@ -1,5 +1,7 @@
 package com.victor.lib.common.app
 
+import com.alibaba.android.arouter.launcher.ARouter
+import com.victor.lib.common.base.AppConfig
 import com.victor.lib.common.base.BaseApplication
 
 /*
@@ -13,8 +15,14 @@ import com.victor.lib.common.base.BaseApplication
  * -----------------------------------------------------------------
  */
 class App: BaseApplication() {
+    companion object {
+        private var instance : BaseApplication ?= null
+        public fun get() = instance!!
+    }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
     }
+
 }

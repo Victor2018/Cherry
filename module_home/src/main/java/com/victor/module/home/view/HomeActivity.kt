@@ -1,6 +1,6 @@
 package com.victor.module.home.view
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
@@ -19,8 +19,6 @@ import com.victor.module.home.R
 @Route(path = ARouterPath.HomeAct)
 class HomeActivity: BaseActivity() {
     var currentFragment: Fragment? = null
-
-
 
     override fun getLayoutResource(): Int {
         return R.layout.activity_home

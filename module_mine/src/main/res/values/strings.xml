@@ -2,5 +2,7 @@
     <string name="module_mine">module_mine</string>
 
     <string name="mine_fragment">MineFragment</string>
+    <string name="post_subtitle">Submitted by %s</string>
+    <string name="retry">Retry</string>
 
 </resources>

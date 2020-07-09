@@ -68,10 +68,18 @@ android {
         enabled = true
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     //生成libs目录
     sourceSets {
         main.jniLibs.srcDirs = ['libs']
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {

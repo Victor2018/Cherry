@@ -16,7 +16,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 abstract class BaseApplication: Application() {
     companion object {
         private var instance : BaseApplication ?= null
-        fun get() = instance!!
+        public fun get() = instance!!
     }
 
     override fun onCreate() {

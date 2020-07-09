@@ -2,13 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 29
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
 
@@ -22,22 +24,60 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    // Support libraries
     api deps.kotlin.stdlib
-    api deps.support.app_compat
-    api deps.support.v4
-    api deps.junit
-    api deps.atsl.runner
-    api deps.espresso.core
-    api deps.support.design
+    api deps.core_ktx
+    api deps.app_compat
     api deps.constraint_layout
-    api deps.support.cardview
-    api deps.support.recyclerview
+    testApi deps.junit
+    testApi deps.arch_core.testing
+
+    androidTestApi deps.atsl.runner
+    androidTestApi deps.atsl.rules
+    androidTestApi deps.atsl.ext_junit
+    androidTestApi deps.espresso.core
+    androidTestApi deps.espresso.contrib
+    androidTestApi deps.arch_core.testing
+
+    api deps.material
+    api deps.lifecycle.runtime
+    api deps.lifecycle.viewmodel_ktx
+    api deps.lifecycle.livedata_ktx
+    api deps.activity.activity_ktx
+    api deps.fragment.fragment_ktx
+
+    //协程
+    testApi deps.coroutines.test
+
+    //网络请求
+    api deps.retrofit.core
+    api deps.retrofit.retrofit_converter_gson
+    api deps.okhttp3.core
+    api deps.okhttp3.logging
+
+    kapt deps.room.compiler
+    kapt deps.glide.compiler
+
+    api deps.room.runtime
+    api deps.room.ktx
+    api deps.paging_runtime
+
+    api deps.glide.runtime
+
+    api deps.recyclerview
+    api deps.cardview
 
 }

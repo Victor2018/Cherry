@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.victor.module.mine">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:label="@string/module_mine"
         android:name="com.victor.lib.common.app.App"
