@@ -251,7 +251,6 @@ class ImageUtils {
     fun getRequestOptions(resId: Int): RequestOptions? {
         if (options == null) {
             options = RequestOptions()
-                .centerCrop()
                 .placeholder(resId)
                 .error(resId)
                 .priority(Priority.HIGH)

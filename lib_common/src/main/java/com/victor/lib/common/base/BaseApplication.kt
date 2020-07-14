@@ -1,6 +1,7 @@
 package com.victor.lib.common.base
 
 import android.app.Application
+import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 
 /*
@@ -29,5 +30,6 @@ abstract class BaseApplication: Application() {
             ARouter.openLog()
         }
         ARouter.init(this)
+        MultiDex.install(this)
     }
 }

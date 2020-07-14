@@ -1,11 +1,11 @@
 package com.victor.lib.coremodel.http.datasource
 
 import androidx.paging.ExperimentalPagingApi
-import com.victor.lib.coremodel.entity.GirlInfo
 import com.victor.lib.coremodel.http.ApiService
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.victor.lib.coremodel.entity.GankDetailInfo
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -23,8 +23,8 @@ import java.io.IOException
  */
 class GankGirlPagingSource (
     private val requestApi: ApiService
-) : PagingSource<Int, GirlInfo>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GirlInfo> {
+) : PagingSource<Int, GankDetailInfo>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GankDetailInfo> {
         return try {
             val items = requestApi.getFuliList(page = params.key ?: 0,count = params.loadSize)
 
@@ -42,7 +42,7 @@ class GankGirlPagingSource (
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun getRefreshKey(state: PagingState<Int, GirlInfo>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, GankDetailInfo>): Int? {
         /**
          * The name field is a unique identifier for post items.
          * (no it is not the title of the post :) )

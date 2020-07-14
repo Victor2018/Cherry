@@ -1,7 +1,7 @@
 package com.victor.lib.coremodel.http.repository
 
 import androidx.paging.PagingData
-import com.victor.lib.coremodel.entity.GirlInfo
+import com.victor.lib.coremodel.entity.GankDetailInfo
 import kotlinx.coroutines.flow.Flow
 
 /*
@@ -15,5 +15,5 @@ import kotlinx.coroutines.flow.Flow
  * -----------------------------------------------------------------
  */
 interface IRepository {
-    fun postsOfSubreddit(pageSize: Int): Flow<PagingData<GirlInfo>>
+    fun postsOfSubreddit(pageSize: Int): Flow<PagingData<GankDetailInfo>>
 }

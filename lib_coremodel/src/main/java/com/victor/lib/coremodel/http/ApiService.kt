@@ -1,7 +1,8 @@
 package com.victor.lib.coremodel.http
 
 import android.util.Log
-import com.victor.lib.coremodel.entity.GirlEntity
+import com.victor.lib.coremodel.entity.GankDetailEntity
+import com.victor.lib.coremodel.entity.GankRes
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -22,15 +23,25 @@ import java.util.concurrent.TimeUnit
  * -----------------------------------------------------------------
  */
 interface ApiService {
+    @GET("api/v2/categories/GanHuo")
+    suspend fun getGank(): GankRes
+
+    @GET("api/v2/data/category/GanHuo/type/{type}/page/{page}/count/{count}")
+    suspend fun getGankDetail(
+        @Path("type") type: String,
+        @Path("page") page: Int = 0,
+        @Path("count") count: Int?
+    ): GankDetailEntity
+
     @GET("api/v2/data/category/Girl/type/Girl/page/{page}/count/{count}")
     suspend fun getFuliList(
         @Path("page") page: Int = 0,
         @Path("count") count: Int?
-    ): GirlEntity
+    ): GankDetailEntity
 
     companion object {
         const val TAG = "ApiService"
-        const val GANK_HOST = "http://gank.io/"
+        const val GANK_HOST = "https://gank.io/"
         fun create(baseUrl: String): ApiService {
 
             val client = OkHttpClient.Builder()

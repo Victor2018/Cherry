@@ -3,7 +3,7 @@ package com.victor.module.mine.view.adapter
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.victor.module.mine.view.holder.NetworkStateItemViewHolder
+import com.victor.lib.common.view.holder.NetworkStateItemViewHolder
 
 /*
  * -----------------------------------------------------------------
@@ -11,11 +11,11 @@ import com.victor.module.mine.view.holder.NetworkStateItemViewHolder
  * -----------------------------------------------------------------
  * File: GankGirlLoadStateAdapter
  * Author: Victor
- * Date: 2020/7/8 下午 06:18
+ * Date: 2020/7/14 下午 06:42
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankGirlLoadStateAdapter (
+class GankGirlLoadStateAdapter  (
     private val adapter: GankGirlAdapter
 ) : LoadStateAdapter<NetworkStateItemViewHolder>() {
     override fun onBindViewHolder(holder: NetworkStateItemViewHolder, loadState: LoadState) {

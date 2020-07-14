@@ -1,6 +1,7 @@
 package com.victor.lib.coremodel.http.locator
 
 import androidx.annotation.VisibleForTesting
+import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
 import com.victor.lib.coremodel.http.repository.IRepository
 
@@ -37,7 +38,7 @@ interface ServiceLocator {
         }
     }
 
-    fun getRepository(): IRepository
+    fun getRepository(type: RepositoryType): IRepository
 
     fun getRequestApi(): ApiService
 }

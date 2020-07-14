@@ -1,6 +1,8 @@
 package com.victor.lib.coremodel.http.locator
 
+import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
+import com.victor.lib.coremodel.http.repository.GankDetailRepository
 import com.victor.lib.coremodel.http.repository.GankGirlRepository
 import com.victor.lib.coremodel.http.repository.IRepository
 
@@ -19,7 +21,15 @@ class NetServiceLocator: ServiceLocator {
         ApiService.create(ApiService.GANK_HOST)
     }
 
-    override fun getRepository(): IRepository {
+    override fun getRepository(type: RepositoryType): IRepository {
+        when (type) {
+            RepositoryType.GANK_GIRL -> {
+                return GankGirlRepository(requestApi = getRequestApi())
+            }
+            RepositoryType.GANK_DETAIL -> {
+                return GankDetailRepository(type = "Android",requestApi = getRequestApi())
+            }
+        }
         return GankGirlRepository(requestApi = getRequestApi())
     }
     override fun getRequestApi(): ApiService = api

@@ -6,23 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/mBtnHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to home"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.victor.lib.common.view.widget.ParticleView
+        android:id="@+id/particleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:particleCount="60"
+        app:linesColor="?attr/colorPrimaryDark"
+        app:particleColor="?attr/colorPrimary"
+        app:backgroundColor="@color/white"
+        app:minParticleRadius="3"
+        app:maxParticleRadius="10"
+        android:fitsSystemWindows="true"/>
+
+    <com.victor.clips.ui.widget.NoTouchViewPager
+        android:id="@+id/mVpHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/mBtnMine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to mine"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mBottomBar"/>
+
+    <com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
+        android:id="@+id/mBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/mBtnHome" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0.7"
+        app:rbb_activeItemType="text"
+        app:rbb_tabs="@xml/tabs"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

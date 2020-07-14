@@ -2,6 +2,7 @@ package com.victor.lib.common.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.victor.lib.common.R
 import com.victor.lib.common.util.StatusBarUtil
@@ -28,9 +29,11 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     fun initializeSuper () {
-        StatusBarUtil.translucentStatusBar(this, true,false,false)
+        StatusBarUtil.translucentStatusBar(this, true,true,true)
+        if (StatusBarUtil.hasNavigationBarShow(this)) {
+            window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this));
+        }
     }
-
 
     override fun onResume() {
         super.onResume()

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:layout_marginBottom="3dp"
+    android:background="@color/white"
+    android:onClick="@{bean::goWeb}">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:lineSpacingExtra="@dimen/dp_5"
+            android:ellipsize="end"
+            android:textColor="@color/color_333333"
+            android:text="Gradle 插件，做自动测试过程中的截屏。"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/dp_105"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_height="@dimen/dp_80"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/who"
+        android:layout_below="@+id/linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="代码家"
+        android:textColor="@color/color_6B605F"
+        android:textSize="@dimen/dp_16"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_below="@+id/linear"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
+        android:text="2017-09-05 11:29:05"
+        android:textColor="@color/color_6B605F"
+        android:textSize="@dimen/dp_16"/>
+
+</RelativeLayout>

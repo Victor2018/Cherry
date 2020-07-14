@@ -1,6 +1,7 @@
 package com.victor.cherry.viewmodel
 
 import androidx.lifecycle.*
+import com.victor.lib.coremodel.entity.GankRes
 import com.victor.module.home.data.HomeDataSource
 import com.victor.module.home.interfaces.IHomeDataSource
 import kotlinx.coroutines.Dispatchers
@@ -40,22 +41,25 @@ class HomeViewModel(
     // Exposed cached value in the data source that can be updated later on
     val cachedValue = dataSource.cachedData
 
-    // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
-    fun onRefresh() {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchNewData()
+    val gankData: LiveData<GankRes> = liveData {
+        emitSource(dataSource.fetchGankData())
+    }
+        // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
+        fun onRefresh() {
+            // Launch a coroutine that reads from a remote data source and updates cache
+            viewModelScope.launch {
+                dataSource.fetchNewData()
+            }
         }
-    }
 
-    // Simulates a long-running computation in a background thread
-    private suspend fun timeStampToTime(timestamp: Long): String {
-        delay(500)  // Simulate long operation
-        val date = Date(timestamp)
-        return date.toString()
-    }
+        // Simulates a long-running computation in a background thread
+        private suspend fun timeStampToTime(timestamp: Long): String {
+            delay(500)  // Simulate long operation
+            val date = Date(timestamp)
+            return date.toString()
+        }
 
-    companion object {
+        companion object {
         // Real apps would use a wrapper on the result type to handle this.
         const val LOADING_STRING = "Loading..."
     }

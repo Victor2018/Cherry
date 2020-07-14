@@ -72,11 +72,13 @@ versions.retrofit_version = "2.8.1"
 versions.okhttp_version = "4.2.0"
 versions.room = "2.3.0-alpha01"
 versions.paging = "3.0.0-alpha02"
+versions.match = "v1.1"
+versions.multidex = "1.0.3"
 
 ext.versions = versions
 
 def build_versions = [:]
-build_versions.min_sdk = 14
+build_versions.min_sdk = 17
 build_versions.compile_sdk = 29
 build_versions.target_sdk = 29
 build_versions.build_tools = "29.0.3"
@@ -186,6 +188,8 @@ deps.glide = glide
 
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"
+deps.match = "com.github.Victor2018:ScreenMatchLib:$versions.match"
+deps.multidex = "com.android.support:multidex:$versions.multidex"
 
 ext.deps = deps
 
@@ -193,5 +197,6 @@ def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url "https://jitpack.io" }
 }
 ext.addRepos = this.&addRepos

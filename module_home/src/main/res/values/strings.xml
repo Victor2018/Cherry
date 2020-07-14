@@ -2,5 +2,6 @@
     <string name="module_home">module_home</string>
 
     <string name="home_fragment">HomeFragment</string>
+    <string name="subtitle">Submitted by %s</string>
 
 </resources>

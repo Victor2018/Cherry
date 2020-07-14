@@ -9,4 +9,11 @@
     <color name="color_E6FBFD">#E6FBFD</color>
     <color name="color_E5FAFE">#E5FAFE</color>
     <color name="color_E5F9FE">#E5F9FE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="color_66FFFFFF">#66FFFFFF</color>
+    <color name="color_6B605F">#6B605F</color>
+    <color name="color_8D9193">#8D9193</color>
+    <color name="color_333333">#333333</color>
 </resources>

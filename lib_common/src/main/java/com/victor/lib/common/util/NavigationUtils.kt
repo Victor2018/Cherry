@@ -26,4 +26,10 @@ object NavigationUtils {
     fun goMineActivity() {
         ARouter.getInstance().build(ARouterPath.MineAct).navigation()
     }
+    /**
+     * 去往干货详情页面
+     */
+    fun goGankActivity() {
+        ARouter.getInstance().build(ARouterPath.GankAct).navigation()
+    }
 }

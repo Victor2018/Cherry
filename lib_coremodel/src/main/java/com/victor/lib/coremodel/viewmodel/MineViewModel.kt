@@ -2,6 +2,7 @@ package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.http.repository.IRepository
 
@@ -26,7 +27,7 @@ class MineViewModel(val repository: IRepository) : ViewModel() {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return MineViewModel(ServiceLocator.instance().getRepository()) as T
+            return MineViewModel(ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL)) as T
         }
     }
 }

@@ -6,12 +6,14 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.victor.lib.common.R
+
 
 /*
  * -----------------------------------------------------------------
@@ -239,5 +241,58 @@ class StatusBarUtil {
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
             decorView.systemUiVisibility = flags
         }
+
+        fun hasNavigationBarShow(activity: Activity): Boolean {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                return false
+            }
+            val wm =
+                activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val display = wm.defaultDisplay
+            var outMetrics = DisplayMetrics()
+            //获取整个屏幕的高度
+            display.getRealMetrics(outMetrics)
+            val heightPixels = outMetrics.heightPixels
+            val widthPixels = outMetrics.widthPixels
+            //获取内容展示部分的高度
+            outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
+            val heightPixelsContent = outMetrics.heightPixels
+            val widthPixelsContent = outMetrics.widthPixels
+            val h = heightPixels - heightPixelsContent
+            val w = widthPixels - widthPixelsContent
+            return w > 0 || h > 0 //竖屏和横屏两种情况
+        }
+
+        /**
+         * 获取导航栏高度
+         *
+         * @param context
+         * @return
+         */
+        fun getNavigationBarHeight(context: Context): Int {
+            return getSystemComponentDimen(context, "navigation_bar_height")
+        }
+
+        fun getSystemComponentDimen(
+            context: Context,
+            dimenName: String?
+        ): Int {
+            // 反射手机运行的类：android.R.dimen.status_bar_height.
+            var statusHeight = -1
+            try {
+                val clazz =
+                    Class.forName("com.android.internal.R\$dimen")
+                val `object` = clazz.newInstance()
+                val heightStr = clazz.getField(dimenName!!)[`object`].toString()
+                val height = heightStr.toInt()
+                //dp->px
+                statusHeight = context.resources.getDimensionPixelSize(height)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+            return statusHeight
+        }
     }
+
 }

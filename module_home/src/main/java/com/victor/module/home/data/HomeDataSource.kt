@@ -3,6 +3,9 @@ package com.victor.module.home.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import com.victor.lib.coremodel.entity.GankRes
+import com.victor.lib.coremodel.http.ApiService
+import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.module.home.interfaces.IHomeDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -74,5 +77,10 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher) : IHomeDataS
         counter++
         "New data from request #$counter"
     }
+
+    override fun fetchGankData(): LiveData<GankRes> = liveData {
+        emit(ServiceLocator.instance().getRequestApi().getGank())
+    }
+
 }
 

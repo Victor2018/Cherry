@@ -79,5 +79,8 @@ dependencies {
 
     api deps.recyclerview
     api deps.cardview
+    //屏幕适配库
+    api deps.match
+    api deps.multidex
 
 }

@@ -30,4 +30,8 @@ object ARouterPath {
     /**我的Fragment */
     const val MineFgt = "$MINE/module/MineFragment"
 
+
+    /**干货Activity */
+    const val GankAct = "$HOME/module/GankActivity"
+
 }

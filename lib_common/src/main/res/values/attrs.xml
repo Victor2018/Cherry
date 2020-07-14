@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CardSlider">
+        <!-- Active card offset from start of RecyclerView. Default value is 50dp. -->
+        <attr name="activeCardLeftOffset" format="dimension"/>
+        <!-- Card width. Default value is 148dp. -->
+        <attr name="cardWidth" format="dimension"/>
+        <!-- Distance between cards. Default value is 12dp. -->
+        <attr name="cardsGap" format="dimension"/>
+        <!-- ViewUpdater implementation class. If not set, DefaultViewUpdater class is used. -->
+        <attr name="viewUpdater" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ParticleView">
+        <attr name="lines" format="boolean" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="particleColor" format="color" />
+        <attr name="linesColor" format="color" />
+        <attr name="particleCount" format="integer" />
+        <attr name="minParticleRadius" format="integer" />
+        <attr name="maxParticleRadius" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ReadableBottomBar">
+        <attr name="rbb_tabs" format="reference" />
+        <attr name="rbb_backgroundColor" format="color" />
+        <attr name="rbb_indicatorColor" format="color" />
+        <attr name="rbb_indicatorHeight" format="dimension" />
+        <attr name="rbb_initialIndex" format="integer" />
+        <attr name="rbb_textColor" format="color" />
+        <attr name="rbb_iconColor" format="color" />
+        <attr name="rbb_textSize" format="dimension" />
+        <attr name="rbb_activeItemType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="icon" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MultiSearchView">
+        <attr name="searchTextStyle" format="reference"/>
+    </declare-styleable>
+</resources>
