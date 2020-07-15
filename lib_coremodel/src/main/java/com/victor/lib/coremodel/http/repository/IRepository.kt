@@ -15,5 +15,5 @@ import kotlinx.coroutines.flow.Flow
  * -----------------------------------------------------------------
  */
 interface IRepository {
-    fun postsOfSubreddit(pageSize: Int): Flow<PagingData<GankDetailInfo>>
+    fun postsOfSubreddit(type: String,pageSize: Int): Flow<PagingData<GankDetailInfo>>
 }

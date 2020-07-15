@@ -19,6 +19,7 @@ import com.victor.lib.common.util.StatusBarUtil
  */
 abstract class BaseActivity: AppCompatActivity() {
     protected var TAG = javaClass.simpleName
+    var statusBarTextColorBlack: Boolean = false
 
     abstract fun getLayoutResource(): Int
 
@@ -29,7 +30,7 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     fun initializeSuper () {
-        StatusBarUtil.translucentStatusBar(this, true,true,true)
+        StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
         if (StatusBarUtil.hasNavigationBarShow(this)) {
             window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this));
         }

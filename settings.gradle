@@ -1,3 +1,4 @@
+include ':module_girls'
 include ':module_mine'
 include ':module_home'
 include ':lib_coremodel'

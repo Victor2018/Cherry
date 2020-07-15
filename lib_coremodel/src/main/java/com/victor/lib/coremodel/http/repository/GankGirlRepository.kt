@@ -16,7 +16,7 @@ import com.victor.lib.coremodel.http.datasource.GankGirlPagingSource
  * -----------------------------------------------------------------
  */
 class GankGirlRepository (private val requestApi: ApiService) : IRepository {
-    override fun postsOfSubreddit(pageSize: Int) = Pager(
+    override fun postsOfSubreddit(type: String,pageSize: Int) = Pager(
         PagingConfig(
             pageSize = pageSize,
             enablePlaceholders = false

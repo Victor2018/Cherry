@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:fitsSystemWindows="true">
-
+0
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/mCtlTitle"
                 android:layout_width="match_parent"
@@ -25,22 +25,17 @@
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginStart="@dimen/dp_50"
-                app:expandedTitleMarginEnd="@dimen/dp_65">
-                <ImageView
-                    android:id="@+id/mIvPoster"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    app:layout_collapseMode="parallax"
-                    android:scaleType="centerCrop"
-                    android:background="@color/colorPrimary"/>
+                app:expandedTitleMarginEnd="@dimen/dp_65"
+                app:titleEnabled="false">
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/transparent"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin"
+                    app:title="@string/app_name">
+                </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>

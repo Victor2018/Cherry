@@ -13,6 +13,7 @@ package com.victor.lib.common.base
 object ARouterPath {
     private const val MAIN = "/main"
     private const val HOME = "/home"
+    private const val GIRLS = "/girls"
     private const val MINE = "/mine"
 
     /**主Activity */
@@ -24,12 +25,20 @@ object ARouterPath {
     /**首页Fragment */
     const val HomeFgt = "$HOME/module/HomeFragment"
 
-    /**首我的Activity */
+    /**我的Activity */
     const val MineAct = "$MINE/module/MineActivity"
 
     /**我的Fragment */
     const val MineFgt = "$MINE/module/MineFragment"
 
+    /**妹子Activity */
+    const val GirlsAct = "$GIRLS/module/GirlsActivity"
+
+    /**妹子Fragment */
+    const val GirlsFgt = "$GIRLS/module/GirlsFragment"
+
+    /**妹子详情Activity */
+    const val GirlDetailAct = "$GIRLS/module/GirlsDetailActivity"
 
     /**干货Activity */
     const val GankAct = "$HOME/module/GankActivity"

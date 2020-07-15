@@ -38,7 +38,10 @@ interface ServiceLocator {
         }
     }
 
+
+
     fun getRepository(type: RepositoryType): IRepository
 
     fun getRequestApi(): ApiService
+
 }

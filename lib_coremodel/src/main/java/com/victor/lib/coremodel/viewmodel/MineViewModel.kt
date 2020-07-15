@@ -18,7 +18,7 @@ import com.victor.lib.coremodel.http.repository.IRepository
  */
 class MineViewModel(val repository: IRepository) : ViewModel() {
 
-    val datas = repository.postsOfSubreddit( 20)
+    val datas = repository.postsOfSubreddit("", 20)
 
     /**
      * Factory for [LiveDataViewModel].

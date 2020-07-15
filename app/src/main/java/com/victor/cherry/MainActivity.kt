@@ -23,13 +23,16 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        statusBarTextColorBlack = true
         super.onCreate(savedInstanceState)
 
         homeFragmentAdapter = HomeFragmentAdapter(supportFragmentManager)
 
         val homeFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.HomeFgt).navigation() as BaseFragment
+        val girlsFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.GirlsFgt).navigation() as BaseFragment
         val mineFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.MineFgt).navigation() as BaseFragment
         fragmentList.add(homeFrag)
+        fragmentList.add(girlsFrag)
         fragmentList.add(mineFrag)
 
         homeFragmentAdapter?.fragmetList = fragmentList

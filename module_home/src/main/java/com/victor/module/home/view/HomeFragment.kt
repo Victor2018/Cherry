@@ -90,7 +90,9 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
         // Bind ViewModel
         binding?.viewmodel = viewmodel
 
-        mTsDescription.setFactory(DescriptionViewSwitcherFactory(context!!))
+        if (mTsDescription.childCount < 2) {
+            mTsDescription.setFactory(DescriptionViewSwitcherFactory(context!!))
+        }
 
         mTsDescription.setInAnimation(context!!, android.R.anim.fade_in)
         mTsDescription.setOutAnimation(context!!, android.R.anim.fade_out)
@@ -100,6 +102,8 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
         mRvGank.setHasFixedSize(true)
         mRvGank.layoutManager = layoutManager
         mRvGank.adapter = homeAdapter
+
+        mRvGank.setOnFlingListener(null);
         CardSnapHelper().attachToRecyclerView(mRvGank)
 
         mRvGank.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -131,7 +135,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         ToastUtils.showShort(homeAdapter?.getItem(position)?.desc!!)
-        NavigationUtils.goGankActivity()
+        NavigationUtils.goGankActivity(homeAdapter?.getItem(position)?.title!!,homeAdapter?.getItem(position)?.type!!)
     }
 
     private fun onActiveCardChange() {

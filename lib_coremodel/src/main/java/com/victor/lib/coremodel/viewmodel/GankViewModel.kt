@@ -16,18 +16,18 @@ import com.victor.lib.coremodel.http.repository.IRepository
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankViewModel(val repository: IRepository) : ViewModel() {
-
-    val datas = repository.postsOfSubreddit( 20)
+class GankViewModel(val type: String,val repository: IRepository) : ViewModel() {
+    val datas = repository.postsOfSubreddit(type,20)
 
     /**
      * Factory for [LiveDataViewModel].
      */
-    object LiveDataVMFactory : ViewModelProvider.Factory {
+  /*  object LiveDataVMFactory : ViewModelProvider.Factory {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return GankViewModel(ServiceLocator.instance().getRepository(RepositoryType.GANK_DETAIL)) as T
+            var gankType = ServiceLocator.instance().getGankType()
+            return GankViewModel(ServiceLocator.instance().getRepository(gankType,RepositoryType.GANK_DETAIL)) as T
         }
-    }
+    }*/
 }

@@ -1,0 +1,8 @@
+<resources>
+    <string name="module_girls">module_girls</string>
+
+    <string name="girls_fragment">GirlsFragment</string>
+    <string name="post_subtitle">Submitted by %s</string>
+    <string name="retry">Retry</string>
+
+</resources>

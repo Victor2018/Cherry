@@ -16,7 +16,7 @@ import com.victor.lib.coremodel.http.repository.IRepository
  * Description: default implementation of ServiceLocator that uses production endpoints.
  * -----------------------------------------------------------------
  */
-class NetServiceLocator: ServiceLocator {
+class NetServiceLocator : ServiceLocator {
     private val api by lazy {
         ApiService.create(ApiService.GANK_HOST)
     }
@@ -27,10 +27,11 @@ class NetServiceLocator: ServiceLocator {
                 return GankGirlRepository(requestApi = getRequestApi())
             }
             RepositoryType.GANK_DETAIL -> {
-                return GankDetailRepository(type = "Android",requestApi = getRequestApi())
+                return GankDetailRepository(requestApi = getRequestApi())
             }
         }
         return GankGirlRepository(requestApi = getRequestApi())
     }
     override fun getRequestApi(): ApiService = api
+
 }

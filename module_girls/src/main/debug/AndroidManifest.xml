@@ -1,0 +1,20 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.victor.module.girls">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:label="@string/module_girls"
+        android:name="com.victor.lib.common.app.App"
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".view.GirlsActivity"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

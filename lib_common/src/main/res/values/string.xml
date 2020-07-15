@@ -1,4 +1,11 @@
 <resources>
     <string name="loading">loading...</string>
     <string name="i_have_bottom_line">you’ve reached bottom line</string>
+
+    <string name="copy_to_clipboard">Copied to the clipboard</string>
+    <string name="cope_the_url">Cope the url</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="share">Share</string>
+
+    <string name="transition_gank_img">transition_gank_img</string>
 </resources>

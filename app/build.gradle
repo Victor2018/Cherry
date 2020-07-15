@@ -22,6 +22,7 @@ dependencies {
         implementation project(':lib_coremodel')
     } else {
         implementation project(':module_home')
+        implementation project(':module_girls')
         implementation project(':module_mine')
     }
 }

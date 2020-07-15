@@ -14,5 +14,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.GankActivity"/>
+        <activity
+            android:name="com.victor.lib.common.view.activity.WebActivity"
+            android:launchMode="singleTask"/>
     </application>
 </manifest>

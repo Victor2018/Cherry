@@ -1,7 +1,11 @@
 package com.victor.lib.common.util
 
+import android.os.Bundle
+import android.os.Parcelable
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.lib.common.base.ARouterPath
+import com.victor.lib.coremodel.entity.GankDetailInfo
+import java.io.Serializable
 
 /*
  * -----------------------------------------------------------------
@@ -14,6 +18,9 @@ import com.victor.lib.common.base.ARouterPath
  * -----------------------------------------------------------------
  */
 object NavigationUtils {
+    val TITLE_KEY = "TITLE_KEY"
+    val TYPE_KEY = "TYPE_KEY"
+    val GANK_DATA_KEY = "GANK_DATA_KEY"
     /**
      * 去往首页
      */
@@ -29,7 +36,10 @@ object NavigationUtils {
     /**
      * 去往干货详情页面
      */
-    fun goGankActivity() {
-        ARouter.getInstance().build(ARouterPath.GankAct).navigation()
+    fun goGankActivity(title: String,type: String) {
+        ARouter.getInstance().build(ARouterPath.GankAct)
+            .withString(TITLE_KEY,title)
+            .withString(TYPE_KEY,type)
+            .navigation()
     }
 }
