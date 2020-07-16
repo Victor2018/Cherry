@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:fitsSystemWindows="true">
-0
+
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/mCtlTitle"
                 android:layout_width="match_parent"
@@ -39,7 +39,6 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
-
 
         <com.victor.lib.common.view.widget.LMRecyclerView
             android:id="@+id/mRvGank"

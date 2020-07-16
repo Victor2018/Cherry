@@ -1,10 +1,12 @@
 package com.victor.lib.coremodel.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.content.Context
+import androidx.lifecycle.*
+import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.http.repository.IRepository
+import kotlinx.coroutines.flow.flatMapLatest
 
 /*
  * -----------------------------------------------------------------
@@ -17,7 +19,6 @@ import com.victor.lib.coremodel.http.repository.IRepository
  * -----------------------------------------------------------------
  */
 class MineViewModel(val repository: IRepository) : ViewModel() {
-
     val datas = repository.postsOfSubreddit("", 20)
 
     /**

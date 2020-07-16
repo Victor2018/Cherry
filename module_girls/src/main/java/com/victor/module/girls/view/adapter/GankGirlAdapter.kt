@@ -1,6 +1,7 @@
 package com.victor.module.girls.view.adapter
 
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.victor.lib.coremodel.entity.GankDetailInfo
@@ -16,8 +17,14 @@ import com.victor.module.girls.view.holder.GankGirlViewHolder
  * Description: A simple adapter implementation that shows Reddit posts.
  * -----------------------------------------------------------------
  */
-class GankGirlAdapter
+class GankGirlAdapter(listener:AdapterView.OnItemClickListener?)
     : PagingDataAdapter<GankDetailInfo, GankGirlViewHolder>(POST_COMPARATOR) {
+
+    var mOnItemClickListener: AdapterView.OnItemClickListener? = null
+
+    init {
+        mOnItemClickListener = listener
+    }
 
     override fun onBindViewHolder(holder: GankGirlViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -37,7 +44,7 @@ class GankGirlAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GankGirlViewHolder {
-        return GankGirlViewHolder.create(parent)
+        return GankGirlViewHolder.create(parent,mOnItemClickListener)
     }
 
     companion object {

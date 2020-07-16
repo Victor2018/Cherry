@@ -1,6 +1,9 @@
 package com.victor.module.girls.view
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
@@ -9,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.lib.coremodel.viewmodel.MineViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GankGirlAdapter
@@ -28,11 +33,12 @@ import kotlinx.coroutines.flow.collectLatest
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.GirlsFgt)
-class GirlsFragment: BaseFragment() {
+class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener {
     private val viewmodel: MineViewModel by viewModels { MineViewModel.LiveDataVMFactory }
 
     private lateinit var adapter: GankGirlAdapter
     private var gridLayoutManager: GridLayoutManager? = null
+    var datas: ArrayList<GankDetailInfo> = ArrayList()
 
     companion object {
         fun newInstance(): GirlsFragment {
@@ -64,7 +70,7 @@ class GirlsFragment: BaseFragment() {
 
         list.setLayoutManager(gridLayoutManager)
 
-        adapter = GankGirlAdapter()
+        adapter = GankGirlAdapter(this)
         list.adapter = adapter.withLoadStateHeaderAndFooter(
             header = GankGirlLoadStateAdapter(
                 adapter
@@ -97,7 +103,10 @@ class GirlsFragment: BaseFragment() {
     }
 
     private fun initSwipeToRefresh() {
-        swipe_refresh.setOnRefreshListener { adapter.refresh() }
+        swipe_refresh.setOnRefreshListener {
+            datas.clear()
+            adapter.refresh()
+        }
     }
 
     override fun handleBackEvent(): Boolean {
@@ -105,5 +114,11 @@ class GirlsFragment: BaseFragment() {
     }
 
     override fun freshFragData() {
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        Loger.e(TAG,"initData-onItemClick-gankDetailList?.size = " + datas?.size)
+        Loger.e(TAG,"initData-onItemClick-adapter.itemCount = " + adapter.itemCount)
+//        GirlsDetailActivity.intentStart(activity!! as AppCompatActivity,datas)
     }
 }

@@ -38,7 +38,7 @@ object ARouterPath {
     const val GirlsFgt = "$GIRLS/module/GirlsFragment"
 
     /**妹子详情Activity */
-    const val GirlDetailAct = "$GIRLS/module/GirlsDetailActivity"
+    const val GirlsDetailAct = "$GIRLS/module/GirlsDetailActivity"
 
     /**干货Activity */
     const val GankAct = "$HOME/module/GankActivity"

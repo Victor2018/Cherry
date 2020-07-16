@@ -82,6 +82,10 @@ android {
         jvmTarget = "1.8"
     }
 
+    //支持@Parcelize来实现Parcelable序列化
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {

@@ -1,17 +1,18 @@
 package com.victor.module.girls.view.holder
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.app.App
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.girls.R
+import com.victor.module.girls.view.GirlsDetailActivity
 
 /*
  * -----------------------------------------------------------------
@@ -23,17 +24,18 @@ import com.victor.module.girls.R
  * Description: A RecyclerView ViewHolder that displays a reddit post.
  * -----------------------------------------------------------------
  */
-class GankGirlViewHolder (view: View)
+class GankGirlViewHolder (view: View,listener: AdapterView.OnItemClickListener?)
     : RecyclerView.ViewHolder(view) {
     private val mTvTitle: TextView = view.findViewById(R.id.tv_title)
     private val mIvImg : ImageView = view.findViewById(R.id.iv_img)
     private var post : GankDetailInfo? = null
     init {
         view.setOnClickListener {
-            post?.url?.let { url ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                view.context.startActivity(intent)
-            }
+//            post?.url?.let { url ->
+//                GirlsDetailActivity.intentStart(view.context)
+//            }
+            GirlsDetailActivity.intentStart(view.context,post!!)
+            listener?.onItemClick(null,view,bindingAdapterPosition,0)
         }
     }
 
@@ -44,10 +46,10 @@ class GankGirlViewHolder (view: View)
     }
 
     companion object {
-        fun create(parent: ViewGroup): GankGirlViewHolder {
+        fun create(parent: ViewGroup,listener:AdapterView.OnItemClickListener?): GankGirlViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.rv_girls_cell, parent, false)
-            return GankGirlViewHolder(view)
+            return GankGirlViewHolder(view,listener)
         }
     }
 

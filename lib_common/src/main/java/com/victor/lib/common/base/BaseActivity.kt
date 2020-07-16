@@ -1,9 +1,11 @@
 package com.victor.lib.common.base
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.victor.clips.util.AppUtil
 import com.victor.lib.common.R
 import com.victor.lib.common.util.StatusBarUtil
 

@@ -8,14 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.NavigationUtils
-import com.victor.lib.common.util.StatusBarUtil
-import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.viewmodel.GankViewModel
