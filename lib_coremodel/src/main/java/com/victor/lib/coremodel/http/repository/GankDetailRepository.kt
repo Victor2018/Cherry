@@ -16,12 +16,11 @@ import com.victor.lib.coremodel.http.datasource.GankGirlPagingSource
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankDetailRepository (private val requestApi: ApiService) : IRepository {
+class GankDetailRepository (
+    val pageConfig: PagingConfig,
+    private val requestApi: ApiService) : IRepository {
     override fun postsOfSubreddit(type: String,pageSize: Int) = Pager(
-        PagingConfig(
-            pageSize = pageSize,
-            enablePlaceholders = false
-        )
+        config = pageConfig
     ) {
         GankDetailPagingSource(
             type = type,
