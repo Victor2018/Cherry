@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.victor.lib.coremodel.entity.GankRes
+import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.module.home.interfaces.IHomeDataSource
@@ -22,7 +23,7 @@ import kotlinx.coroutines.withContext
  * Description: A source of data for [LiveDataViewModel], showcasing different LiveData + coroutines patterns.
  * -----------------------------------------------------------------
  */
-class HomeDataSource(private val ioDispatcher: CoroutineDispatcher) : IHomeDataSource {
+class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSource {
 
     /**
      * LiveData builder generating a value that will be transformed.
@@ -79,7 +80,7 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher) : IHomeDataS
     }
 
     override fun fetchGankData(): LiveData<GankRes> = liveData {
-        emit(ServiceLocator.instance().getRequestApi().getGank())
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGank())
     }
 
 }

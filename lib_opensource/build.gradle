@@ -82,5 +82,7 @@ dependencies {
     //屏幕适配库
     api deps.match
     api deps.multidex
+    //动态权限申请
+    api deps.permissions.core
 
 }

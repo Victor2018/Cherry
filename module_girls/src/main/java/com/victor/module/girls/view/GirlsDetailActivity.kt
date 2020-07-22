@@ -1,23 +1,29 @@
 package com.victor.module.girls.view
 
+import android.Manifest
+import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
+import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.clips.util.AppUtil
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
-import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.common.util.Loger
-import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlDetailAdapter
 import kotlinx.android.synthetic.main.activity_girls_detail.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 /*
@@ -35,6 +41,7 @@ class GirlsDetailActivity: BaseActivity() {
     var girlDetailAdapter: GirlDetailAdapter? = null
     var gankDetailList: ArrayList<GankDetailInfo>? = null
     var gankDetailInfo: GankDetailInfo? = null
+    var mWallpaperManager: WallpaperManager? = null
 
     companion object {
         open fun intentStart(ctx: Context?) {
@@ -77,19 +84,41 @@ class GirlsDetailActivity: BaseActivity() {
                 return true
             }
             R.id.action_share -> {
-               /* val url: String = gankInfos.get(currentPage).getUrl()
+                val url: String = gankDetailInfo?.images?.get(0)!!
                 val intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
                     .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
                     .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_beauty) + url)
                 Intent.createChooser(intentshare, getString(R.string.share))
-                startActivity(intentshare)*/
+                startActivity(intentshare)
                 return true
             }
             R.id.action_save -> {
+                if (!isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!) {
+                    requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    return true
+                }
+                mPbLoading.visibility = View.VISIBLE
+                lifecycleScope.launch {
+                    //lifecycleScope使协程的生命周期随着activity的生命周期变化
+                    saveImage()
+                    mPbLoading.visibility = View.GONE
+                    SnackbarUtil.ShortSnackbar(mIvGirl,getString(R.string.save_picture_success)).show();
+                }
                 return true
             }
             R.id.action_set_wallpaper -> {
+                if (!isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)!!) {
+                    requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    return true
+                }
+                mPbLoading.visibility = View.VISIBLE
+                lifecycleScope.launch {
+                    //lifecycleScope使协程的生命周期随着activity的生命周期变化
+                    setWallpaper()
+                    mPbLoading.visibility = View.GONE
+                    SnackbarUtil.ShortSnackbar(mIvGirl,getString(R.string.set_wallpaper_success)).show();
+                }
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -105,7 +134,7 @@ class GirlsDetailActivity: BaseActivity() {
     fun initialize () {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        mWallpaperManager = WallpaperManager.getInstance(this);
 //        girlDetailAdapter = GirlDetailAdapter(this,gankDetailList!!)
 //        mVpGirls.adapter = girlDetailAdapter
     }
@@ -117,4 +146,26 @@ class GirlsDetailActivity: BaseActivity() {
 
         ImageUtils.instance.loadImage(this,mIvGirl,gankDetailInfo?.images?.get(0))
     }
+
+
+    suspend fun saveImage () {
+        withContext(Dispatchers.IO) {
+            val bitmap: Bitmap = mIvGirl.drawable.toBitmap() //可以传入图片的大小，默认是显示的图片
+
+            val imgUrl = gankDetailInfo?.images?.get(0)
+            val fileName = imgUrl?.substring(imgUrl.lastIndexOf("/") + 1, imgUrl?.length) + ".png"
+            val dir = FileUtil.getExRootFolder()
+
+            BitmapUtil.saveBitmap(bitmap,dir?.absolutePath,fileName!!,true)
+        }
+    }
+
+    suspend fun setWallpaper () {
+        val bitmap: Bitmap = mIvGirl.drawable.toBitmap() //可以传入图片的大小，默认是显示的图片
+        withContext(Dispatchers.IO) {
+            mWallpaperManager?.setBitmap(bitmap);
+        }
+    }
+
+
 }

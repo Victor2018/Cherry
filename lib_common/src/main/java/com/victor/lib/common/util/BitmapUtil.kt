@@ -7,6 +7,8 @@ import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import com.victor.lib.common.app.App
@@ -26,6 +28,7 @@ import java.io.FileOutputStream
  */
 class BitmapUtil {
     companion object {
+
         fun drawableToBitmap(drawable: Drawable): Bitmap? {
             val bitmap = Bitmap.createBitmap(
                 drawable.intrinsicWidth,
@@ -120,5 +123,7 @@ class BitmapUtil {
             canvas.drawBitmap(bm!!, 0f, 0f, paint)
             return overlay
         }
+
     }
+
 }

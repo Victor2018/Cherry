@@ -1,10 +1,13 @@
 package com.victor.module.girls.view
 
+import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.module.girls.R
+import kotlinx.android.synthetic.main.activity_girls.*
 
 /*
  * -----------------------------------------------------------------
@@ -23,6 +26,16 @@ class GirlsActivity: BaseActivity() {
 
     override fun getLayoutResource(): Int {
         return R.layout.activity_girls
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initialize()
+    }
+
+    fun initialize () {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onResume() {
@@ -48,5 +61,14 @@ class GirlsActivity: BaseActivity() {
             ft.hide(fromFragment)
         }
         ft.commitAllowingStateLoss()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

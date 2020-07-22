@@ -5,12 +5,12 @@
         text="@string/home" />
 
     <tab
-        drawable="@drawable/ic_search_black_24dp"
-        text="@string/search" />
+        drawable="@drawable/ic_dashboard_black_24dp"
+        text="@string/girls" />
 
     <tab
-        drawable="@drawable/ic_shopping_basket_black_24dp"
-        text="@string/bag" />
+        drawable="@drawable/ic_wechat_black_24dp"
+        text="@string/wechat" />
 
     <tab
         drawable="@drawable/ic_favorite_black_24dp"

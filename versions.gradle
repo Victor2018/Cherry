@@ -74,6 +74,7 @@ versions.room = "2.3.0-alpha01"
 versions.paging = "3.0.0-alpha02"
 versions.match = "v1.1"
 versions.multidex = "1.0.3"
+versions.permissions = "v1.0"
 
 ext.versions = versions
 
@@ -185,6 +186,10 @@ def glide = [:]
 glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
+
+def permissions = [:]
+permissions.core = "com.github.Victor2018:PermissionHelper:$versions.permissions"
+deps.permissions = permissions
 
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"

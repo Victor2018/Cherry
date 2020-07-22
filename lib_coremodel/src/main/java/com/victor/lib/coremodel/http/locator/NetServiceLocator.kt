@@ -21,19 +21,30 @@ class NetServiceLocator : ServiceLocator {
     private val api by lazy {
         ApiService.create(ApiService.GANK_HOST)
     }
+    private val wanAndroidApi by lazy {
+        ApiService.create(ApiService.WAN_ANDROID_HOST)
+    }
 
     override fun getRepository(type: RepositoryType): IRepository {
         when (type) {
             RepositoryType.GANK_GIRL -> {
-                return GankGirlRepository(requestApi = getRequestApi(),pageConfig = pagingConfig)
+                return GankGirlRepository(requestApi = getRequestApi(type),pageConfig = pagingConfig)
             }
             RepositoryType.GANK_DETAIL -> {
-                return GankDetailRepository(requestApi = getRequestApi(),pageConfig = pagingConfig)
+                return GankDetailRepository(requestApi = getRequestApi(type),pageConfig = pagingConfig)
             }
         }
-        return GankGirlRepository(requestApi = getRequestApi(),pageConfig = pagingConfig)
+        return GankGirlRepository(requestApi = getRequestApi(type),pageConfig = pagingConfig)
     }
-    override fun getRequestApi(): ApiService = api
+
+    override fun getRequestApi(type: RepositoryType): ApiService {
+        when (type) {
+            RepositoryType.WAN_ANDROID -> {
+                return wanAndroidApi
+            }
+        }
+        return return api
+    }
 
     val pagingConfig = PagingConfig(
         // 每页显示的数据的大小

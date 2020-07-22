@@ -2,9 +2,6 @@
     <string name="module_girls">module_girls</string>
 
     <string name="girls_fragment">GirlsFragment</string>
-    <string name="post_subtitle">Submitted by %s</string>
-    <string name="retry">Retry</string>
-    <string name="save">save</string>
-    <string name="set_wallpaper">Set wallpaper</string>
+
 
 </resources>

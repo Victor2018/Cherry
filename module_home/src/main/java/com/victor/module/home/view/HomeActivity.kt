@@ -1,10 +1,13 @@
 package com.victor.module.home.view
 
+import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.module.home.R
+import kotlinx.android.synthetic.main.activity_gank.*
 
 /*
  * -----------------------------------------------------------------
@@ -24,6 +27,16 @@ class HomeActivity: BaseActivity() {
         return R.layout.activity_home
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initialize()
+    }
+
+    fun initialize () {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     override fun onResume() {
         super.onResume()
         switchFragment(currentFragment,HomeFragment.newInstance())
@@ -41,11 +54,21 @@ class HomeActivity: BaseActivity() {
         if (toFragment?.isAdded()!!) {
             ft.show(toFragment)
         } else {
-            ft.add(R.id.container, toFragment)
+            ft.add(R.id.fl_home_container, toFragment)
         }
         if (fromFragment != null) {
             ft.hide(fromFragment)
         }
         ft.commitAllowingStateLoss()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

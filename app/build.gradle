@@ -23,6 +23,7 @@ dependencies {
     } else {
         implementation project(':module_home')
         implementation project(':module_girls')
+        implementation project(':module_wechat')
         implementation project(':module_mine')
     }
 }

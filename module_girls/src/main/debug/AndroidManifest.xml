@@ -3,11 +3,17 @@
     package="com.victor.module.girls">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
         android:label="@string/module_girls"
         android:name="com.victor.lib.common.app.App"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:replace="android:label">
 
         <activity android:name=".view.GirlsActivity"
             tools:ignore="Instantiatable">

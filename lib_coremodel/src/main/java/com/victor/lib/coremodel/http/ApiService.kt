@@ -3,6 +3,7 @@ package com.victor.lib.coremodel.http
 import android.util.Log
 import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.GankRes
+import com.victor.lib.coremodel.entity.WeChatRes
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -39,9 +40,13 @@ interface ApiService {
         @Path("count") count: Int?
     ): GankDetailEntity
 
+    @GET("wxarticle/chapters/json")
+    suspend fun getWeChat(): WeChatRes
+
     companion object {
         const val TAG = "ApiService"
         const val GANK_HOST = "https://gank.io/"
+        const val WAN_ANDROID_HOST = "https://wanandroid.com/"
         fun create(baseUrl: String): ApiService {
 
             val client = OkHttpClient.Builder()

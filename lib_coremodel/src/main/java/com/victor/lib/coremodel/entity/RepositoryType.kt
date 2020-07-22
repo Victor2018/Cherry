@@ -13,5 +13,6 @@ package com.victor.lib.coremodel.entity
 enum class RepositoryType {
     GANK,
     GANK_GIRL,
-    GANK_DETAIL
+    GANK_DETAIL,
+    WAN_ANDROID
 }

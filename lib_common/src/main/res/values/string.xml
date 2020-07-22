@@ -1,4 +1,11 @@
 <resources>
+
+    <string name="home">Home</string>
+    <string name="girls">Girls</string>
+    <string name="wechat">WeChat</string>
+    <string name="favorite">Orders</string>
+    <string name="profile">Profile</string>
+
     <string name="loading">loading...</string>
     <string name="i_have_bottom_line">you’ve reached bottom line</string>
 
@@ -8,4 +15,15 @@
     <string name="share">Share</string>
 
     <string name="transition_gank_img">transition_gank_img</string>
+    <string name="retry">Retry</string>
+
+    <string name="post_subtitle">Submitted by %s</string>
+    <string name="subtitle">Submitted by %s</string>
+
+    <string name="save">save</string>
+    <string name="set_wallpaper">Set wallpaper</string>
+
+    <string name="save_picture_success">图片保存成功！</string>
+    <string name="set_wallpaper_success">设为壁纸成功！</string>
+    <string name="share_beauty">给你分享一个美女：</string>
 </resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nav_title">
+		<item>@string/home</item>
+		<item>@string/girls</item>
+		<item>@string/wechat</item>
+		<item>@string/favorite</item>
+		<item>@string/profile</item>
+    </string-array>
+
+</resources>

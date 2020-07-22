@@ -1,10 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.victor.module.home">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:label="@string/module_home"
         android:name="com.victor.lib.common.app.App"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:replace="android:label">
 
         <activity android:name=".view.HomeActivity">
             <intent-filter>

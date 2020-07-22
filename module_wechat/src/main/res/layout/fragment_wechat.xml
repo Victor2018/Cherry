@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.victor.module.wechat.viewmodel.WeChatViewModel" />
+    </data>
+    <com.victor.lib.common.view.widget.LMRecyclerView
+        android:id="@+id/mRvWechat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:background="@color/white"
+        android:alpha="0.8"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+</layout>
+
+

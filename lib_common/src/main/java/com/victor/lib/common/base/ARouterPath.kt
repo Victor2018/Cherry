@@ -13,6 +13,7 @@ package com.victor.lib.common.base
 object ARouterPath {
     private const val MAIN = "/main"
     private const val HOME = "/home"
+    private const val WECHAT = "/wechat"
     private const val GIRLS = "/girls"
     private const val MINE = "/mine"
 
@@ -42,5 +43,10 @@ object ARouterPath {
 
     /**干货Activity */
     const val GankAct = "$HOME/module/GankActivity"
+
+    /**公众号Fragment */
+    const val WeChatFgt = "$WECHAT/module/WeChatFragment"
+    /**公众号Activity */
+    const val WeChatAct = "$WECHAT/module/WeChatActivity"
 
 }
