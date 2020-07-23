@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginBottom="@dimen/dp_10"
+    card_view:contentPadding="@dimen/dp_20"
+    card_view:cardCornerRadius="0dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:lineSpacingExtra="@dimen/dp_1"
+                android:ellipsize="end"
+                android:textSize="@dimen/dp_28"
+                android:textColor="@color/color_333333"
+                android:text="Gradle 插件，做自动测试过程中的截屏。"/>
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="@dimen/dp_105"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_height="@dimen/dp_80"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_below="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="代码家"
+            android:textColor="@color/color_8D9193"
+            android:textSize="@dimen/dp_22"/>
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_below="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -23,8 +23,8 @@ import java.io.IOException
  */
 class GankGirlPagingSource (
     private val requestApi: ApiService
-) : PagingSource<Int, GankDetailInfo>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GankDetailInfo> {
+) : PagingSource<Int, Any>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         return try {
             val items = requestApi.getFuliList(page = params.key ?: 0,count = params.loadSize)
 
@@ -42,14 +42,14 @@ class GankGirlPagingSource (
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun getRefreshKey(state: PagingState<Int, GankDetailInfo>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Any>): Int? {
         /**
          * The name field is a unique identifier for post items.
          * (no it is not the title of the post :) )
          * https://www.reddit.com/dev/api
          */
         return state.anchorPosition?.let { anchorPosition ->
-            state.closestItemToPosition(anchorPosition)?.views
+            state.closestItemToPosition(anchorPosition)?.hashCode()
         }
     }
 }

@@ -1,11 +1,13 @@
-package com.victor.module.home.view
+package com.victor.module.wechat.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -14,15 +16,16 @@ import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.coremodel.entity.ArticleInfo
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.viewmodel.ArticleViewModel
 import com.victor.lib.coremodel.viewmodel.GankViewModel
-import com.victor.module.home.R
-import com.victor.module.home.view.adapter.GankAdapter
-import com.victor.module.home.view.adapter.GankLoadStateAdapter
-import kotlinx.android.synthetic.main.activity_gank.*
+import com.victor.module.wechat.R
+import com.victor.module.wechat.view.adapter.ArticleAdapter
+import com.victor.module.wechat.view.adapter.ArticleLoadStateAdapter
+import kotlinx.android.synthetic.main.activity_article.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 
@@ -30,38 +33,37 @@ import kotlinx.coroutines.flow.collectLatest
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankActivity
+ * File: ArticleActivity
  * Author: Victor
- * Date: 2020/7/14 下午 05:19
+ * Date: 2020/7/23 上午 10:56
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.GankAct)
-class GankActivity: BaseActivity() {
-
+@Route(path = ARouterPath.ArticleAct)
+class ArticleActivity: BaseActivity() {
     companion object {
         fun  intentStart (activity: AppCompatActivity, type: String) {
-            var intent = Intent(activity, GankActivity::class.java)
+            var intent = Intent(activity, ArticleActivity::class.java)
             intent.putExtra(NavigationUtils.TYPE_KEY, type)
             activity.startActivity(intent)
         }
     }
-    private lateinit var adapter: GankAdapter
+    private lateinit var adapter: ArticleAdapter
 
     var title: String? = null
-    var type: String? = null
+    var id: Int = 0
 
-    private val viewmodel: GankViewModel by viewModels {
+    private val viewmodel: ArticleViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
-                return GankViewModel(type!!,ServiceLocator.instance().getRepository(RepositoryType.GANK_DETAIL)) as T
+                return ArticleViewModel(id!!, ServiceLocator.instance().getRepository(RepositoryType.ARTICLE)) as T
             }
         }
     }
 
     override fun getLayoutResource(): Int {
-        return R.layout.activity_gank
+        return R.layout.activity_article
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +71,7 @@ class GankActivity: BaseActivity() {
         initData(intent)
         initialize()
     }
-    
+
     fun initialize () {
 
         setSupportActionBar(toolbar)
@@ -80,23 +82,23 @@ class GankActivity: BaseActivity() {
 
         toolbar.title = title
         //设置 进度条的颜色变化，最多可以设置4种颜色
-        mSrlGank.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
+        mSrlArticle.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
             android.R.color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     fun initData (intent: Intent?) {
-        title = intent?.getStringExtra(NavigationUtils.TITLE_KEY);
-        type = intent?.getStringExtra(NavigationUtils.TYPE_KEY);
-        Loger.e(TAG,"type = " + type)
+        title = intent?.getStringExtra(NavigationUtils.TITLE_KEY)
+        id = intent?.getIntExtra(NavigationUtils.ID_KEY,0)!!;
+        Loger.e(TAG,"id = " + id)
     }
 
     private fun initAdapter() {
-        adapter = GankAdapter()
-        mRvGank.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = GankLoadStateAdapter(
+        adapter = ArticleAdapter()
+        mRvArticle.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = ArticleLoadStateAdapter(
                 adapter
             ),
-            footer = GankLoadStateAdapter(
+            footer = ArticleLoadStateAdapter(
                 adapter
             )
         )
@@ -104,27 +106,27 @@ class GankActivity: BaseActivity() {
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             adapter.loadStateFlow.collectLatest { loadStates ->
-                mSrlGank.isRefreshing = loadStates.refresh is LoadState.Loading
+                mSrlArticle.isRefreshing = loadStates.refresh is LoadState.Loading
             }
         }
 
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             viewmodel.datas.collectLatest {
-                adapter.submitData(it as PagingData<GankDetailInfo>)
+                adapter.submitData(it as PagingData<ArticleInfo>)
             }
         }
 
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
             adapter.dataRefreshFlow.collectLatest {
-                mRvGank.scrollToPosition(0)
+                mRvArticle.scrollToPosition(0)
             }
         }
     }
 
     private fun initSwipeToRefresh() {
-        mSrlGank.setOnRefreshListener { adapter.refresh() }
+        mSrlArticle.setOnRefreshListener { adapter.refresh() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -4,16 +4,14 @@ package com.victor.lib.coremodel.entity
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: RepositoryType
+ * File: ArticleRes
  * Author: Victor
- * Date: 2020/7/14 下午 06:01
+ * Date: 2020/7/23 上午 11:12
  * Description: 
  * -----------------------------------------------------------------
  */
-enum class RepositoryType {
-    GANK,
-    GANK_GIRL,
-    GANK_DETAIL,
-    WAN_ANDROID,
-    ARTICLE
+class ArticleRes {
+    var errorCode: Int = 0
+    var errorMsg: String? = null
+    var data: ArticleData? = null
 }

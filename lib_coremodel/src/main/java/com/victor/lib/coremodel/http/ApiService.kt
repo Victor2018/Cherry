@@ -1,6 +1,7 @@
 package com.victor.lib.coremodel.http
 
 import android.util.Log
+import com.victor.lib.coremodel.entity.ArticleRes
 import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.GankRes
 import com.victor.lib.coremodel.entity.WeChatRes
@@ -42,6 +43,12 @@ interface ApiService {
 
     @GET("wxarticle/chapters/json")
     suspend fun getWeChat(): WeChatRes
+
+    @GET("wxarticle/list/{id}/{page}/json")
+    suspend fun getArticles(
+        @Path("id") id: Int?,
+        @Path("page") page: Int = 1
+    ): ArticleRes
 
     companion object {
         const val TAG = "ApiService"

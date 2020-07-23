@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
@@ -90,7 +91,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener {
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             viewmodel.datas.collectLatest {
-                adapter.submitData(it)
+                adapter.submitData(it as PagingData<GankDetailInfo>)
             }
         }
 

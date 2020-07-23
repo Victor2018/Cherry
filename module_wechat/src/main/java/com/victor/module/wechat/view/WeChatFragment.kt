@@ -3,11 +3,13 @@ package com.victor.module.wechat.view
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.util.NavigationUtils
 import com.victor.module.wechat.R
 import com.victor.module.wechat.databinding.FragmentWechatBinding
 import com.victor.module.wechat.view.adapter.WeChatAdapter
@@ -84,5 +86,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        NavigationUtils.goArticleActivity(weChatAdapter?.getItem(position)?.name!!,
+            weChatAdapter?.getItem(position)?.id!!)
     }
 }

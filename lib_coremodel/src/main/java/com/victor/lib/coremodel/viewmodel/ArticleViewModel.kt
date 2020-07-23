@@ -13,8 +13,8 @@ import com.victor.lib.coremodel.http.repository.IRepository
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankViewModel(val type: String,val repository: IRepository) : ViewModel() {
-    val datas = repository.postsOfSubreddit(type,20)
+class ArticleViewModel(val id: Int, val repository: IRepository) : ViewModel() {
+    val datas = repository.postsOfSubreddit("",id)
 
     /**
      * Factory for [LiveDataViewModel].

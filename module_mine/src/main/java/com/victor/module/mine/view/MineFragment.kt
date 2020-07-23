@@ -5,9 +5,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.mine.R
 import com.victor.lib.coremodel.viewmodel.MineViewModel
 import com.victor.module.mine.view.adapter.GankGirlAdapter
@@ -79,7 +81,7 @@ class MineFragment: BaseFragment() {
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             viewmodel.datas.collectLatest {
-                adapter.submitData(it)
+                adapter.submitData(it as PagingData<GankDetailInfo>)
             }
         }
 

@@ -5,6 +5,7 @@ import com.victor.lib.coremodel.http.ApiService
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.victor.lib.coremodel.entity.ArticleInfo
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import retrofit2.HttpException
 import java.io.IOException
@@ -13,7 +14,7 @@ import java.io.IOException
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankDetailPagingSource
+ * File: ArticlePagingSource
  * Author: Victor
  * Date: 2020/7/8 下午 05:04
  * Description:  A [PagingSource] that uses the "name" field of posts as the key for next/prev pages.
@@ -21,18 +22,18 @@ import java.io.IOException
  * alternative implementation which might be more suitable for your backend.
  * -----------------------------------------------------------------
  */
-class GankDetailPagingSource (
-    private val type: String,
+class ArticlePagingSource (
+    private val id: Int,
     private val requestApi: ApiService
 ) : PagingSource<Int, Any>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         return try {
-            val items = requestApi.getGankDetail(type = type,page = params.key ?: 0,count = params.loadSize)
+            val items = requestApi.getArticles(id = id,page = params.key ?: 1)
 
             LoadResult.Page(
-                data = items.data!!,
-                prevKey = if (items.page == 1) null else items.page - 1,
-                nextKey = if (items.page == items.page_count) null else items.page + 1
+                data = items.data?.datas!!,
+                prevKey = if (items?.data!!.curPage == 1) null else items?.data!!.curPage - 1,
+                nextKey = if (items?.data!!.curPage == items?.data!!.pageCount) null else items?.data!!.curPage + 1
             )
 
         } catch (e: IOException) {
@@ -50,7 +51,7 @@ class GankDetailPagingSource (
          * https://www.reddit.com/dev/api
          */
         return state.anchorPosition?.let { anchorPosition ->
-            state.closestItemToPosition(anchorPosition)?.hashCode()
+            state.closestItemToPosition(anchorPosition).hashCode()
         }
     }
 }

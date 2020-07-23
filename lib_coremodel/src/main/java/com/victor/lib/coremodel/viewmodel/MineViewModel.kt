@@ -1,12 +1,9 @@
 package com.victor.lib.coremodel.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.http.repository.IRepository
-import kotlinx.coroutines.flow.flatMapLatest
 
 /*
  * -----------------------------------------------------------------

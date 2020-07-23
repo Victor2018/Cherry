@@ -39,4 +39,5 @@
     <declare-styleable name="MultiSearchView">
         <attr name="searchTextStyle" format="reference"/>
     </declare-styleable>
+
 </resources>

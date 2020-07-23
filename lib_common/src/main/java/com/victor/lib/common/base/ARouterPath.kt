@@ -46,7 +46,11 @@ object ARouterPath {
 
     /**公众号Fragment */
     const val WeChatFgt = "$WECHAT/module/WeChatFragment"
+
     /**公众号Activity */
     const val WeChatAct = "$WECHAT/module/WeChatActivity"
+
+    /**公众号文章Activity */
+    const val ArticleAct = "$WECHAT/module/ArticleActivity"
 
 }
