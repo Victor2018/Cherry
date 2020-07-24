@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_5"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    tools:cardBackgroundColor="@color/color_6B605F">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_6">
+
+        <ImageView
+            android:id="@+id/mIvTvLogo"
+            android:layout_width="@dimen/dp_168"
+            android:layout_height="@dimen/dp_156"
+            android:scaleType="fitXY"
+            android:src="@mipmap/default_img" />
+
+        <TextView
+            android:id="@+id/mTvChannelName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/dp_5"
+            android:maxLines="2"
+            android:textSize="@dimen/dp_18"
+            android:textColor="@color/black"
+            tools:text="湖北卫视"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

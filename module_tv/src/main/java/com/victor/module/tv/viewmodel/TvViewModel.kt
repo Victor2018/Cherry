@@ -1,0 +1,40 @@
+package com.victor.module.tv.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.liveData
+import com.victor.module.tv.interfaces.ITVDataSource
+import com.victor.module.tv.data.ChannelCategory
+import com.victor.module.tv.data.ChannelRes
+import com.victor.module.tv.data.TvDataSource
+import kotlinx.coroutines.Dispatchers
+
+/*
+ * -----------------------------------------------------------------
+ * Copyright (C) 2018-2028, by Victor, All rights reserved.
+ * -----------------------------------------------------------------
+ * File: TvViewModel
+ * Author: Victor
+ * Date: 2020/7/24 上午 11:43
+ * Description: 
+ * -----------------------------------------------------------------
+ */
+class TvViewModel(private val dataSource: ITVDataSource) : ViewModel() {
+    val tvData: LiveData<ChannelRes> = liveData {
+        emitSource(dataSource.fetchTvData())
+    }
+}
+
+/**
+ * Factory for [LiveDataViewModel].
+ */
+object LiveDataVMFactory : ViewModelProvider.Factory {
+
+    private val tvDataSource = TvDataSource(Dispatchers.IO)
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
+        return TvViewModel(tvDataSource) as T
+    }
+}

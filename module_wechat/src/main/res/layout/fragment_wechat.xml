@@ -7,14 +7,53 @@
             name="viewmodel"
             type="com.victor.module.wechat.viewmodel.WeChatViewModel" />
     </data>
-    <com.victor.lib.common.view.widget.LMRecyclerView
-        android:id="@+id/mRvWechat"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:background="@color/white"
-        android:alpha="0.8"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/mCtlTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginStart="@dimen/dp_50"
+                app:expandedTitleMarginEnd="@dimen/dp_65"
+                app:titleEnabled="false">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/transparent"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_collapseMode="pin"
+                    app:title="@string/app_name"
+                    app:titleTextAppearance="@style/Toolbar.TitleText">
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.victor.lib.common.view.widget.LMRecyclerView
+            android:id="@+id/mRvWechat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:background="@color/white"
+            android:alpha="0.8"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 
 

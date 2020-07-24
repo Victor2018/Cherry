@@ -1,8 +1,11 @@
 package com.victor.module.girls.view
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +13,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
@@ -61,13 +65,31 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        initialize()
+
+    }
+
+    fun initialize () {
+        setHasOptionsMenu(true);
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        var textView: TextView = toolbar.getChildAt(0) as TextView;//主标题
+        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
+
         initAdapter()
         initSwipeToRefresh()
-
     }
 
     private fun initAdapter() {
         gridLayoutManager = GridLayoutManager(context, 2) //这里用线性宫格显示 类似于grid view
+        //设置头部及底部View占据整行空间
+
+        //设置头部及底部View占据整行空间
+        gridLayoutManager!!.spanSizeLookup = object : SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position == adapter.itemCount - 1) gridLayoutManager!!.spanCount else 1
+            }
+        }
 
         list.setLayoutManager(gridLayoutManager)
 

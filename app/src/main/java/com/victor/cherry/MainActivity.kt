@@ -1,10 +1,7 @@
 package com.victor.cherry
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.cherry.adapter.HomeFragmentAdapter
@@ -13,7 +10,6 @@ import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import org.victor.funny.util.ResUtils
 import java.util.*
 
@@ -29,24 +25,26 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        statusBarTextColorBlack = true
+//        statusBarTextColorBlack = true
         super.onCreate(savedInstanceState)
         initialize()
         initData()
     }
 
     fun initialize () {
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
 
         homeFragmentAdapter = HomeFragmentAdapter(supportFragmentManager)
 
         val homeFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.HomeFgt).navigation() as BaseFragment
         val girlsFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.GirlsFgt).navigation() as BaseFragment
         val weChatFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.WeChatFgt).navigation() as BaseFragment
+        val tvFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.TvFgt).navigation() as BaseFragment
         val mineFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.MineFgt).navigation() as BaseFragment
         fragmentList.add(homeFrag)
         fragmentList.add(girlsFrag)
         fragmentList.add(weChatFrag)
+        fragmentList.add(tvFrag)
         fragmentList.add(mineFrag)
 
         homeFragmentAdapter?.fragmetList = fragmentList
@@ -54,9 +52,9 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         mBottomBar.setOnItemSelectListener(this)
 
-        var textView: TextView  = toolbar.getChildAt(0) as TextView;//主标题
+      /*  var textView: TextView  = toolbar.getChildAt(0) as TextView;//主标题
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选*/
 
     }
 
@@ -80,7 +78,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
     }
 
     override fun onItemSelected(index: Int) {
-        toolbar.title = navTitles?.get(index)
+//        toolbar.title = navTitles?.get(index)
         if (index < fragmentList.size) {
             mVpHome.currentItem = index
         }

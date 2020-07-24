@@ -1,18 +1,12 @@
 package com.victor.module.home.view
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.ViewSwitcher
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -28,9 +22,9 @@ import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
 import com.victor.module.home.view.widget.DescriptionViewSwitcherFactory
-import com.victor.module.home.view.widget.TitleViewSwitcherFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.victor.funny.util.ToastUtils
+
 
 /*
  * -----------------------------------------------------------------
@@ -74,6 +68,12 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
     }
 
     fun initialize () {
+        setHasOptionsMenu(true);
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        var textView: TextView = toolbar.getChildAt(0) as TextView;//主标题
+        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
+
         val binding = viewDataBinding as FragmentHomeBinding?
 
         // Set the LifecycleOwner to be able to observe LiveData objects

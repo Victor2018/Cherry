@@ -13,8 +13,8 @@
         text="@string/wechat" />
 
     <tab
-        drawable="@drawable/ic_favorite_black_24dp"
-        text="@string/favorite" />
+        drawable="@drawable/ic_tv_circel_black_24dp"
+        text="@string/tv" />
 
     <tab
         drawable="@drawable/ic_account_circle_black_24dp"

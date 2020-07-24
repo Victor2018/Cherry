@@ -14,6 +14,7 @@ object ARouterPath {
     private const val MAIN = "/main"
     private const val HOME = "/home"
     private const val WECHAT = "/wechat"
+    private const val TV = "/tv"
     private const val GIRLS = "/girls"
     private const val MINE = "/mine"
 
@@ -52,5 +53,8 @@ object ARouterPath {
 
     /**公众号文章Activity */
     const val ArticleAct = "$WECHAT/module/ArticleActivity"
+
+    /**TV Fragment */
+    const val TvFgt = "$TV/module/TvFragment"
 
 }
