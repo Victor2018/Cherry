@@ -42,7 +42,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener {
     private val viewmodel: MineViewModel by viewModels { MineViewModel.LiveDataVMFactory }
 
     private lateinit var adapter: GankGirlAdapter
-    private var gridLayoutManager: GridLayoutManager? = null
     var datas: ArrayList<GankDetailInfo> = ArrayList()
 
     companion object {
@@ -81,18 +80,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener {
     }
 
     private fun initAdapter() {
-        gridLayoutManager = GridLayoutManager(context, 2) //这里用线性宫格显示 类似于grid view
-        //设置头部及底部View占据整行空间
-
-        //设置头部及底部View占据整行空间
-        gridLayoutManager!!.spanSizeLookup = object : SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position == adapter.itemCount - 1) gridLayoutManager!!.spanCount else 1
-            }
-        }
-
-        list.setLayoutManager(gridLayoutManager)
-
         adapter = GankGirlAdapter(this)
         list.adapter = adapter.withLoadStateHeaderAndFooter(
             header = GankGirlLoadStateAdapter(

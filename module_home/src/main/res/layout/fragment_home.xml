@@ -13,12 +13,13 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0.8"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_600"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:fitsSystemWindows="true">
 
@@ -32,6 +33,17 @@
                 app:expandedTitleMarginStart="@dimen/dp_50"
                 app:expandedTitleMarginEnd="@dimen/dp_65"
                 app:titleEnabled="false">
+
+                <com.victor.module.home.view.widget.BannerSwitcherView
+                    android:id="@+id/mBsvBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fitsSystemWindows="true"
+                    app:mvAnimDuration="1000"
+                    app:mvInterval="10000"
+                    app:mvDirection="right_to_left"/>
+
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -46,31 +58,33 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:alpha="0.8"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
+            app:behavior_overlapTop="@dimen/dp_0"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mRvGank"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_760"
-                android:layout_marginTop="@dimen/dp_50"
-                android:clipChildren="false"
-                android:overScrollMode="never"
-                app:viewUpdater="com.victor.lib.common.view.widget.cardslider.CardsUpdater"/>
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-            <TextSwitcher
-                android:id="@+id/mTsDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_50"
-                android:paddingLeft="@dimen/dp_20"/>
-        </LinearLayout>
+                <TextSwitcher
+                    android:id="@+id/mTsDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_20"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRvGank"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_456"
+                    android:clipChildren="false"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    app:viewUpdater="com.victor.lib.common.view.widget.cardslider.CardsUpdater"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

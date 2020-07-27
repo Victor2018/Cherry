@@ -1,10 +1,7 @@
 package com.victor.lib.coremodel.http
 
 import android.util.Log
-import com.victor.lib.coremodel.entity.ArticleRes
-import com.victor.lib.coremodel.entity.GankDetailEntity
-import com.victor.lib.coremodel.entity.GankRes
-import com.victor.lib.coremodel.entity.WeChatRes
+import com.victor.lib.coremodel.entity.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -27,6 +24,9 @@ import java.util.concurrent.TimeUnit
 interface ApiService {
     @GET("api/v2/categories/GanHuo")
     suspend fun getGank(): GankRes
+
+    @GET("api/v2/banners")
+    suspend fun getBanner(): BannerRes
 
     @GET("api/v2/data/category/GanHuo/type/{type}/page/{page}/count/{count}")
     suspend fun getGankDetail(

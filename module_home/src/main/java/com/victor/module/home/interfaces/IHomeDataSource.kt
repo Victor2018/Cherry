@@ -1,6 +1,7 @@
 package com.victor.module.home.interfaces
 
 import androidx.lifecycle.LiveData
+import com.victor.lib.coremodel.entity.BannerRes
 import com.victor.lib.coremodel.entity.GankRes
 
 /*
@@ -19,4 +20,5 @@ interface IHomeDataSource {
     val cachedData: LiveData<String>
     suspend fun fetchNewData()
     fun fetchGankData(): LiveData<GankRes>
+    fun fetchBannerData(): LiveData<BannerRes>
 }

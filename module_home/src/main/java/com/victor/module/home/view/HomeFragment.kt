@@ -1,5 +1,7 @@
 package com.victor.module.home.view
 
+import android.R.attr.data
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -16,11 +18,13 @@ import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.cardslider.CardSliderLayoutManager
 import com.victor.lib.common.view.widget.cardslider.CardSnapHelper
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
+import com.victor.module.home.view.widget.BannerSwitcherView
 import com.victor.module.home.view.widget.DescriptionViewSwitcherFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.victor.funny.util.ToastUtils
@@ -105,9 +109,15 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
                 }
             }
         })
+
+        mBsvBanner.onItemClickListener = this
+
     }
 
     fun initData () {
+        viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
+            mBsvBanner.startWithList(it.data)
+        })
         viewmodel.gankData.observe(viewLifecycleOwner, Observer {
             homeAdapter?.clear()
             homeAdapter?.add(it.data)
@@ -126,8 +136,12 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
 
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        ToastUtils.showShort(homeAdapter?.getItem(position)?.desc!!)
-        NavigationUtils.goGankActivity(homeAdapter?.getItem(position)?.title!!,homeAdapter?.getItem(position)?.type!!)
+        if (id == BannerSwitcherView.ON_BANNER_ITEM_CLICK) {
+            WebActivity.intentStart(activity!!,mBsvBanner?.messages?.get(position)?.title!!,
+                mBsvBanner?.messages?.get(position)?.url!!)
+        } else {
+            NavigationUtils.goGankActivity(homeAdapter?.getItem(position)?.title!!,homeAdapter?.getItem(position)?.type!!)
+        }
     }
 
     private fun onActiveCardChange() {

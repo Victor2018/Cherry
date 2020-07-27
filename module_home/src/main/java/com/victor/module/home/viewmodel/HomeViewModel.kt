@@ -1,6 +1,7 @@
 package com.victor.cherry.viewmodel
 
 import androidx.lifecycle.*
+import com.victor.lib.coremodel.entity.BannerRes
 import com.victor.lib.coremodel.entity.GankRes
 import com.victor.module.home.data.HomeDataSource
 import com.victor.module.home.interfaces.IHomeDataSource
@@ -43,6 +44,9 @@ class HomeViewModel(
 
     val gankData: LiveData<GankRes> = liveData {
         emitSource(dataSource.fetchGankData())
+    }
+    val bannerData: LiveData<BannerRes> = liveData {
+        emitSource(dataSource.fetchBannerData())
     }
         // Called when the user clicks on the "FETCH NEW DATA" button. Updates value in data source.
         fun onRefresh() {

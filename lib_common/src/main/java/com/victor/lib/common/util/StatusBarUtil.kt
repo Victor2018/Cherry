@@ -35,9 +35,7 @@ class StatusBarUtil {
                 localLayoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     if (hideStatusBarBackground && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        if (statusTextColorBlack) {
-                            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                        }
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
                     }
                     if (statusTextColorBlack) {
                         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

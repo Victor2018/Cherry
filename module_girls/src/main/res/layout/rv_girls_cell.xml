@@ -3,38 +3,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_480"
-    android:layout_margin="@dimen/dp_2"
     android:id="@+id/cv_item"
     card_view:cardCornerRadius="0dp"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
-    <FrameLayout
+    <com.victor.lib.common.view.widget.piv.VerticalScrollParallaxImageView
+        android:id="@+id/iv_img"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-        <ImageView
-            android:id="@+id/iv_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/default_img"
-            android:transitionName="@string/transition_gank_img"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center_vertical"/>
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_img"
-            android:padding="@dimen/dp_10"
-            android:layout_gravity="bottom"
-            android:maxLines="2"
-            android:lineSpacingExtra="@dimen/dp_1"
-            android:ellipsize="end"
-            android:text="从你的全世界路过"
-            android:textColor="?attr/colorPrimary"
-            android:textColorLink="?attr/colorPrimaryDark"
-            android:textSize="16sp"/>
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:src="@mipmap/default_img"
+        android:transitionName="@string/transition_gank_img"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_img"
+        android:padding="@dimen/dp_10"
+        android:layout_gravity="bottom"
+        android:maxLines="2"
+        android:lineSpacingExtra="@dimen/dp_1"
+        android:ellipsize="end"
+        android:text="从你的全世界路过"
+        android:textColor="?attr/colorPrimary"
+        android:textColorLink="?attr/colorPrimaryDark"
+        android:textSize="16sp"/>
 
 </androidx.cardview.widget.CardView>

@@ -1,7 +1,9 @@
 package com.victor.module.mine.view
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +13,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.victor.clips.util.AppUtil
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.mine.R
 import com.victor.lib.coremodel.viewmodel.MineViewModel
@@ -33,11 +37,7 @@ import kotlinx.coroutines.flow.collectLatest
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.MineFgt)
-class MineFragment: BaseFragment() {
-
-    private val viewmodel: MineViewModel by viewModels { MineViewModel.LiveDataVMFactory }
-
-    private lateinit var adapter: GankGirlAdapter
+class MineFragment: BaseFragment(),View.OnClickListener {
 
     companion object {
         fun newInstance(): MineFragment {
@@ -60,55 +60,36 @@ class MineFragment: BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         initialize()
-
+        initData()
     }
 
     fun initialize () {
         setHasOptionsMenu(true);
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         var textView: TextView = toolbar.getChildAt(0) as TextView;//主标题
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
         textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
 
-        initAdapter()
-        initSwipeToRefresh()
+        mTvDownloadApp.movementMethod = LinkMovementMethod.getInstance()
+        mTvGmail.movementMethod = LinkMovementMethod.getInstance()
+        mTvIssues.movementMethod = LinkMovementMethod.getInstance()
+
+        mFabGitHub.setOnClickListener(this)
+
     }
 
-    private fun initAdapter() {
-        adapter = GankGirlAdapter()
-        list.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = GankGirlLoadStateAdapter(
-                adapter
-            ),
-            footer = GankGirlLoadStateAdapter(
-                adapter
-            )
-        )
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            adapter.loadStateFlow.collectLatest { loadStates ->
-                swipe_refresh.isRefreshing = loadStates.refresh is LoadState.Loading
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            viewmodel.datas.collectLatest {
-                adapter.submitData(it as PagingData<GankDetailInfo>)
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
-            adapter.dataRefreshFlow.collectLatest {
-                list.scrollToPosition(0)
-            }
-        }
+    fun initData () {
+        mTvVersion.text = String.format("Version：v%s",AppUtil.getAppVersionName(context!!))
     }
 
-    private fun initSwipeToRefresh() {
-        swipe_refresh.setOnRefreshListener { adapter.refresh() }
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.mFabGitHub -> {
+                WebActivity.intentStart(activity as AppCompatActivity, getString(R.string.github), getString(R.string.github_url), false)
+            }
+        }
     }
 
     override fun handleBackEvent(): Boolean {

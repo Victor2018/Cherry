@@ -34,7 +34,7 @@ class WebActivity: BaseActivity(), View.OnClickListener {
         val WEB_URL_KEY = "WEB_URL_KEY"
         val WEB_VIEW_BLACK_KEY = "WEB_VIEW_BLACK_KEY"
 
-        fun  intentStart (activity: Context, title: String, url: String) {
+        fun  intentStart (activity: Context, title: String?, url: String?) {
             Loger.e("WebActivity","intentStart()......title = " + title)
             Loger.e("WebActivity","intentStart()......url = " + url)
             var intent = Intent(activity, WebActivity::class.java)
@@ -42,7 +42,7 @@ class WebActivity: BaseActivity(), View.OnClickListener {
             intent.putExtra(WEB_URL_KEY, url)
             activity.startActivity(intent)
         }
-        fun  intentStart (activity: AppCompatActivity, title: String, url: String, isBlackBackground: Boolean) {
+        fun  intentStart (activity: AppCompatActivity, title: String?, url: String?, isBlackBackground: Boolean) {
             var intent = Intent(activity, WebActivity::class.java)
             intent.putExtra(WEB_TITLE_KEY, title)
             intent.putExtra(WEB_URL_KEY, url)

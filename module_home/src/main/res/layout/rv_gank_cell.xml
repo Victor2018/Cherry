@@ -35,9 +35,9 @@
 
             <ImageView
                 android:id="@+id/iv_image"
-                android:layout_width="@dimen/dp_105"
+                android:layout_width="@dimen/dp_168"
                 android:layout_marginStart="@dimen/dp_10"
-                android:layout_height="@dimen/dp_80"/>
+                android:layout_height="@dimen/dp_220"/>
 
         </LinearLayout>
 

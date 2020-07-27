@@ -33,7 +33,7 @@ import java.util.*
 class CardSliderLayoutManager: RecyclerView.LayoutManager, ScrollVectorProvider {
 
     private val DEFAULT_ACTIVE_CARD_LEFT_OFFSET = 50
-    private val DEFAULT_CARD_WIDTH = 218
+    private val DEFAULT_CARD_WIDTH = 168
     private val DEFAULT_CARDS_GAP = 12
     private val LEFT_CARD_COUNT = 2
 
