@@ -6,8 +6,8 @@ beautiful girls, live show watching. . . All you want is here.This application
 is only for learning and use.Please do not use it!
 
 # Api source
-https://gank.io/api
-https://www.wanandroid.com/blog/show/2
+- https://gank.io/api
+- https://www.wanandroid.com/blog/show/2
 
 # Rendering:
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/rendering.gif)
