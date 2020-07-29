@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="home">Home</string>
     <string name="girls">Girls</string>
@@ -38,4 +38,8 @@
     <string name="description">Description:\nJetpack components such as paging ktx flow, aouter componentized development,kolin coroutines cooperate with retrofit network request, dry gank browsing,beautiful girls, live show watching. . . All you want is here.This application is only for learning and use.Please do not use it!</string>
     <string name="github">Github</string>
     <string name="mail_to_me_tip">Please select the mail application</string>
+
+    <string name="watch_tv">Watch TV</string>
+    <string name="search">Search</string>
+
 </resources>

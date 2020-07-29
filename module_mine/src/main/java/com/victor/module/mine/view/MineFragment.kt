@@ -3,7 +3,9 @@ package com.victor.module.mine.view
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -64,13 +66,8 @@ class MineFragment: BaseFragment(),View.OnClickListener {
     }
 
     fun initialize () {
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-        var textView: TextView = toolbar.getChildAt(0) as TextView;//主标题
-        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
 
         mTvDownloadApp.movementMethod = LinkMovementMethod.getInstance()
         mTvGmail.movementMethod = LinkMovementMethod.getInstance()

@@ -25,8 +25,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
+                android:fitsSystemWindows="true"
+                app:title="@string/watch_tv"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp">
 
@@ -52,7 +53,8 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/transparent"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin"
+                    android:fitsSystemWindows="true"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -1,8 +1,14 @@
 package com.victor.module.tv.view
 
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -59,6 +65,9 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener {
     }
 
     fun initialize () {
+        setHasOptionsMenu(true)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+
         val binding = viewDataBinding as FragmentTvBinding?
 
         // Set the LifecycleOwner to be able to observe LiveData objects

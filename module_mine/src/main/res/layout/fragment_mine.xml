@@ -20,7 +20,10 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:contentScrim="?attr/colorPrimary"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:title="@string/about_us"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp">
             <ImageView
                 android:id="@+id/mIvAboutPoster"
                 android:layout_width="match_parent"

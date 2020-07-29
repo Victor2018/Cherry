@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#CDDC39</color>
     <color name="colorPrimaryDark">#AFB42B</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#C0CA33</color>
 
     <color name="half_alpha">#4c000000</color>
     <color name="color_E6FCFC">#E6FCFC</color>
@@ -17,4 +17,5 @@
     <color name="color_8D9193">#8D9193</color>
     <color name="color_333333">#333333</color>
     <color name="color_7C7C7C">#7C7C7C</color>
+    <color name="alpha_blue">#66B3E5FC</color>
 </resources>

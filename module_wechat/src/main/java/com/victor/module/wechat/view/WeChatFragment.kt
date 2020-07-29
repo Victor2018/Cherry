@@ -1,17 +1,19 @@
 package com.victor.module.wechat.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
-import android.view.View
+import android.view.*
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.module.wechat.R
 import com.victor.module.wechat.databinding.FragmentWechatBinding
@@ -31,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_wechat.*
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.WeChatFgt)
-class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener {
+class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.OnMenuItemClickListener {
     private val viewmodel: WeChatViewModel by viewModels { LiveDataVMFactory }
     var weChatAdapter: WeChatAdapter? = null
 
@@ -59,11 +61,14 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener {
     }
 
     fun initialize () {
-        setHasOptionsMenu(true);
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-        var textView: TextView = toolbar.getChildAt(0) as TextView;//主标题
-        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
+        setHasOptionsMenu(true)
+        var textView: TextView = toolbar.getChildAt(0) as TextView//主标题
+        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT//填充父类
+        textView.setGravity(Gravity.CENTER_VERTICAL)//水平居中，CENTER，即水平也垂直，自选
+
+        toolbar.menu.clear()
+        toolbar.inflateMenu(R.menu.menu_wechat)
+        toolbar.setOnMenuItemClickListener(this)
 
         val binding = viewDataBinding as FragmentWechatBinding?
 
@@ -97,5 +102,20 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener {
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         NavigationUtils.goArticleActivity(weChatAdapter?.getItem(position)?.name!!,
             weChatAdapter?.getItem(position)?.id!!)
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.action_share -> {
+                var intentshare = Intent(Intent.ACTION_SEND);
+                intentshare.setType(Constant.SHARE_TYPE)
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
+                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app));
+                Intent.createChooser(intentshare, getString(R.string.share));
+                startActivity(intentshare);
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item!!)
     }
 }

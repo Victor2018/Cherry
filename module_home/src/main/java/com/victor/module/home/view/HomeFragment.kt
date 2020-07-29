@@ -1,14 +1,16 @@
 package com.victor.module.home.view
 
-import android.R.attr.data
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import com.victor.cherry.viewmodel.HomeViewModel
 import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.cardslider.CardSliderLayoutManager
@@ -27,7 +30,6 @@ import com.victor.module.home.view.adapter.HomeAdapter
 import com.victor.module.home.view.widget.BannerSwitcherView
 import com.victor.module.home.view.widget.DescriptionViewSwitcherFactory
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.victor.funny.util.ToastUtils
 
 
 /*
@@ -40,8 +42,10 @@ import org.victor.funny.util.ToastUtils
  * Description: 
  * -----------------------------------------------------------------
  */
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @Route(path = ARouterPath.HomeFgt)
-class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
+class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
+    Toolbar.OnMenuItemClickListener {
     private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
 
     var homeAdapter: HomeAdapter? = null
@@ -72,11 +76,15 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
     }
 
     fun initialize () {
-        setHasOptionsMenu(true);
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-        var textView: TextView = toolbar.getChildAt(0) as TextView;//主标题
-        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选
+        setHasOptionsMenu(true)
+        var textView: TextView = toolbar.getChildAt(0) as TextView//主标题
+        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT//填充父类
+        textView.setGravity(Gravity.CENTER_VERTICAL)//水平居中，CENTER，即水平也垂直，自选
+
+        toolbar.menu.clear()
+        toolbar.inflateMenu(R.menu.menu_home)
+        toolbar.setOnMenuItemClickListener(this)
+
 
         val binding = viewDataBinding as FragmentHomeBinding?
 
@@ -157,4 +165,21 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener {
         currentPosition = pos
     }
 
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.action_search -> {
+                return true
+            }
+            R.id.action_share -> {
+                var intentshare = Intent(Intent.ACTION_SEND);
+                intentshare.setType(Constant.SHARE_TYPE)
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
+                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app));
+                Intent.createChooser(intentshare, getString(R.string.share));
+                startActivity(intentshare);
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item!!)
+    }
 }

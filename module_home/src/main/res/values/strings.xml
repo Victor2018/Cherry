@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="module_home">module_home</string>
 
     <string name="home_fragment">HomeFragment</string>
