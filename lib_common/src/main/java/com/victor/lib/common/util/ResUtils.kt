@@ -55,6 +55,21 @@ class ResUtils {
             }
 
         }
+        /**
+         * 获取 int[] 值. 如果id对应的资源文件不存在, 则返回 null.
+         *
+         * @param id
+         * @return
+         */
+        fun getIntArrayRes(id: Int): IntArray? {
+            try {
+                return App.get().getResources().getIntArray(id)
+            } catch (e: Resources.NotFoundException) {
+                e.printStackTrace()
+                return null
+            }
+
+        }
 
         /**
          * 获取dimension px值. 如果id对应的资源文件不存在, 则返回 -1.

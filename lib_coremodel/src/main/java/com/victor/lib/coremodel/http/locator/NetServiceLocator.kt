@@ -84,7 +84,7 @@ class NetServiceLocator : ServiceLocator {
     )
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 30
+        const val NETWORK_PAGE_SIZE = 30
     }
 
 }

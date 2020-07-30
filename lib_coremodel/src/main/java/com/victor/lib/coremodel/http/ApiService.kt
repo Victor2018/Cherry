@@ -43,7 +43,7 @@ interface ApiService {
 
     @GET("api/v2/search/{key}/category/All/type/All/page/{page}/count/{count}")
     suspend fun searchGank(
-        @Path("key") key: String,
+        @Path("key") key: String?,
         @Path("page") page: Int = 1,
         @Path("count") count: Int?
     ): GankDetailEntity

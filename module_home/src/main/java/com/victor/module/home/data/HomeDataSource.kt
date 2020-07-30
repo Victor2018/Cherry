@@ -3,11 +3,9 @@ package com.victor.module.home.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import com.victor.lib.coremodel.entity.BannerRes
-import com.victor.lib.coremodel.entity.GankRes
-import com.victor.lib.coremodel.entity.HotKeyRes
-import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.entity.*
 import com.victor.lib.coremodel.http.ApiService
+import com.victor.lib.coremodel.http.locator.NetServiceLocator.Companion.NETWORK_PAGE_SIZE
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.module.home.interfaces.IHomeDataSource
 import kotlinx.coroutines.CoroutineDispatcher
@@ -91,6 +89,21 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSo
 
     override fun fetchHotKey(): LiveData<HotKeyRes> = liveData {
         emit(ServiceLocator.instance().getRequestApi(RepositoryType.HOT_KEY).getHotKey())
+    }
+
+    // Cache of a data point that is exposed to VM
+    private val _searchGankData = MutableLiveData(GankDetailEntity())
+    override val searchGankData: LiveData<GankDetailEntity> = _searchGankData
+
+    override suspend fun searchGank(key: String?, page: Int) {
+        // Force Main thread
+        withContext(Dispatchers.Main) {
+            _searchGankData.value = gankDataFetch(key,page,NETWORK_PAGE_SIZE)
+        }
+    }
+
+    private suspend fun gankDataFetch(key: String?, page: Int, count: Int): GankDetailEntity = withContext(ioDispatcher) {
+        ServiceLocator.instance().getRequestApi(RepositoryType.SEARCH_GANK).searchGank(key,page,count)
     }
 
 

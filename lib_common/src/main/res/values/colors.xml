@@ -9,6 +9,7 @@
     <color name="color_E6FBFD">#E6FBFD</color>
     <color name="color_E5FAFE">#E5FAFE</color>
     <color name="color_E5F9FE">#E5F9FE</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
@@ -18,4 +19,19 @@
     <color name="color_333333">#333333</color>
     <color name="color_7C7C7C">#7C7C7C</color>
     <color name="alpha_blue">#66B3E5FC</color>
+    <color name="color_D8D8D8">#D8D8D8</color>
+
+    <array name="search_filter_colors">
+        <item name="all" type="color">#827F93</item>
+        <item name="design" type="color">#C467F4</item>
+        <item name="ios" type="color">#3B9AEE</item>
+        <item name="android" type="color">#9BC53D</item>
+        <item name="web" type="color">#f4A261</item>
+        <item name="business" type="color">#1ED2BB</item>
+        <item name="research" type="color">#778DA9</item>
+        <item name="sales" type="color">#20BF55</item>
+        <item name="quality" type="color">#9F9FED</item>
+        <item name="customer" type="color">#FC6177</item>
+        <item name="other" type="color">#BCBCBC</item>
+    </array>
 </resources>

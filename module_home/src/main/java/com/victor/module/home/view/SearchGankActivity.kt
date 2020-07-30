@@ -3,11 +3,11 @@ package com.victor.module.home.view
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Message
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -15,36 +15,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadState
-import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.cherry.viewmodel.HomeViewModel
 import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
+import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.util.NavigationUtils
-import com.victor.lib.common.view.widget.KeywordsFlow
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.HotKeyInfo
-import com.victor.lib.coremodel.entity.RepositoryType
-import com.victor.lib.coremodel.http.locator.ServiceLocator
-import com.victor.lib.coremodel.viewmodel.SearchGankViewModel
 import com.victor.module.home.R
+import com.victor.module.home.data.SearchFilterTag
 import com.victor.module.home.databinding.FragmentHomeBinding
-import com.victor.module.home.view.adapter.GankAdapter
-import com.victor.module.home.view.adapter.GankLoadStateAdapter
+import com.victor.module.home.view.adapter.SearchFilterAdapter
+import com.victor.module.home.view.adapter.SearchGankAdapter
+import com.yalantis.filter.listener.FilterListener
+import com.yalantis.filter.widget.Filter
 import kotlinx.android.synthetic.main.activity_gank.toolbar
 import kotlinx.android.synthetic.main.activity_search_gank.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collectLatest
-import org.victor.funny.util.ToastUtils
-import java.util.*
-import kotlin.collections.ArrayList
+import org.victor.funny.util.ResUtils
+import java.util.ArrayList
 
 /*
  * -----------------------------------------------------------------
@@ -57,21 +48,18 @@ import kotlin.collections.ArrayList
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.SearchGankAct)
-class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnClickListener {
+class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnClickListener,
+    AdapterView.OnItemClickListener, LMRecyclerView.OnLoadMoreListener,
+    FilterListener<HotKeyInfo> {
     private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
     var viewDataBinding : ViewDataBinding? = null;
 
-    private lateinit var adapter: GankAdapter
-    var key: String? = "android"
+    var searchGankAdapter: SearchGankAdapter? = null
+    var currentPage = 1
+    var query: String? = null
 
-    private val searchViewmodel: SearchGankViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                @Suppress("UNCHECKED_CAST")
-                return SearchGankViewModel(key!!, ServiceLocator.instance().getRepository(RepositoryType.SEARCH_GANK)) as T
-            }
-        }
-    }
+    var mTitles: List<HotKeyInfo>? = null
+    var mFilter: Filter<HotKeyInfo>? = null
 
     companion object {
         fun  intentStart (activity: AppCompatActivity, type: String) {
@@ -104,78 +92,64 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
         // Bind ViewModel
         binding?.viewmodel = viewmodel
 
-        initAdapter()
-        initSwipeToRefresh()
+        searchGankAdapter = SearchGankAdapter(this,this)
+        searchGankAdapter?.setHeaderVisible(false)
+        searchGankAdapter?.setFooterVisible(false)
+        mRvSearchGank.setHasFixedSize(true)
+        mRvSearchGank.adapter = searchGankAdapter
 
-        //设置 进度条的颜色变化，最多可以设置4种颜色
-        mSrlSearch.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
-            android.R.color.holo_orange_light, android.R.color.holo_red_light);
-    }
+        mRvSearchGank.setLoadMoreListener(this)
 
-    private fun feedKeywordsFlow(
-        keywordsFlow: KeywordsFlow,
-        arr: List<HotKeyInfo>
-    ) {
-        val random = Random()
-        for (i in 0 until KeywordsFlow.MAX) {
-            val ran: Int = random.nextInt(arr.size)
-            val tmp = arr[ran]
-            keywordsFlow.feedKeyword(tmp.name)
-        }
+
+        mFilter = filter as Filter<HotKeyInfo>?
+        mFilter?.listener = this
+
+        //the text to show when there's no selected items
+        mFilter?.noSelectedItemText = ResUtils.getStringRes(R.string.hot_search_keywords)
     }
 
     fun initData () {
         viewmodel.hotKeyData.observe(this, Observer {
-            it.data?.let { it1 ->
+            it.let {it1 ->
+                it.data.let {it2 ->
+                    val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
+                    mTitles = it2
+                    mFilter?.adapter = SearchFilterAdapter(this,it2,colors)
+                    mFilter?.expand()
+                    mFilter?.build()
+                }
             }
+        })
+        viewmodel.seachGankValue.observe(this, Observer {
+            it.let {it1 ->
+                it.data.let {it2 ->
+                    if (currentPage == 1) {
+                        searchGankAdapter?.clear()
+                    }
+                    searchGankAdapter?.setFooterVisible(it.page < it.page_count)
+                    if (it.page < it.page_count) {
+                        searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING!!)
+                    } else {
+                        searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING_END!!)
+                    }
+
+                    searchGankAdapter?.add(it.data)
+                    searchGankAdapter?.notifyDataSetChanged()
+                }
+            }
+
         })
     }
 
-    private fun initAdapter() {
-        adapter = GankAdapter()
-        mRvSearchGank.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = GankLoadStateAdapter(
-                adapter
-            ),
-            footer = GankLoadStateAdapter(
-                adapter
-            )
-        )
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            adapter.loadStateFlow.collectLatest { loadStates ->
-                mSrlSearch.isRefreshing = loadStates.refresh is LoadState.Loading
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            searchViewmodel.datas.collectLatest {
-                adapter.submitData(it as PagingData<GankDetailInfo>)
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
-            adapter.dataRefreshFlow.collectLatest {
-                mRvSearchGank.scrollToPosition(0)
-            }
-        }
-    }
-
-    private fun initSwipeToRefresh() {
-        mSrlSearch.setOnRefreshListener { adapter.refresh() }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
-        val searchMenuItem = menu?.findItem(R.id.action_search);
+        val searchMenuItem = menu?.findItem(R.id.action_search)
         val searchView = searchMenuItem?.actionView as SearchView
-        val textView = searchView.findViewById(R.id.search_src_text) as TextView;
-        textView.setTextColor(Color.WHITE);
-        textView.setHighlightColor(getResources().getColor(R.color.colorAccent));
-        textView.setCursorVisible(true);
+        val textView = searchView.findViewById(R.id.search_src_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.setHighlightColor(getResources().getColor(R.color.colorAccent))
+        textView.setCursorVisible(true)
 
         searchView.setMaxWidth(Integer.MAX_VALUE)
         searchView.onActionViewExpanded()
@@ -219,6 +193,9 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        this.query = query
+        currentPage = 1
+        viewmodel.searchGank(query,currentPage)
         return false
     }
 
@@ -232,5 +209,46 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     override fun onClick(v: View?) {
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+    }
+
+    override fun OnLoadMore() {
+        currentPage++
+        viewmodel.searchGank(query,currentPage)
+    }
+
+    override fun onFilterDeselected(item: HotKeyInfo) {
+        Loger.e(TAG,"onFilterDeselected()......")
+    }
+
+    override fun onFilterSelected(item: HotKeyInfo) {
+        Loger.e(TAG,"onFilterSelected()......")
+        if (item.getText().equals(mTitles?.get(0))) {
+            mFilter?.deselectAll();
+            mFilter?.collapse();
+        }
+    }
+
+    override fun onFiltersSelected(filters: ArrayList<HotKeyInfo>) {
+        Loger.e(TAG,"onFiltersSelected()......")
+
+        var querySb = StringBuffer()
+        for (item in filters) {
+            querySb.append(item.name + " ")
+        }
+        if (querySb.length <= 0) return
+
+        query = querySb.substring(0,querySb.length-1)
+        currentPage = 1
+        viewmodel.searchGank(query,currentPage)
+    }
+
+    override fun onNothingSelected() {
+        Loger.e(TAG,"onNothingSelected()......")
+        searchGankAdapter?.clear()
+        searchGankAdapter?.notifyDataSetChanged()
     }
 }

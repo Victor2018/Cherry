@@ -9,7 +9,7 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_marginRight="6dp"
+        android:layout_marginRight="@dimen/dp_10"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/colorAccent"
-        android:textSize="16sp"
+        android:textSize="@dimen/dp_28"
         android:text="@string/loading" />
 
     <LinearLayout

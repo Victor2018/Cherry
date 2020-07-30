@@ -85,9 +85,11 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
 
     fun initData () {
         viewmodel.weChatData.observe(viewLifecycleOwner, Observer {
-            weChatAdapter?.clear()
-            weChatAdapter?.add(it.data)
-            weChatAdapter?.notifyDataSetChanged()
+            it.let {
+                weChatAdapter?.clear()
+                weChatAdapter?.add(it.data)
+                weChatAdapter?.notifyDataSetChanged()
+            }
         })
     }
 

@@ -2,6 +2,7 @@ package com.victor.module.home.interfaces
 
 import androidx.lifecycle.LiveData
 import com.victor.lib.coremodel.entity.BannerRes
+import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.GankRes
 import com.victor.lib.coremodel.entity.HotKeyRes
 
@@ -23,4 +24,7 @@ interface IHomeDataSource {
     fun fetchGankData(): LiveData<GankRes>
     fun fetchBannerData(): LiveData<BannerRes>
     fun fetchHotKey(): LiveData<HotKeyRes>
+
+    val searchGankData: LiveData<GankDetailEntity>
+    suspend fun searchGank(key: String?,page: Int)
 }

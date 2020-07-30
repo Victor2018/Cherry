@@ -2,6 +2,7 @@ package com.victor.module.tv.view.adapter
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
@@ -47,8 +48,13 @@ class TvCellAdapter (context: Context, listener: AdapterView.OnItemClickListener
         val contentViewHolder = viewHolder as TvCellContentViewHolder
         contentViewHolder.itemView.mTvChannelName.text = data.channel_name
 
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
-            data.icon,R.drawable.ic_baseline_live_tv_24)
+        if (TextUtils.isEmpty(data.icon)) {
+            ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
+                R.drawable.ic_baseline_live_tv_24)
+        } else {
+            ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
+                data.icon)
+        }
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 }

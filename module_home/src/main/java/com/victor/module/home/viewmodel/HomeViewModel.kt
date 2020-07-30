@@ -2,6 +2,7 @@ package com.victor.cherry.viewmodel
 
 import androidx.lifecycle.*
 import com.victor.lib.coremodel.entity.BannerRes
+import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.GankRes
 import com.victor.lib.coremodel.entity.HotKeyRes
 import com.victor.module.home.data.HomeDataSource
@@ -21,10 +22,7 @@ import java.util.*
  * Description: Showcases different patterns using the liveData coroutines builder.
  * -----------------------------------------------------------------
  */
-class HomeViewModel(
-    private val dataSource: IHomeDataSource
-) : ViewModel() {
-
+class HomeViewModel(private val dataSource: IHomeDataSource) : ViewModel() {
     // Exposed LiveData from a function that returns a LiveData generated with a liveData builder
     val currentTime = dataSource.getCurrentTime()
 
@@ -42,6 +40,15 @@ class HomeViewModel(
 
     // Exposed cached value in the data source that can be updated later on
     val cachedValue = dataSource.cachedData
+
+    val seachGankValue = dataSource.searchGankData
+
+    fun searchGank(key: String?,page: Int) {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.searchGank(key,page)
+        }
+    }
 
     val gankData: LiveData<GankRes> = liveData {
         emitSource(dataSource.fetchGankData())

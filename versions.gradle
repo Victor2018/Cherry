@@ -75,11 +75,12 @@ versions.paging = "3.0.0-alpha02"
 versions.match = "v1.1"
 versions.multidex = "1.0.3"
 versions.permissions = "v1.0"
+versions.SearchFilter = "v1.0.4"
 
 ext.versions = versions
 
 def build_versions = [:]
-build_versions.min_sdk = 17
+build_versions.min_sdk = 18
 build_versions.compile_sdk = 29
 build_versions.target_sdk = 29
 build_versions.build_tools = "29.0.3"
@@ -195,6 +196,7 @@ deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"
 deps.match = "com.github.Victor2018:ScreenMatchLib:$versions.match"
 deps.multidex = "com.android.support:multidex:$versions.multidex"
+deps.SearchFilter = "com.github.Yalantis:SearchFilter:$versions.SearchFilter"
 
 ext.deps = deps
 

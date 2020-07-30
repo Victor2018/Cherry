@@ -84,5 +84,7 @@ dependencies {
     api deps.multidex
     //动态权限申请
     api deps.permissions.core
+    //搜索筛选view
+    api deps.SearchFilter
 
 }
