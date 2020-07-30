@@ -122,7 +122,7 @@ class ImageUtils {
             .into(imageView)
     }
 
-    fun loadImage(context: Context,imageView: ImageView?, url: String, placeDrawable: Int): Target<*>? {
+    fun loadImage(context: Context,imageView: ImageView?, url: String?, placeDrawable: Int): Target<*>? {
         return if (imageView == null) null else Glide.with(context)
             .load(url).apply(options!!.placeholder(placeDrawable).fitCenter()
                 .error(placeDrawable))

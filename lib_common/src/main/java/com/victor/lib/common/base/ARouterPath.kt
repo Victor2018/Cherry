@@ -27,6 +27,9 @@ object ARouterPath {
     /**首页Fragment */
     const val HomeFgt = "$HOME/module/HomeFragment"
 
+    /**干货搜索Activity */
+    const val SearchGankAct = "$HOME/module/SearchGankActivity"
+
     /**我的Activity */
     const val MineAct = "$MINE/module/MineActivity"
 

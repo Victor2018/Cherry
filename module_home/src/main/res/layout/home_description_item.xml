@@ -4,8 +4,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/dp_10"
-    android:textSize="@dimen/dp_56"
-    android:fontFamily="@font/zuo_an_lian_ren"
-    android:textColor="@color/color_8D9193">
+    android:textSize="@dimen/dp_58"
+    android:textColor="?attr/colorPrimary"
+    android:textColorLink="?attr/colorPrimaryDark"
+    android:fontFamily="@font/zuo_an_lian_ren">
 
 </TextView>

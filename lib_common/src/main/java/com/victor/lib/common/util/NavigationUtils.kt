@@ -22,6 +22,7 @@ object NavigationUtils {
     val TYPE_KEY = "TYPE_KEY"
     val GANK_DATA_KEY = "GANK_DATA_KEY"
     val ID_KEY = "ID_KEY"
+
     /**
      * 去往首页
      */
@@ -51,5 +52,11 @@ object NavigationUtils {
             .withString(TITLE_KEY,title)
             .withInt(ID_KEY,id)
             .navigation()
+    }
+    /**
+     * 去往搜索干货页面
+     */
+    fun goSearchGankActivity() {
+        ARouter.getInstance().build(ARouterPath.SearchGankAct).navigation()
     }
 }

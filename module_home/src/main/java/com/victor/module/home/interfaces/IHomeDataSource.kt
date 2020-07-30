@@ -3,6 +3,7 @@ package com.victor.module.home.interfaces
 import androidx.lifecycle.LiveData
 import com.victor.lib.coremodel.entity.BannerRes
 import com.victor.lib.coremodel.entity.GankRes
+import com.victor.lib.coremodel.entity.HotKeyRes
 
 /*
  * -----------------------------------------------------------------
@@ -21,4 +22,5 @@ interface IHomeDataSource {
     suspend fun fetchNewData()
     fun fetchGankData(): LiveData<GankRes>
     fun fetchBannerData(): LiveData<BannerRes>
+    fun fetchHotKey(): LiveData<HotKeyRes>
 }

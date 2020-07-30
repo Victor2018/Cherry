@@ -15,8 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/dp_16"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dp_22"
+        android:textSize="@dimen/dp_36"
+        android:textColor="?attr/colorPrimary"
+        android:textColorLink="?attr/colorPrimaryDark"
+        android:fontFamily="@font/zuo_an_lian_ren"
         android:text="Snap center"/>
 
     <androidx.recyclerview.widget.RecyclerView

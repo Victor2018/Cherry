@@ -3,10 +3,7 @@ package com.victor.lib.coremodel.http.locator
 import androidx.paging.PagingConfig
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
-import com.victor.lib.coremodel.http.repository.ArticleRepository
-import com.victor.lib.coremodel.http.repository.GankDetailRepository
-import com.victor.lib.coremodel.http.repository.GankGirlRepository
-import com.victor.lib.coremodel.http.repository.IRepository
+import com.victor.lib.coremodel.http.repository.*
 
 /*
  * -----------------------------------------------------------------
@@ -37,6 +34,9 @@ class NetServiceLocator : ServiceLocator {
             RepositoryType.ARTICLE -> {
                 return ArticleRepository(requestApi = getRequestApi(type),pageConfig = pagingConfig)
             }
+            RepositoryType.SEARCH_GANK -> {
+                return SearchGankRepository(requestApi = getRequestApi(type),pageConfig = pagingConfig)
+            }
         }
         return GankGirlRepository(requestApi = getRequestApi(type),pageConfig = pagingConfig)
     }
@@ -47,6 +47,9 @@ class NetServiceLocator : ServiceLocator {
                 return wanAndroidApi
             }
             RepositoryType.ARTICLE -> {
+                return wanAndroidApi
+            }
+            RepositoryType.HOT_KEY -> {
                 return wanAndroidApi
             }
         }

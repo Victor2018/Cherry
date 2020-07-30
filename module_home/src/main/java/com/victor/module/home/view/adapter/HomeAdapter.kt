@@ -1,6 +1,7 @@
 package com.victor.module.home.view.adapter
 
 import android.content.Context
+import android.graphics.Typeface
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +38,8 @@ class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
-
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.image, data.coverImageUrl)
+        contentViewHolder.itemView.mTvTitle.text = data.desc;
+        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvPoster, data.coverImageUrl)
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 }

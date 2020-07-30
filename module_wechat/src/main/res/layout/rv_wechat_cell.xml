@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_10"
@@ -18,7 +19,14 @@
         android:lineSpacingExtra="@dimen/dp_1"
         android:ellipsize="end"
         android:gravity="center"
-        android:textSize="@dimen/dp_36"
-        android:textColor="@color/color_333333"
-        android:text="Gradle 插件，做自动测试过程中的截屏。"/>
+        android:textSize="@dimen/dp_58"
+        tools:text="Gradle 插件，做自动测试过程中的截屏。"
+        android:textColor="?attr/colorPrimary"
+        android:textColorLink="?attr/colorPrimaryDark"
+        android:fontFamily="@font/zuo_an_lian_ren"/>
+
+    <com.victor.lib.common.view.widget.CharAvatarView
+        android:id="@+id/mCavAvatar"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"/>
 </androidx.cardview.widget.CardView>

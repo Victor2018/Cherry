@@ -41,6 +41,13 @@ interface ApiService {
         @Path("count") count: Int?
     ): GankDetailEntity
 
+    @GET("api/v2/search/{key}/category/All/type/All/page/{page}/count/{count}")
+    suspend fun searchGank(
+        @Path("key") key: String,
+        @Path("page") page: Int = 1,
+        @Path("count") count: Int?
+    ): GankDetailEntity
+
     @GET("wxarticle/chapters/json")
     suspend fun getWeChat(): WeChatRes
 
@@ -49,6 +56,9 @@ interface ApiService {
         @Path("id") id: Int?,
         @Path("page") page: Int = 1
     ): ArticleRes
+
+    @GET("hotkey/json")
+    suspend fun getHotKey(): HotKeyRes
 
     companion object {
         const val TAG = "ApiService"

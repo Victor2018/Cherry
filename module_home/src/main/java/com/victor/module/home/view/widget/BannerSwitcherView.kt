@@ -36,6 +36,7 @@ class BannerSwitcherView: ViewFlipper {
     val TAG = "BannerSwitcherView"
     companion object {
         val ON_BANNER_ITEM_CLICK:Long = 6
+        val ON_BANNER_ITEM_SELECT:Long = 7
     }
 
     var interval = 3000
@@ -199,6 +200,10 @@ class BannerSwitcherView: ViewFlipper {
                         addView(view)
                     }
                     isAnimStart = false
+
+                    if (onItemClickListener != null) {
+                        onItemClickListener!!.onItemClick(null,getChildAt(position),getCurrentPosition(), ON_BANNER_ITEM_SELECT)
+                    }
                 }
 
                 override fun onAnimationRepeat(animation: Animation) {}

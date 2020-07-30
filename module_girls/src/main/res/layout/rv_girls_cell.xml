@@ -28,8 +28,9 @@
         android:lineSpacingExtra="@dimen/dp_1"
         android:ellipsize="end"
         android:text="从你的全世界路过"
+        android:fontFamily="@font/zuo_an_lian_ren"
         android:textColor="?attr/colorPrimary"
         android:textColorLink="?attr/colorPrimaryDark"
-        android:textSize="16sp"/>
+        android:textSize="@dimen/dp_58"/>
 
 </androidx.cardview.widget.CardView>

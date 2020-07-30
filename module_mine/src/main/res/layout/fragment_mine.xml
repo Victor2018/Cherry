@@ -72,6 +72,7 @@
                     android:lineSpacingMultiplier="1.5"
                     android:textSize="@dimen/dp_28"
                     android:textColor="@color/color_7C7C7C"
+                    android:fontFamily="@font/zuo_an_lian_ren"
                     android:text="@string/description" />
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -88,6 +89,7 @@
                     android:gravity="center_vertical"
                     android:padding="@dimen/dp_30"
                     android:textColor="@color/color_7C7C7C"
+                    android:fontFamily="@font/zuo_an_lian_ren"
                     android:textSize="@dimen/dp_28"
                     android:text="@string/download_app" />
             </androidx.cardview.widget.CardView>
@@ -106,6 +108,7 @@
                     android:gravity="center_vertical"
                     android:textSize="@dimen/dp_28"
                     android:textColor="@color/color_7C7C7C"
+                    android:fontFamily="@font/zuo_an_lian_ren"
                     android:text="@string/gmail" />
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -123,6 +126,7 @@
                     android:gravity="center_vertical"
                     android:textSize="@dimen/dp_28"
                     android:textColor="@color/color_7C7C7C"
+                    android:fontFamily="@font/zuo_an_lian_ren"
                     android:text="@string/github_issues" />
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -139,6 +143,7 @@
                     android:padding="@dimen/dp_30"
                     android:textSize="@dimen/dp_28"
                     android:textColor="@color/color_7C7C7C"
+                    android:fontFamily="@font/zuo_an_lian_ren"
                     android:text="Version：v1.0.0" />
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -155,6 +160,7 @@
                     android:padding="@dimen/dp_30"
                     android:textSize="@dimen/dp_28"
                     android:textColor="@color/color_7C7C7C"
+                    android:fontFamily="@font/zuo_an_lian_ren"
                     android:text="@string/support_us" />
                 <LinearLayout
                     android:layout_width="match_parent"

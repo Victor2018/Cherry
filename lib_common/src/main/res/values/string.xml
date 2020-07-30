@@ -41,5 +41,6 @@
 
     <string name="watch_tv">Watch TV</string>
     <string name="search">Search</string>
+    <string name="search_tip">Enter search keywords</string>
 
 </resources>

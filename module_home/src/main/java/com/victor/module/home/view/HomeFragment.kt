@@ -30,6 +30,7 @@ import com.victor.module.home.view.adapter.HomeAdapter
 import com.victor.module.home.view.widget.BannerSwitcherView
 import com.victor.module.home.view.widget.DescriptionViewSwitcherFactory
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.toolbar
 
 
 /*
@@ -130,8 +131,6 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             homeAdapter?.clear()
             homeAdapter?.add(it.data)
             homeAdapter?.notifyDataSetChanged()
-
-            mTsDescription.setText(homeAdapter?.getItem(0)?.desc)
         })
     }
 
@@ -147,6 +146,8 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         if (id == BannerSwitcherView.ON_BANNER_ITEM_CLICK) {
             WebActivity.intentStart(activity!!,mBsvBanner?.messages?.get(position)?.title!!,
                 mBsvBanner?.messages?.get(position)?.url!!)
+        } else if (id == BannerSwitcherView.ON_BANNER_ITEM_SELECT) {
+            mTsDescription.setText(mBsvBanner?.messages?.get(position)?.title)
         } else {
             NavigationUtils.goGankActivity(homeAdapter?.getItem(position)?.title!!,homeAdapter?.getItem(position)?.type!!)
         }
@@ -161,13 +162,13 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     }
 
     private fun onActiveCardChange(pos: Int) {
-        mTsDescription.setText(homeAdapter?.getItem(pos)?.desc)
         currentPosition = pos
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.action_search -> {
+                NavigationUtils.goSearchGankActivity()
                 return true
             }
             R.id.action_share -> {
@@ -182,4 +183,6 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         }
         return super.onOptionsItemSelected(item!!)
     }
+
+
 }

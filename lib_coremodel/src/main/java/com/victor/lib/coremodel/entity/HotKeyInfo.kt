@@ -4,18 +4,17 @@ package com.victor.lib.coremodel.entity
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: RepositoryType
+ * File: HotKeyInfo
  * Author: Victor
- * Date: 2020/7/14 下午 06:01
+ * Date: 2020/7/29 下午 03:53
  * Description: 
  * -----------------------------------------------------------------
  */
-enum class RepositoryType {
-    GANK,
-    GANK_GIRL,
-    GANK_DETAIL,
-    WAN_ANDROID,
-    ARTICLE,
-    HOT_KEY,
-    SEARCH_GANK
+class HotKeyInfo {
+    var id: Int = 0
+    var order: Int = 0
+    var visible: Int = 0
+    var link: String? = null
+    var name: String? = null
+
 }

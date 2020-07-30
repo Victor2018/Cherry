@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.victor.lib.coremodel.entity.BannerRes
 import com.victor.lib.coremodel.entity.GankRes
+import com.victor.lib.coremodel.entity.HotKeyRes
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
 import com.victor.lib.coremodel.http.locator.ServiceLocator
@@ -87,6 +88,11 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSo
     override fun fetchBannerData(): LiveData<BannerRes> = liveData {
         emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getBanner())
     }
+
+    override fun fetchHotKey(): LiveData<HotKeyRes> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.HOT_KEY).getHotKey())
+    }
+
 
 }
 

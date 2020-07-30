@@ -38,6 +38,8 @@ class WeChatAdapter(context: Context, listener: AdapterView.OnItemClickListener)
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: WeChatInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
         contentViewHolder.itemView.mTvTitle.text = data.name
+        contentViewHolder.itemView.mCavAvatar.setAvatarText(data.name)
+
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 }

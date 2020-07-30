@@ -47,7 +47,8 @@ class TvCellAdapter (context: Context, listener: AdapterView.OnItemClickListener
         val contentViewHolder = viewHolder as TvCellContentViewHolder
         contentViewHolder.itemView.mTvChannelName.text = data.channel_name
 
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo, data.icon)
+        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
+            data.icon,R.drawable.ic_baseline_live_tv_24)
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 }

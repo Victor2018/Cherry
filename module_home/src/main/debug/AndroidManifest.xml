@@ -16,7 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.GankActivity"/>
+        <activity
+            android:name=".view.GankActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".view.SearchGankActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.victor.lib.common.view.activity.WebActivity"
             android:launchMode="singleTask"/>
