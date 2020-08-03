@@ -1,5 +1,6 @@
 package com.victor.module.home.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +24,8 @@ import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
+import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.entity.GankInfo
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
@@ -30,6 +33,7 @@ import com.victor.module.home.view.widget.BannerSwitcherView
 import com.victor.module.home.view.widget.DescriptionViewSwitcherFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.toolbar
+import org.victor.funny.util.ResUtils
 
 
 /*
@@ -120,7 +124,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
                 mBsvBanner.startWithList(it.data)
             }
         })
-        viewmodel.searchGankDetail("Android",currentPage)
+        viewmodel.searchGankDetail(type,currentPage)
         viewmodel.gankDetailValue.observe(viewLifecycleOwner, Observer {
             it.let {it1 ->
                 it.data.let {it2 ->
@@ -157,7 +161,8 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         } else if (id == BannerSwitcherView.ON_BANNER_ITEM_SELECT) {
             mTsDescription.setText(mBsvBanner?.messages?.get(position)?.title)
         } else {
-            NavigationUtils.goGankActivity(homeAdapter?.getItem(position)?.title!!,homeAdapter?.getItem(position)?.type!!)
+            WebActivity.intentStart(activity!!,homeAdapter?.getItem(position)?.title!!,
+                homeAdapter?.getItem(position)?.url!!)
         }
     }
 
@@ -185,13 +190,28 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.mFabGankCategory -> {
-                GankCategoryActivity.intentStart(activity!! as AppCompatActivity)
+                GankCategoryActivity.intentStartForResult(this)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                GankCategoryActivity.SELECT_CATEGORY_REQUEST_CODE -> {
+                    var gankInfo: GankInfo = data?.getSerializableExtra(GankCategoryActivity.SELECT_CATEGORY_KEY) as GankInfo
+                    type = gankInfo.type
+                    currentPage = 1
+                    viewmodel.searchGankDetail(type,currentPage)
+                }
             }
         }
     }
 
     override fun OnLoadMore() {
-        TODO("Not yet implemented")
+        currentPage++
+        viewmodel.searchGankDetail(type,currentPage)
     }
 
 

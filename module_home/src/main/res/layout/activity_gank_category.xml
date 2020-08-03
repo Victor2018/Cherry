@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewmodel"
@@ -27,7 +28,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:contentScrim="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
-                app:title="@string/watch_tv"
+                app:title="@string/select_category"
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleMarginEnd="64dp">
 
@@ -57,12 +58,13 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_fullscreen"
+            android:id="@+id/mFabClose"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="center"
-            android:src="@drawable/ic_white_check_24dp"
+            android:transitionName="@string/transition_fab"
+            android:src="@drawable/ic_white_close_24dp"
             android:layout_margin="@dimen/dp_18"
             android:clickable="true"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

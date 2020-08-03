@@ -44,5 +44,7 @@
     <string name="search_tip">Enter search keywords</string>
     <string name="hot_search_keywords">Hot search keywords</string>
     <string name="transition_girl_img">transition_girl_img</string>
+    <string name="select_category">Select category</string>
+    <string name="transition_fab">transition_fab</string>
 
 </resources>

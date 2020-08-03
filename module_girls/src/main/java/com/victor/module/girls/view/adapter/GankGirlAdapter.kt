@@ -1,12 +1,16 @@
 package com.victor.module.girls.view.adapter
 
+import android.content.Context
+import android.graphics.Typeface
 import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.DiffUtil
-import com.victor.lib.common.util.Loger
+import androidx.recyclerview.widget.RecyclerView
+import com.victor.lib.common.util.ImageUtils
+import com.victor.lib.common.view.adapter.BaseRecycleAdapter
+import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.entity.GankDetailInfo
-import com.victor.module.girls.view.holder.GankGirlViewHolder
+import com.victor.module.girls.R
+import kotlinx.android.synthetic.main.rv_girls_cell.view.*
 
 /*
  * -----------------------------------------------------------------
@@ -18,67 +22,28 @@ import com.victor.module.girls.view.holder.GankGirlViewHolder
  * Description: A simple adapter implementation that shows Reddit posts.
  * -----------------------------------------------------------------
  */
-class GankGirlAdapter(listener:AdapterView.OnItemClickListener?)
-    : PagingDataAdapter<GankDetailInfo, GankGirlViewHolder>(POST_COMPARATOR) {
-
-    var mOnItemClickListener: AdapterView.OnItemClickListener? = null
-
+class GankGirlAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
+    BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener) {
+    var fontStyle: Typeface? = null
     init {
-        mOnItemClickListener = listener
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
+    override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
+        return null
     }
 
-    override fun onBindViewHolder(holder: GankGirlViewHolder, position: Int) {
-        holder.bind(getItem(position))
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
     }
 
-    override fun onBindViewHolder(
-        holder: GankGirlViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        if (payloads.isNotEmpty()) {
-            var cell = payloads[0] as GankDetailInfo
-            Loger.e("GankGirlAdapter","onBindViewHolder-cell.desc = " + cell.desc)
-            val item = getItem(position)
-            holder.updateScore(item)
-        } else {
-            onBindViewHolder(holder, position)
-        }
+    override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_girls_cell ,parent, false))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GankGirlViewHolder {
-        return GankGirlViewHolder.create(parent,mOnItemClickListener)
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+        val contentViewHolder = viewHolder as ContentViewHolder
+        contentViewHolder.itemView.tv_title.typeface = fontStyle
+        contentViewHolder.itemView.tv_title.text = data?.desc ?: "loading"
+        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.iv_img,data.url)
+        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
-
-    companion object {
-        private val PAYLOAD_SCORE = Any()
-        val POST_COMPARATOR = object : DiffUtil.ItemCallback<GankDetailInfo>() {
-            override fun areContentsTheSame(oldItem: GankDetailInfo, newItem: GankDetailInfo): Boolean =
-                oldItem._id == newItem._id
-
-            override fun areItemsTheSame(oldItem: GankDetailInfo, newItem: GankDetailInfo): Boolean =
-                oldItem.createdAt == newItem.createdAt
-
-            override fun getChangePayload(oldItem: GankDetailInfo, newItem: GankDetailInfo): Any? {
-                return if (sameExceptScore(
-                        oldItem,
-                        newItem
-                    )
-                ) {
-                    PAYLOAD_SCORE
-                } else {
-                    null
-                }
-            }
-        }
-
-        private fun sameExceptScore(oldItem: GankDetailInfo, newItem: GankDetailInfo): Boolean {
-            // DON'T do this copy in a real app, it is just convenient here for the demo :)
-            // because reddit randomizes scores, we want to pass it as a payload to minimize
-            // UI updates between refreshes
-            return oldItem.createdAt == newItem.createdAt
-        }
-    }
-
-
 }

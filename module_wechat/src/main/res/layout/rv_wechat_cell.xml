@@ -7,7 +7,10 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_10"
     android:layout_marginBottom="@dimen/dp_10"
-    card_view:contentPadding="@dimen/dp_30"
+    card_view:contentPaddingTop="@dimen/dp_20"
+    card_view:contentPaddingBottom="@dimen/dp_20"
+    card_view:contentPaddingLeft="@dimen/dp_50"
+    card_view:contentPaddingRight="@dimen/dp_50"
     card_view:cardCornerRadius="0dp"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -20,12 +23,13 @@
         android:ellipsize="end"
         android:gravity="center"
         android:textSize="@dimen/dp_58"
-        tools:text="Gradle 插件，做自动测试过程中的截屏。"
+        tools:text="Android"
         android:textColor="?attr/colorPrimary"
         android:textColorLink="?attr/colorPrimaryDark"/>
 
     <com.victor.lib.common.view.widget.CharAvatarView
         android:id="@+id/mCavAvatar"
         android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"/>
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginLeft="@dimen/dp_30"/>
 </androidx.cardview.widget.CardView>

@@ -9,25 +9,19 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadState
-import androidx.paging.PagingData
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.Loger
+import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.GankDetailInfo
-import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GankGirlAdapter
-import com.victor.module.girls.view.adapter.GankGirlLoadStateAdapter
+import com.victor.module.girls.viewmodel.GirlsViewModel
+import com.victor.module.girls.viewmodel.LiveDataVMFactory
 import kotlinx.android.synthetic.main.fragment_girls.*
 import kotlinx.android.synthetic.main.rv_girls_cell.view.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import org.victor.funny.util.ResUtils
 
 /*
@@ -41,11 +35,13 @@ import org.victor.funny.util.ResUtils
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.GirlsFgt)
-class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener {
-    private val viewmodel: GirlsViewModel by viewModels { GirlsViewModel.LiveDataVMFactory }
+class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
+    LMRecyclerView.OnLoadMoreListener{
+    private val viewmodel: GirlsViewModel by viewModels { LiveDataVMFactory }
 
-    private lateinit var adapter: GankGirlAdapter
-    var datas: ArrayList<GankDetailInfo> = ArrayList()
+    private lateinit var gankGirlAdapter: GankGirlAdapter
+
+    var currentPage = 1
 
     companion object {
         fun newInstance(): GirlsFragment {
@@ -68,7 +64,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         super.onActivityCreated(savedInstanceState)
 
         initialize()
-
+        initData()
     }
 
     fun initialize () {
@@ -81,48 +77,33 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         toolbar.inflateMenu(R.menu.menu_girls)
         toolbar.setOnMenuItemClickListener(this)
 
-        initAdapter()
-        initSwipeToRefresh()
+        gankGirlAdapter = GankGirlAdapter(activity!!,this)
+        mRvGirls.setHasFixedSize(true)
+        mRvGirls.adapter = gankGirlAdapter
+        mRvGirls.setLoadMoreListener(this)
     }
 
-    private fun initAdapter() {
-        adapter = GankGirlAdapter(this)
-        list.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = GankGirlLoadStateAdapter(
-                adapter
-            ),
-            footer = GankGirlLoadStateAdapter(
-                adapter
-            )
-        )
+    fun initData () {
+        viewmodel.fetchGirls(currentPage)
+        viewmodel.girlsDataValue.observe(viewLifecycleOwner, Observer {
+            it.let {it1 ->
+                it.data.let {it2 ->
+                    if (currentPage == 1) {
+                        gankGirlAdapter?.clear()
+                    }
+                    gankGirlAdapter?.setFooterVisible(it.page < it.page_count)
+                    if (it.page < it.page_count) {
+                        gankGirlAdapter?.setLoadState(gankGirlAdapter?.LOADING!!)
+                    } else {
+                        gankGirlAdapter?.setLoadState(gankGirlAdapter?.LOADING_END!!)
+                    }
 
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            adapter.loadStateFlow.collectLatest { loadStates ->
-                swipe_refresh.isRefreshing = loadStates.refresh is LoadState.Loading
+                    gankGirlAdapter?.add(it.data)
+                    gankGirlAdapter?.notifyDataSetChanged()
+                }
             }
-        }
 
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            viewmodel.datas.collectLatest {
-                adapter.submitData(it as PagingData<GankDetailInfo>)
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
-            adapter.dataRefreshFlow.collectLatest {
-                list.scrollToPosition(0)
-            }
-        }
-    }
-
-    private fun initSwipeToRefresh() {
-        swipe_refresh.setOnRefreshListener {
-            datas.clear()
-            adapter.refresh()
-        }
+        })
     }
 
     override fun handleBackEvent(): Boolean {
@@ -133,8 +114,9 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        GirlsDetailActivity.intentStart(activity!! as AppCompatActivity,view?.tag as GankDetailInfo,
-        view.iv_img,ResUtils.getStringRes(R.string.transition_girl_img))
+        GirlsDetailActivity.intentStart(activity!! as AppCompatActivity,
+            gankGirlAdapter.getDatas() as ArrayList<GankDetailInfo>,position,
+        view?.iv_img,ResUtils.getStringRes(R.string.transition_girl_img))
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -150,5 +132,10 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
             }
         }
         return super.onOptionsItemSelected(item!!)
+    }
+
+    override fun OnLoadMore() {
+        currentPage++
+        viewmodel.fetchGirls(currentPage)
     }
 }

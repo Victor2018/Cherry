@@ -1,21 +1,19 @@
-package com.victor.lib.coremodel.entity
+package com.victor.module.girls.interfaces
 
-import java.io.Serializable
+import androidx.lifecycle.LiveData
+import com.victor.lib.coremodel.entity.GankDetailEntity
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankInfo
+ * File: IGirlsDataSource
  * Author: Victor
- * Date: 2020/7/11 下午 03:44
+ * Date: 2020/8/3 下午 06:18
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankInfo: Serializable {
-    var _id: String? = null
-    var coverImageUrl: String? = null
-    var desc: String? = null
-    var title: String? = null
-    var type: String? = null
+interface IGirlsDataSource {
+    val girlsData: LiveData<GankDetailEntity>
+    suspend fun fetchGirls(page: Int)
 }

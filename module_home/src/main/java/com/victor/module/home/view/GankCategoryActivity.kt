@@ -6,17 +6,21 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.cherry.viewmodel.GankCategoryLiveDataVMFactory
 import com.victor.cherry.viewmodel.GankCategoryViewModel
+import com.victor.clips.util.AppUtil.Companion.startActivityForResult
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.module.home.R
 import com.victor.module.home.databinding.ActivityGankCategoryBinding
 import com.victor.module.home.view.adapter.GankCategoryAdapter
 import kotlinx.android.synthetic.main.activity_gank_category.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 /*
  * -----------------------------------------------------------------
@@ -29,13 +33,30 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.GankCategoryAct)
-class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener {
+class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener {
     private val viewmodel: GankCategoryViewModel by viewModels { GankCategoryLiveDataVMFactory }
     var gankCategoryAdapter: GankCategoryAdapter? = null
+
     companion object {
+        const val SELECT_CATEGORY_REQUEST_CODE = 6
+        const val SELECT_CATEGORY_KEY = "SELECT_CATEGORY_KEY"
+
         fun  intentStart (activity: AppCompatActivity) {
             var intent = Intent(activity, GankCategoryActivity::class.java)
             activity.startActivity(intent)
+        }
+        fun  intentStartForResult (fragment: Fragment) {
+            var intent = Intent(fragment.context, GankCategoryActivity::class.java)
+            fragment.startActivityForResult(intent,SELECT_CATEGORY_REQUEST_CODE)
+        }
+
+        fun  intentStartForResult (activity: AppCompatActivity, sharedElement: View,
+                          sharedElementName: String) {
+
+            var intent = Intent(activity, GankCategoryActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                activity,sharedElement, sharedElementName)
+            ActivityCompat.startActivityForResult(activity!!, intent, SELECT_CATEGORY_REQUEST_CODE,options.toBundle())
         }
     }
 
@@ -62,6 +83,9 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener {
         gankCategoryAdapter = GankCategoryAdapter(this,this)
         mRvGankCategory.setHasFixedSize(true)
         mRvGankCategory.adapter = gankCategoryAdapter
+
+        mFabClose.setOnClickListener(this)
+
     }
 
     fun initData () {
@@ -75,5 +99,18 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val intent = Intent()
+        intent.putExtra(SELECT_CATEGORY_KEY, gankCategoryAdapter?.getItem(position))
+        setResult(RESULT_OK, intent)
+        onBackPressed()
     }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.mFabClose -> {
+                onBackPressed()
+            }
+        }
+    }
+
 }

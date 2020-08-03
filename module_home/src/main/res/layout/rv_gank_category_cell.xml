@@ -1,31 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_10"
     android:layout_marginBottom="@dimen/dp_10"
+    card_view:cardBackgroundColor="@color/white"
     card_view:contentPadding="@dimen/dp_30"
-    card_view:cardCornerRadius="0dp"
+    card_view:cardCornerRadius="@dimen/dp_5"
+    card_view:cardPreventCornerOverlap="false"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
-    <TextView
-        android:id="@+id/mTvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:lineSpacingExtra="@dimen/dp_1"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:textSize="@dimen/dp_58"
-        tools:text="Gradle 插件，做自动测试过程中的截屏。"
-        android:textColor="?attr/colorPrimary"
-        android:textColorLink="?attr/colorPrimaryDark"/>
 
-    <com.victor.lib.common.view.widget.CharAvatarView
-        android:id="@+id/mCavAvatar"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_50"
+        android:paddingRight="@dimen/dp_50">
+
+        <FrameLayout
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32">
+
+
+            <ImageView
+                android:id="@+id/mIvCategoryDot"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:layout_gravity="center"
+                android:src="@drawable/circle" />
+
+
+            <FrameLayout
+                android:id="@+id/checked_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/category_checked_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/circle" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_8"
+                    android:src="@drawable/ic_white_check_24dp" />
+            </FrameLayout>
+
+        </FrameLayout>
+        <TextView
+            android:id="@+id/mTvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:maxLines="1"
+            android:lineSpacingExtra="@dimen/dp_1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/dp_58"
+            tools:text="Gradle 插件，做自动测试过程中的截屏。"
+            android:textColor="?attr/colorPrimary"
+            android:textColorLink="?attr/colorPrimaryDark"/>
+
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

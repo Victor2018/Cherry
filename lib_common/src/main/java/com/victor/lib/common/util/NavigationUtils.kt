@@ -21,6 +21,7 @@ object NavigationUtils {
     val TITLE_KEY = "TITLE_KEY"
     val TYPE_KEY = "TYPE_KEY"
     val GANK_DATA_KEY = "GANK_DATA_KEY"
+    val POSITION_KEY = "POSITION_KEY"
     val ID_KEY = "ID_KEY"
 
     /**

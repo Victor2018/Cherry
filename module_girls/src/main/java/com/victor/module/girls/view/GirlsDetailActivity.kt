@@ -42,7 +42,7 @@ import kotlinx.coroutines.withContext
 class GirlsDetailActivity: BaseActivity() {
     var girlDetailAdapter: GirlDetailAdapter? = null
     var gankDetailList: ArrayList<GankDetailInfo>? = null
-    var gankDetailInfo: GankDetailInfo? = null
+    var position: Int? = 0
     var mWallpaperManager: WallpaperManager? = null
 
     companion object {
@@ -61,13 +61,14 @@ class GirlsDetailActivity: BaseActivity() {
             intent.putExtra(NavigationUtils.GANK_DATA_KEY, data)
             ctx.startActivity(intent)
         }
-        fun  intentStart (activity: AppCompatActivity, data: GankDetailInfo, sharedElement: View,
-                          sharedElementName: String) {
+        fun  intentStart (activity: AppCompatActivity, datas: ArrayList<GankDetailInfo>,position: Int,
+                          sharedElement: View?,sharedElementName: String) {
 
             var intent = Intent(activity, GirlsDetailActivity::class.java)
-            intent.putExtra(NavigationUtils.GANK_DATA_KEY, data)
+            intent.putExtra(NavigationUtils.GANK_DATA_KEY, datas)
+            intent.putExtra(NavigationUtils.POSITION_KEY, position)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                activity,sharedElement, sharedElementName)
+                activity,sharedElement!!, sharedElementName)
             ActivityCompat.startActivity(activity!!, intent, options.toBundle())
         }
     }
@@ -95,7 +96,7 @@ class GirlsDetailActivity: BaseActivity() {
                 return true
             }
             R.id.action_share -> {
-                val url: String = gankDetailInfo?.images?.get(0)!!
+                val url: String = gankDetailList?.get(mVpGirls.currentItem)?.images?.get(0)!!
                 val intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
                     .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
@@ -114,7 +115,7 @@ class GirlsDetailActivity: BaseActivity() {
                     //lifecycleScope使协程的生命周期随着activity的生命周期变化
                     saveImage()
                     mPbLoading.visibility = View.GONE
-                    SnackbarUtil.ShortSnackbar(mIvGirl,getString(R.string.save_picture_success)).show();
+                    SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_picture_success)).show();
                 }
                 return true
             }
@@ -128,7 +129,7 @@ class GirlsDetailActivity: BaseActivity() {
                     //lifecycleScope使协程的生命周期随着activity的生命周期变化
                     setWallpaper()
                     mPbLoading.visibility = View.GONE
-                    SnackbarUtil.ShortSnackbar(mIvGirl,getString(R.string.set_wallpaper_success)).show();
+                    SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.set_wallpaper_success)).show();
                 }
                 return true
             }
@@ -146,24 +147,25 @@ class GirlsDetailActivity: BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mWallpaperManager = WallpaperManager.getInstance(this);
-//        girlDetailAdapter = GirlDetailAdapter(this,gankDetailList!!)
-//        mVpGirls.adapter = girlDetailAdapter
+        girlDetailAdapter = GirlDetailAdapter(this,gankDetailList!!)
+        mVpGirls.adapter = girlDetailAdapter
+
+        mVpGirls.currentItem = position!!
     }
 
     fun initData (intent: Intent?) {
-//        gankDetailList = intent?.getSerializableExtra(NavigationUtils.GANK_DATA_KEY) as ArrayList<GankDetailInfo>?
-        gankDetailInfo = intent?.getSerializableExtra(NavigationUtils.GANK_DATA_KEY) as GankDetailInfo?
+        position = intent?.getIntExtra(NavigationUtils.POSITION_KEY,0)
+        gankDetailList = intent?.getSerializableExtra(NavigationUtils.GANK_DATA_KEY) as ArrayList<GankDetailInfo>?
         Loger.e(TAG,"initData-gankDetailList?.size = " + gankDetailList?.size)
 
-        ImageUtils.instance.loadImage(this,mIvGirl,gankDetailInfo?.images?.get(0))
     }
 
 
     suspend fun saveImage () {
         withContext(Dispatchers.IO) {
-            val bitmap: Bitmap = mIvGirl.drawable.toBitmap() //可以传入图片的大小，默认是显示的图片
+            val bitmap: Bitmap = girlDetailAdapter?.getCurrentView()!! //可以传入图片的大小，默认是显示的图片
 
-            val imgUrl = gankDetailInfo?.images?.get(0)
+            val imgUrl = gankDetailList?.get(mVpGirls.currentItem)?.images?.get(0)
             val fileName = imgUrl?.substring(imgUrl.lastIndexOf("/") + 1, imgUrl?.length) + ".png"
             val dir = FileUtil.getExRootFolder()
 
@@ -172,7 +174,7 @@ class GirlsDetailActivity: BaseActivity() {
     }
 
     suspend fun setWallpaper () {
-        val bitmap: Bitmap = mIvGirl.drawable.toBitmap() //可以传入图片的大小，默认是显示的图片
+        val bitmap: Bitmap = girlDetailAdapter?.getCurrentView()!!
         withContext(Dispatchers.IO) {
             mWallpaperManager?.setBitmap(bitmap);
         }

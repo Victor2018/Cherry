@@ -5,12 +5,14 @@ import android.graphics.Typeface
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
+import com.victor.lib.common.util.ColorUtil
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.entity.GankInfo
 import com.victor.lib.coremodel.entity.WeChatInfo
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.rv_gank_category_cell.view.*
+import org.victor.funny.util.ResUtils
 
 /*
  * -----------------------------------------------------------------
@@ -25,6 +27,7 @@ import kotlinx.android.synthetic.main.rv_gank_category_cell.view.*
 class GankCategoryAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
     BaseRecycleAdapter<GankInfo, RecyclerView.ViewHolder>(context, listener) {
     var fontStyle: Typeface? = null
+
     init {
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
     }
@@ -42,8 +45,8 @@ class GankCategoryAdapter (context: Context, listener: AdapterView.OnItemClickLi
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
         contentViewHolder.itemView.mTvTitle.typeface = fontStyle
-        contentViewHolder.itemView.mTvTitle.text = data.desc
-        contentViewHolder.itemView.mCavAvatar.setAvatarText(data.title)
+        contentViewHolder.itemView.mTvTitle.text = data.title
+        contentViewHolder.itemView.mIvCategoryDot.setColorFilter(ColorUtil.getColorByHashCode(position.hashCode()))
 
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }

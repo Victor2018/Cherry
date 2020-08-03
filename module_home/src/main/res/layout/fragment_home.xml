@@ -83,6 +83,7 @@
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|right|end"
             android:src="@drawable/ic_white_category_24dp"
+            android:transitionName="@string/transition_fab"
             android:layout_margin="@dimen/dp_18"
             android:clickable="true"/>
 

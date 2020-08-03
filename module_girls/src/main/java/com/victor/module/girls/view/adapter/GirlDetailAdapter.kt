@@ -61,7 +61,7 @@ class GirlDetailAdapter(var context: Context,var datas: MutableList<GankDetailIn
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        super.destroyItem(container, position, `object`)
+//        super.destroyItem(container, position, `object`)
         container.removeView(`object` as View)
     }
 
