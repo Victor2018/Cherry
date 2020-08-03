@@ -18,7 +18,6 @@
         android:textSize="@dimen/dp_36"
         android:textColor="?attr/colorPrimary"
         android:textColorLink="?attr/colorPrimaryDark"
-        android:fontFamily="@font/zuo_an_lian_ren"
         android:text="Snap center"/>
 
     <androidx.recyclerview.widget.RecyclerView

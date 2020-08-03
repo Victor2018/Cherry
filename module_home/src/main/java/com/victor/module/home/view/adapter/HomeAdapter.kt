@@ -2,15 +2,18 @@ package com.victor.module.home.view.adapter
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.Html
+import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
+import com.victor.lib.common.app.App
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
-import com.victor.lib.coremodel.entity.GankInfo
+import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.home.R
-import kotlinx.android.synthetic.main.rv_home_cell.view.*
+import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 
 /*
  * -----------------------------------------------------------------
@@ -23,23 +26,47 @@ import kotlinx.android.synthetic.main.rv_home_cell.view.*
  * -----------------------------------------------------------------
  */
 class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
-    BaseRecycleAdapter<GankInfo, RecyclerView.ViewHolder>(context, listener)  {
+    BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener)  {
+    var fontStyle: Typeface? = null
+    init {
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
 
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_home_cell ,parent, false))
+        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_gank_cell ,parent, false))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
-        contentViewHolder.itemView.mTvTitle.text = data.desc;
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvPoster, data.coverImageUrl)
+
+        contentViewHolder.itemView.mTvTitle.typeface = fontStyle
+        contentViewHolder.itemView.mTvTime.typeface = fontStyle
+
+        contentViewHolder.itemView.mTvTitle.setText(
+            Html.fromHtml(
+                ("<a href=\""
+                        + data?.url) + "\">"
+                        + data?.desc + "</a>" + "[" + data?.author
+                    .toString() + "]"
+            )
+        )
+
+        if (data.images?.size!! > 0) {
+            contentViewHolder.itemView.mIvPoster.visibility = View.VISIBLE
+            ImageUtils.instance.loadImage(App.get(),contentViewHolder.itemView.mIvPoster,data.images?.get(0))
+        } else {
+            contentViewHolder.itemView.mIvPoster.visibility = View.GONE
+        }
+
+        contentViewHolder.itemView.mTvTime.text = data?.publishedAt
+
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 }

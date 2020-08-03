@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.victor.lib.common.util.Loger
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.girls.view.holder.GankGirlViewHolder
 
@@ -36,6 +37,8 @@ class GankGirlAdapter(listener:AdapterView.OnItemClickListener?)
         payloads: MutableList<Any>
     ) {
         if (payloads.isNotEmpty()) {
+            var cell = payloads[0] as GankDetailInfo
+            Loger.e("GankGirlAdapter","onBindViewHolder-cell.desc = " + cell.desc)
             val item = getItem(position)
             holder.updateScore(item)
         } else {
@@ -76,4 +79,6 @@ class GankGirlAdapter(listener:AdapterView.OnItemClickListener?)
             return oldItem.createdAt == newItem.createdAt
         }
     }
+
+
 }

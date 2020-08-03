@@ -1,7 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="module_girls">module_girls</string>
 
     <string name="girls_fragment">GirlsFragment</string>
-
 
 </resources>

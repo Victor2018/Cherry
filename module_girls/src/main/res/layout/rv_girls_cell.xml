@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@mipmap/default_img"
-        android:transitionName="@string/transition_gank_img"
+        android:transitionName="@string/transition_girl_img"
         android:scaleType="centerCrop"
         android:layout_gravity="center_vertical"/>
 

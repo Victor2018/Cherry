@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.victor.lib.common.R
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.StatusBarUtil
@@ -27,7 +29,7 @@ import java.util.*
 abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback {
     protected var TAG = javaClass.simpleName
     var statusBarTextColorBlack: Boolean = false
-
+    var viewDataBinding : ViewDataBinding? = null;
     var permissionHelper: PermissionHelper? = null
     private var neededPermission: Array<String>? = null
     private var builder: AlertDialog? = null
@@ -41,7 +43,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutResource())
+        viewDataBinding = DataBindingUtil.setContentView(this,getLayoutResource())
         initializeSuper()
     }
 

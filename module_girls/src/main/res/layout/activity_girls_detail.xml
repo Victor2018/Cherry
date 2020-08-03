@@ -45,7 +45,7 @@
         android:id="@+id/mIvGirl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionName="@string/transition_gank_img"
+        android:transitionName="@string/transition_girl_img"
         android:layout_centerInParent="true"
         android:scaleType="fitCenter"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>

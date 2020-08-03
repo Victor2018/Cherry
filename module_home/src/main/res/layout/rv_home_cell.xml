@@ -2,32 +2,39 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/dp_375"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/dp_5"
     app:cardCornerRadius="@dimen/dp_10"
     app:cardPreventCornerOverlap="false">
 
-    <ImageView
-        android:id="@+id/mIvPoster"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/mTvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_img"
-        android:padding="@dimen/dp_10"
-        android:layout_gravity="bottom"
-        android:lineSpacingExtra="@dimen/dp_1"
-        android:ellipsize="end"
-        android:text="从你的全世界路过"
-        android:textColor="?attr/colorPrimary"
-        android:textColorLink="?attr/colorPrimaryDark"
-        android:fontFamily="@font/zuo_an_lian_ren"
-        android:textSize="@dimen/dp_48"/>
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/mIvPoster"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"/>
+        <com.victor.lib.common.view.widget.MovingTextView
+            android:id="@+id/mTvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_img"
+            android:padding="@dimen/dp_10"
+            android:layout_gravity="bottom"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:text="从你的全世界路过"
+            android:textColor="?attr/colorPrimary"
+            android:textColorLink="?attr/colorPrimaryDark"
+            android:textSize="@dimen/dp_48"/>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

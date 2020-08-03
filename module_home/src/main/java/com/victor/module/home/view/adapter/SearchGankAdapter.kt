@@ -12,10 +12,8 @@ import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.entity.GankDetailInfo
-import com.victor.lib.coremodel.entity.GankInfo
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
-import kotlinx.android.synthetic.main.rv_home_cell.view.*
 
 /*
  * -----------------------------------------------------------------
@@ -29,6 +27,10 @@ import kotlinx.android.synthetic.main.rv_home_cell.view.*
  */
 class SearchGankAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
     BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener)  {
+    var fontStyle: Typeface? = null
+    init {
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
 
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         return null
@@ -43,7 +45,11 @@ class SearchGankAdapter(context: Context, listener: AdapterView.OnItemClickListe
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
-        contentViewHolder.itemView.tv_title.setText(
+
+        contentViewHolder.itemView.mTvTitle.typeface = fontStyle
+        contentViewHolder.itemView.mTvTime.typeface = fontStyle
+
+        contentViewHolder.itemView.mTvTitle.setText(
             Html.fromHtml(
                 ("<a href=\""
                         + data?.url) + "\">"
@@ -53,13 +59,13 @@ class SearchGankAdapter(context: Context, listener: AdapterView.OnItemClickListe
         )
 
         if (data.images?.size!! > 0) {
-            contentViewHolder.itemView.iv_image.visibility = View.VISIBLE
-            ImageUtils.instance.loadImage(App.get(),contentViewHolder.itemView.iv_image,data.images?.get(0))
+            contentViewHolder.itemView.mIvPoster.visibility = View.VISIBLE
+            ImageUtils.instance.loadImage(App.get(),contentViewHolder.itemView.mIvPoster,data.images?.get(0))
         } else {
-            contentViewHolder.itemView.iv_image.visibility = View.GONE
+            contentViewHolder.itemView.mIvPoster.visibility = View.GONE
         }
 
-        contentViewHolder.itemView.tv_time.text = data?.publishedAt
+        contentViewHolder.itemView.mTvTime.text = data?.publishedAt
 
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }

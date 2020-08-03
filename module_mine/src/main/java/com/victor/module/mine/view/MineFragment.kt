@@ -1,32 +1,17 @@
 package com.victor.module.mine.view
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadState
-import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.clips.util.AppUtil
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.view.activity.WebActivity
-import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.mine.R
-import com.victor.lib.coremodel.viewmodel.MineViewModel
-import com.victor.module.mine.view.adapter.GankGirlAdapter
-import com.victor.module.mine.view.adapter.GankGirlLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_mine.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collectLatest
 
 /*
  * -----------------------------------------------------------------
@@ -40,6 +25,7 @@ import kotlinx.coroutines.flow.collectLatest
  */
 @Route(path = ARouterPath.MineFgt)
 class MineFragment: BaseFragment(),View.OnClickListener {
+    var fontStyle: Typeface? = null
 
     companion object {
         fun newInstance(): MineFragment {
@@ -75,6 +61,13 @@ class MineFragment: BaseFragment(),View.OnClickListener {
 
         mFabGitHub.setOnClickListener(this)
 
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+        mTvDescription.typeface = fontStyle
+        mTvDownloadApp.typeface = fontStyle
+        mTvGmail.typeface = fontStyle
+        mTvIssues.typeface = fontStyle
+        mTvVersion.typeface = fontStyle
+        mTvSupport.typeface = fontStyle
     }
 
     fun initData () {

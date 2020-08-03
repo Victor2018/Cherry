@@ -27,4 +27,7 @@ interface IHomeDataSource {
 
     val searchGankData: LiveData<GankDetailEntity>
     suspend fun searchGank(key: String?,page: Int)
+
+    val gankDetailData: LiveData<GankDetailEntity>
+    suspend fun fetchGankDetail(type: String?,page: Int)
 }

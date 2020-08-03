@@ -1,5 +1,6 @@
 package com.victor.module.wechat.view.holder
 
+import android.graphics.Typeface
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.coremodel.entity.ArticleInfo
 import com.victor.module.wechat.R
+import kotlinx.android.synthetic.main.rv_article_cell.view.*
 
 /*
  * -----------------------------------------------------------------
@@ -20,11 +22,8 @@ import com.victor.module.wechat.R
  * Description: 
  * -----------------------------------------------------------------
  */
-class ArticleViewHolder (view: View)
+class ArticleViewHolder (var view: View)
     : RecyclerView.ViewHolder(view) {
-    private val mTvTitle: TextView = view.findViewById(R.id.tv_title)
-//    private val mIvImage: ImageView = view.findViewById(R.id.iv_image)
-    private val mTvTime : TextView = view.findViewById(R.id.tv_time)
     private var post : ArticleInfo? = null
     init {
         view.setOnClickListener {
@@ -38,7 +37,7 @@ class ArticleViewHolder (view: View)
 
     fun bind(post: ArticleInfo?) {
         this.post = post!!
-        mTvTitle.setText(
+        view.mTvTitle.setText(
             Html.fromHtml(
                 ("<a href=\""
                         + post?.link) + "\">"
@@ -49,14 +48,18 @@ class ArticleViewHolder (view: View)
         //使用WebActivity显示网页，屏蔽使用系统浏览器
 //        mTvTitle.setMovementMethod(LinkMovementMethod.getInstance())
 
-        mTvTime.text = post?.niceShareDate
+        view.mTvTime.text = post?.niceShareDate
 
     }
 
     companion object {
-        fun create(parent: ViewGroup): ArticleViewHolder {
+        fun create(parent: ViewGroup,fontStyle: Typeface?): ArticleViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.rv_article_cell, parent, false)
+
+            view.mTvTitle.typeface = fontStyle
+            view.mTvTime.typeface = fontStyle
+
             return ArticleViewHolder(view)
         }
     }

@@ -10,6 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -58,6 +60,15 @@ class GirlsDetailActivity: BaseActivity() {
             var intent = Intent(ctx, GirlsDetailActivity::class.java)
             intent.putExtra(NavigationUtils.GANK_DATA_KEY, data)
             ctx.startActivity(intent)
+        }
+        fun  intentStart (activity: AppCompatActivity, data: GankDetailInfo, sharedElement: View,
+                          sharedElementName: String) {
+
+            var intent = Intent(activity, GirlsDetailActivity::class.java)
+            intent.putExtra(NavigationUtils.GANK_DATA_KEY, data)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                activity,sharedElement, sharedElementName)
+            ActivityCompat.startActivity(activity!!, intent, options.toBundle())
         }
     }
 

@@ -23,10 +23,12 @@ import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.HotKeyInfo
 import com.victor.module.home.R
 import com.victor.module.home.data.SearchFilterTag
+import com.victor.module.home.databinding.ActivitySearchGankBinding
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.SearchFilterAdapter
 import com.victor.module.home.view.adapter.SearchGankAdapter
@@ -44,7 +46,7 @@ import java.util.ArrayList
  * File: SearchGankActivity
  * Author: Victor
  * Date: 2020/7/29 上午 11:31
- * Description: 
+ * Description:
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.SearchGankAct)
@@ -52,7 +54,6 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     AdapterView.OnItemClickListener, LMRecyclerView.OnLoadMoreListener,
     FilterListener<HotKeyInfo> {
     private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
-    var viewDataBinding : ViewDataBinding? = null;
 
     var searchGankAdapter: SearchGankAdapter? = null
     var currentPage = 1
@@ -84,7 +85,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val binding = viewDataBinding as FragmentHomeBinding?
+        val binding = viewDataBinding as ActivitySearchGankBinding?
 
         // Set the LifecycleOwner to be able to observe LiveData objects
         binding?.lifecycleOwner = this
@@ -212,7 +213,8 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+        WebActivity.intentStart(this,searchGankAdapter?.getItem(position)?.title!!,
+            searchGankAdapter?.getItem(position)?.url!!)
     }
 
     override fun OnLoadMore() {

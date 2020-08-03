@@ -10,10 +10,10 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.cherry.viewmodel.HomeViewModel
 import com.victor.cherry.viewmodel.LiveDataVMFactory
@@ -22,8 +22,7 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.view.activity.WebActivity
-import com.victor.lib.common.view.widget.cardslider.CardSliderLayoutManager
-import com.victor.lib.common.view.widget.cardslider.CardSnapHelper
+import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
@@ -46,12 +45,12 @@ import kotlinx.android.synthetic.main.fragment_home.toolbar
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @Route(path = ARouterPath.HomeFgt)
 class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
-    Toolbar.OnMenuItemClickListener {
+    Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener {
     private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
 
     var homeAdapter: HomeAdapter? = null
-    var layoutManager: CardSliderLayoutManager? = null
-    private var currentPosition = 0
+    var currentPage = 1
+    var type: String? = "Android"
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -82,6 +81,8 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT//填充父类
         textView.setGravity(Gravity.CENTER_VERTICAL)//水平居中，CENTER，即水平也垂直，自选
 
+        mCtlTitle.title = type
+
         toolbar.menu.clear()
         toolbar.inflateMenu(R.menu.menu_home)
         toolbar.setOnMenuItemClickListener(this)
@@ -103,24 +104,14 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         mTsDescription.setOutAnimation(context!!, android.R.anim.fade_out)
 
         homeAdapter = HomeAdapter(context!!,this)
-        layoutManager = CardSliderLayoutManager(activity!!)
+        homeAdapter?.setHeaderVisible(false)
+        homeAdapter?.setFooterVisible(false)
         mRvGank.setHasFixedSize(true)
-        mRvGank.layoutManager = layoutManager
         mRvGank.adapter = homeAdapter
-
-        mRvGank.setOnFlingListener(null);
-        CardSnapHelper().attachToRecyclerView(mRvGank)
-
-        mRvGank.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    onActiveCardChange()
-                }
-            }
-        })
+        mRvGank.setLoadMoreListener(this)
 
         mBsvBanner.onItemClickListener = this
-
+        mFabGankCategory.setOnClickListener(this)
     }
 
     fun initData () {
@@ -129,12 +120,25 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
                 mBsvBanner.startWithList(it.data)
             }
         })
-        viewmodel.gankData.observe(viewLifecycleOwner, Observer {
-            it.let {
-                homeAdapter?.clear()
-                homeAdapter?.add(it.data)
-                homeAdapter?.notifyDataSetChanged()
+        viewmodel.searchGankDetail("Android",currentPage)
+        viewmodel.gankDetailValue.observe(viewLifecycleOwner, Observer {
+            it.let {it1 ->
+                it.data.let {it2 ->
+                    if (currentPage == 1) {
+                        homeAdapter?.clear()
+                    }
+                    homeAdapter?.setFooterVisible(it.page < it.page_count)
+                    if (it.page < it.page_count) {
+                        homeAdapter?.setLoadState(homeAdapter?.LOADING!!)
+                    } else {
+                        homeAdapter?.setLoadState(homeAdapter?.LOADING_END!!)
+                    }
+
+                    homeAdapter?.add(it.data)
+                    homeAdapter?.notifyDataSetChanged()
+                }
             }
+
         })
     }
 
@@ -157,17 +161,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         }
     }
 
-    private fun onActiveCardChange() {
-        val pos: Int = layoutManager?.getActiveCardPosition()!!
-        if (pos == RecyclerView.NO_POSITION || pos == currentPosition) {
-            return
-        }
-        onActiveCardChange(pos)
-    }
 
-    private fun onActiveCardChange(pos: Int) {
-        currentPosition = pos
-    }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
@@ -186,6 +180,18 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             }
         }
         return super.onOptionsItemSelected(item!!)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.mFabGankCategory -> {
+                GankCategoryActivity.intentStart(activity!! as AppCompatActivity)
+            }
+        }
+    }
+
+    override fun OnLoadMore() {
+        TODO("Not yet implemented")
     }
 
 

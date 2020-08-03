@@ -1,5 +1,7 @@
 package com.victor.module.wechat.view.adapter
 
+import android.content.Context
+import android.graphics.Typeface
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +19,11 @@ import com.victor.module.wechat.view.holder.ArticleViewHolder
  * Description: 
  * -----------------------------------------------------------------
  */
-class ArticleAdapter : PagingDataAdapter<ArticleInfo, ArticleViewHolder>(POST_COMPARATOR) {
+class ArticleAdapter(context: Context?) : PagingDataAdapter<ArticleInfo, ArticleViewHolder>(POST_COMPARATOR) {
+    var fontStyle: Typeface? = null
+    init {
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -37,7 +43,7 @@ class ArticleAdapter : PagingDataAdapter<ArticleInfo, ArticleViewHolder>(POST_CO
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder.create(parent)
+        return ArticleViewHolder.create(parent,fontStyle)
     }
 
     companion object {

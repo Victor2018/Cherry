@@ -13,21 +13,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.Loger
 import com.victor.lib.coremodel.entity.GankDetailInfo
-import com.victor.lib.coremodel.viewmodel.MineViewModel
+import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GankGirlAdapter
 import com.victor.module.girls.view.adapter.GankGirlLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_girls.*
+import kotlinx.android.synthetic.main.rv_girls_cell.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import org.victor.funny.util.ResUtils
 
 /*
  * -----------------------------------------------------------------
@@ -41,7 +42,7 @@ import kotlinx.coroutines.flow.collectLatest
  */
 @Route(path = ARouterPath.GirlsFgt)
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener {
-    private val viewmodel: MineViewModel by viewModels { MineViewModel.LiveDataVMFactory }
+    private val viewmodel: GirlsViewModel by viewModels { GirlsViewModel.LiveDataVMFactory }
 
     private lateinit var adapter: GankGirlAdapter
     var datas: ArrayList<GankDetailInfo> = ArrayList()
@@ -132,9 +133,8 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Loger.e(TAG,"initData-onItemClick-gankDetailList?.size = " + datas?.size)
-        Loger.e(TAG,"initData-onItemClick-adapter.itemCount = " + adapter.itemCount)
-//        GirlsDetailActivity.intentStart(activity!! as AppCompatActivity,datas)
+        GirlsDetailActivity.intentStart(activity!! as AppCompatActivity,view?.tag as GankDetailInfo,
+        view.iv_img,ResUtils.getStringRes(R.string.transition_girl_img))
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {

@@ -48,6 +48,9 @@ object ARouterPath {
     /**干货Activity */
     const val GankAct = "$HOME/module/GankActivity"
 
+    /**干货Activity */
+    const val GankCategoryAct = "$HOME/module/GankCategoryActivity"
+
     /**公众号Fragment */
     const val WeChatFgt = "$WECHAT/module/WeChatFragment"
 

@@ -91,7 +91,7 @@ class GankActivity: BaseActivity() {
     }
 
     private fun initAdapter() {
-        adapter = GankAdapter()
+        adapter = GankAdapter(this)
         mRvGank.adapter = adapter.withLoadStateHeaderAndFooter(
             header = GankLoadStateAdapter(
                 adapter

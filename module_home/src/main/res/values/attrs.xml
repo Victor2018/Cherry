@@ -19,4 +19,23 @@
             <enum name="left_to_right" value="3"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="CoordinatorLayout_Layout">
+        <!--开始拦截下拉的滑动距离-->
+        <attr name="layout_startInterceptDistance" format="dimension" />
+        <!--能够进入二楼的滑动距离-->
+        <attr name="layout_minTriggerOffset" format="dimension" />
+        <!--触发下拉后的滑动距离衰减率-->
+        <attr name="layout_dampingRatio" format="float" />
+        <!--回退的动画时长-->
+        <attr name="layout_rollbackDuration" format="integer" />
+        <!--进入二楼的动画时长-->
+        <attr name="layout_enterDuration" format="integer" />
+        <!--退出二楼的动画时长-->
+        <attr name="layout_exitDuration" format="integer" />
+        <!--进入二楼的回调方法-->
+        <attr name="layout_onEnterSecondFloor" format="string" />
+        <!--退出二楼的回调方法-->
+        <attr name="layout_onExitSecondFloor" format="string" />
+    </declare-styleable>
 </resources>

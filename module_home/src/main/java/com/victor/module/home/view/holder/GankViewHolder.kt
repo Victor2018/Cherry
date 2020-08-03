@@ -1,5 +1,6 @@
 package com.victor.module.home.view.holder
 
+import android.graphics.Typeface
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.module.home.R
+import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 
 /*
  * -----------------------------------------------------------------
@@ -24,12 +26,10 @@ import com.victor.module.home.R
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankViewHolder (view: View)
+class GankViewHolder (var view: View)
     : RecyclerView.ViewHolder(view) {
-    private val mTvTitle: TextView = view.findViewById(R.id.tv_title)
-    private val mIvImage: ImageView = view.findViewById(R.id.iv_image)
-    private val mTvTime : TextView = view.findViewById(R.id.tv_time)
     private var post : GankDetailInfo? = null
+
     init {
         view.setOnClickListener {
             post?.url?.let { url ->
@@ -42,7 +42,8 @@ class GankViewHolder (view: View)
 
     fun bind(post: GankDetailInfo?) {
         this.post = post!!
-        mTvTitle.setText(
+
+        view.mTvTitle.setText(
             Html.fromHtml(
                 ("<a href=\""
                         + post?.url) + "\">"
@@ -54,20 +55,24 @@ class GankViewHolder (view: View)
 //        mTvTitle.setMovementMethod(LinkMovementMethod.getInstance())
 
         if (post.images?.size!! > 0) {
-            mIvImage.visibility = View.VISIBLE
-            ImageUtils.instance.loadImage(App.get(),mIvImage,post.images?.get(0))
+            view.mIvPoster.visibility = View.VISIBLE
+            ImageUtils.instance.loadImage(App.get(),view.mIvPoster,post.images?.get(0))
         } else {
-            mIvImage.visibility = View.GONE
+            view.mIvPoster.visibility = View.GONE
         }
 
-        mTvTime.text = post?.publishedAt
+        view.mTvTime.text = post?.publishedAt
 
     }
 
     companion object {
-        fun create(parent: ViewGroup): GankViewHolder {
+        fun create(parent: ViewGroup,fontStyle: Typeface?): GankViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.rv_gank_cell, parent, false)
+
+            view.mTvTitle.typeface = fontStyle
+            view.mTvTime.typeface = fontStyle
+
             return GankViewHolder(view)
         }
     }
@@ -75,4 +80,5 @@ class GankViewHolder (view: View)
     fun updateScore(item: GankDetailInfo?) {
         post = item
     }
+
 }

@@ -43,5 +43,6 @@
     <string name="search">Search</string>
     <string name="search_tip">Enter search keywords</string>
     <string name="hot_search_keywords">Hot search keywords</string>
+    <string name="transition_girl_img">transition_girl_img</string>
 
 </resources>

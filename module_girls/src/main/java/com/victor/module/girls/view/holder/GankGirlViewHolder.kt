@@ -34,7 +34,7 @@ class GankGirlViewHolder (view: View,listener: AdapterView.OnItemClickListener?)
 //            post?.url?.let { url ->
 //                GirlsDetailActivity.intentStart(view.context)
 //            }
-            GirlsDetailActivity.intentStart(view.context,post!!)
+            view.setTag(post)
             listener?.onItemClick(null,view,bindingAdapterPosition,0)
         }
     }

@@ -102,8 +102,22 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSo
         }
     }
 
+    // Cache of a data point that is exposed to VM
+    private val _gankDetailData = MutableLiveData(GankDetailEntity())
+    override val gankDetailData: LiveData<GankDetailEntity> = _gankDetailData
+
+    override suspend fun fetchGankDetail(key: String?, page: Int) {
+        // Force Main thread
+        withContext(Dispatchers.Main) {
+            _gankDetailData.value = gankDetailDataFetch(key,page,NETWORK_PAGE_SIZE)
+        }
+    }
+
     private suspend fun gankDataFetch(key: String?, page: Int, count: Int): GankDetailEntity = withContext(ioDispatcher) {
         ServiceLocator.instance().getRequestApi(RepositoryType.SEARCH_GANK).searchGank(key,page,count)
+    }
+    private suspend fun gankDetailDataFetch(type: String?, page: Int, count: Int): GankDetailEntity = withContext(ioDispatcher) {
+        ServiceLocator.instance().getRequestApi(RepositoryType.GANK_DETAIL).getGankDetail(type,page,count)
     }
 
 

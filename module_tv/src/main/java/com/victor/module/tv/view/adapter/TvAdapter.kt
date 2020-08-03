@@ -26,6 +26,10 @@ import kotlinx.android.synthetic.main.rv_tv_cell.view.*
  */
 class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
     BaseRecycleAdapter<ChannelCategory, RecyclerView.ViewHolder>(context, listener) {
+    var fontStyle: Typeface? = null
+    init {
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
 
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         return null
@@ -40,6 +44,9 @@ class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelCategory, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
+
+        contentViewHolder.itemView.mTvCategoryTitle.typeface = fontStyle
+
         contentViewHolder.itemView.mTvCategoryTitle.text = data.channel_category
 
         contentViewHolder.itemView.recyclerView.layoutManager = LinearLayoutManager(

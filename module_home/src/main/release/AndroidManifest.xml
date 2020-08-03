@@ -22,6 +22,9 @@
             android:name=".view.SearchGankActivity"
             android:launchMode="singleTask"/>
         <activity
+            android:name=".view.GankCategoryActivity"
+            android:launchMode="singleTask"/>
+        <activity
             android:name="com.victor.lib.common.view.activity.WebActivity"
             android:launchMode="singleTask"/>
     </application>

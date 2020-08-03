@@ -1,5 +1,7 @@
 package com.victor.module.home.view.adapter
 
+import android.content.Context
+import android.graphics.Typeface
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,8 +18,11 @@ import com.victor.module.home.view.holder.GankViewHolder
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankAdapter: PagingDataAdapter<GankDetailInfo, GankViewHolder>(POST_COMPARATOR) {
-
+class GankAdapter(context: Context?): PagingDataAdapter<GankDetailInfo, GankViewHolder>(POST_COMPARATOR) {
+    var fontStyle: Typeface? = null
+    init {
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
     override fun onBindViewHolder(holder: GankViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -36,7 +41,7 @@ class GankAdapter: PagingDataAdapter<GankDetailInfo, GankViewHolder>(POST_COMPAR
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GankViewHolder {
-        return GankViewHolder.create(parent)
+        return GankViewHolder.create(parent,fontStyle)
     }
 
     companion object {

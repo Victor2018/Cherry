@@ -42,11 +42,18 @@ class HomeViewModel(private val dataSource: IHomeDataSource) : ViewModel() {
     val cachedValue = dataSource.cachedData
 
     val seachGankValue = dataSource.searchGankData
+    val gankDetailValue = dataSource.gankDetailData
 
     fun searchGank(key: String?,page: Int) {
         // Launch a coroutine that reads from a remote data source and updates cache
         viewModelScope.launch {
             dataSource.searchGank(key,page)
+        }
+    }
+    fun searchGankDetail(type: String?,page: Int) {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.fetchGankDetail(type,page)
         }
     }
 

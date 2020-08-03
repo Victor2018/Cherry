@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.victor.lib.common.view.widget.VerticalTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -7,6 +7,14 @@
     android:textSize="@dimen/dp_58"
     android:textColor="?attr/colorPrimary"
     android:textColorLink="?attr/colorPrimaryDark"
-    android:fontFamily="@font/zuo_an_lian_ren">
+    android:fontFamily="@font/zuo_an_lian_ren"
+    app:charSpacingExtra="@dimen/dp_2"
+    app:lineSpacingExtra="@dimen/dp_10"
+    app:textLeftToRight="false"
+    app:underLineText="true"
+    app:underLineColor="#CEAD53"
+    app:underLineWidth="@dimen/dp_1"
+    app:textHeightLightColor="@color/colorAccent"
+    app:underlineOffset="@dimen/dp_3">
 
-</TextView>
+</com.victor.lib.common.view.widget.VerticalTextView>

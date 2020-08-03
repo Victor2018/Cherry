@@ -8,10 +8,10 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
-import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.module.tv.R
 import com.victor.module.tv.data.ChannelInfo
 import com.victor.module.tv.view.holder.TvCellContentViewHolder
+import kotlinx.android.synthetic.main.rv_tv_cell.view.*
 import kotlinx.android.synthetic.main.rv_tv_channel_cell.view.*
 
 /*
@@ -27,11 +27,10 @@ import kotlinx.android.synthetic.main.rv_tv_channel_cell.view.*
 class TvCellAdapter (context: Context, listener: AdapterView.OnItemClickListener, var parentPosition: Int) :
     BaseRecycleAdapter<ChannelInfo, RecyclerView.ViewHolder>(context, listener) {
 
-//    var fontStyle: Typeface? = null
-//
-//    init {
-//        fontStyle = Typeface.createFromAsset(mContext?.assets, "fonts/ZuoAnLianRen.ttf");
-//    }
+    var fontStyle: Typeface? = null
+    init {
+        fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+    }
 
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         return null
@@ -46,11 +45,13 @@ class TvCellAdapter (context: Context, listener: AdapterView.OnItemClickListener
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelInfo, position: Int) {
         val contentViewHolder = viewHolder as TvCellContentViewHolder
+        contentViewHolder.itemView.mTvChannelName.typeface = fontStyle
+
         contentViewHolder.itemView.mTvChannelName.text = data.channel_name
 
         if (TextUtils.isEmpty(data.icon)) {
             ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
-                R.drawable.ic_baseline_live_tv_24)
+                R.drawable.ic_baseline_live_tv_24dp)
         } else {
             ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
                 data.icon)

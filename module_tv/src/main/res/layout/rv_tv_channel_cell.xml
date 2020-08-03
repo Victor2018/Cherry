@@ -32,7 +32,6 @@
             android:textSize="@dimen/dp_28"
             android:textColor="?attr/colorPrimary"
             android:textColorLink="?attr/colorPrimaryDark"
-            android:fontFamily="@font/zuo_an_lian_ren"
             tools:text="湖北卫视"/>
     </LinearLayout>
 

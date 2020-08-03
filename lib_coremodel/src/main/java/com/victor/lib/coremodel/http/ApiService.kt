@@ -30,7 +30,7 @@ interface ApiService {
 
     @GET("api/v2/data/category/GanHuo/type/{type}/page/{page}/count/{count}")
     suspend fun getGankDetail(
-        @Path("type") type: String,
+        @Path("type") type: String?,
         @Path("page") page: Int = 0,
         @Path("count") count: Int?
     ): GankDetailEntity

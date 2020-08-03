@@ -22,8 +22,7 @@
         android:textSize="@dimen/dp_58"
         tools:text="Gradle 插件，做自动测试过程中的截屏。"
         android:textColor="?attr/colorPrimary"
-        android:textColorLink="?attr/colorPrimaryDark"
-        android:fontFamily="@font/zuo_an_lian_ren"/>
+        android:textColorLink="?attr/colorPrimaryDark"/>
 
     <com.victor.lib.common.view.widget.CharAvatarView
         android:id="@+id/mCavAvatar"

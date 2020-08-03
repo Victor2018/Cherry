@@ -93,7 +93,7 @@ class ArticleActivity: BaseActivity() {
     }
 
     private fun initAdapter() {
-        adapter = ArticleAdapter()
+        adapter = ArticleAdapter(this)
         mRvArticle.adapter = adapter.withLoadStateHeaderAndFooter(
             header = ArticleLoadStateAdapter(
                 adapter
