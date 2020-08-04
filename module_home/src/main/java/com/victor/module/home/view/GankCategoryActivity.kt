@@ -17,6 +17,10 @@ import com.victor.cherry.viewmodel.GankCategoryViewModel
 import com.victor.clips.util.AppUtil.Companion.startActivityForResult
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
+import com.victor.lib.common.util.Constant
+import com.victor.lib.common.util.ImageUtils
+import com.victor.lib.common.util.JsonUtils
+import com.victor.lib.common.util.SharePreferencesUtil
 import com.victor.module.home.R
 import com.victor.module.home.databinding.ActivityGankCategoryBinding
 import com.victor.module.home.view.adapter.GankCategoryAdapter
@@ -45,18 +49,14 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
             var intent = Intent(activity, GankCategoryActivity::class.java)
             activity.startActivity(intent)
         }
-        fun  intentStartForResult (fragment: Fragment) {
-            var intent = Intent(fragment.context, GankCategoryActivity::class.java)
-            fragment.startActivityForResult(intent,SELECT_CATEGORY_REQUEST_CODE)
-        }
 
-        fun  intentStartForResult (activity: AppCompatActivity, sharedElement: View,
+        fun  intentStart (activity: AppCompatActivity, sharedElement: View,
                           sharedElementName: String) {
-
             var intent = Intent(activity, GankCategoryActivity::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 activity,sharedElement, sharedElementName)
-            ActivityCompat.startActivityForResult(activity!!, intent, SELECT_CATEGORY_REQUEST_CODE,options.toBundle())
+
+            ActivityCompat.startActivity(activity!!, intent,options.toBundle())
         }
     }
 
@@ -89,6 +89,11 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
     }
 
     fun initData () {
+        viewmodel.girlData.observe(this, Observer {
+            it.let {
+                ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
+            }
+        })
         viewmodel.gankData.observe(this, Observer {
             it.let {
                 gankCategoryAdapter?.clear()
@@ -99,9 +104,8 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val intent = Intent()
-        intent.putExtra(SELECT_CATEGORY_KEY, gankCategoryAdapter?.getItem(position))
-        setResult(RESULT_OK, intent)
+        var categoryRes = JsonUtils.toJSONString(gankCategoryAdapter?.getItem(position)!!)!!
+        SharePreferencesUtil.putString(this,Constant.CATEGORY_TYPE_KEY,categoryRes)
         onBackPressed()
     }
 

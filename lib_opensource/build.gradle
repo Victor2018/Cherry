@@ -79,11 +79,16 @@ dependencies {
 
     api deps.recyclerview
     api deps.cardview
-    //屏幕适配库
-    api deps.match
+
     api deps.multidex
+
+    //屏幕适配库
+    api deps.victor.match
     //动态权限申请
-    api deps.permissions.core
+    api deps.victor.permissions
+    //播放器
+    api deps.victor.player
+
     //搜索筛选view
     api deps.SearchFilter
 

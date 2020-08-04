@@ -76,10 +76,14 @@ class BottomBarItemView @JvmOverloads constructor(context: Context, attrs: Attri
     }
 
     fun select() {
+        if (animatedView == null) return
+        if (translateUpAnimation == null) return
         animatedView.startAnimation(translateUpAnimation)
     }
 
     fun deselect() {
+        if (animatedView == null) return
+        if (translateUpAnimation == null) return
         animatedView.startAnimation(translateDownAnimation)
     }
 

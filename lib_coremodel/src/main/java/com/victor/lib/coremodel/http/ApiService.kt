@@ -41,6 +41,9 @@ interface ApiService {
         @Path("count") count: Int?
     ): GankDetailEntity
 
+    @GET("api/v2/random/category/Girl/type/Girl/count/1")
+    suspend fun getGirl(): GankDetailEntity
+
     @GET("api/v2/search/{key}/category/All/type/All/page/{page}/count/{count}")
     suspend fun searchGank(
         @Path("key") key: String?,

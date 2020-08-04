@@ -2,12 +2,18 @@ package com.victor.cherry
 
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.cherry.adapter.HomeFragmentAdapter
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.util.AnimUtil
+import com.victor.lib.common.util.Constant
+import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.victor.funny.util.ResUtils
@@ -50,7 +56,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
         homeFragmentAdapter?.fragmetList = fragmentList
         mVpHome.adapter = homeFragmentAdapter
 
-        mBottomBar.setOnItemSelectListener(this)
+        mNavBar.setOnItemSelectListener(this)
 
       /*  var textView: TextView  = toolbar.getChildAt(0) as TextView;//主标题
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
@@ -82,5 +88,47 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
         if (index < fragmentList.size) {
             mVpHome.currentItem = index
         }
+    }
+
+    fun showNavBar () {
+        val layoutParams = mNavBar.getLayoutParams() as LinearLayout.LayoutParams
+        layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
+        layoutParams.height = resources.getDimension(R.dimen.dp_100).toInt()
+        mNavBar.layoutParams = layoutParams
+
+//        mNavBar.startAnimation(AnimUtil.bottomEnter())
+    }
+    fun hideNavBar () {
+//        mNavBar.startAnimation(AnimUtil.bottomExit())
+
+        val layoutParams = mNavBar.getLayoutParams() as LinearLayout.LayoutParams
+        layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
+        layoutParams.height = resources.getDimension(com.victor.module.tv.R.dimen.dp_0).toInt()
+        mNavBar.layoutParams = layoutParams
+    }
+
+    override fun update(observable: Observable?, data: Any?) {
+        super.update(observable, data)
+        if (data is Int) {
+            when (data) {
+                Constant.Action.SHOW_NAV_BAR -> {
+                    MainHandler.get().runMainThread(Runnable {
+                        showNavBar()
+                    })
+                }
+                Constant.Action.HIDE_NAV_BAR -> {
+                    MainHandler.get().runMainThread(Runnable {
+                        hideNavBar()
+                    })
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (fragmentList.get(mVpHome.currentItem).handleBackEvent()) {
+            return
+        }
+        super.onBackPressed()
     }
 }

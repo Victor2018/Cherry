@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -20,8 +21,7 @@ import com.victor.cherry.viewmodel.HomeViewModel
 import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
-import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.common.util.*
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.GankDetailInfo
@@ -76,7 +76,12 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initialize()
-        initData()
+        initBannerData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initGankData()
     }
 
     fun initialize () {
@@ -116,14 +121,27 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
         mBsvBanner.onItemClickListener = this
         mFabGankCategory.setOnClickListener(this)
+
+        SharePreferencesUtil.putString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
     }
 
-    fun initData () {
+    fun initBannerData() {
         viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
             it.let {
                 mBsvBanner.startWithList(it.data)
             }
         })
+    }
+
+    fun initGankData () {
+        var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
+        if (!TextUtils.isEmpty(categoryRes)) {
+            var gankInfo: GankInfo? = JsonUtils.parseObject(categoryRes!!,GankInfo::class.java)
+            type = gankInfo?.type
+            mCtlTitle.title = gankInfo?.title
+            currentPage = 1
+        }
+
         viewmodel.searchGankDetail(type,currentPage)
         viewmodel.gankDetailValue.observe(viewLifecycleOwner, Observer {
             it.let {it1 ->
@@ -190,21 +208,8 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.mFabGankCategory -> {
-                GankCategoryActivity.intentStartForResult(this)
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                GankCategoryActivity.SELECT_CATEGORY_REQUEST_CODE -> {
-                    var gankInfo: GankInfo = data?.getSerializableExtra(GankCategoryActivity.SELECT_CATEGORY_KEY) as GankInfo
-                    type = gankInfo.type
-                    currentPage = 1
-                    viewmodel.searchGankDetail(type,currentPage)
-                }
+                GankCategoryActivity.intentStart(activity as AppCompatActivity,
+                    mFabGankCategory,ResUtils.getStringRes(R.string.transition_fab))
             }
         }
     }

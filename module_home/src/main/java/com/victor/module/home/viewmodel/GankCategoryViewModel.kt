@@ -29,6 +29,9 @@ class GankCategoryViewModel(private val dataSource: IGankCategoryDataSource) : V
     val gankData: LiveData<GankRes> = liveData {
         emitSource(dataSource.fetchGankData())
     }
+    val girlData: LiveData<GankDetailEntity> = liveData {
+        emitSource(dataSource.fetchGirlData())
+    }
 
 }
 

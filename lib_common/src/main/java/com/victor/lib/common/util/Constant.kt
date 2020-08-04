@@ -16,8 +16,8 @@ class Constant {
         const val BG_COLOR_MAX                      = 255f
         const val BG_COLOR_MIN                      = 232f
         const val INTENT_DATA_KEY                   = "INTENT_DATA_KEY"
-        const val INTENT_ACTION_KEY                 = "INTENT_ACTION_KEY"
-        const val CATEGORY_POSITION_KEY             = "CATEGORY_POSITION_KEY"
+        const val INTENT_ACTION_KEY                 = "CATEGORY_TYPE_KEY"
+        const val CATEGORY_TYPE_KEY             = "CATEGORY_POSITION_KEY"
         const val MA_DATA = "madata"
         const val SHARE_TYPE                        = "text/plain";
         const val MAIL_TO                           = "mailto:%s";
@@ -32,8 +32,8 @@ class Constant {
     }
     class Action {
         companion object {
-            const val CATEGORY                      = 0x2001
-            const val WEEKLY_RANKING                = 0x2002
+            const val SHOW_NAV_BAR                  = 0x2001
+            const val HIDE_NAV_BAR                  = 0x2002
             const val MONTHLY_RANKING               = 0x2003
             const val TOTAL_RANKING                 = 0x2004
             const val FOLLOW                        = 0x1005

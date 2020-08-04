@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.victor.lib.common.R
+import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.StatusBarUtil
 import permission.victor.com.library.OnPermissionCallback
@@ -26,7 +27,7 @@ import java.util.*
  * Description: 
  * -----------------------------------------------------------------
  */
-abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback {
+abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer {
     protected var TAG = javaClass.simpleName
     var statusBarTextColorBlack: Boolean = false
     var viewDataBinding : ViewDataBinding? = null;
@@ -48,6 +49,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback {
     }
 
     fun initializeSuper () {
+        DataObservable.instance.addObserver(this)
         StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
         if (StatusBarUtil.hasNavigationBarShow(this)) {
             window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this));
@@ -79,6 +81,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback {
 
     override fun onDestroy() {
         super.onDestroy()
+        DataObservable.instance.deleteObserver(this)
     }
 
     override fun startActivity(intent: Intent?) {
@@ -134,5 +137,9 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback {
         builder?.setButton(DialogInterface.BUTTON_POSITIVE, "Request", DialogInterface.OnClickListener { dialog, which -> permissionHelper?.requestAfterExplanation(permissions) })
         builder?.setMessage("Permissions need explanation ($permissionName)")
         return builder!!
+    }
+
+    override fun update(observable: Observable?, data: Any?) {
+
     }
 }

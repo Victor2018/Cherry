@@ -30,6 +30,10 @@ class GankCategoryDataSource(private val ioDispatcher: CoroutineDispatcher): IGa
         emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGank())
     }
 
+    override fun fetchGirlData(): LiveData<GankDetailEntity> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGirl())
+    }
+
 
 }
 

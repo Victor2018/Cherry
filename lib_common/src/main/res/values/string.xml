@@ -46,5 +46,6 @@
     <string name="transition_girl_img">transition_girl_img</string>
     <string name="select_category">Select category</string>
     <string name="transition_fab">transition_fab</string>
+    <string name="transition_tv_poster">transition_tv_poster</string>
 
 </resources>

@@ -18,4 +18,5 @@ import com.victor.lib.coremodel.entity.HotKeyRes
  */
 interface IGankCategoryDataSource {
     fun fetchGankData(): LiveData<GankRes>
+    fun fetchGirlData(): LiveData<GankDetailEntity>
 }
