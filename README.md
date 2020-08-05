@@ -22,6 +22,7 @@ is only for learning and use.Please do not use it!
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/st_7.png)
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/st_8.png)
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/st_9.png)
+![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/st_10.png)
 
 # Download app
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/download.png)

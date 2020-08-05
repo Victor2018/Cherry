@@ -36,7 +36,7 @@
                     android:background="@color/transparent"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:layout_collapseMode="pin"
-                    app:title="@string/app_name"
+                    app:title="@string/module_wechat"
                     app:titleTextAppearance="@style/Toolbar.TitleText">
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>

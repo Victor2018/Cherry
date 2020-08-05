@@ -7,8 +7,9 @@
     <application
         android:label="@string/module_mine"
         android:name="com.victor.lib.common.app.App"
+        android:icon="@drawable/module_mine_logo"
         android:theme="@style/AppTheme.NoActionBar"
-        tools:replace="android:label">
+        tools:replace="android:label,android:icon">
 
         <activity android:name=".view.MineActivity"
             tools:ignore="Instantiatable">
