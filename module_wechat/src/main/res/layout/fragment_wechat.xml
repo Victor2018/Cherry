@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.victor.module.wechat.viewmodel.WeChatViewModel" />
+            type="com.victor.lib.coremodel.viewmodel.WeChatViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

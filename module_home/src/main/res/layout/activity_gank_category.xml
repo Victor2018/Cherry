@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.victor.cherry.viewmodel.GankCategoryViewModel" />
+            type="com.victor.lib.coremodel.viewmodel.GankCategoryViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"

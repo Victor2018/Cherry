@@ -3,10 +3,4 @@
 
     <string name="home_fragment">HomeFragment</string>
 
-    <string name="idle">Idle</string>
-    <string name="dragging">Dragging</string>
-    <string name="prepared">Prepared</string>
-    <string name="opening">Opening</string>
-    <string name="opened">Opened</string>
-    <string name="closing">Closing</string>
 </resources>

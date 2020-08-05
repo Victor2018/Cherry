@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.victor.lib.common.util.BitmapUtil
 import com.victor.lib.common.view.widget.PinchImageView
 import com.victor.lib.coremodel.entity.GankDetailInfo
-import com.victor.lib.coremodel.entity.GankInfo
 import com.victor.module.girls.R
 
 /*

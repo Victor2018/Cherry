@@ -1,0 +1,6 @@
+<resources>
+    <string name="module_tv">module_tv</string>
+
+    <string name="tv_fragment">TvFragment</string>
+
+</resources>

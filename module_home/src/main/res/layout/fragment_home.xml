@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.victor.cherry.viewmodel.HomeViewModel" />
+            type="com.victor.lib.coremodel.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -33,7 +33,7 @@
                 app:expandedTitleMarginStart="@dimen/dp_50"
                 app:expandedTitleMarginEnd="@dimen/dp_65">
 
-                <com.victor.module.home.view.widget.BannerSwitcherView
+                <com.victor.lib.common.view.widget.banner.BannerViewFlipper
                     android:id="@+id/mBsvBanner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

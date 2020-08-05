@@ -52,8 +52,8 @@ class MineFragment: BaseFragment(),View.OnClickListener {
     }
 
     fun initialize () {
-        setHasOptionsMenu(true)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+//        setHasOptionsMenu(true)
+//        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
         mTvDownloadApp.movementMethod = LinkMovementMethod.getInstance()
         mTvGmail.movementMethod = LinkMovementMethod.getInstance()

@@ -16,10 +16,10 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.viewmodel.GirlsLiveDataVMFactory
+import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GankGirlAdapter
-import com.victor.module.girls.viewmodel.GirlsViewModel
-import com.victor.module.girls.viewmodel.LiveDataVMFactory
 import kotlinx.android.synthetic.main.fragment_girls.*
 import kotlinx.android.synthetic.main.rv_girls_cell.view.*
 import org.victor.funny.util.ResUtils
@@ -37,7 +37,7 @@ import org.victor.funny.util.ResUtils
 @Route(path = ARouterPath.GirlsFgt)
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
     LMRecyclerView.OnLoadMoreListener{
-    private val viewmodel: GirlsViewModel by viewModels { LiveDataVMFactory }
+    private val viewmodel: GirlsViewModel by viewModels { GirlsLiveDataVMFactory }
 
     private lateinit var gankGirlAdapter: GankGirlAdapter
 

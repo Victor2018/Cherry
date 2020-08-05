@@ -1,6 +1,5 @@
 package com.victor.module.home.view
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -17,20 +16,19 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.cherry.viewmodel.HomeViewModel
-import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.common.view.widget.banner.BannerViewFlipper
+import com.victor.lib.common.view.widget.banner.DescriptionViewSwitcherFactory
 import com.victor.lib.coremodel.entity.GankInfo
+import com.victor.lib.coremodel.viewmodel.HomeLiveDataVMFactory
+import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
-import com.victor.module.home.view.widget.BannerSwitcherView
-import com.victor.module.home.view.widget.DescriptionViewSwitcherFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.toolbar
 import org.victor.funny.util.ResUtils
@@ -50,7 +48,7 @@ import org.victor.funny.util.ResUtils
 @Route(path = ARouterPath.HomeFgt)
 class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener {
-    private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
+    private val viewmodel: HomeViewModel by viewModels { HomeLiveDataVMFactory }
 
     var homeAdapter: HomeAdapter? = null
     var currentPage = 1
@@ -173,18 +171,16 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if (id == BannerSwitcherView.ON_BANNER_ITEM_CLICK) {
+        if (id == BannerViewFlipper.ON_BANNER_ITEM_CLICK) {
             WebActivity.intentStart(activity!!,mBsvBanner?.messages?.get(position)?.title!!,
                 mBsvBanner?.messages?.get(position)?.url!!)
-        } else if (id == BannerSwitcherView.ON_BANNER_ITEM_SELECT) {
+        } else if (id == BannerViewFlipper.ON_BANNER_ITEM_SELECT) {
             mTsDescription.setText(mBsvBanner?.messages?.get(position)?.title)
         } else {
             WebActivity.intentStart(activity!!,homeAdapter?.getItem(position)?.title!!,
                 homeAdapter?.getItem(position)?.url!!)
         }
     }
-
-
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {

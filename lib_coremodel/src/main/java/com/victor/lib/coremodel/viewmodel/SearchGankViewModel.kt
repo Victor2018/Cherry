@@ -1,9 +1,16 @@
 package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.*
+import com.victor.lib.coremodel.entity.HotKeyRes
 import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.http.datasource.GirlsDataSource
+import com.victor.lib.coremodel.http.datasource.SearchGankDataSource
+import com.victor.lib.coremodel.http.interfaces.IGirlsDataSource
+import com.victor.lib.coremodel.http.interfaces.ISearchGankDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.http.repository.IRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /*
  * -----------------------------------------------------------------
@@ -15,17 +22,31 @@ import com.victor.lib.coremodel.http.repository.IRepository
  * Description: 
  * -----------------------------------------------------------------
  */
-class SearchGankViewModel(val type: String,val repository: IRepository) : ViewModel() {
-    val datas = repository.postsOfSubreddit(type, 20)
+class SearchGankViewModel(private val dataSource: ISearchGankDataSource) : ViewModel() {
+    val seachGankValue = dataSource.searchGankData
+
+    fun searchGank(key: String?,page: Int) {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.searchGank(key,page)
+        }
+    }
+
+    val hotKeyData: LiveData<HotKeyRes> = liveData {
+        emitSource(dataSource.fetchHotKey())
+    }
+
 
     /**
      * Factory for [LiveDataViewModel].
      */
-   /* object LiveDataVMFactory : ViewModelProvider.Factory {
+    object SearchGankLiveDataVMFactory : ViewModelProvider.Factory {
+
+        private val girlsDataSource = SearchGankDataSource(Dispatchers.IO)
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return SearchGankViewModel(ServiceLocator.instance().getRepository(RepositoryType.SEARCH_GANK)) as T
+            return SearchGankViewModel(girlsDataSource) as T
         }
-    }*/
+    }
 }

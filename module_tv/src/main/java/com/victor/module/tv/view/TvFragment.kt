@@ -11,21 +11,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.*
-import com.victor.lib.common.view.widget.cardslider.CardSliderLayoutManager
-import com.victor.lib.common.view.widget.cardslider.CardSnapHelper
 import com.victor.module.tv.R
-import com.victor.module.tv.data.ChannelCategory
 import com.victor.module.tv.databinding.FragmentTvBinding
 import com.victor.module.tv.view.adapter.TvAdapter
 import com.victor.module.tv.viewmodel.LiveDataVMFactory
@@ -79,8 +73,8 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
     fun initialize () {
         MainHandler.get().register(this)
 
-        setHasOptionsMenu(true)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+//        setHasOptionsMenu(true)
+//        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
         val binding = viewDataBinding as FragmentTvBinding?
 

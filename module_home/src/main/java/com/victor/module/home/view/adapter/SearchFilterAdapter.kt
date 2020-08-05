@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.victor.lib.common.util.ColorUtil
 import com.victor.lib.coremodel.entity.HotKeyInfo
-import com.victor.module.home.data.SearchFilterTag
 import com.yalantis.filter.adapter.FilterAdapter
 import com.yalantis.filter.widget.FilterItem
 

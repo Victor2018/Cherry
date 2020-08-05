@@ -103,7 +103,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         val layoutParams = mNavBar.getLayoutParams() as LinearLayout.LayoutParams
         layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-        layoutParams.height = resources.getDimension(com.victor.module.tv.R.dimen.dp_0).toInt()
+        layoutParams.height = resources.getDimension(R.dimen.dp_0).toInt()
         mNavBar.layoutParams = layoutParams
     }
 

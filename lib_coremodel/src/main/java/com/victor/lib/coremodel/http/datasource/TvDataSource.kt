@@ -1,10 +1,9 @@
-package com.victor.module.tv.data
+package com.victor.lib.coremodel.http.datasource
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.victor.lib.common.util.AssetsJsonReaderUtil
-import com.victor.lib.common.util.JsonUtils
-import com.victor.module.tv.interfaces.ITVDataSource
+import com.victor.lib.coremodel.entity.ChannelRes
+import com.victor.lib.coremodel.http.interfaces.ITVDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -14,19 +13,17 @@ import kotlinx.coroutines.withContext
  * -----------------------------------------------------------------
  * File: TvDataSource
  * Author: Victor
- * Date: 2020/7/24 上午 11:31
+ * Date: 2020/8/5 上午 11:31
  * Description: 
  * -----------------------------------------------------------------
  */
 class TvDataSource(private val ioDispatcher: CoroutineDispatcher):
     ITVDataSource {
     override fun fetchTvData(): LiveData<ChannelRes> = liveData {
-        withContext(ioDispatcher) {
-            AssetsJsonReaderUtil.getJsonString("channels.json")?.let {
-                JsonUtils.parseObject(it,ChannelRes::class.java)
-                    ?.let { emit(it) }
-            }
-        }
-
+        /*AssetsJsonReaderUtil.getJsonString("channels.json")?.let {
+            JsonUtils.parseObject(it,ChannelRes::class.java)
+                ?.let { emit(it) }
+        }*/
     }
+
 }

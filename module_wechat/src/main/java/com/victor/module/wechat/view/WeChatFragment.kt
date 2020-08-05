@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -15,11 +14,11 @@ import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.coremodel.viewmodel.WeChatViewModel
+import com.victor.lib.coremodel.viewmodel.WeChatViewModel.WechatLiveDataVMFactory
 import com.victor.module.wechat.R
 import com.victor.module.wechat.databinding.FragmentWechatBinding
 import com.victor.module.wechat.view.adapter.WeChatAdapter
-import com.victor.module.wechat.viewmodel.WeChatViewModel
-import com.victor.module.wechat.viewmodel.WeChatViewModel.LiveDataVMFactory
 import kotlinx.android.synthetic.main.fragment_wechat.*
 
 /*
@@ -34,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_wechat.*
  */
 @Route(path = ARouterPath.WeChatFgt)
 class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.OnMenuItemClickListener {
-    private val viewmodel: WeChatViewModel by viewModels { LiveDataVMFactory }
+    private val viewmodel: WeChatViewModel by viewModels { WechatLiveDataVMFactory }
     var weChatAdapter: WeChatAdapter? = null
 
     companion object {

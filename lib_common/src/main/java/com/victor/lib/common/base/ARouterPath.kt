@@ -63,4 +63,7 @@ object ARouterPath {
     /**TV Fragment */
     const val TvFgt = "$TV/module/TvFragment"
 
+    /**TV Activity */
+    const val TvAct = "$TV/module/TvActivity"
+
 }

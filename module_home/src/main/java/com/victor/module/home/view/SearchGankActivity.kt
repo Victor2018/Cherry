@@ -13,23 +13,19 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.cherry.viewmodel.HomeViewModel
-import com.victor.cherry.viewmodel.LiveDataVMFactory
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Loger
-import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.HotKeyInfo
+import com.victor.lib.coremodel.viewmodel.SearchGankViewModel
+import com.victor.lib.coremodel.viewmodel.SearchGankViewModel.SearchGankLiveDataVMFactory
 import com.victor.module.home.R
-import com.victor.module.home.data.SearchFilterTag
 import com.victor.module.home.databinding.ActivitySearchGankBinding
-import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.SearchFilterAdapter
 import com.victor.module.home.view.adapter.SearchGankAdapter
 import com.yalantis.filter.listener.FilterListener
@@ -53,7 +49,7 @@ import java.util.ArrayList
 class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnClickListener,
     AdapterView.OnItemClickListener, LMRecyclerView.OnLoadMoreListener,
     FilterListener<HotKeyInfo> {
-    private val viewmodel: HomeViewModel by viewModels { LiveDataVMFactory }
+    private val viewmodel: SearchGankViewModel by viewModels { SearchGankLiveDataVMFactory }
 
     var searchGankAdapter: SearchGankAdapter? = null
     var currentPage = 1

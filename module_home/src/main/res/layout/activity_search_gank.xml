@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.victor.cherry.viewmodel.HomeViewModel" />
+            type="com.victor.lib.coremodel.viewmodel.SearchGankViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
