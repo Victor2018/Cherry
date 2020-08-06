@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,6 +27,8 @@ import kotlinx.android.synthetic.main.activity_girls_detail.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /*
@@ -110,13 +113,7 @@ class GirlsDetailActivity: BaseActivity() {
                     requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     return true
                 }
-                mPbLoading.visibility = View.VISIBLE
-                lifecycleScope.launch {
-                    //lifecycleScope使协程的生命周期随着activity的生命周期变化
-                    saveImage()
-                    mPbLoading.visibility = View.GONE
-                    SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_picture_success)).show();
-                }
+                downImage()
                 return true
             }
             R.id.action_set_wallpaper -> {
@@ -160,6 +157,15 @@ class GirlsDetailActivity: BaseActivity() {
 
     }
 
+    fun downImage () {
+        mPbLoading.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            //lifecycleScope使协程的生命周期随着activity的生命周期变化
+            saveImage()
+            mPbLoading.visibility = View.GONE
+            SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_picture_success)).show();
+        }
+    }
 
     suspend fun saveImage () {
         withContext(Dispatchers.IO) {
@@ -180,5 +186,19 @@ class GirlsDetailActivity: BaseActivity() {
         }
     }
 
+    override fun onPermissionGranted(permissionName: Array<out String>) {
+        super.onPermissionGranted(permissionName)
+        Loger.e(TAG, "onPermissionGranted-Permission(s) " + Arrays.toString(permissionName) + " Granted")
+        if (permissionName.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            downImage()
+        }
+    }
 
+    override fun onPermissionDeclined(permissionName: Array<out String>) {
+        super.onPermissionDeclined(permissionName)
+        Loger.e(TAG, "onPermissionDeclined-Permission(s) " + Arrays.toString(permissionName) + " Declined")
+        if (permissionName.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_pic_faild)).show();
+        }
+    }
 }

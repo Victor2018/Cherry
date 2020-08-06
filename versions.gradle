@@ -200,6 +200,7 @@ deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
 deps.cardview = "androidx.cardview:cardview:$versions.cardview"
 deps.multidex = "com.android.support:multidex:$versions.multidex"
 deps.SearchFilter = "com.github.Yalantis:SearchFilter:$versions.SearchFilter"
+deps.bugly = "com.tencent.bugly:crashreport:latest.release"
 
 ext.deps = deps
 

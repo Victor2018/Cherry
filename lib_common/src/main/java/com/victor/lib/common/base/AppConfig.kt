@@ -1,8 +1,6 @@
 package com.victor.lib.common.base
 
 import com.victor.lib.common.BuildConfig
-import com.victor.lib.common.base.AppConfig.MODEL_DEBUG
-
 
 /*
  * -----------------------------------------------------------------
@@ -27,5 +25,5 @@ object AppConfig {
     /**
      * 编译版本
      */
-//    const val BUILD_CODE = BuildConfig.BUILD_CODE
+    const val BUILD_CODE = BuildConfig.BUILD_CODE
 }

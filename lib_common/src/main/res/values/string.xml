@@ -26,15 +26,16 @@
     <string name="save_picture_success">图片保存成功！</string>
     <string name="set_wallpaper_success">设为壁纸成功！</string>
     <string name="share_beauty">给你分享一个美女：</string>
+    <string name="save_pic_faild">You refused the storage permission, and failed to save the picture!</string>
 
     <!--about us-->
     <string name="gmail">Gmail：<a href="cherry://mail?gmail=victor423099@gmail.com">victor423099@gmail.com</a></string>
     <string name="github_url">https://github.com/Victor2018</string>
     <string name="github_issues">Issues：<a href="cherry://openurl?title=Github Issues&amp;url=https://github.com/Victor2018/Cherry/issues">Feedback problem</a></string>
-    <string name="download_app">Download：<a href="cherry://openurl?title=Download app&amp;url=https://fir.im/Cherry">Poke here</a></string>
+    <string name="download_app">Download：<a href="cherry://openurl?title=Download app&amp;url=http://d.firim.top/Cherry">Poke here</a></string>
     <string name="about_us">About us</string>
     <string name="support_us">Support us</string>
-    <string name="share_app">Share an funny app for you：https://fir.im/Cherry</string>
+    <string name="share_app">Share an funny app for you：http://d.firim.top/Cherry</string>
     <string name="description">Description:\nJetpack components such as paging ktx flow, aouter componentized development,kolin coroutines cooperate with retrofit network request, dry gank browsing,beautiful girls, live show watching. . . All you want is here.This application is only for learning and use.Please do not use it!</string>
     <string name="github">Github</string>
     <string name="mail_to_me_tip">Please select the mail application</string>

@@ -6,6 +6,17 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+
+/**
+ * 读取版本配置
+ */
+def Properties mVersionProps = getProperty()
+
+/**
+ * 构建编号
+ */
+def String mBuildCode = String.valueOf(mVersionProps['BUILD_CODE'])
+
 android {
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
@@ -30,9 +41,11 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "int", "BUILD_CODE", mBuildCode
 
         multiDexEnabled true
 
@@ -87,13 +100,23 @@ android {
         main.jniLibs.srcDirs = ['libs']
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     //支持@Parcelize来实现Parcelable序列化
     androidExtensions {
         experimental = true
     }
+}
+
+/**
+ * 获取构建版本
+ * @return
+ */
+def getProperty() {
+    def Properties buildProps = new Properties()
+    buildProps.load(new FileInputStream(file('../docs/build.properties')))
+    return buildProps
 }
 
 dependencies {

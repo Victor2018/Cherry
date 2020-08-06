@@ -1,14 +1,14 @@
 package com.victor.lib.common.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import com.victor.lib.common.R
+import com.victor.lib.common.util.Loger
 
 /*
  * -----------------------------------------------------------------
@@ -28,8 +28,16 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected var rootView: View? = null
+
+    /**
+     * 是否初始化过布局
+     */
+    protected var isViewInitiated = false
+
     //Fragment对用户可见的标记
     var isVisibleToUser: Boolean = false
+    //是否加载过数据
+    var isDataInitiated = false
     var viewDataBinding : ViewDataBinding? = null;
 
     protected abstract fun getLayoutResource(): Int
@@ -38,6 +46,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
+        Loger.e(TAG,"setUserVisibleHint()......isVisibleToUser = ${isVisibleToUser}")
         //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
         if (isVisibleToUser) {
             this.isVisibleToUser = true
@@ -47,12 +56,24 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        Log.e(TAG,"onHiddenChanged()......hidden = ${hidden}")
+        if (!hidden) {
+            this.isVisibleToUser = true
+            lazyLoad()
+        } else {
+            this.isVisibleToUser = false
+        }
+    }
+
     fun lazyLoad() {
         //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
-        if (isVisibleToUser) {
+        if (isVisibleToUser && isViewInitiated && !isDataInitiated) {
             freshFragData()
             //数据加载完毕,恢复标记,防止重复加载
             isVisibleToUser = false
+            isDataInitiated = true
         }
     }
 
@@ -76,8 +97,28 @@ abstract class BaseFragment : Fragment() {
         return rootView
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        isViewInitiated = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(TAG,"onResume(()......isViewInitiated = ${isViewInitiated}")
+        Log.e(TAG,"onResume(()......isVisibleToUser = ${isVisibleToUser}")
+        Log.e(TAG,"onResume(()......isDataInitiated = ${isDataInitiated}")
+        Log.e(TAG,"onResume(()......isHidden = ${isHidden}")
+        isVisibleToUser = !isHidden
+        if (!isHidden) {
+            lazyLoad()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        isViewInitiated = false
+        isVisibleToUser = false
+        isDataInitiated = false
     }
 
 

@@ -64,10 +64,21 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
         return R.layout.fragment_tv
     }
 
+    override fun handleBackEvent(): Boolean {
+        if (isFullScreenPlay) {
+            exitFullScreen()
+            return true
+        }
+        return false
+    }
+
+    override fun freshFragData() {
+        initData()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initialize()
-        initData()
     }
 
     fun initialize () {
@@ -108,17 +119,6 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
 
         })
 
-    }
-
-    override fun handleBackEvent(): Boolean {
-        if (isFullScreenPlay) {
-            exitFullScreen()
-            return true
-        }
-        return false
-    }
-
-    override fun freshFragData() {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

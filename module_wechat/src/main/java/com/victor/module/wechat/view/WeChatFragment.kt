@@ -49,14 +49,22 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
         }
     }
 
+
     override fun getLayoutResource(): Int {
         return R.layout.fragment_wechat
+    }
+
+    override fun handleBackEvent(): Boolean {
+        return false
+    }
+
+    override fun freshFragData() {
+        initData()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initialize()
-        initData()
     }
 
     fun initialize () {
@@ -90,14 +98,6 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
                 weChatAdapter?.notifyDataSetChanged()
             }
         })
-    }
-
-    override fun handleBackEvent(): Boolean {
-        return false
-    }
-
-    override fun freshFragData() {
-
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

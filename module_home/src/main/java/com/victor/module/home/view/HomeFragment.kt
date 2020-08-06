@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -69,6 +70,13 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
     override fun getLayoutResource(): Int {
         return R.layout.fragment_home
+    }
+
+    override fun handleBackEvent(): Boolean {
+        return false
+    }
+
+    override fun freshFragData() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -161,14 +169,6 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
         })
     }
-
-    override fun handleBackEvent(): Boolean {
-        return false
-    }
-
-    override fun freshFragData() {
-    }
-
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if (id == BannerViewFlipper.ON_BANNER_ITEM_CLICK) {

@@ -25,6 +25,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 配置APP ID -->
+        <meta-data
+            android:name="BUGLY_APPID"
+            android:value="${BUGLY_APPID}" />
+        <!-- 配置APP版本号 -->
+        <meta-data
+            android:name="BUGLY_APP_VERSION"
+            android:value="${BUGLY_APP_VERSION}" />
+        <!-- 配置APP渠道号 -->
+        <meta-data
+            android:name="BUGLY_APP_CHANNEL"
+            android:value="${BUGLY_APP_CHANNEL}" />
+        <!-- 配置Bugly调试模式（true或者false） -->
+        <meta-data
+            android:name="BUGLY_ENABLE_DEBUG"
+            android:value="${BUGLY_ENABLE_DEBUG}" />
     </application>
 
 </manifest>

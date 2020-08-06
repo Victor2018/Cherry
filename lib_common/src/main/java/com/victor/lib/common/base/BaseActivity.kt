@@ -52,9 +52,9 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
         DataObservable.instance.addObserver(this)
         StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
         if (StatusBarUtil.hasNavigationBarShow(this)) {
-            window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this));
+            window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this))
         }
-        permissionHelper = PermissionHelper.getInstance(this);
+        permissionHelper = PermissionHelper.getInstance(this,this)
     }
 
     fun isPermissionGranted (permissionName: String): Boolean {
@@ -66,12 +66,12 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
     fun requestPermission (permission: String) {
         Loger.e(TAG,"requestPermission-permission = " + permission)
         permissionHelper?.setForceAccepting(false) // default is false. its here so you know that it exists.
-            ?.request(arrayOf(permission));
+            ?.request(arrayOf(permission))
     }
     fun requestPermission (permissions: Array<String>) {
         Loger.e(TAG,"requestPermission-permissions = " + permissions.toString())
         permissionHelper?.setForceAccepting(false) // default is false. its here so you know that it exists.
-            ?.request(permissions);
+            ?.request(permissions)
     }
 
     override fun onResume() {
@@ -95,7 +95,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
     }
 
     override fun onPermissionPreGranted(permissionsName: String) {
-        Loger.d("onPermissionPreGranted", "Permission( " + permissionsName + " ) preGranted");
+        Loger.d(TAG, "onPermissionPreGranted-Permission( " + permissionsName + " ) preGranted");
     }
 
     override fun onPermissionGranted(permissionName: Array<out String>) {
@@ -103,15 +103,15 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
     }
 
     override fun onNoPermissionNeeded() {
-        Loger.d("onNoPermissionNeeded", "Permission(s) not needed");
+        Loger.d(TAG, "onNoPermissionNeeded-Permission(s) not needed");
     }
 
     override fun onPermissionReallyDeclined(permissionName: String) {
-        Loger.d("ReallyDeclined", "Permission " + permissionName + " can only be granted from settingsScreen");
+        Loger.d(TAG, "ReallyDeclined-Permission " + permissionName + " can only be granted from settingsScreen");
     }
 
     override fun onPermissionDeclined(permissionName: Array<out String>) {
-        Loger.d("onPermissionDeclined", "Permission(s) " + Arrays.toString(permissionName) + " Declined");
+        Loger.d(TAG, "onPermissionDeclined-Permission(s) " + Arrays.toString(permissionName) + " Declined");
     }
 
     override fun onPermissionNeedExplanation(p0: String) {
@@ -137,6 +137,20 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
         builder?.setButton(DialogInterface.BUTTON_POSITIVE, "Request", DialogInterface.OnClickListener { dialog, which -> permissionHelper?.requestAfterExplanation(permissions) })
         builder?.setMessage("Permissions need explanation ($permissionName)")
         return builder!!
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        permissionHelper?.onActivityForResult(requestCode)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        permissionHelper?.onRequestPermissionsResult(requestCode,permissions,grantResults)
     }
 
     override fun update(observable: Observable?, data: Any?) {

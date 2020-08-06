@@ -91,5 +91,7 @@ dependencies {
 
     //搜索筛选view
     api deps.SearchFilter
+    //腾讯bugly崩溃日志收集
+    api deps.bugly
 
 }

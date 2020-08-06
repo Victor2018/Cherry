@@ -63,7 +63,7 @@
 
 # 保留support下的所有类及其内部类
 -keep class android.support.** {*;}
-# 保留androidx下的缩影内及内部类
+# 保留androidx下的所有类及内部类
 -keep class androidx.** {*;}
 
 # 保留R下面的资源
@@ -109,31 +109,13 @@
 
 # 实体类不混淆（fastjson会解析失败）
 -keep class com.victor.lib.common.entity.** { *; }
+-keep class com.victor.lib.coremodel.entity.** { *; }
 -keep class com.victor.module.tv.data.** { *; }
 
 # 播放器
 -dontwarn com.victor.player.library.**
 -keep class com.victor.player.library.** { *; }
 -keep interface com.victor.player.library.** { *; }
-
-# 注解
--dontwarn javax.annotation.**
--dontwarn javax.inject.**
-
-# RxJava RxAndroid
-
--dontwarn sun.misc.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-    long producerIndex;
-    long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
-
 
 # 屏幕适配库
 -dontwarn com.victor.screen.match.library.**
@@ -159,10 +141,6 @@
 -keepattributes Signature
 -keepattributes Exceptions
 
-# retrofit_converter_gson
--dontwarn com.squareup.retrofit2.**
--keep class com.squareup.retrofit2.** { *; }
-
 # okhttp
 -dontwarn okhttp3.**
 -dontwarn okhttp3.logging.**
@@ -172,32 +150,6 @@
 # okio
 -dontwarn okio.**
 -keep class okio.**{*;}
-
- #rxjava
--dontwarn sun.misc.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
- long producerIndex;
- long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
- rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
- rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
-
-#rxandroid
--dontwarn sun.misc.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-   long producerIndex;
-   long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
 
 #glide
 -dontwarn com.bumptech.glide.**
@@ -239,4 +191,4 @@
 -keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 
 # If single-type injection is used, that is, no interface is defined to implement IProvider, the following rules need to be added to protect the implementation
-# -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
+-keep class * implements com.alibaba.android.arouter.facade.template.IProvider

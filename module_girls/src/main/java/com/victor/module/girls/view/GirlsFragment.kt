@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
+import com.victor.lib.common.util.Loger
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.entity.GankDetailInfo
 import com.victor.lib.coremodel.viewmodel.GirlsLiveDataVMFactory
@@ -60,11 +61,18 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         return R.layout.fragment_girls
     }
 
+    override fun handleBackEvent(): Boolean {
+        return false
+    }
+
+    override fun freshFragData() {
+        initData()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         initialize()
-        initData()
     }
 
     fun initialize () {
@@ -104,13 +112,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
             }
 
         })
-    }
-
-    override fun handleBackEvent(): Boolean {
-        return false
-    }
-
-    override fun freshFragData() {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

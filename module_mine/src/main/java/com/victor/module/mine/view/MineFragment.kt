@@ -40,16 +40,26 @@ class MineFragment: BaseFragment(),View.OnClickListener {
         }
     }
 
+
     override fun getLayoutResource(): Int {
         return R.layout.fragment_mine
+    }
+
+    override fun handleBackEvent(): Boolean {
+        return false
+    }
+
+    override fun freshFragData() {
+        initData()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         initialize()
-        initData()
     }
+
+
 
     fun initialize () {
 //        setHasOptionsMenu(true)
@@ -80,13 +90,6 @@ class MineFragment: BaseFragment(),View.OnClickListener {
                 WebActivity.intentStart(activity as AppCompatActivity, getString(R.string.github), getString(R.string.github_url), false)
             }
         }
-    }
-
-    override fun handleBackEvent(): Boolean {
-        return false
-    }
-
-    override fun freshFragData() {
     }
 
 }

@@ -1,6 +1,7 @@
 package com.victor.lib.common.app
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.tencent.bugly.crashreport.CrashReport
 import com.victor.lib.common.base.AppConfig
 import com.victor.lib.common.base.BaseApplication
 
@@ -23,6 +24,7 @@ class App: BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        CrashReport.initCrashReport(getApplicationContext());
     }
 
 }
