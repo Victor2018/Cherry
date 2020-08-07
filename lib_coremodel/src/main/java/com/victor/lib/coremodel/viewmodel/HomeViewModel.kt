@@ -23,18 +23,21 @@ import java.util.*
  */
 class HomeViewModel(private val dataSource: IHomeDataSource) : ViewModel() {
 
-    val gankDetailValue = dataSource.gankDetailData
+    val bannerDataValue = dataSource.bannerData
+    fun fetchBanner() {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.fetchBannerData()
+        }
+    }
 
+    val gankDetailValue = dataSource.gankDetailData
     fun searchGankDetail(type: String?,page: Int) {
         // Launch a coroutine that reads from a remote data source and updates cache
         viewModelScope.launch {
             dataSource.fetchGankDetail(type,page)
         }
     }
-    val bannerData: LiveData<BannerRes> = liveData {
-        emitSource(dataSource.fetchBannerData())
-    }
-
 }
 
 

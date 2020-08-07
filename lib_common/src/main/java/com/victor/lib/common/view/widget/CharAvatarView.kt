@@ -62,7 +62,6 @@ class CharAvatarView: ImageView {
 
         val color: Int = colors.get(charHash % colors.size)
         // 画圆
-        // 画圆
         mPaintBackground!!.color = color
         canvas!!.drawCircle(
             width / 2.toFloat(),
@@ -71,16 +70,13 @@ class CharAvatarView: ImageView {
             mPaintBackground!!
         )
         // 写字
-        // 写字
         mPaintText!!.color = Color.WHITE
         mPaintText!!.textSize = width / 2.toFloat()
         mPaintText!!.strokeWidth = 3f
         mPaintText!!.getTextBounds(text, 0, 1, mRect)
         // 垂直居中
-        // 垂直居中
         val fontMetrics = mPaintText!!.fontMetricsInt
         val baseline = (measuredHeight - fontMetrics.bottom - fontMetrics.top) / 2
-        // 左右居中
         // 左右居中
         mPaintText!!.textAlign = Paint.Align.CENTER
         canvas!!.drawText(text!!, width / 2.toFloat(), baseline.toFloat(), mPaintText!!)

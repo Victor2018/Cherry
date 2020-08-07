@@ -1,12 +1,16 @@
 package com.victor.lib.coremodel.http.datasource
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.entity.WeChatRes
 import com.victor.lib.coremodel.http.interfaces.IWeChatDataSource
+import com.victor.lib.coremodel.http.locator.NetServiceLocator
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /*
@@ -20,7 +24,14 @@ import kotlinx.coroutines.withContext
  * -----------------------------------------------------------------
  */
 class WeChatDataSource(private val ioDispatcher: CoroutineDispatcher): IWeChatDataSource {
-    override fun fetchWeChatData(): LiveData<WeChatRes> = liveData {
-        emit(ServiceLocator.instance().getRequestApi(RepositoryType.WAN_ANDROID).getWeChat())
+    private val _weChatData = MutableLiveData(WeChatRes())
+    override val weChatData: LiveData<WeChatRes> = _weChatData
+
+    override suspend fun fetchWeChat() = withContext(Dispatchers.Main) {
+        _weChatData.value = weChatDataFetch()
+    }
+
+    private suspend fun weChatDataFetch(): WeChatRes = withContext(ioDispatcher) {
+        ServiceLocator.instance().getRequestApi(RepositoryType.WAN_ANDROID).getWeChat()
     }
 }

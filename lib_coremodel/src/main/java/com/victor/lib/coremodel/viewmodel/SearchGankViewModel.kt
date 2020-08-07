@@ -32,21 +32,24 @@ class SearchGankViewModel(private val dataSource: ISearchGankDataSource) : ViewM
         }
     }
 
-    val hotKeyData: LiveData<HotKeyRes> = liveData {
-        emitSource(dataSource.fetchHotKey())
+    val hotKeyDataValue = dataSource.hotKeyData
+    fun fetchHotKey() {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.fetchHotKey()
+        }
     }
-
 
     /**
      * Factory for [LiveDataViewModel].
      */
     object SearchGankLiveDataVMFactory : ViewModelProvider.Factory {
 
-        private val girlsDataSource = SearchGankDataSource(Dispatchers.IO)
+        private val dataSource = SearchGankDataSource(Dispatchers.IO)
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return SearchGankViewModel(girlsDataSource) as T
+            return SearchGankViewModel(dataSource) as T
         }
     }
 }

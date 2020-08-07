@@ -1,14 +1,12 @@
 package com.victor.lib.coremodel.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.GankRes
 import com.victor.lib.coremodel.http.datasource.GankCategoryDataSource
 import com.victor.lib.coremodel.http.interfaces.IGankCategoryDataSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /*
  * -----------------------------------------------------------------
@@ -21,12 +19,20 @@ import kotlinx.coroutines.Dispatchers
  * -----------------------------------------------------------------
  */
 class GankCategoryViewModel(private val dataSource: IGankCategoryDataSource) : ViewModel() {
-
-    val gankData: LiveData<GankRes> = liveData {
-        emitSource(dataSource.fetchGankData())
+    val gankDataValue = dataSource.gankData
+    fun fetchGank() {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.fetchGankData()
+        }
     }
-    val girlData: LiveData<GankDetailEntity> = liveData {
-        emitSource(dataSource.fetchGirlData())
+
+    val girlDataValue = dataSource.girlData
+    fun fetchGirl() {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.fetchGirlData()
+        }
     }
 
 }

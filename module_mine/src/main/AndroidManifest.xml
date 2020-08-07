@@ -2,18 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.victor.module.mine">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <application
-        android:theme="@style/AppTheme.NoActionBar">
+    <application>
 
         <activity android:name=".view.MineActivity"
-            android:label="@string/module_mine"
-            tools:ignore="Instantiatable">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:label="@string/module_mine"/>
         <!-- Scheme代理跳转 -->
         <activity
             android:name="com.victor.lib.common.view.activity.SchemaProxyActivity"

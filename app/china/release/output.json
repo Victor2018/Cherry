@@ -11,10 +11,10 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 2,
-      "versionName": "2",
+      "versionCode": 3,
+      "versionName": "3",
       "enabled": true,
-      "outputFile": "Cherry_v1.0.2_2_china.apk"
+      "outputFile": "Cherry_v1.0.3_3_china.apk"
     }
   ]
 }

@@ -1,6 +1,7 @@
 package com.victor.lib.coremodel.http.interfaces
 
 import androidx.lifecycle.LiveData
+import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.lib.coremodel.entity.WeChatRes
 
 /*
@@ -14,5 +15,6 @@ import com.victor.lib.coremodel.entity.WeChatRes
  * -----------------------------------------------------------------
  */
 interface IWeChatDataSource {
-    fun fetchWeChatData(): LiveData<WeChatRes>
+    val weChatData: LiveData<WeChatRes>
+    suspend fun fetchWeChat()
 }

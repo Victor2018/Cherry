@@ -132,7 +132,8 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     }
 
     fun initBannerData() {
-        viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
+        viewmodel.fetchBanner()
+        viewmodel.bannerDataValue.observe(viewLifecycleOwner, Observer {
             it.let {
                 mBsvBanner.startWithList(it.data)
             }

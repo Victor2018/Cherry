@@ -1,6 +1,7 @@
 package com.victor.module.tv.interfaces
 
 import androidx.lifecycle.LiveData
+import com.victor.lib.coremodel.entity.GankDetailEntity
 import com.victor.module.tv.data.ChannelCategory
 import com.victor.module.tv.data.ChannelRes
 
@@ -15,5 +16,6 @@ import com.victor.module.tv.data.ChannelRes
  * -----------------------------------------------------------------
  */
 interface ITVDataSource {
-    fun fetchTvData(): LiveData<ChannelRes>
+    val tvData: LiveData<ChannelRes>
+    suspend fun fetchTvData()
 }

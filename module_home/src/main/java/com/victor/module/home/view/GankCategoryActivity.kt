@@ -86,12 +86,15 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
     }
 
     fun initData () {
-        viewmodel.girlData.observe(this, Observer {
+        viewmodel.fetchGank()
+        viewmodel.fetchGirl()
+
+        viewmodel.girlDataValue.observe(this, Observer {
             it.let {
                 ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
             }
         })
-        viewmodel.gankData.observe(this, Observer {
+        viewmodel.gankDataValue.observe(this, Observer {
             it.let {
                 gankCategoryAdapter?.clear()
                 gankCategoryAdapter?.add(it.data)

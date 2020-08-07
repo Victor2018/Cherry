@@ -106,15 +106,18 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     fun initData () {
-        viewmodel.hotKeyData.observe(this, Observer {
-            it.let {it1 ->
-                it.data.let {it2 ->
-                    val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
-                    mTitles = it2
-                    mFilter?.adapter = SearchFilterAdapter(this,it2,colors)
-                    mFilter?.expand()
-                    mFilter?.build()
-                }
+        Loger.e(TAG,"initData......")
+        viewmodel.fetchHotKey()
+        viewmodel.hotKeyDataValue.observe(this, Observer {
+            if (it == null) return@Observer
+            if (it.data == null) return@Observer
+
+            if (it?.data?.size!! > 0) {
+                val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
+                mTitles = it?.data
+                mFilter?.adapter = SearchFilterAdapter(this,it?.data,colors)
+                mFilter?.expand()
+                mFilter?.build()
             }
         })
         viewmodel.seachGankValue.observe(this, Observer {

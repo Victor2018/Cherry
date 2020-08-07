@@ -75,7 +75,7 @@ open class ReadableBottomBar @JvmOverloads constructor(context: Context, attrs: 
         tabIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.ReadableBottomBar_rbb_indicatorHeight, 10)
         tabInitialSelectedIndex = typedArray.getInt(R.styleable.ReadableBottomBar_rbb_initialIndex, 0)
 
-        val textSize = typedArray.getDimension(R.styleable.ReadableBottomBar_rbb_textSize, 15f)
+        val textSize = typedArray.getDimension(R.styleable.ReadableBottomBar_rbb_textSize, 18f)
         val textColor = typedArray.getColor(R.styleable.ReadableBottomBar_rbb_textColor, Color.BLACK)
         val iconColor = typedArray.getColor(R.styleable.ReadableBottomBar_rbb_iconColor, Color.BLACK)
         val activeItemType = ItemType.getType(typedArray.getInt(R.styleable.ReadableBottomBar_rbb_activeItemType, ItemType.Icon.value))

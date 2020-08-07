@@ -1,13 +1,11 @@
 package com.victor.lib.coremodel.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.victor.lib.coremodel.entity.WeChatRes
 import com.victor.lib.coremodel.http.datasource.WeChatDataSource
 import com.victor.lib.coremodel.http.interfaces.IWeChatDataSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /*
  * -----------------------------------------------------------------
@@ -21,8 +19,13 @@ import kotlinx.coroutines.Dispatchers
  */
 class WeChatViewModel(private val dataSource: IWeChatDataSource): ViewModel() {
 
-    val weChatData: LiveData<WeChatRes> = liveData {
-        emitSource(dataSource.fetchWeChatData())
+    val weChatDataValue = dataSource.weChatData
+
+    fun fetchWeChat() {
+        // Launch a coroutine that reads from a remote data source and updates cache
+        viewModelScope.launch {
+            dataSource.fetchWeChat()
+        }
     }
 
     /**

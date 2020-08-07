@@ -1,11 +1,8 @@
 package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.RepositoryType
 import com.victor.lib.coremodel.http.datasource.GirlsDataSource
 import com.victor.lib.coremodel.http.interfaces.IGirlsDataSource
-import com.victor.lib.coremodel.http.locator.ServiceLocator
-import com.victor.lib.coremodel.http.repository.IRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

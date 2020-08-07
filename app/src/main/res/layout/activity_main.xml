@@ -42,7 +42,6 @@
             app:rbb_tabs="@xml/nav_bottom_bar"
             app:rbb_backgroundColor="@color/white"
             app:rbb_textColor="@color/colorPrimaryDark"
-            app:rbb_textSize="@dimen/dp_18"
             app:rbb_iconColor="@color/colorPrimaryDark"
             app:rbb_indicatorColor="@color/colorPrimaryDark"
             app:rbb_indicatorHeight="@dimen/dp_5" />

@@ -26,7 +26,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="@dimen/dp_1"
+                android:lineSpacingMultiplier="1.5"
                 android:lines="3"
                 android:ellipsize="end"
                 android:textSize="@dimen/dp_42"

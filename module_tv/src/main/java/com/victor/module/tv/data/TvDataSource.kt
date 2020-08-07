@@ -1,11 +1,17 @@
 package com.victor.module.tv.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.victor.lib.common.util.AssetsJsonReaderUtil
 import com.victor.lib.common.util.JsonUtils
+import com.victor.lib.coremodel.entity.GankDetailEntity
+import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.http.locator.NetServiceLocator
+import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.module.tv.interfaces.ITVDataSource
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /*
@@ -20,13 +26,15 @@ import kotlinx.coroutines.withContext
  */
 class TvDataSource(private val ioDispatcher: CoroutineDispatcher):
     ITVDataSource {
-    override fun fetchTvData(): LiveData<ChannelRes> = liveData {
-        withContext(ioDispatcher) {
-            AssetsJsonReaderUtil.getJsonString("channels.json")?.let {
-                JsonUtils.parseObject(it,ChannelRes::class.java)
-                    ?.let { emit(it) }
-            }
-        }
 
+    private val _tvData = MutableLiveData(ChannelRes())
+    override val tvData: LiveData<ChannelRes> = _tvData
+
+    override suspend fun fetchTvData() = withContext(Dispatchers.Main) {
+        _tvData.value = tvDataFetch()
+    }
+
+    private suspend fun tvDataFetch(): ChannelRes = withContext(ioDispatcher) {
+        JsonUtils.parseObject(AssetsJsonReaderUtil.getJsonString("channels.json")!!,ChannelRes::class.java)!!
     }
 }

@@ -2,18 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.victor.module.tv">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
-    <application
-        android:theme="@style/AppTheme.NoActionBar">
+    <application>
 
         <activity android:name=".view.TvActivity"
-            android:label="@string/module_tv"
-            tools:ignore="Instantiatable">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:label="@string/module_tv"/>
     </application>
 </manifest>
