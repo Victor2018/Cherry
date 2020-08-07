@@ -9,6 +9,7 @@
         android:name="com.victor.lib.common.app.App"
         android:icon="@drawable/module_mine_logo"
         android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true"
         tools:replace="android:label,android:icon">
 
         <activity android:name=".view.MineActivity"
@@ -36,5 +37,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.victor.lib.common.view.activity.WebActivity"
+            android:launchMode="singleTask"/>
     </application>
 </manifest>
