@@ -3,7 +3,6 @@ package com.victor.cherry
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -11,7 +10,6 @@ import com.victor.cherry.adapter.HomeFragmentAdapter
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.base.BaseFragment
-import com.victor.lib.common.util.AnimUtil
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar

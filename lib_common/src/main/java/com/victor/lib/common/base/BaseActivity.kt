@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -50,11 +51,19 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
 
     fun initializeSuper () {
         DataObservable.instance.addObserver(this)
+
+        //状态栏背景及字体颜色适配
         StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
-        if (StatusBarUtil.hasNavigationBarShow(this)) {
-            window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this))
-        }
+
+        //Android全面屏虚拟导航栏适配
+        StatusBarUtil.adaptationNav(this)
+
         permissionHelper = PermissionHelper.getInstance(this,this)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
     }
 
     fun isPermissionGranted (permissionName: String): Boolean {
