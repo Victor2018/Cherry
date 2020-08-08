@@ -55,8 +55,14 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
         //状态栏背景及字体颜色适配
         StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
 
+        //状态栏背景及字体颜色适配
+        StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
+        if (StatusBarUtil.hasNavigationBarShow(this)) {
+            window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this))
+        }
+
         //Android全面屏虚拟导航栏适配
-        StatusBarUtil.adaptationNav(this)
+//        StatusBarUtil.adaptationNav(this)
 
         permissionHelper = PermissionHelper.getInstance(this,this)
     }
