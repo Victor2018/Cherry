@@ -13,24 +13,22 @@ import com.victor.lib.common.base.AppConfig
  * Description: 日志打印工具
  * -----------------------------------------------------------------
  */
-class Loger {
-    companion object {
-        fun d(TAG: String, msg: Any) {
-            if (AppConfig.MODEL_DEBUG) {
-                Log.d(TAG, msg.toString())
-            }
+object Loger {
+    fun d(TAG: String, msg: Any) {
+        if (AppConfig.MODEL_DEBUG) {
+            Log.d(TAG, msg.toString())
         }
+    }
 
-        fun e(TAG: String, msg: Any) {
-            if (AppConfig.MODEL_DEBUG) {
-                Log.e(TAG, msg.toString())
-            }
+    fun e(TAG: String, msg: Any) {
+        if (AppConfig.MODEL_DEBUG) {
+            Log.e(TAG, msg.toString())
         }
+    }
 
-        fun i(TAG: String, msg: Any) {
-            if (AppConfig.MODEL_DEBUG) {
-                Log.i(TAG, msg.toString())
-            }
+    fun i(TAG: String, msg: Any) {
+        if (AppConfig.MODEL_DEBUG) {
+            Log.i(TAG, msg.toString())
         }
     }
 }
