@@ -26,28 +26,12 @@ import kotlinx.coroutines.withContext
 class GankCategoryDataSource(private val ioDispatcher: CoroutineDispatcher):
     IGankCategoryDataSource {
 
-    private val _gankData = MutableLiveData(GankRes())
-    override val gankData: LiveData<GankRes> = _gankData
-
-    override suspend fun fetchGankData() = withContext(Dispatchers.Main) {
-        _gankData.value = gankDataFetch()
+    override fun fetchGankData(): LiveData<GankRes> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGank())
     }
 
-
-    private val _girlData = MutableLiveData(GankDetailEntity())
-    override val girlData: LiveData<GankDetailEntity> = _girlData
-
-    override suspend fun fetchGirlData() = withContext(Dispatchers.Main) {
-        _girlData.value = girlDataFetch()
-    }
-
-
-    private suspend fun gankDataFetch(): GankRes = withContext(ioDispatcher) {
-        ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGank()
-    }
-
-    private suspend fun girlDataFetch(): GankDetailEntity = withContext(ioDispatcher) {
-        ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGirl()
+    override fun fetchGirlData(): LiveData<GankDetailEntity> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getGirl())
     }
 
 }

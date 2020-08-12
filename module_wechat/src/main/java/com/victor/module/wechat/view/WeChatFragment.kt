@@ -91,8 +91,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
     }
 
     fun initData () {
-        viewmodel.fetchWeChat()
-        viewmodel.weChatDataValue.observe(viewLifecycleOwner, Observer {
+        viewmodel.weChatData.observe(viewLifecycleOwner, Observer {
             it.let {
                 weChatAdapter?.clear()
                 weChatAdapter?.add(it.data)

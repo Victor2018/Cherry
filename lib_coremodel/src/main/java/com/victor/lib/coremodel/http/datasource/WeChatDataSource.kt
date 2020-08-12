@@ -24,14 +24,7 @@ import kotlinx.coroutines.withContext
  * -----------------------------------------------------------------
  */
 class WeChatDataSource(private val ioDispatcher: CoroutineDispatcher): IWeChatDataSource {
-    private val _weChatData = MutableLiveData(WeChatRes())
-    override val weChatData: LiveData<WeChatRes> = _weChatData
-
-    override suspend fun fetchWeChat() = withContext(Dispatchers.Main) {
-        _weChatData.value = weChatDataFetch()
-    }
-
-    private suspend fun weChatDataFetch(): WeChatRes = withContext(ioDispatcher) {
-        ServiceLocator.instance().getRequestApi(RepositoryType.WAN_ANDROID).getWeChat()
+    override fun fetchWeChatData(): LiveData<WeChatRes> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.WAN_ANDROID).getWeChat())
     }
 }

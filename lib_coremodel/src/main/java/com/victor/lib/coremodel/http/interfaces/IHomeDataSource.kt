@@ -17,9 +17,7 @@ import com.victor.lib.coremodel.entity.HotKeyRes
  * -----------------------------------------------------------------
  */
 interface IHomeDataSource {
-    val bannerData:LiveData<BannerRes>
-    suspend fun fetchBannerData()
-
+    fun fetchBannerData(): LiveData<BannerRes>
     val gankDetailData: LiveData<GankDetailEntity>
     suspend fun fetchGankDetail(type: String?,page: Int)
 }

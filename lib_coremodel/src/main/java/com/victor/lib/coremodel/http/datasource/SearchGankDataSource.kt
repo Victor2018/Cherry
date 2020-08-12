@@ -25,22 +25,18 @@ import kotlinx.coroutines.withContext
  */
 class SearchGankDataSource(private val ioDispatcher: CoroutineDispatcher): ISearchGankDataSource {
 
-    private val _hotKeyData = MutableLiveData(HotKeyRes())
-    override val hotKeyData: LiveData<HotKeyRes> = _hotKeyData
-
-    override suspend fun fetchHotKey() = withContext(Dispatchers.Main) {
-        _hotKeyData.value = hotKeyDataFetch()
-    }
-    private val _searchGankData = MutableLiveData(GankDetailEntity())
-    override val searchGankData: LiveData<GankDetailEntity> = _searchGankData
-
-    override suspend fun searchGank(key: String?, page: Int)= withContext(Dispatchers.Main) {
-        _searchGankData.value = gankDataFetch(key,page, NetServiceLocator.NETWORK_PAGE_SIZE)
+    override fun fetchHotKey(): LiveData<HotKeyRes> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.HOT_KEY).getHotKey())
     }
 
+    // Cache of a data point that is exposed to VM
+    override val searchGankData = MutableLiveData(GankDetailEntity())
 
-    private suspend fun hotKeyDataFetch(): HotKeyRes = withContext(ioDispatcher) {
-        ServiceLocator.instance().getRequestApi(RepositoryType.HOT_KEY).getHotKey()
+    override suspend fun searchGank(key: String?, page: Int) {
+        // Force Main thread
+        withContext(Dispatchers.Main) {
+            searchGankData.value = gankDataFetch(key,page, NetServiceLocator.NETWORK_PAGE_SIZE)
+        }
     }
 
     private suspend fun gankDataFetch(key: String?, page: Int, count: Int): GankDetailEntity = withContext(ioDispatcher) {

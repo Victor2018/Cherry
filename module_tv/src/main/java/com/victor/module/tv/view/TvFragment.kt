@@ -106,10 +106,7 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
     }
 
     fun initData () {
-
-        viewmodel.fetchTvData()
-
-        viewmodel.tvDataValue.observe(viewLifecycleOwner, Observer {
+        viewmodel.tvData.observe(viewLifecycleOwner, Observer {
             Loger.e(TAG,"initData-channel_category = " + it.count)
             Loger.e(TAG,"initData-channels = " + it.categorys)
             tvAdapter?.clear()

@@ -107,8 +107,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
 
     fun initData () {
         Loger.e(TAG,"initData......")
-        viewmodel.fetchHotKey()
-        viewmodel.hotKeyDataValue.observe(this, Observer {
+        viewmodel.hotKeyData.observe(this, Observer {
             if (it == null) return@Observer
             if (it.data == null) return@Observer
 

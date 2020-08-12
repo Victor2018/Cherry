@@ -24,11 +24,8 @@ import kotlinx.coroutines.withContext
  */
 class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSource {
 
-    private val _bannerData = MutableLiveData(BannerRes())
-    override val bannerData: LiveData<BannerRes> = _bannerData
-
-    override suspend fun fetchBannerData() = withContext(Dispatchers.Main) {
-        _bannerData.value = bannerDataFetch()
+    override fun fetchBannerData(): LiveData<BannerRes> = liveData {
+        emit(ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getBanner())
     }
 
     // Cache of a data point that is exposed to VM
@@ -44,13 +41,10 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSo
         }
     }
 
-    private suspend fun bannerDataFetch(): BannerRes = withContext(ioDispatcher) {
-        ServiceLocator.instance().getRequestApi(RepositoryType.GANK).getBanner()
-    }
-
     private suspend fun gankDetailDataFetch(type: String?, page: Int, count: Int): GankDetailEntity = withContext(ioDispatcher) {
         ServiceLocator.instance().getRequestApi(RepositoryType.GANK_DETAIL).getGankDetail(type,page,count)
     }
+
 
 
 }

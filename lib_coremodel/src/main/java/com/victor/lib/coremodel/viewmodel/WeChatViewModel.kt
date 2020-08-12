@@ -19,13 +19,8 @@ import kotlinx.coroutines.launch
  */
 class WeChatViewModel(private val dataSource: IWeChatDataSource): ViewModel() {
 
-    val weChatDataValue = dataSource.weChatData
-
-    fun fetchWeChat() {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchWeChat()
-        }
+    val weChatData: LiveData<WeChatRes> = liveData {
+        emitSource(dataSource.fetchWeChatData())
     }
 
     /**

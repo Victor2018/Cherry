@@ -68,14 +68,19 @@ dependencies {
     api deps.okhttp3.core
     api deps.okhttp3.logging
 
+    //room
     kapt deps.room.compiler
-    kapt deps.glide.compiler
-
     api deps.room.runtime
     api deps.room.ktx
-    api deps.paging_runtime
 
+    //glide
+    kapt deps.glide.compiler
     api deps.glide.runtime
+
+    //paging 3
+    api deps.paging_runtime
+    //workmanager
+    api deps.work.runtime
 
     api deps.recyclerview
     api deps.cardview

@@ -15,9 +15,6 @@ import com.victor.lib.coremodel.entity.GankRes
  * -----------------------------------------------------------------
  */
 interface IGankCategoryDataSource {
-    val gankData: LiveData<GankRes>
-    suspend fun fetchGankData()
-
-    val girlData: LiveData<GankDetailEntity>
-    suspend fun fetchGirlData()
+    fun fetchGankData(): LiveData<GankRes>
+    fun fetchGirlData(): LiveData<GankDetailEntity>
 }

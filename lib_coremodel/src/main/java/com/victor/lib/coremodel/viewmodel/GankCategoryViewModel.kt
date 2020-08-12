@@ -19,24 +19,13 @@ import kotlinx.coroutines.launch
  * -----------------------------------------------------------------
  */
 class GankCategoryViewModel(private val dataSource: IGankCategoryDataSource) : ViewModel() {
-    val gankDataValue = dataSource.gankData
-    fun fetchGank() {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchGankData()
-        }
+    val gankData: LiveData<GankRes> = liveData {
+        emitSource(dataSource.fetchGankData())
     }
-
-    val girlDataValue = dataSource.girlData
-    fun fetchGirl() {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchGirlData()
-        }
+    val girlData: LiveData<GankDetailEntity> = liveData {
+        emitSource(dataSource.fetchGirlData())
     }
-
 }
-
 
 /**
  * Factory for [LiveDataViewModel].

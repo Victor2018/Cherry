@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
-import com.victor.lib.coremodel.entity.WeChatInfo
+import com.victor.lib.coremodel.entity.ChannelCategory
 import com.victor.module.tv.R
-import com.victor.module.tv.data.ChannelCategory
 import kotlinx.android.synthetic.main.rv_tv_cell.view.*
 
 /*

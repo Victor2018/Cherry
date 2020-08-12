@@ -1,5 +1,9 @@
 package com.victor.lib.coremodel.entity
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
@@ -10,7 +14,9 @@ package com.victor.lib.coremodel.entity
  * Description: 
  * -----------------------------------------------------------------
  */
-class ChannelCategory {
-    var channel_category: String? = null
-    var channels: List<ChannelInfo>? = null
-}
+@Entity
+data class ChannelCategory (
+    @PrimaryKey val uid: Int,
+    @ColumnInfo(name = "channel_category") var channel_category: String? = null,
+    @ColumnInfo(name = "channels") var channels: List<ChannelInfo>? = null
+)

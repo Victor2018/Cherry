@@ -1,21 +1,17 @@
-package com.victor.module.tv.data
-
-import android.view.Gravity
-
-
-
+package com.victor.lib.coremodel.db
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: ChannelCategory
+ * File: TvDbConfig
  * Author: Victor
- * Date: 2020/7/24 上午 11:26
+ * Date: 2020/8/12 下午 06:28
  * Description: 
  * -----------------------------------------------------------------
  */
-class ChannelCategory {
-    var channel_category: String? = null
-    var channels: List<ChannelInfo>? = null
+
+object TvDbConfig {
+    const val DATABASE_NAME = "cherry-db"
+    const val TV_DATA_FILENAME = "channels.json"
 }

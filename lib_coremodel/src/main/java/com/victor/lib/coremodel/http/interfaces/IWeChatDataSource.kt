@@ -15,6 +15,5 @@ import com.victor.lib.coremodel.entity.WeChatRes
  * -----------------------------------------------------------------
  */
 interface IWeChatDataSource {
-    val weChatData: LiveData<WeChatRes>
-    suspend fun fetchWeChat()
+    fun fetchWeChatData(): LiveData<WeChatRes>
 }

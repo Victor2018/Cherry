@@ -1,5 +1,9 @@
 package com.victor.lib.coremodel.entity
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
@@ -10,14 +14,16 @@ package com.victor.lib.coremodel.entity
  * Description: 
  * -----------------------------------------------------------------
  */
-class ChannelInfo {
-    var _id: Int = 0//唯一标示
-    var category: Int = 0
-    var gravity: Int = 0
-    var channel_name: String? = null
-    var icon: String? = null
-    var epg: String? = null
-    var play_urls: List<ChannelPlayInfo>? = null
-    var current: Long = 0
-    var duration: Long = 0
-}
+@Entity
+data class ChannelInfo (
+    @PrimaryKey val uid: Int,
+    @ColumnInfo(name = "_id") var _id: Int = 0,//唯一标示
+    @ColumnInfo(name = "category") var category: Int = 0,
+    @ColumnInfo(name = "gravity") var gravity: Int = 0,
+    @ColumnInfo(name = "channel_name") var channel_name: String? = null,
+    @ColumnInfo(name = "icon") var icon: String? = null,
+    @ColumnInfo(name = "epg") var epg: String? = null,
+    @ColumnInfo(name = "play_urls") var play_urls: List<ChannelPlayInfo>? = null,
+    @ColumnInfo(name = "current") var current: Long = 0,
+    @ColumnInfo(name = "duration") var duration: Long = 0
+)

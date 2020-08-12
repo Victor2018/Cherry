@@ -17,9 +17,7 @@ import com.victor.lib.coremodel.entity.HotKeyRes
  * -----------------------------------------------------------------
  */
 interface ISearchGankDataSource {
-    val hotKeyData: LiveData<HotKeyRes>
-    suspend fun fetchHotKey()
-
+    fun fetchHotKey(): LiveData<HotKeyRes>
     val searchGankData: LiveData<GankDetailEntity>
     suspend fun searchGank(key: String?,page: Int)
 

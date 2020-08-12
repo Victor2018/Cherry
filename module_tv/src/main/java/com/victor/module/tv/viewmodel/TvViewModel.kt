@@ -1,12 +1,10 @@
 package com.victor.module.tv.viewmodel
 
 import androidx.lifecycle.*
+import com.victor.lib.coremodel.entity.ChannelRes
 import com.victor.module.tv.interfaces.ITVDataSource
-import com.victor.module.tv.data.ChannelCategory
-import com.victor.module.tv.data.ChannelRes
 import com.victor.module.tv.data.TvDataSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /*
  * -----------------------------------------------------------------
@@ -20,13 +18,8 @@ import kotlinx.coroutines.launch
  */
 class TvViewModel(private val dataSource: ITVDataSource) : ViewModel() {
 
-    val tvDataValue = dataSource.tvData
-
-    fun fetchTvData() {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchTvData()
-        }
+    val tvData: LiveData<ChannelRes> = liveData {
+        emitSource(dataSource.fetchTvData())
     }
 }
 

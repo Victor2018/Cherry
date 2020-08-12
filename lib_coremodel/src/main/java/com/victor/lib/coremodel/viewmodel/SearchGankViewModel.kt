@@ -32,12 +32,8 @@ class SearchGankViewModel(private val dataSource: ISearchGankDataSource) : ViewM
         }
     }
 
-    val hotKeyDataValue = dataSource.hotKeyData
-    fun fetchHotKey() {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchHotKey()
-        }
+    val hotKeyData: LiveData<HotKeyRes> = liveData {
+        emitSource(dataSource.fetchHotKey())
     }
 
     /**

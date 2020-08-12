@@ -22,11 +22,10 @@ import kotlinx.coroutines.withContext
  * -----------------------------------------------------------------
  */
 class GirlsDataSource(private val ioDispatcher: CoroutineDispatcher): IGirlsDataSource {
-    private val _girlsData = MutableLiveData(GankDetailEntity())
-    override val girlsData: LiveData<GankDetailEntity> = _girlsData
+    override val girlsData = MutableLiveData(GankDetailEntity())
 
     override suspend fun fetchGirls(page: Int) = withContext(Dispatchers.Main) {
-        _girlsData.value = girlsDataFetch(page,
+        girlsData.value = girlsDataFetch(page,
             NetServiceLocator.NETWORK_PAGE_SIZE
         )
     }
