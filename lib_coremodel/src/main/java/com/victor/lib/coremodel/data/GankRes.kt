@@ -1,16 +1,16 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: ChannelRes
+ * File: GankRes
  * Author: Victor
- * Date: 2020/8/5 上午 11:30
+ * Date: 2020/7/11 下午 03:43
  * Description: 
  * -----------------------------------------------------------------
  */
-class ChannelRes {
-    var count: Int = 0
-    var categorys: List<ChannelCategory>? = null
+class GankRes {
+    var status: Int = 0
+    var data: List<GankInfo>? = null
 }

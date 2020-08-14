@@ -2,17 +2,14 @@ package com.victor.module.home.view.holder
 
 import android.graphics.Typeface
 import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.app.App
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.activity.WebActivity
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 

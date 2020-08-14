@@ -1,7 +1,6 @@
 package com.victor.lib.coremodel.http.repository
 
 import androidx.paging.PagingData
-import com.victor.lib.coremodel.entity.GankDetailInfo
 import kotlinx.coroutines.flow.Flow
 
 /*

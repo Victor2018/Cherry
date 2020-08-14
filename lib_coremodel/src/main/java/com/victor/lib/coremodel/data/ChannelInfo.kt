@@ -1,4 +1,4 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -18,6 +18,7 @@ import androidx.room.PrimaryKey
 data class ChannelInfo (
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "_id") var _id: Int = 0,//唯一标示
+    @ColumnInfo(name = "category_id") var category_id: Int = 0,
     @ColumnInfo(name = "category") var category: Int = 0,
     @ColumnInfo(name = "gravity") var gravity: Int = 0,
     @ColumnInfo(name = "channel_name") var channel_name: String? = null,

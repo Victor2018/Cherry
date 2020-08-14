@@ -1,12 +1,11 @@
 package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.GankDetailEntity
-import com.victor.lib.coremodel.entity.GankRes
+import com.victor.lib.coremodel.data.GankDetailEntity
+import com.victor.lib.coremodel.data.GankRes
 import com.victor.lib.coremodel.http.datasource.GankCategoryDataSource
 import com.victor.lib.coremodel.http.interfaces.IGankCategoryDataSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /*
  * -----------------------------------------------------------------

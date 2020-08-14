@@ -8,11 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.util.ColorUtil
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
-import com.victor.lib.coremodel.entity.GankInfo
-import com.victor.lib.coremodel.entity.WeChatInfo
+import com.victor.lib.coremodel.data.GankInfo
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.rv_gank_category_cell.view.*
-import org.victor.funny.util.ResUtils
 
 /*
  * -----------------------------------------------------------------

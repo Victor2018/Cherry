@@ -1,11 +1,10 @@
 package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.WeChatRes
+import com.victor.lib.coremodel.data.WeChatRes
 import com.victor.lib.coremodel.http.datasource.WeChatDataSource
 import com.victor.lib.coremodel.http.interfaces.IWeChatDataSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 /*
  * -----------------------------------------------------------------

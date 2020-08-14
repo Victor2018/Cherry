@@ -1,17 +1,16 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: ArticleRes
+ * File: ChannelRes
  * Author: Victor
- * Date: 2020/7/23 上午 11:12
+ * Date: 2020/8/5 上午 11:30
  * Description: 
  * -----------------------------------------------------------------
  */
-class ArticleRes {
-    var errorCode: Int = 0
-    var errorMsg: String? = null
-    var data: ArticleData? = null
+class ChannelRes {
+    var count: Int = 0
+    var categorys: List<Category>? = null
 }

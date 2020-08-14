@@ -5,7 +5,7 @@ import android.graphics.Typeface
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.home.view.holder.GankViewHolder
 
 /*

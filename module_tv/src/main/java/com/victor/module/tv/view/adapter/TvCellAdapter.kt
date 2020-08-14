@@ -8,7 +8,7 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
-import com.victor.lib.coremodel.entity.ChannelInfo
+import com.victor.lib.coremodel.data.ChannelInfo
 import com.victor.module.tv.R
 import com.victor.module.tv.view.holder.TvCellContentViewHolder
 import kotlinx.android.synthetic.main.rv_tv_channel_cell.view.*

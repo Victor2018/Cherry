@@ -5,10 +5,9 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.view.activity.WebActivity
-import com.victor.lib.coremodel.entity.ArticleInfo
+import com.victor.lib.coremodel.data.ArticleInfo
 import com.victor.module.wechat.R
 import kotlinx.android.synthetic.main.rv_article_cell.view.*
 

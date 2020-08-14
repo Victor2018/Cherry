@@ -18,7 +18,7 @@ import com.victor.lib.common.util.DensityUtil
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.view.widget.kenburnsview.KenBurnsView
-import com.victor.lib.coremodel.entity.BannerInfo
+import com.victor.lib.coremodel.data.BannerInfo
 
 /*
  * -----------------------------------------------------------------

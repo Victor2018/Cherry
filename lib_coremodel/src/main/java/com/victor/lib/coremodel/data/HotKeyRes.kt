@@ -1,4 +1,4 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------

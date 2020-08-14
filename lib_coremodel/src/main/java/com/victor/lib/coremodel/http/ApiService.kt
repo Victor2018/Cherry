@@ -1,7 +1,7 @@
 package com.victor.lib.coremodel.http
 
 import android.util.Log
-import com.victor.lib.coremodel.entity.*
+import com.victor.lib.coremodel.data.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 

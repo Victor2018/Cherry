@@ -1,17 +1,19 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: BannerInfo
+ * File: GankDetailEntity
  * Author: Victor
- * Date: 2020/7/25 下午 02:18
+ * Date: 2020/7/6 下午 07:29
  * Description: 
  * -----------------------------------------------------------------
  */
-class BannerInfo {
-    var image: String? = null
-    var title: String? = null
-    var url: String? = null
-}
+data class GankDetailEntity (
+    val status: Int = 0,
+    val page: Int = 0,
+    val page_count: Int = 0,
+    val total_counts: Int = 0,
+    val data: List<GankDetailInfo>? = null
+)

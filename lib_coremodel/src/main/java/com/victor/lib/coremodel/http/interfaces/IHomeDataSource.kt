@@ -1,10 +1,8 @@
 package com.victor.lib.coremodel.http.interfaces
 
 import androidx.lifecycle.LiveData
-import com.victor.lib.coremodel.entity.BannerRes
-import com.victor.lib.coremodel.entity.GankDetailEntity
-import com.victor.lib.coremodel.entity.GankRes
-import com.victor.lib.coremodel.entity.HotKeyRes
+import com.victor.lib.coremodel.data.BannerRes
+import com.victor.lib.coremodel.data.GankDetailEntity
 
 /*
  * -----------------------------------------------------------------

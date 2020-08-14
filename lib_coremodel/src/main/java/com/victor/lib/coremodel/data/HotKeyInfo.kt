@@ -1,21 +1,25 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
+
+import com.yalantis.filter.model.FilterModel
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: WeChatInfo
+ * File: HotKeyInfo
  * Author: Victor
- * Date: 2020/7/22 上午 10:43
+ * Date: 2020/7/29 下午 03:53
  * Description: 
  * -----------------------------------------------------------------
  */
-class WeChatInfo {
+class HotKeyInfo: FilterModel {
     var id: Int = 0
-    var courseId: Int = 0
     var order: Int = 0
-    var parentChapterId: Int = 0
     var visible: Int = 0
-    var userControlSetTop: Boolean = false
+    var link: String? = null
     var name: String? = null
+    override fun getText(): String {
+        return name!!
+    }
+
 }

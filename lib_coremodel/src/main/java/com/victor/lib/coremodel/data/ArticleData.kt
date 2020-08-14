@@ -1,16 +1,22 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankRes
+ * File: ArticleData
  * Author: Victor
- * Date: 2020/7/11 下午 03:43
+ * Date: 2020/7/23 上午 11:14
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankRes {
-    var status: Int = 0
-    var data: List<GankInfo>? = null
+class ArticleData {
+    var curPage: Int = 0
+    var pageCount: Int = 0
+    var size: Int = 0
+    var total: Int = 0
+    var offset: Int = 0
+    var over: Boolean = false
+    var datas: List<ArticleInfo>? = null
+
 }

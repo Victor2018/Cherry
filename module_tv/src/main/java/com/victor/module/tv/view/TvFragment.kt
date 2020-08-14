@@ -19,6 +19,7 @@ import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.*
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.module.tv.R
 import com.victor.module.tv.databinding.FragmentTvBinding
 import com.victor.module.tv.view.adapter.TvAdapter
@@ -40,6 +41,10 @@ import kotlinx.android.synthetic.main.fragment_tv.*
 @Route(path = ARouterPath.TvFgt)
 class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.OnMainHandlerImpl,
     View.OnClickListener {
+
+    private val tvViewModel: com.victor.lib.coremodel.viewmodel.TvViewModel by viewModels {
+        InjectorUtils.provideTvViewModelFactory(this)
+    }
 
     private val viewmodel: TvViewModel by viewModels { LiveDataVMFactory }
     var tvAdapter: TvAdapter? = null
@@ -94,6 +99,7 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
 
         // Bind ViewModel
         binding?.viewmodel = viewmodel
+//        binding?.viewmodel = tvViewModel
 
         tvAdapter = TvAdapter(activity!!,this)
         mRvChannels.setHasFixedSize(true)
@@ -118,6 +124,16 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
             get(0)?.play_urls?.get(0)?.play_url,false)
 
         })
+        /*tvViewModel.categories.observe(viewLifecycleOwner, Observer {
+            tvAdapter?.clear()
+            tvAdapter?.add(it)
+            tvAdapter?.notifyDataSetChanged()
+
+            mCtlTvTitle.title = tvAdapter?.getItem(0)?.channels?.get(0)?.channel_name
+            mPlayer?.playUrl(tvAdapter?.getItem(0)?.channels?.
+            get(0)?.play_urls?.get(0)?.play_url,false)
+
+        })*/
 
     }
 

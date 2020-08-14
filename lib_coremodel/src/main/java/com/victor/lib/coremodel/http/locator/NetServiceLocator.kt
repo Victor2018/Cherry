@@ -1,7 +1,7 @@
 package com.victor.lib.coremodel.http.locator
 
 import androidx.paging.PagingConfig
-import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
 import com.victor.lib.coremodel.http.repository.*
 

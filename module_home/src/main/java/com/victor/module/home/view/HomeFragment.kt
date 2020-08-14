@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -24,7 +23,7 @@ import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.common.view.widget.banner.BannerViewFlipper
 import com.victor.lib.common.view.widget.banner.DescriptionViewSwitcherFactory
-import com.victor.lib.coremodel.entity.GankInfo
+import com.victor.lib.coremodel.data.GankInfo
 import com.victor.lib.coremodel.viewmodel.HomeLiveDataVMFactory
 import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.module.home.R

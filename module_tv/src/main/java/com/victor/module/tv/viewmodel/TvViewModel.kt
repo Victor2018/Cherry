@@ -1,7 +1,7 @@
 package com.victor.module.tv.viewmodel
 
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.ChannelRes
+import com.victor.lib.coremodel.data.ChannelRes
 import com.victor.module.tv.interfaces.ITVDataSource
 import com.victor.module.tv.data.TvDataSource
 import kotlinx.coroutines.Dispatchers

@@ -1,17 +1,13 @@
 package com.victor.lib.coremodel.http.datasource
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import com.victor.lib.coremodel.entity.GankDetailEntity
-import com.victor.lib.coremodel.entity.GankRes
-import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.data.GankDetailEntity
+import com.victor.lib.coremodel.data.GankRes
+import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.interfaces.IGankCategoryDataSource
-import com.victor.lib.coremodel.http.locator.NetServiceLocator
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /*
  * -----------------------------------------------------------------

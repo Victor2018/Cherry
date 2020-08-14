@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.app.App
 import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.mine.R
 
 /*

@@ -1,11 +1,7 @@
 package com.victor.lib.common.util
 
-import android.os.Bundle
-import android.os.Parcelable
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.lib.common.base.ARouterPath
-import com.victor.lib.coremodel.entity.GankDetailInfo
-import java.io.Serializable
 
 /*
  * -----------------------------------------------------------------

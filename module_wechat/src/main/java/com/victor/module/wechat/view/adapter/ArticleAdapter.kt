@@ -5,8 +5,7 @@ import android.graphics.Typeface
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.victor.lib.coremodel.entity.ArticleInfo
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.ArticleInfo
 import com.victor.module.wechat.view.holder.ArticleViewHolder
 
 /*

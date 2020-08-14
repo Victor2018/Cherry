@@ -1,14 +1,9 @@
 package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.HotKeyRes
-import com.victor.lib.coremodel.entity.RepositoryType
-import com.victor.lib.coremodel.http.datasource.GirlsDataSource
+import com.victor.lib.coremodel.data.HotKeyRes
 import com.victor.lib.coremodel.http.datasource.SearchGankDataSource
-import com.victor.lib.coremodel.http.interfaces.IGirlsDataSource
 import com.victor.lib.coremodel.http.interfaces.ISearchGankDataSource
-import com.victor.lib.coremodel.http.locator.ServiceLocator
-import com.victor.lib.coremodel.http.repository.IRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

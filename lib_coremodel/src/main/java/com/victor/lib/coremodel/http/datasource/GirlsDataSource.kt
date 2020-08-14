@@ -1,9 +1,8 @@
 package com.victor.lib.coremodel.http.datasource
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.victor.lib.coremodel.entity.GankDetailEntity
-import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.data.GankDetailEntity
+import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.interfaces.IGirlsDataSource
 import com.victor.lib.coremodel.http.locator.NetServiceLocator
 import com.victor.lib.coremodel.http.locator.ServiceLocator

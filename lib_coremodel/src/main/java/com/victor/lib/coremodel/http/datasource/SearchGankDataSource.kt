@@ -3,14 +3,12 @@ package com.victor.lib.coremodel.http.datasource
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import com.victor.lib.coremodel.entity.*
-import com.victor.lib.coremodel.http.interfaces.IHomeDataSource
+import com.victor.lib.coremodel.data.*
 import com.victor.lib.coremodel.http.interfaces.ISearchGankDataSource
 import com.victor.lib.coremodel.http.locator.NetServiceLocator
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 /*

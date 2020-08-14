@@ -109,7 +109,7 @@
 
 # 实体类不混淆（fastjson会解析失败）
 -keep class com.victor.lib.common.entity.** { *; }
--keep class com.victor.lib.coremodel.entity.** { *; }
+-keep class com.victor.lib.coremodel.data.** { *; }
 -keep class com.victor.module.tv.data.** { *; }
 
 # 播放器

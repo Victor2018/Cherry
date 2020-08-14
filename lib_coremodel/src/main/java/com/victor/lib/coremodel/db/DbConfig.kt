@@ -1,21 +1,17 @@
-package com.victor.lib.coremodel.entity
-
-import java.io.Serializable
+package com.victor.lib.coremodel.db
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankInfo
+ * File: TvDbConfig
  * Author: Victor
- * Date: 2020/7/11 下午 03:44
+ * Date: 2020/8/12 下午 06:28
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankInfo: Serializable {
-    var _id: String? = null
-    var coverImageUrl: String? = null
-    var desc: String? = null
-    var title: String? = null
-    var type: String? = null
+
+object DbConfig {
+    const val DATABASE_NAME = "cherry-db"
+    const val TV_DATA_FILENAME = "channels.json"
 }

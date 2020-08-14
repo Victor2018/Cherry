@@ -1,18 +1,15 @@
-package com.victor.lib.coremodel.http.interfaces
-
-import androidx.lifecycle.LiveData
-import com.victor.lib.coremodel.data.WeChatRes
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: IWeChatDataSource
+ * File: ChannelPlayInfo
  * Author: Victor
- * Date: 2020/8/5 上午 11:47
+ * Date: 2020/8/5 上午 11:30
  * Description: 
  * -----------------------------------------------------------------
  */
-interface IWeChatDataSource {
-    fun fetchWeChatData(): LiveData<WeChatRes>
+class ChannelPlayInfo {
+    var play_url: String? = null
 }

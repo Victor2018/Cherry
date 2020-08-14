@@ -3,7 +3,7 @@ package com.victor.module.mine.view.adapter
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.mine.view.holder.GankGirlViewHolder
 
 /*

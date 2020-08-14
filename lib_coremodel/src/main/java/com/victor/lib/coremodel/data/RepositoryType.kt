@@ -1,17 +1,21 @@
-package com.victor.lib.coremodel.db
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: TvDbConfig
+ * File: RepositoryType
  * Author: Victor
- * Date: 2020/8/12 下午 06:28
+ * Date: 2020/7/14 下午 06:01
  * Description: 
  * -----------------------------------------------------------------
  */
-
-object TvDbConfig {
-    const val DATABASE_NAME = "cherry-db"
-    const val TV_DATA_FILENAME = "channels.json"
+enum class RepositoryType {
+    GANK,
+    GANK_GIRL,
+    GANK_DETAIL,
+    WAN_ANDROID,
+    ARTICLE,
+    HOT_KEY,
+    SEARCH_GANK
 }

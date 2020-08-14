@@ -1,15 +1,11 @@
 package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.*
-import com.victor.lib.coremodel.entity.BannerRes
-import com.victor.lib.coremodel.entity.GankRes
-import com.victor.lib.coremodel.entity.HotKeyRes
+import com.victor.lib.coremodel.data.BannerRes
 import com.victor.lib.coremodel.http.datasource.HomeDataSource
 import com.victor.lib.coremodel.http.interfaces.IHomeDataSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.*
 
 /*
  * -----------------------------------------------------------------

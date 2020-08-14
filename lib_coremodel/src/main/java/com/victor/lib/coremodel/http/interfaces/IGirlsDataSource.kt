@@ -1,7 +1,7 @@
 package com.victor.lib.coremodel.http.interfaces
 
 import androidx.lifecycle.LiveData
-import com.victor.lib.coremodel.entity.GankDetailEntity
+import com.victor.lib.coremodel.data.GankDetailEntity
 
 /*
  * -----------------------------------------------------------------

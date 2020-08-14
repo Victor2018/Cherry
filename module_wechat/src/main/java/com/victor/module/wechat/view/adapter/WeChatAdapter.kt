@@ -7,7 +7,7 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
-import com.victor.lib.coremodel.entity.WeChatInfo
+import com.victor.lib.coremodel.data.WeChatInfo
 import com.victor.module.wechat.R
 import kotlinx.android.synthetic.main.rv_wechat_cell.view.*
 

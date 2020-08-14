@@ -6,13 +6,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.app.App
 import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.girls.R
-import com.victor.module.girls.view.GirlsDetailActivity
 
 /*
  * -----------------------------------------------------------------

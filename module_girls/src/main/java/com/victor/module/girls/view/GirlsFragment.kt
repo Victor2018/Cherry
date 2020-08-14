@@ -14,9 +14,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.Loger
 import com.victor.lib.common.view.widget.LMRecyclerView
-import com.victor.lib.coremodel.entity.GankDetailInfo
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.viewmodel.GirlsLiveDataVMFactory
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R

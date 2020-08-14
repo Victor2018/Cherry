@@ -5,7 +5,6 @@ import com.victor.lib.coremodel.http.ApiService
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.victor.lib.coremodel.entity.GankDetailInfo
 import retrofit2.HttpException
 import java.io.IOException
 

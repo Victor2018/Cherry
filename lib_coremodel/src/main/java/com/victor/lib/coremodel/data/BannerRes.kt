@@ -1,22 +1,16 @@
-package com.victor.lib.coremodel.entity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: ArticleData
+ * File: BannerRes
  * Author: Victor
- * Date: 2020/7/23 上午 11:14
+ * Date: 2020/7/25 下午 02:17
  * Description: 
  * -----------------------------------------------------------------
  */
-class ArticleData {
-    var curPage: Int = 0
-    var pageCount: Int = 0
-    var size: Int = 0
-    var total: Int = 0
-    var offset: Int = 0
-    var over: Boolean = false
-    var datas: List<ArticleInfo>? = null
-
+class BannerRes {
+    var status: Int = 0;
+    var data : ArrayList<BannerInfo>? = null
 }

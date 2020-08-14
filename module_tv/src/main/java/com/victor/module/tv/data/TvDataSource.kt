@@ -1,18 +1,12 @@
 package com.victor.module.tv.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.victor.lib.common.util.AssetsJsonReaderUtil
 import com.victor.lib.common.util.JsonUtils
-import com.victor.lib.coremodel.entity.ChannelRes
-import com.victor.lib.coremodel.entity.GankDetailEntity
-import com.victor.lib.coremodel.entity.RepositoryType
-import com.victor.lib.coremodel.http.locator.NetServiceLocator
-import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.data.ChannelRes
 import com.victor.module.tv.interfaces.ITVDataSource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /*

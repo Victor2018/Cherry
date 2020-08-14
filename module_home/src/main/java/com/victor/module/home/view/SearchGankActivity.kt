@@ -21,7 +21,7 @@ import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
-import com.victor.lib.coremodel.entity.HotKeyInfo
+import com.victor.lib.coremodel.data.HotKeyInfo
 import com.victor.lib.coremodel.viewmodel.SearchGankViewModel
 import com.victor.lib.coremodel.viewmodel.SearchGankViewModel.SearchGankLiveDataVMFactory
 import com.victor.module.home.R

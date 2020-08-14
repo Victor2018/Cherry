@@ -16,12 +16,10 @@ import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.NavigationUtils
-import com.victor.lib.coremodel.entity.ArticleInfo
-import com.victor.lib.coremodel.entity.GankDetailInfo
-import com.victor.lib.coremodel.entity.RepositoryType
+import com.victor.lib.coremodel.data.ArticleInfo
+import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.viewmodel.ArticleViewModel
-import com.victor.lib.coremodel.viewmodel.GankViewModel
 import com.victor.module.wechat.R
 import com.victor.module.wechat.view.adapter.ArticleAdapter
 import com.victor.module.wechat.view.adapter.ArticleLoadStateAdapter

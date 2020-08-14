@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
-import com.victor.lib.coremodel.entity.ChannelCategory
+import com.victor.lib.coremodel.data.Category
 import com.victor.module.tv.R
 import kotlinx.android.synthetic.main.rv_tv_cell.view.*
 
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.rv_tv_cell.view.*
  * -----------------------------------------------------------------
  */
 class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
-    BaseRecycleAdapter<ChannelCategory, RecyclerView.ViewHolder>(context, listener) {
+    BaseRecycleAdapter<Category, RecyclerView.ViewHolder>(context, listener) {
     var fontStyle: Typeface? = null
     init {
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
@@ -34,14 +34,14 @@ class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelCategory, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: Category, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_tv_cell ,parent, false))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelCategory, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: Category, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
 
         contentViewHolder.itemView.mTvCategoryTitle.typeface = fontStyle
