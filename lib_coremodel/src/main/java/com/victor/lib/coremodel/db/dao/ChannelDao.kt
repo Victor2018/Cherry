@@ -18,7 +18,7 @@ import com.victor.lib.coremodel.data.ChannelInfo
 @Dao
 interface ChannelDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg datas: List<ChannelInfo>)
+    suspend fun insertAll(datas: List<ChannelInfo>)
 
     @Delete
     fun delete(data: ChannelInfo)

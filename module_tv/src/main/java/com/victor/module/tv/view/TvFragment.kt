@@ -14,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.workers.SeedDatabaseWorker
 import com.victor.module.tv.R
 import com.victor.module.tv.databinding.FragmentTvBinding
 import com.victor.module.tv.view.adapter.TvAdapter
@@ -98,7 +101,7 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
         binding?.lifecycleOwner = this
 
         // Bind ViewModel
-        binding?.viewmodel = viewmodel
+//        binding?.viewmodel = viewmodel
 //        binding?.viewmodel = tvViewModel
 
         tvAdapter = TvAdapter(activity!!,this)
@@ -112,34 +115,22 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
     }
 
     fun initData () {
-        viewmodel.tvData.observe(viewLifecycleOwner, Observer {
-            Loger.e(TAG,"initData-channel_category = " + it.count)
-            Loger.e(TAG,"initData-channels = " + it.categorys)
-            tvAdapter?.clear()
-            tvAdapter?.add(it.categorys)
-            tvAdapter?.notifyDataSetChanged()
-
-            mCtlTvTitle.title = tvAdapter?.getItem(0)?.channels?.get(0)?.channel_name
-            mPlayer?.playUrl(tvAdapter?.getItem(0)?.channels?.
-            get(0)?.play_urls?.get(0)?.play_url,false)
-
-        })
-        /*tvViewModel.categories.observe(viewLifecycleOwner, Observer {
+        tvViewModel.categories.observe(viewLifecycleOwner, Observer {
             tvAdapter?.clear()
             tvAdapter?.add(it)
             tvAdapter?.notifyDataSetChanged()
 
-            mCtlTvTitle.title = tvAdapter?.getItem(0)?.channels?.get(0)?.channel_name
-            mPlayer?.playUrl(tvAdapter?.getItem(0)?.channels?.
+            mCtlTvTitle.title = tvAdapter?.getItem(0)?.categoryChannels?.get(0)?.channel_name
+            mPlayer?.playUrl(tvAdapter?.getItem(0)?.categoryChannels?.
             get(0)?.play_urls?.get(0)?.play_url,false)
 
-        })*/
+        })
 
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        mCtlTvTitle.title = tvAdapter?.getItem(id.toInt())?.channels?.get(position)?.channel_name
-        mPlayer?.playUrl(tvAdapter?.getItem(id.toInt())?.channels?.
+        mCtlTvTitle.title = tvAdapter?.getItem(id.toInt())?.categoryChannels?.get(position)?.channel_name
+        mPlayer?.playUrl(tvAdapter?.getItem(id.toInt())?.categoryChannels?.
         get(position)?.play_urls?.get(0)?.play_url,false)
     }
 

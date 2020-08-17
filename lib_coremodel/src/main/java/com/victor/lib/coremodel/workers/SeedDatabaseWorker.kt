@@ -10,6 +10,7 @@ import com.google.gson.stream.JsonReader
 import com.victor.lib.coremodel.db.AppDatabase
 import com.victor.lib.coremodel.db.DbConfig.TV_DATA_FILENAME
 import com.victor.lib.coremodel.data.Category
+import com.victor.lib.coremodel.data.ChannelRes
 import kotlinx.coroutines.coroutineScope
 
 /*
@@ -31,11 +32,18 @@ class SeedDatabaseWorker(
         try {
             applicationContext.assets.open(TV_DATA_FILENAME).use { inputStream ->
                 JsonReader(inputStream.reader()).use { jsonReader ->
-                    val plantType = object : TypeToken<List<Category>>() {}.type
-                    val plantList: List<Category> = Gson().fromJson(jsonReader, plantType)
+
+                    val channelType = object : TypeToken<ChannelRes>() {}.type
+
+                    val channelRes: ChannelRes = Gson().fromJson(jsonReader, channelType)
+
 
                     val database = AppDatabase.getInstance(applicationContext)
-                    database.channelCategoryDao().insertAll(plantList)
+                    database.channelCategoryDao().insertAll(channelRes.categorys!!)
+
+                    for (category in channelRes.categorys!!) {
+                        database.channelDao().insertAll(category.channels!!)
+                    }
 
                     Result.success()
                 }

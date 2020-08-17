@@ -1,8 +1,7 @@
 package com.victor.lib.coremodel.data
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.victor.lib.coremodel.db.PlayUrlConverters
 
 /*
  * -----------------------------------------------------------------
@@ -14,10 +13,13 @@ import androidx.room.PrimaryKey
  * Description: 
  * -----------------------------------------------------------------
  */
-@Entity
+@Entity(tableName = "channelinfo",
+    foreignKeys = [
+        ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["category_id"])
+    ],
+    indices = [Index("category_id")])
+@TypeConverters(PlayUrlConverters::class)
 data class ChannelInfo (
-    @PrimaryKey val uid: Int,
-    @ColumnInfo(name = "_id") var _id: Int = 0,//唯一标示
     @ColumnInfo(name = "category_id") var category_id: Int = 0,
     @ColumnInfo(name = "category") var category: Int = 0,
     @ColumnInfo(name = "gravity") var gravity: Int = 0,
@@ -27,4 +29,8 @@ data class ChannelInfo (
     @ColumnInfo(name = "play_urls") var play_urls: List<ChannelPlayInfo>? = null,
     @ColumnInfo(name = "current") var current: Long = 0,
     @ColumnInfo(name = "duration") var duration: Long = 0
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "channelId")
+    var channelId: Int = 0
+}

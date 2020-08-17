@@ -38,22 +38,22 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    api deps.kotlin.stdlib
-    api deps.basic.app_compat
-    api deps.basic.constraint_layout
+    api deps.kotlin.stdlib//
+    api deps.basic.app_compat//
+    api deps.basic.constraint_layout//
     api deps.basic.material
     api deps.basic.recyclerview
     api deps.basic.cardview
 
-    testApi deps.basic.junit
-    testApi deps.arch_core.testing
+    testApi deps.basic.junit//
+//    testApi deps.arch_core.testing
 
     androidTestApi deps.atsl.runner
     androidTestApi deps.atsl.rules
-    androidTestApi deps.atsl.ext_junit
-    androidTestApi deps.espresso.core
+    androidTestApi deps.atsl.ext_junit//
+    androidTestApi deps.espresso.core//
     androidTestApi deps.espresso.contrib
-    androidTestApi deps.arch_core.testing
+//    androidTestApi deps.arch_core.testing
 
     //lifecycle
     api deps.lifecycle.runtime
@@ -61,7 +61,7 @@ dependencies {
     api deps.lifecycle.livedata_ktx
 
     //ktx
-    api deps.ktx.core
+    api deps.ktx.core//
     api deps.ktx.activity
     api deps.ktx.fragment
 
@@ -73,11 +73,6 @@ dependencies {
     api deps.retrofit.retrofit_converter_gson
     api deps.okhttp3.core
     api deps.okhttp3.logging
-
-    //room
-    kapt deps.room.compiler
-    api deps.room.runtime
-    api deps.room.ktx
 
     //glide
     kapt deps.glide.compiler

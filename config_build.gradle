@@ -101,8 +101,8 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
-
     //支持@Parcelize来实现Parcelable序列化
     androidExtensions {
         experimental = true
@@ -122,6 +122,12 @@ def getProperty() {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+    //Arouter
     implementation deps.arouter.runtime
     kapt deps.arouter.compiler
+
+    //room
+    kapt deps.room.compiler
+    implementation deps.room.runtime
+    implementation deps.room.ktx
 }

@@ -19,7 +19,7 @@ import com.victor.lib.coremodel.db.entity.CategoryInfo
 @Dao
 interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg datas: List<Category>)
+    suspend fun insertAll(datas: List<Category>)
 
     @Delete
     fun delete(data: Category)

@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.victor.lib.coremodel.dao.ChannelDao
 import com.victor.lib.coremodel.db.DbConfig.DATABASE_NAME
 import com.victor.lib.coremodel.data.Category
+import com.victor.lib.coremodel.data.ChannelInfo
 import com.victor.lib.coremodel.db.dao.CategoryDao
 import com.victor.lib.coremodel.workers.SeedDatabaseWorker
 
@@ -23,9 +26,11 @@ import com.victor.lib.coremodel.workers.SeedDatabaseWorker
  * -----------------------------------------------------------------
  */
 
-@Database(entities = arrayOf(Category::class), version = 1)
+@Database(entities = arrayOf(Category::class,ChannelInfo::class), version = 1, exportSchema = false)
+@TypeConverters(DateConverters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun channelCategoryDao(): CategoryDao
+    abstract fun channelDao(): ChannelDao
 
     companion object {
         // For Singleton instantiation

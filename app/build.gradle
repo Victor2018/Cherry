@@ -213,6 +213,7 @@ build {
 
 
 dependencies {
+
     if (isModule.toBoolean()) {
         implementation project(':lib_common')
         implementation project(':lib_coremodel')
