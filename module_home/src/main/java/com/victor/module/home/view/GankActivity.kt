@@ -54,7 +54,8 @@ class GankActivity: BaseActivity() {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
-                return GankViewModel(type!!,ServiceLocator.instance().getRepository(RepositoryType.GANK_DETAIL)) as T
+                return GankViewModel(type!!,
+                    ServiceLocator.instance().getRepository(RepositoryType.GANK_DETAIL,this@GankActivity)) as T
             }
         }
     }

@@ -16,13 +16,13 @@ import kotlinx.android.synthetic.main.rv_girls_cell.view.*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankGirlAdapter
+ * File: GirlsViewAdapter
  * Author: Victor
  * Date: 2020/7/8 下午 05:24
  * Description: A simple adapter implementation that shows Reddit posts.
  * -----------------------------------------------------------------
  */
-class GankGirlAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
+class GirlsViewAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
     BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener) {
     var fontStyle: Typeface? = null
     init {
@@ -36,7 +36,7 @@ class GankGirlAdapter(context: Context, listener: AdapterView.OnItemClickListene
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_girls_cell ,parent, false))
+        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_girls_view_cell ,parent, false))
     }
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {

@@ -13,6 +13,7 @@ import com.victor.lib.coremodel.db.PlayUrlConverters
  * Description: 
  * -----------------------------------------------------------------
  */
+
 @Entity(tableName = "channelinfo",
     foreignKeys = [
         ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["category_id"])

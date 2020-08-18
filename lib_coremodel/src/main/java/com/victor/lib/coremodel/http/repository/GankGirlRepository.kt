@@ -2,6 +2,7 @@ package com.victor.lib.coremodel.http.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.victor.lib.coremodel.db.AppDatabase
 import com.victor.lib.coremodel.http.ApiService
 import com.victor.lib.coremodel.http.datasource.GankGirlPagingSource
 
@@ -16,13 +17,15 @@ import com.victor.lib.coremodel.http.datasource.GankGirlPagingSource
  * -----------------------------------------------------------------
  */
 class GankGirlRepository (
-    val pageConfig: PagingConfig,
-    private val requestApi: ApiService) : IRepository {
+    private val pageConfig: PagingConfig,
+    private val requestApi: ApiService,
+    private val db: AppDatabase) : IRepository {
     override fun postsOfSubreddit(type: String,pageSize: Int) = Pager(
         config = pageConfig
     ) {
         GankGirlPagingSource(
-            requestApi = requestApi
+            requestApi = requestApi,
+            db = db
         )
     }.flow
 

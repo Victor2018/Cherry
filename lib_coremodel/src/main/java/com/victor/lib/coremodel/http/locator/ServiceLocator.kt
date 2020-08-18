@@ -1,6 +1,8 @@
 package com.victor.lib.coremodel.http.locator
 
+import android.content.Context
 import androidx.annotation.VisibleForTesting
+import androidx.paging.PagingConfig
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.ApiService
 import com.victor.lib.coremodel.http.repository.IRepository
@@ -18,6 +20,8 @@ import com.victor.lib.coremodel.http.repository.IRepository
  */
 interface ServiceLocator {
     companion object {
+        const val NETWORK_PAGE_SIZE = 30
+
         private val LOCK = Any()
         private var instance: ServiceLocator? = null
         fun instance(): ServiceLocator {
@@ -36,12 +40,16 @@ interface ServiceLocator {
         fun swap(locator: ServiceLocator) {
             instance = locator
         }
+
     }
 
 
 
-    fun getRepository(type: RepositoryType): IRepository
+    fun getRepository(type: RepositoryType,context: Context): IRepository
 
     fun getRequestApi(type: RepositoryType): ApiService
+
+    fun getPagingConfigs() :PagingConfig
+
 
 }

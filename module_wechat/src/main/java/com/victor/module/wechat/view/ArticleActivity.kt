@@ -55,7 +55,8 @@ class ArticleActivity: BaseActivity() {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
-                return ArticleViewModel(id!!, ServiceLocator.instance().getRepository(RepositoryType.ARTICLE)) as T
+                return ArticleViewModel(id!!,
+                    ServiceLocator.instance().getRepository(RepositoryType.ARTICLE,this@ArticleActivity)) as T
             }
         }
     }

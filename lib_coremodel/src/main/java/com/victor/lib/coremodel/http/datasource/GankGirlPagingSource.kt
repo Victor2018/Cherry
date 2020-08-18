@@ -1,10 +1,13 @@
 package com.victor.lib.coremodel.http.datasource
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import com.victor.lib.coremodel.http.ApiService
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import androidx.room.withTransaction
+import com.victor.lib.coremodel.db.AppDatabase
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -21,17 +24,27 @@ import java.io.IOException
  * -----------------------------------------------------------------
  */
 class GankGirlPagingSource (
-    private val requestApi: ApiService
+    private val requestApi: ApiService,
+    private val db: AppDatabase
 ) : PagingSource<Int, Any>() {
+    val TAG = "GankGirlPagingSource"
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         return try {
             val items = requestApi.getFuliList(page = params.key ?: 0,count = params.loadSize)
+
+            db.withTransaction {
+                if (items.page == 1) {
+                    db.girlsDao().clearAll()
+                }
+                db.girlsDao().insertAll(items.data!!)
+            }
 
             LoadResult.Page(
                 data = items.data!!,
                 prevKey = if (items.page == 1) null else items.page - 1,
                 nextKey = if (items.page == items.page_count) null else items.page + 1
             )
+
 
         } catch (e: IOException) {
             LoadResult.Error(e)

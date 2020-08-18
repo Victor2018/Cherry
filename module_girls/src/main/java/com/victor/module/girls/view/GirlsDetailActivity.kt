@@ -1,6 +1,7 @@
 package com.victor.module.girls.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
@@ -9,18 +10,26 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.clips.util.AppUtil
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.GankDetailInfo
+import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.viewmodel.LocalGirlsViewModel
 import com.victor.module.girls.R
+import com.victor.module.girls.databinding.ActivityGirlsDetailBinding
 import com.victor.module.girls.view.adapter.GirlDetailAdapter
+import com.victor.module.girls.view.adapter.GirlsViewAdapter
 import kotlinx.android.synthetic.main.activity_girls_detail.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,11 +49,16 @@ import kotlin.collections.ArrayList
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.GirlsDetailAct)
-class GirlsDetailActivity: BaseActivity() {
+class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener {
     var girlDetailAdapter: GirlDetailAdapter? = null
-    var gankDetailList: ArrayList<GankDetailInfo>? = null
+    var gankDetailList: ArrayList<GankDetailInfo>? = ArrayList()
     var position: Int? = 0
+
     var mWallpaperManager: WallpaperManager? = null
+
+    private val localGirlsViewModel: LocalGirlsViewModel by viewModels {
+        InjectorUtils.provideLocalGirlsViewModelFactory(this)
+    }
 
     companion object {
         open fun intentStart(ctx: Context?) {
@@ -62,11 +76,10 @@ class GirlsDetailActivity: BaseActivity() {
             intent.putExtra(NavigationUtils.GANK_DATA_KEY, data)
             ctx.startActivity(intent)
         }
-        fun  intentStart (activity: AppCompatActivity, datas: ArrayList<GankDetailInfo>,position: Int,
+        fun  intentStart (activity: AppCompatActivity,position: Int,
                           sharedElement: View?,sharedElementName: String) {
 
             var intent = Intent(activity, GirlsDetailActivity::class.java)
-            intent.putExtra(NavigationUtils.GANK_DATA_KEY, datas)
             intent.putExtra(NavigationUtils.POSITION_KEY, position)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 activity,sharedElement!!, sharedElementName)
@@ -80,8 +93,9 @@ class GirlsDetailActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initData(intent)
+        initArgs(intent)
         initialize()
+        initLocalGirlsData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -134,24 +148,38 @@ class GirlsDetailActivity: BaseActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        initData(intent)
+        initArgs(intent)
         initialize()
+        initLocalGirlsData()
     }
 
     fun initialize () {
+        val binding = viewDataBinding as ActivityGirlsDetailBinding
+
+        // Set the LifecycleOwner to be able to observe LiveData objects
+        binding?.lifecycleOwner = this
+
+        // Bind ViewModel
+        binding?.viewmodel = localGirlsViewModel
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mWallpaperManager = WallpaperManager.getInstance(this);
+
         girlDetailAdapter = GirlDetailAdapter(this,gankDetailList!!)
         mVpGirls.adapter = girlDetailAdapter
-
-        mVpGirls.currentItem = position!!
     }
 
-    fun initData (intent: Intent?) {
+    fun initArgs (intent: Intent?) {
         position = intent?.getIntExtra(NavigationUtils.POSITION_KEY,0)
-        gankDetailList = intent?.getSerializableExtra(NavigationUtils.GANK_DATA_KEY) as ArrayList<GankDetailInfo>?
-        Loger.e(TAG,"initData-gankDetailList?.size = " + gankDetailList?.size)
+    }
+    fun initLocalGirlsData () {
+        localGirlsViewModel.girls.observe(this, androidx.lifecycle.Observer {
+            gankDetailList?.clear()
+            gankDetailList?.addAll(it)
+            girlDetailAdapter?.notifyDataSetChanged()
+            mVpGirls.currentItem = position!!
+        })
 
     }
 
@@ -177,6 +205,7 @@ class GirlsDetailActivity: BaseActivity() {
         }
     }
 
+    @SuppressLint("MissingPermission")
     suspend fun setWallpaper () {
         val bitmap: Bitmap = girlDetailAdapter?.getCurrentView()!!
         withContext(Dispatchers.IO) {
@@ -198,5 +227,8 @@ class GirlsDetailActivity: BaseActivity() {
         if (permissionName.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_pic_faild)).show();
         }
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
     }
 }

@@ -7,6 +7,7 @@ import com.victor.lib.coremodel.data.*
 import com.victor.lib.coremodel.http.interfaces.IHomeDataSource
 import com.victor.lib.coremodel.http.locator.NetServiceLocator
 import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.http.locator.ServiceLocator.Companion.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -35,7 +36,7 @@ class HomeDataSource(private val ioDispatcher: CoroutineDispatcher): IHomeDataSo
         // Force Main thread
         withContext(Dispatchers.Main) {
             _gankDetailData.value = gankDetailDataFetch(key,page,
-                NetServiceLocator.NETWORK_PAGE_SIZE
+                NETWORK_PAGE_SIZE
             )
         }
     }

@@ -7,27 +7,19 @@ import android.os.Bundle
 import android.os.Message
 import android.view.*
 import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.workers.SeedDatabaseWorker
+import com.victor.lib.coremodel.viewmodel.TvViewModel
 import com.victor.module.tv.R
 import com.victor.module.tv.databinding.FragmentTvBinding
 import com.victor.module.tv.view.adapter.TvAdapter
-import com.victor.module.tv.viewmodel.LiveDataVMFactory
-import com.victor.module.tv.viewmodel.TvViewModel
 import com.victor.player.library.module.Player
 import kotlinx.android.synthetic.main.fragment_tv.*
 
@@ -45,11 +37,10 @@ import kotlinx.android.synthetic.main.fragment_tv.*
 class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.OnMainHandlerImpl,
     View.OnClickListener {
 
-    private val tvViewModel: com.victor.lib.coremodel.viewmodel.TvViewModel by viewModels {
+    private val tvViewModel: TvViewModel by viewModels {
         InjectorUtils.provideTvViewModelFactory(this)
     }
 
-    private val viewmodel: TvViewModel by viewModels { LiveDataVMFactory }
     var tvAdapter: TvAdapter? = null
 
     var mPlayer: Player? = null
@@ -101,8 +92,7 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
         binding?.lifecycleOwner = this
 
         // Bind ViewModel
-//        binding?.viewmodel = viewmodel
-//        binding?.viewmodel = tvViewModel
+        binding?.viewmodel = tvViewModel
 
         tvAdapter = TvAdapter(activity!!,this)
         mRvChannels.setHasFixedSize(true)

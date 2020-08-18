@@ -1,10 +1,10 @@
 package com.victor.lib.coremodel.viewmodel
 
-import androidx.lifecycle.*
-import com.victor.lib.coremodel.http.datasource.GirlsDataSource
-import com.victor.lib.coremodel.http.interfaces.IGirlsDataSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.victor.lib.coremodel.data.RepositoryType
+import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.http.repository.IRepository
 
 /*
  * -----------------------------------------------------------------
@@ -16,26 +16,18 @@ import kotlinx.coroutines.launch
  * Description: 
  * -----------------------------------------------------------------
  */
-class GirlsViewModel(private val dataSource: IGirlsDataSource): ViewModel() {
-    val girlsDataValue = dataSource.girlsData
+class GirlsViewModel(val repository: IRepository) : ViewModel() {
 
-    fun fetchGirls(page: Int) {
-        // Launch a coroutine that reads from a remote data source and updates cache
-        viewModelScope.launch {
-            dataSource.fetchGirls(page)
+    val datas = repository.postsOfSubreddit("", 20)
+
+    /**
+     * Factory for [LiveDataViewModel].
+     */
+    /*object GirlsLiveDataVMFactory : ViewModelProvider.Factory {
+
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
+            return GirlsViewModel(ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL)) as T
         }
-    }
-}
-
-/**
- * Factory for [LiveDataViewModel].
- */
-object GirlsLiveDataVMFactory : ViewModelProvider.Factory {
-
-    private val girlsDataSource = GirlsDataSource(Dispatchers.IO)
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST")
-        return GirlsViewModel(girlsDataSource) as T
-    }
+    }*/
 }

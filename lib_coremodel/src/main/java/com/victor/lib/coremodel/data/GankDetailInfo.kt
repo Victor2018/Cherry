@@ -1,5 +1,10 @@
 package com.victor.lib.coremodel.data
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.victor.lib.coremodel.db.GirlsUrlConverters
 import java.io.Serializable
 
 /*
@@ -12,19 +17,21 @@ import java.io.Serializable
  * Description: 
  * -----------------------------------------------------------------
  */
-class GankDetailInfo: Serializable {
-    val _id: String? = null
-    val author: String? = null
-    val category: String? = null
-    val createdAt: String? = null
-    val publishedAt: String? = null
-    val desc: String? = null
-    val likeCounts = 0
-    val stars = 0
-    val views = 0
-    val title: String? = null
-    val type: String? = null
-    val url: String? = null
+@Entity(tableName = "girls")
+@TypeConverters(GirlsUrlConverters::class)
+class GankDetailInfo (
+    @PrimaryKey @ColumnInfo(name = "_id") val _id: String,
+    @ColumnInfo(name = "author") val author: String,
+    @ColumnInfo(name = "category") val category: String,
+    @ColumnInfo(name = "createdAt") val createdAt: String,
+    @ColumnInfo(name = "publishedAt") val publishedAt: String,
+    @ColumnInfo(name = "desc") val desc: String,
+    @ColumnInfo(name = "likeCounts") val likeCounts:Int,
+    @ColumnInfo(name = "stars") val stars:Int,
+    @ColumnInfo(name = "views") val views:Int,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "type") val type: String,
+    @ColumnInfo(name = "url") val url: String,
 
-    val images: List<String>? = null
-}
+    @ColumnInfo(name = "images") val images: List<String>
+): Serializable

@@ -6,9 +6,11 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.victor.lib.common.util.BitmapUtil
+import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.widget.PinchImageView
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.girls.R
@@ -51,10 +53,11 @@ class GirlDetailAdapter(var context: Context,var datas: MutableList<GankDetailIn
         val imageView: PinchImageView =
             view.findViewById<View>(R.id.iv_img) as PinchImageView
         imageView.setOnClickListener(mOnClickListener)
-        Glide.with(context)
-            .load(imageUrl)
-            .thumbnail(0.2f)
-            .into(imageView)
+
+        val mTvTitle:TextView = view.findViewById<View>(R.id.tv_title) as TextView
+        mTvTitle.text = datas[position].desc?: "loading"
+
+        ImageUtils.instance.loadImage(context,imageView,imageUrl)
         container.addView(view)
         return view
     }

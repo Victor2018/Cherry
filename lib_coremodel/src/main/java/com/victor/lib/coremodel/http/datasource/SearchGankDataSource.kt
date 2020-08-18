@@ -7,6 +7,7 @@ import com.victor.lib.coremodel.data.*
 import com.victor.lib.coremodel.http.interfaces.ISearchGankDataSource
 import com.victor.lib.coremodel.http.locator.NetServiceLocator
 import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.http.locator.ServiceLocator.Companion.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -33,7 +34,7 @@ class SearchGankDataSource(private val ioDispatcher: CoroutineDispatcher): ISear
     override suspend fun searchGank(key: String?, page: Int) {
         // Force Main thread
         withContext(Dispatchers.Main) {
-            searchGankData.value = gankDataFetch(key,page, NetServiceLocator.NETWORK_PAGE_SIZE)
+            searchGankData.value = gankDataFetch(key,page, NETWORK_PAGE_SIZE)
         }
     }
 
