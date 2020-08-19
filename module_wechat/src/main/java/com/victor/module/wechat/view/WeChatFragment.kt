@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
@@ -32,7 +34,8 @@ import kotlinx.android.synthetic.main.fragment_wechat.*
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.WeChatFgt)
-class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.OnMenuItemClickListener {
+class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.OnMenuItemClickListener,
+    AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener {
     private val viewmodel: WeChatViewModel by viewModels { WechatLiveDataVMFactory }
     var weChatAdapter: WeChatAdapter? = null
 
@@ -85,6 +88,14 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
         // Bind ViewModel
         binding?.viewmodel = viewmodel
 
+        appbar.addOnOffsetChangedListener(this)
+
+        //设置 进度条的颜色变化，最多可以设置4种颜色
+        mSrlRefresh.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
+            android.R.color.holo_orange_light, android.R.color.holo_red_light)
+
+        mSrlRefresh.setOnRefreshListener(this)
+
         weChatAdapter = WeChatAdapter(context!!,this)
         mRvWechat.setHasFixedSize(true)
         mRvWechat.adapter = weChatAdapter
@@ -92,6 +103,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
 
     fun initData () {
         viewmodel.weChatData.observe(viewLifecycleOwner, Observer {
+            mSrlRefresh.isRefreshing = false
             it.let {
                 weChatAdapter?.clear()
                 weChatAdapter?.add(it.data)
@@ -118,5 +130,25 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
             }
         }
         return super.onOptionsItemSelected(item!!)
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        if (verticalOffset == 0) {
+            //展开状态
+            mSrlRefresh.isEnabled = true
+        } else if (Math.abs(verticalOffset) >= appBarLayout!!.totalScrollRange) {
+            //折叠状态
+            mSrlRefresh.isEnabled = false
+        } else {
+            //中间状态
+        }
+    }
+
+    override fun onRefresh() {
+        mSrlRefresh.isRefreshing = true
+        weChatAdapter?.clear()
+        weChatAdapter?.notifyDataSetChanged()
+
+        initData()
     }
 }

@@ -67,11 +67,12 @@ interface ApiService {
         const val TAG = "ApiService"
         const val GANK_HOST = "https://gank.io/"
         const val WAN_ANDROID_HOST = "https://wanandroid.com/"
+        const val TIME_OUT:Long = 30
         fun create(baseUrl: String): ApiService {
 
             val client = OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(5, TimeUnit.SECONDS)
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(initLogInterceptor())
                 .build()
             return Retrofit.Builder()

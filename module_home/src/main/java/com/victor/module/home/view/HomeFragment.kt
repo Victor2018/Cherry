@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
@@ -47,7 +49,8 @@ import org.victor.funny.util.ResUtils
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @Route(path = ARouterPath.HomeFgt)
 class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
-    Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener {
+    Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener,
+    AppBarLayout.OnOffsetChangedListener,SwipeRefreshLayout.OnRefreshListener {
     private val viewmodel: HomeViewModel by viewModels { HomeLiveDataVMFactory }
 
     var homeAdapter: HomeAdapter? = null
@@ -126,36 +129,22 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
         mBsvBanner.onItemClickListener = this
         mFabGankCategory.setOnClickListener(this)
+        appbar.addOnOffsetChangedListener(this)
+
+        //设置 进度条的颜色变化，最多可以设置4种颜色
+        mSrlRefresh.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
+            android.R.color.holo_orange_light, android.R.color.holo_red_light)
+
+        mSrlRefresh.setOnRefreshListener(this)
 
         SharePreferencesUtil.putString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
     }
 
-    fun initBannerData() {
-        viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
-            it.let {
-                it.data.let {
-                    mBsvBanner.startWithList(it)
-                }
-            }
-        })
-    }
-
-    fun initGankData () {
-        var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
-        if (!TextUtils.isEmpty(categoryRes)) {
-            var gankInfo: GankInfo? = JsonUtils.parseObject(categoryRes!!,GankInfo::class.java)
-            type = gankInfo?.type
-            mCtlTitle.title = gankInfo?.title
-            currentPage = 1
-        }
-
-        viewmodel.searchGankDetail(type,currentPage)
+    fun subscribeUi() {
         viewmodel.gankDetailValue.observe(viewLifecycleOwner, Observer {
+            mSrlRefresh.isRefreshing = false
             it.let {it1 ->
                 it.data.let {it2 ->
-                    if (currentPage == 1) {
-                        homeAdapter?.clear()
-                    }
                     homeAdapter?.setFooterVisible(it.page < it.page_count)
                     if (it.page < it.page_count) {
                         homeAdapter?.setLoadState(homeAdapter?.LOADING!!)
@@ -169,6 +158,31 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             }
 
         })
+    }
+
+    fun initBannerData() {
+        viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
+            mSrlRefresh.isRefreshing = false
+            it.let {
+                it.data.let {
+                    mBsvBanner.startWithList(it)
+                }
+            }
+        })
+    }
+
+
+    fun initGankData () {
+        var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
+        if (!TextUtils.isEmpty(categoryRes)) {
+            var gankInfo: GankInfo? = JsonUtils.parseObject(categoryRes!!,GankInfo::class.java)
+            type = gankInfo?.type
+            mCtlTitle.title = gankInfo?.title
+            currentPage = 1
+        }
+
+        viewmodel.searchGankDetail(type,currentPage)
+        subscribeUi()
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -214,6 +228,28 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun OnLoadMore() {
         currentPage++
         viewmodel.searchGankDetail(type,currentPage)
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        if (verticalOffset == 0) {
+            //展开状态
+            mSrlRefresh.isEnabled = true
+        } else if (Math.abs(verticalOffset) >= appBarLayout!!.totalScrollRange) {
+            //折叠状态
+            mSrlRefresh.isEnabled = false
+        } else {
+            //中间状态
+        }
+    }
+
+    override fun onRefresh() {
+        mSrlRefresh.isRefreshing = true
+        currentPage = 1
+        homeAdapter?.clear()
+        homeAdapter?.notifyDataSetChanged()
+
+        initBannerData()
+        initGankData()
     }
 
 

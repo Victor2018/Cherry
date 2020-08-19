@@ -25,6 +25,7 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.AnimUtil
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.ImageUtils
+import com.victor.lib.common.util.Loger
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
@@ -51,7 +52,7 @@ import org.victor.funny.util.ResUtils
  */
 @Route(path = ARouterPath.GirlsFgt)
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
-    View.OnClickListener, AppBarLayout.OnOffsetChangedListener{
+    View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
 //    private val viewmodel: GirlsViewModel by viewModels { GirlsLiveDataVMFactory }
 
     private val viewmodel: GirlsViewModel by viewModels {
@@ -109,11 +110,12 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 //        toolbar.setOnMenuItemClickListener(this)
 
         //设置 进度条的颜色变化，最多可以设置4种颜色
-        mSrlRefreshGirl.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
-            android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSrlRefresh.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
+            android.R.color.holo_orange_light, android.R.color.holo_red_light)
 
         mFabRandomGirl.setOnClickListener(this)
         appbar.addOnOffsetChangedListener(this)
+
 
         mRvGirls.setHasFixedSize(true)
 
@@ -152,7 +154,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             girlsAdapter.loadStateFlow.collectLatest { loadStates ->
-                mSrlRefreshGirl.isRefreshing = loadStates.refresh is LoadState.Loading
+                mSrlRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
             }
         }
 
@@ -174,7 +176,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     private fun initSwipeToRefresh() {
-        mSrlRefreshGirl.setOnRefreshListener { girlsAdapter.refresh() }
+        mSrlRefresh.setOnRefreshListener { girlsAdapter.refresh() }
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -216,10 +218,10 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         if (verticalOffset == 0) {
             //展开状态
-            mSrlRefreshGirl.isEnabled = true
+            mSrlRefresh.isEnabled = true
         } else if (Math.abs(verticalOffset) >= appBarLayout!!.totalScrollRange) {
             //折叠状态
-            mSrlRefreshGirl.isEnabled = false
+            mSrlRefresh.isEnabled = false
         } else {
             //中间状态
         }

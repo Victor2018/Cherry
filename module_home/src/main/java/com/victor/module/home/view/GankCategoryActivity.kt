@@ -86,7 +86,6 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
     }
 
     fun initData () {
-
         viewmodel.girlData.observe(this, Observer {
             it.let {
                 ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
