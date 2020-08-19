@@ -1,6 +1,7 @@
 package com.victor.lib.coremodel.db.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.victor.lib.coremodel.data.ChannelInfo
 import com.victor.lib.coremodel.data.GankDetailInfo

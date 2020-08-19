@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.victor.lib.common.util.BitmapUtil
+import com.victor.lib.common.util.DateUtil
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.widget.PinchImageView
 import com.victor.lib.coremodel.data.GankDetailInfo
@@ -55,7 +56,12 @@ class GirlDetailAdapter(var context: Context,var datas: MutableList<GankDetailIn
         imageView.setOnClickListener(mOnClickListener)
 
         val mTvTitle:TextView = view.findViewById<View>(R.id.tv_title) as TextView
-        mTvTitle.text = datas[position].desc?: "loading"
+        val mTvDes:TextView = view.findViewById<View>(R.id.tv_des) as TextView
+
+        var pubDate = DateUtil.transDate(datas[position].publishedAt,"yyyy-MM-dd HH:mm:ss","yyyy-MM-dd")
+        mTvTitle.text = datas[position].title + "#" + pubDate + "@" +  datas[position].author
+        mTvDes.text = datas[position].desc?: "loading"
+
 
         ImageUtils.instance.loadImage(context,imageView,imageUrl)
         container.addView(view)

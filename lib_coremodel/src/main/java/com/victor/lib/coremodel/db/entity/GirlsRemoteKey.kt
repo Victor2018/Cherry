@@ -8,16 +8,17 @@ import androidx.room.PrimaryKey
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: User
+ * File: GirlsRemoteKey
  * Author: Victor
- * Date: 2020/8/14 下午 06:48
+ * Date: 2020/8/19 上午 10:35
  * Description: 
  * -----------------------------------------------------------------
  */
 
-@Entity
-data class User(
-    @PrimaryKey val uid: Int,
-    @ColumnInfo(name = "first_name") val firstName: String = "423099",
-    @ColumnInfo(name = "last_name") val lastName: String = "victor"
+@Entity(tableName = "grils_remote_keys")
+data class GirlsRemoteKey (
+    @PrimaryKey
+    @ColumnInfo(collate = ColumnInfo.NOCASE)
+    val subreddit: String, // technically mutable but fine for a demo
+    val nextPageKey: String?
 )

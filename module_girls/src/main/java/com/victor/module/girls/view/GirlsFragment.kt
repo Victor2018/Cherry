@@ -1,12 +1,13 @@
 package com.victor.module.girls.view
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.MenuItem
+import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.AdapterView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
@@ -18,18 +19,22 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
+import com.victor.lib.common.util.AnimUtil
 import com.victor.lib.common.util.Constant
+import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.data.RepositoryType
+import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
-import com.victor.lib.coremodel.viewmodel.ArticleViewModel
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlsAdapter
 import com.victor.module.girls.view.adapter.GirlsLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_girls.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import org.victor.funny.util.ResUtils
@@ -45,7 +50,8 @@ import org.victor.funny.util.ResUtils
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.GirlsFgt)
-class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener{
+class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
+    View.OnClickListener, AppBarLayout.OnOffsetChangedListener{
 //    private val viewmodel: GirlsViewModel by viewModels { GirlsLiveDataVMFactory }
 
     private val viewmodel: GirlsViewModel by viewModels {
@@ -53,7 +59,8 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
                 return GirlsViewModel(
-                    ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL,activity!!)) as T
+                    ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL,activity!!),
+                    RandomGirlDataSource(Dispatchers.IO)) as T
             }
         }
     }
@@ -82,6 +89,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     override fun freshFragData() {
+        fetchRandomGirlData()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -91,20 +99,44 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     fun initialize () {
-        setHasOptionsMenu(true)
-        var textView: TextView = toolbar.getChildAt(0) as TextView//主标题
-        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT//填充父类
-        textView.setGravity(Gravity.CENTER_VERTICAL)//水平居中，CENTER，即水平也垂直，自选
+//        setHasOptionsMenu(true)
+//        var textView: TextView = toolbar.getChildAt(0) as TextView//主标题
+//        textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT//填充父类
+//        textView.setGravity(Gravity.CENTER_VERTICAL)//水平居中，CENTER，即水平也垂直，自选
+//
+//        toolbar.menu.clear()
+//        toolbar.inflateMenu(R.menu.menu_girls)
+//        toolbar.setOnMenuItemClickListener(this)
 
-        toolbar.menu.clear()
-        toolbar.inflateMenu(R.menu.menu_girls)
-        toolbar.setOnMenuItemClickListener(this)
+        //设置 进度条的颜色变化，最多可以设置4种颜色
+        mSrlRefreshGirl.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
+            android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
+        mFabRandomGirl.setOnClickListener(this)
+        appbar.addOnOffsetChangedListener(this)
 
         mRvGirls.setHasFixedSize(true)
 
         initAdapter()
 
         initSwipeToRefresh()
+
+        subscribeUi()
+    }
+
+    private fun subscribeUi() {
+        viewmodel.randomGirlDataValue.observe(viewLifecycleOwner, Observer {
+            hideFreshGirlAnim()
+            it.let {
+                mCtlTitle.title = it.data?.get(0)?.title
+                ImageUtils.instance.loadImage(context!!,mIvRandomGirl,it.data?.get(0)?.images?.get(0))
+            }
+        })
+    }
+
+    private fun fetchRandomGirlData() {
+        showFreshGirlAnim()
+        viewmodel.fetchRandomGirlData()
     }
 
     private fun initAdapter() {
@@ -120,14 +152,16 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             girlsAdapter.loadStateFlow.collectLatest { loadStates ->
-                swipe_refresh.isRefreshing = loadStates.refresh is LoadState.Loading
+                mSrlRefreshGirl.isRefreshing = loadStates.refresh is LoadState.Loading
             }
         }
 
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             viewmodel.datas.collectLatest {
-                girlsAdapter.submitData(it as PagingData<GankDetailInfo>)
+                it.let {
+                    girlsAdapter.submitData(it as PagingData<GankDetailInfo>)
+                }
             }
         }
 
@@ -140,7 +174,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     private fun initSwipeToRefresh() {
-        swipe_refresh.setOnRefreshListener { girlsAdapter.refresh() }
+        mSrlRefreshGirl.setOnRefreshListener { girlsAdapter.refresh() }
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -161,6 +195,34 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
             }
         }
         return super.onOptionsItemSelected(item!!)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.mFabRandomGirl -> {
+                fetchRandomGirlData()
+            }
+        }
+    }
+
+    private fun showFreshGirlAnim () {
+        mFabRandomGirl.startAnimation(AnimUtil.xShake())
+        mFabRandomGirl.isEnabled = false
+    }
+    private fun hideFreshGirlAnim () {
+        mFabRandomGirl.isEnabled = true
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        if (verticalOffset == 0) {
+            //展开状态
+            mSrlRefreshGirl.isEnabled = true
+        } else if (Math.abs(verticalOffset) >= appBarLayout!!.totalScrollRange) {
+            //折叠状态
+            mSrlRefreshGirl.isEnabled = false
+        } else {
+            //中间状态
+        }
     }
 
 }

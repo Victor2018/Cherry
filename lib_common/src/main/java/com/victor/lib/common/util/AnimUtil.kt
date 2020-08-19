@@ -44,6 +44,10 @@ object AnimUtil {
         animation.fillAfter = true
         return animation
     }
+    fun xShake(): Animation {
+        val animation = AnimationUtils.loadAnimation(App.get(), R.anim.anim_x_shake)
+        return animation
+    }
 
     fun concatAnimators(animators: Array<Animator>, alphaAnimator: Animator): Array<Animator?> {
         val allAnimators = arrayOfNulls<Animator>(animators.size + 1)

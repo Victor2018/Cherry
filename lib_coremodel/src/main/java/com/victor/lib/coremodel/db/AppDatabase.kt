@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -28,9 +27,12 @@ import com.victor.lib.coremodel.workers.SeedDatabaseWorker
  * -----------------------------------------------------------------
  */
 
-@Database(entities = arrayOf(Category::class,ChannelInfo::class, GankDetailInfo:: class),
+@Database(entities = arrayOf(
+    Category::class,
+    ChannelInfo::class,
+    GankDetailInfo:: class
+),
     version = 1, exportSchema = false)
-@TypeConverters(DateConverters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun channelCategoryDao(): CategoryDao
     abstract fun channelDao(): ChannelDao

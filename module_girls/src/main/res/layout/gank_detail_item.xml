@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/cv_item"
     card_view:cardCornerRadius="0dp"
+    card_view:cardBackgroundColor="@color/black"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground">
 
@@ -16,20 +17,45 @@
         android:layout_centerInParent="true"
         android:scaleType="fitCenter"/>
 
-    <TextView
-        android:id="@+id/tv_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_30"
+        android:orientation="vertical"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/dp_20"
-        android:maxLines="2"
-        android:lineSpacingExtra="@dimen/dp_1"
-        android:ellipsize="end"
-        android:text="从你的全世界路过"
-        android:fontFamily="@font/zuo_an_lian_ren"
-        android:textColor="?attr/colorPrimary"
-        android:textColorLink="?attr/colorPrimaryDark"
-        android:textSize="@dimen/dp_58"/>
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:maxLines="2"
+            android:lineSpacingExtra="@dimen/dp_1"
+            android:ellipsize="end"
+            android:text="从你的全世界路过"
+            android:fontFamily="@font/zuo_an_lian_ren"
+            android:textColor="?attr/colorPrimary"
+            android:textColorLink="?attr/colorPrimaryDark"
+            android:textSize="@dimen/dp_52"/>
+
+        <TextView
+            android:id="@+id/tv_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/dp_5"
+            android:maxLines="2"
+            android:lineSpacingExtra="@dimen/dp_1"
+            android:ellipsize="end"
+            android:text="从你的全世界路过"
+            android:fontFamily="@font/zuo_an_lian_ren"
+            android:textColor="?attr/colorPrimary"
+            android:textColorLink="?attr/colorPrimaryDark"
+            android:textSize="@dimen/dp_36"/>
+    </LinearLayout>
+
+
 
 </androidx.cardview.widget.CardView>

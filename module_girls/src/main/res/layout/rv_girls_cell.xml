@@ -2,7 +2,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_480"
+    android:layout_height="@dimen/dp_456"
     android:id="@+id/cv_item"
     card_view:cardCornerRadius="0dp"
     android:clickable="true"

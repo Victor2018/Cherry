@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.9"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/img_mine"
                 android:fitsSystemWindows="true"/>
