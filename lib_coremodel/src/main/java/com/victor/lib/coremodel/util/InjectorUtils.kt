@@ -24,10 +24,13 @@ import com.victor.lib.coremodel.viewmodel.TvViewModelFactory
 object InjectorUtils {
     private fun getLocalGirlsRepository(context: Context): LocalGirlsRepository {
         return LocalGirlsRepository.getInstance(
-            AppDatabase.getInstance(context.applicationContext).girlsDao())
+            AppDatabase.getInstance(context.applicationContext))
     }
     fun provideLocalGirlsViewModelFactory(activity: AppCompatActivity): LocalGirlsViewModelFactory {
         return LocalGirlsViewModelFactory(getLocalGirlsRepository(activity), activity)
+    }
+    fun provideLocalGirlsViewModelFactory(fragment: Fragment): LocalGirlsViewModelFactory {
+        return LocalGirlsViewModelFactory(getLocalGirlsRepository(fragment.requireContext()), fragment)
     }
 
     private fun getTvRepository(context: Context): TvRepository {

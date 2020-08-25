@@ -1,4 +1,4 @@
-package com.victor.clips.util
+package com.victor.lib.common.util
 
 import android.annotation.SuppressLint
 import android.app.Activity

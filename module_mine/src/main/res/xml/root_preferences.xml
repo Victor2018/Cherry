@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/basic_setting">
+
+        <SwitchPreferenceCompat
+            app:key="@string/show_thumbnail"
+            app:title="show_thumbnail_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/welfare">
+
+        <SwitchPreferenceCompat
+            app:key="@string/girl"
+            app:title="@string/splash_girl"
+            app:defaultValue="true"/>
+
+        <SwitchPreferenceCompat
+            app:dependency="@string/girl"
+            app:key="@string/appear_random"
+            app:summaryOff="@string/random_girl_off"
+            app:summaryOn="@string/random_girl_on"
+            app:defaultValue="true"
+            app:title="@string/appear_randomly" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/more">
+
+        <Preference
+            app:key="@string/about"
+            app:title="@string/about_us"
+            app:widgetLayout="@layout/setting_preference_cell">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.victor.cherry"
+                android:targetClass="com.victor.module.mine.view.AboutActivity" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

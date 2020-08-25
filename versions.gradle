@@ -59,6 +59,7 @@ versions.permissions = "v1.0"
 versions.player = "v1.7"
 versions.SearchFilter = "v1.0.4"
 versions.workVersion = '2.1.0'
+versions.preference = '1.1.0'
 
 ext.versions = versions
 
@@ -193,6 +194,10 @@ deps.bugly = bugly
 def SearchFilter = [:]
 SearchFilter.core = "com.github.Yalantis:SearchFilter:$versions.SearchFilter"
 deps.SearchFilter = SearchFilter
+
+def preference = [:]
+preference.core = "androidx.preference:preference:$versions.preference"
+deps.preference = preference
 
 ext.deps = deps
 

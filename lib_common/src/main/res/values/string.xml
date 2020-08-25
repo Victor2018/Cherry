@@ -48,5 +48,22 @@
     <string name="select_category">Select category</string>
     <string name="transition_fab">transition_fab</string>
     <string name="transition_tv_poster">transition_tv_poster</string>
+    <string name="setting">Setting</string>
+    <string name="favorite">Favorite</string>
+    <string name="clear_cache">Clear cache</string>
+    <string name="cache_cleared">Cache cleared</string>
+    <string name="version">Version</string>
+    <string name="basic_setting">Basic setting</string>
+    <string name="show_thumbnail">showThumbnail</string>
+    <string name="show_thumbnail_title">Show thumbnail</string>
+    <string name="welfare">welfare</string>
+    <string name="girl">girl</string>
+    <string name="splash_girl">Splash girl</string>
+    <string name="appear_random">appear_random</string>
+    <string name="appear_randomly">Appear randomly</string>
+    <string name="random_girl_off">No girl is too lonely</string>
+    <string name="random_girl_on">Why do gay guys need girls</string>
+    <string name="more">More</string>
+    <string name="about">about</string>
 
 </resources>

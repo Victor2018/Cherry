@@ -20,6 +20,7 @@
     <color name="color_7C7C7C">#7C7C7C</color>
     <color name="alpha_blue">#66B3E5FC</color>
     <color name="color_D8D8D8">#D8D8D8</color>
+    <color name="color_D3D3D3">#D3D3D3</color>
 
     <array name="search_filter_colors">
         <item name="all" type="color">#827F93</item>

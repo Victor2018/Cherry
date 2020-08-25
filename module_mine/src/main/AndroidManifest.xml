@@ -6,6 +6,10 @@
 
         <activity android:name=".view.MineActivity"
             android:label="@string/module_mine"/>
+        <activity android:name=".view.AboutActivity"
+            android:label="@string/module_mine"/>
+        <activity android:name=".view.SettingActivity"
+            android:label="@string/module_mine"/>
         <!-- Scheme代理跳转 -->
         <activity
             android:name="com.victor.lib.common.view.activity.SchemaProxyActivity"

@@ -2,9 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <item
-        android:id="@+id/action_share"
-        android:icon="@drawable/ic_share_white_24dp"
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_baseline_edit_24"
         android:orderInCategory="100"
-        android:title="@string/share"
+        android:title="@string/setting"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:orderInCategory="100"
+        android:title="@string/setting"
         app:showAsAction="always" />
 </menu>

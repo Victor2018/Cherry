@@ -1,194 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:alpha="0.8"
-    android:fitsSystemWindows="true">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_678"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/mCtlVideoTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:contentScrim="?attr/colorPrimary"
-            android:fitsSystemWindows="true"
-            app:title="@string/about_us"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
-            <ImageView
-                android:id="@+id/mIvAboutPoster"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.9"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/img_mine"
-                android:fitsSystemWindows="true"/>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/transparent"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_collapseMode="pin"
-                app:title="@string/about_us"
-                android:fitsSystemWindows="true"/>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/mNsvAbout"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.victor.lib.coremodel.viewmodel.LocalGirlsViewModel" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:background="@color/white"
+        android:alpha="0.8"
+        android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <androidx.cardview.widget.CardView
+            android:layout_height="@dimen/dp_456"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/mCtlVideoTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardElevation="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/mTvDescription"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:contentScrim="?attr/colorPrimary"
+                android:fitsSystemWindows="true"
+                app:titleEnabled="false"
+                app:title="@string/about_us"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp">
+                <ImageView
+                    android:id="@+id/mIvAboutPoster"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_30"
-                    android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:lineSpacingMultiplier="1.5"
-                    android:textSize="@dimen/dp_28"
-                    android:textColor="@color/color_7C7C7C"
-                    android:text="@string/description" />
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardElevation="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/mTvDownloadApp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/dp_30"
-                    android:textColor="@color/color_7C7C7C"
-                    android:textSize="@dimen/dp_28"
-                    android:text="@string/download_app" />
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardElevation="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/mTvGmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_30"
-                    android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/dp_28"
-                    android:textColor="@color/color_7C7C7C"
-                    android:text="@string/gmail" />
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardElevation="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/mTvIssues"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_30"
-                    android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/dp_28"
-                    android:textColor="@color/color_7C7C7C"
-                    android:text="@string/github_issues" />
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardElevation="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/mTvVersion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/dp_30"
-                    android:textSize="@dimen/dp_28"
-                    android:textColor="@color/color_7C7C7C"
-                    android:text="Version：v1.0.0" />
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardElevation="@dimen/dp_5">
-                <TextView
-                    android:id="@+id/mTvSupport"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="@dimen/dp_30"
-                    android:textSize="@dimen/dp_28"
-                    android:textColor="@color/color_7C7C7C"
-                    android:text="@string/support_us" />
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.9"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_mine_header"
+                    android:fitsSystemWindows="true"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_88"
-                    android:layout_marginBottom="@dimen/dp_30"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp_200"
-                        android:layout_height="@dimen/dp_200"
-                        android:src="@mipmap/img_wx"/>
-                    <ImageView
-                        android:layout_width="@dimen/dp_200"
-                        android:layout_height="@dimen/dp_200"
-                        android:layout_marginLeft="@dimen/dp_66"
-                        android:src="@mipmap/img_ali"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.9"
+                    android:fitsSystemWindows="true">
+                    <com.victor.lib.common.view.widget.CircleBorderImageView
+                        android:layout_width="@dimen/dp_128"
+                        android:layout_height="@dimen/dp_128"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/ic_avatar"
+                        app:aiv_ShowBoarder="true"
+                        app:aiv_BoarderColor="@color/white"
+                        app:aiv_BoarderWidth="@dimen/dp_5"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/dp_56"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:gravity="center"
+                        android:text="Victor"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/dp_36"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:gravity="center"
+                        android:text="从你的全世界路过"/>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mFabGitHub"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end"
-        android:src="@mipmap/ic_github"
-        android:layout_margin="@dimen/dp_18"
-        android:clickable="true"/>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/transparent"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_collapseMode="pin"
+                    app:title=""
+                    app:titleTextAppearance="@style/Toolbar.TitleText"/>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/mNsvAbout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_overlapTop="@dimen/dp_90"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dp_10"
+                    app:cardElevation="@dimen/dp_5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_90"
+                        android:paddingLeft="@dimen/dp_30"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="@string/favorite"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dp_0"
+                    app:cardElevation="@dimen/dp_5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_90"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_20"
+                        android:gravity="center|right"
+                        android:drawableLeft="@drawable/ic_gank_black_24"
+                        android:drawableRight="@drawable/ic_arrow_black_right_24"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="18"/>
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    style="@style/base_line_horizontal"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dp_0"
+                    app:cardElevation="@dimen/dp_5">
+
+                    <TextView
+                        android:id="@+id/mTvFavGirlsCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_90"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_20"
+                        android:gravity="center|right"
+                        android:drawableLeft="@drawable/ic_beauty_black_24"
+                        android:drawableRight="@drawable/ic_arrow_black_right_24"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="18"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRvFavGirls"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_360"
+                        android:layout_marginTop="@dimen/dp_95"
+                        android:nestedScrollingEnabled="false"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dp_0"
+                    app:cardElevation="@dimen/dp_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_90"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_delete_black_24"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="@string/clear_cache"/>
+                    <TextView
+                        android:id="@+id/mTvClearCache"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_90"
+                        android:layout_gravity="right"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_20"
+                        android:gravity="center|right"
+                        android:drawableRight="@drawable/ic_arrow_black_right_24"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="0KB"/>
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    style="@style/base_line_horizontal"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/dp_0"
+                    app:cardElevation="@dimen/dp_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_90"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:gravity="center_vertical"
+                        android:drawableLeft="@drawable/ic_baseline_cloud_download_24"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="@string/version"/>
+                    <TextView
+                        android:id="@+id/mTvVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_90"
+                        android:layout_gravity="right"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_20"
+                        android:gravity="center|right"
+                        android:drawableRight="@drawable/ic_arrow_black_right_24"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:textSize="@dimen/dp_36"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/zuo_an_lian_ren"
+                        android:text="v1.0.6"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

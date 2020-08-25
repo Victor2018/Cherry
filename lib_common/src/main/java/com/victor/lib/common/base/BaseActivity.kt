@@ -1,11 +1,12 @@
 package com.victor.lib.common.base
 
 import android.Manifest
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.os.Message
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ import androidx.databinding.ViewDataBinding
 import com.victor.lib.common.R
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.Loger
+import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.util.StatusBarUtil
 import permission.victor.com.library.OnPermissionCallback
 import permission.victor.com.library.PermissionHelper
@@ -28,7 +30,8 @@ import java.util.*
  * Description: 
  * -----------------------------------------------------------------
  */
-abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer {
+abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer,
+    MainHandler.OnMainHandlerImpl {
     protected var TAG = javaClass.simpleName
     var statusBarTextColorBlack: Boolean = false
     var viewDataBinding : ViewDataBinding? = null;
@@ -51,6 +54,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
 
     fun initializeSuper () {
         DataObservable.instance.addObserver(this)
+        MainHandler.get().register(this)
 
         //状态栏背景及字体颜色适配
         StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
@@ -97,6 +101,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
     override fun onDestroy() {
         super.onDestroy()
         DataObservable.instance.deleteObserver(this)
+        MainHandler.get().unregister(this)
     }
 
     override fun startActivity(intent: Intent?) {
@@ -169,6 +174,10 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer 
     }
 
     override fun update(observable: Observable?, data: Any?) {
+
+    }
+
+    override fun handleMainMessage(message: Message?) {
 
     }
 }

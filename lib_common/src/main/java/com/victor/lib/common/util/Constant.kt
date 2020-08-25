@@ -28,9 +28,7 @@ object Constant {
     object Action {
         const val SHOW_NAV_BAR                  = 0x2001
         const val HIDE_NAV_BAR                  = 0x2002
-        const val MONTHLY_RANKING               = 0x2003
-        const val TOTAL_RANKING                 = 0x2004
-        const val FOLLOW                        = 0x1005
+        const val GO_MAIN                       = 0x2003
     }
 
 }

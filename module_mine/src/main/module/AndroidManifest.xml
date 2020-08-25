@@ -40,5 +40,11 @@
         <activity
             android:name="com.victor.lib.common.view.activity.WebActivity"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".view.AboutActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".view.SettingActivity"
+            android:launchMode="singleTask"/>
     </application>
 </manifest>

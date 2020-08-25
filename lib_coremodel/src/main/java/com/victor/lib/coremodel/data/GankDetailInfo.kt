@@ -32,6 +32,7 @@ class GankDetailInfo (
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "type") val type: String,
     @ColumnInfo(name = "url") val url: String,
+    @ColumnInfo(name = "isFavorited") var isFavorited: Int,
 
     @ColumnInfo(name = "images") val images: List<String>
 ): Serializable

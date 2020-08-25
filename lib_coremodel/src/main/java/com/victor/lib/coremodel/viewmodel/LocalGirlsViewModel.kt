@@ -2,11 +2,12 @@ package com.victor.lib.coremodel.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.victor.lib.coremodel.data.GankDetailInfo
-import com.victor.lib.coremodel.db.entity.CategoryInfo
-import com.victor.lib.coremodel.http.repository.GankGirlRepository
 import com.victor.lib.coremodel.http.repository.LocalGirlsRepository
-import com.victor.lib.coremodel.http.repository.TvRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /*
  * -----------------------------------------------------------------
@@ -19,7 +20,17 @@ import com.victor.lib.coremodel.http.repository.TvRepository
  * -----------------------------------------------------------------
  */
 
-class LocalGirlsViewModel internal constructor(repository: LocalGirlsRepository) : ViewModel() {
+class LocalGirlsViewModel internal constructor(var repository: LocalGirlsRepository) : ViewModel() {
 
-    val girls: LiveData<List<GankDetailInfo>> = repository.getLocalGirls()
+    val girls = repository.getLocalGirls()
+    val favGirls = repository.getFavGirls()
+    val favGirlsCount = repository.getFavGirlsCount()
+
+    fun updateGirl(data: GankDetailInfo) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.updateGirl(data)
+            }
+        }
+    }
 }

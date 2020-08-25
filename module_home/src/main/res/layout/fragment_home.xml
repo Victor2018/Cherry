@@ -47,7 +47,8 @@
                         app:mvAnimDuration="1000"
                         app:mvInterval="10000"
                         app:mvDirection="right_to_left"
-                        app:layout_collapseMode="parallax"/>
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.9"/>
 
                     <TextSwitcher
                         android:id="@+id/mTsDescription"
@@ -55,7 +56,8 @@
                         android:layout_height="@dimen/dp_598"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_gravity="center|right"
-                        app:layout_collapseMode="parallax"/>
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.9"/>
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"

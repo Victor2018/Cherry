@@ -1,9 +1,13 @@
 package com.victor.cherry
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.cherry.adapter.HomeFragmentAdapter
@@ -13,12 +17,21 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
+import com.victor.module.mine.view.AboutActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.victor.funny.util.ResUtils
 import java.util.*
 
 @Route(path = ARouterPath.MainAct)
 class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.ItemSelectListener {
+
+    companion object {
+        fun  intentStart (activity: AppCompatActivity) {
+            var intent = Intent(activity, MainActivity::class.java)
+            activity.startActivity(intent)
+        }
+
+    }
 
     var homeFragmentAdapter: HomeFragmentAdapter? = null
     var fragmentList: MutableList<BaseFragment> = ArrayList();
@@ -53,6 +66,8 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         homeFragmentAdapter?.fragmetList = fragmentList
         mVpHome.adapter = homeFragmentAdapter
+
+        mVpHome.offscreenPageLimit = fragmentList.size
 
         mNavBar.setOnItemSelectListener(this)
 

@@ -6,6 +6,7 @@ import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.app.App
 import com.victor.lib.common.util.ImageUtils
@@ -14,6 +15,7 @@ import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
+import org.victor.funny.util.ResUtils
 
 /*
  * -----------------------------------------------------------------
@@ -28,8 +30,11 @@ import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
     BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener)  {
     var fontStyle: Typeface? = null
+    var showThumbnail: Boolean = true
     init {
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        showThumbnail = sharedPref.getBoolean(ResUtils.getStringRes(R.string.show_thumbnail), false)
     }
 
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
@@ -65,6 +70,11 @@ class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
             contentViewHolder.itemView.mIvPoster.visibility = View.GONE
         }
 
+        if (showThumbnail) {
+            contentViewHolder.itemView.mIvPoster.visibility = View.VISIBLE
+        } else {
+            contentViewHolder.itemView.mIvPoster.visibility = View.GONE
+        }
         contentViewHolder.itemView.mTvTime.text = data?.publishedAt
 
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)

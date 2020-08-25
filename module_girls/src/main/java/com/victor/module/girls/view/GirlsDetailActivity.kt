@@ -16,10 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.clips.util.AppUtil
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
@@ -49,10 +47,11 @@ import kotlin.collections.ArrayList
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.GirlsDetailAct)
-class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener {
+class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener,
+    ViewPager.OnPageChangeListener{
     var girlDetailAdapter: GirlDetailAdapter? = null
     var gankDetailList: ArrayList<GankDetailInfo>? = ArrayList()
-    var position: Int? = 0
+    var position: Int = 0
 
     var mWallpaperManager: WallpaperManager? = null
 
@@ -168,10 +167,13 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener {
 
         girlDetailAdapter = GirlDetailAdapter(this,gankDetailList!!)
         mVpGirls.adapter = girlDetailAdapter
+        mVpGirls.addOnPageChangeListener(this)
+
+        mFabFavGirl.setOnClickListener(this)
     }
 
     fun initArgs (intent: Intent?) {
-        position = intent?.getIntExtra(NavigationUtils.POSITION_KEY,0)
+        position = intent?.getIntExtra(NavigationUtils.POSITION_KEY,0)!!
     }
     fun initLocalGirlsData () {
         localGirlsViewModel.girls.observe(this, androidx.lifecycle.Observer {
@@ -209,7 +211,7 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener {
     suspend fun setWallpaper () {
         val bitmap: Bitmap = girlDetailAdapter?.getCurrentView()!!
         withContext(Dispatchers.IO) {
-            mWallpaperManager?.setBitmap(bitmap);
+            mWallpaperManager?.setBitmap(bitmap)
         }
     }
 
@@ -230,5 +232,42 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.mFabFavGirl -> {
+                var favorited = gankDetailList?.get(position)?.isFavorited
+
+                if (favorited == 1) {
+                    gankDetailList?.get(position)?.isFavorited = 0
+                    mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
+                } else {
+                    gankDetailList?.get(position)?.isFavorited = 1
+                    mFabFavGirl.setImageResource(R.drawable.ic_favorite)
+                }
+                localGirlsViewModel.updateGirl(gankDetailList?.get(position)!!)
+                girlDetailAdapter?.notifyDataSetChanged()
+
+            }
+        }
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        Loger.e(TAG,"onPageSelected-gankDetailList = " + gankDetailList)
+        Loger.e(TAG,"onPageSelected-gankDetailList-size = " + gankDetailList?.size)
+        this.position = position
+        var favorited = gankDetailList?.get(position)?.isFavorited
+        if (favorited == 1) {
+            mFabFavGirl.setImageResource(R.drawable.ic_favorite)
+        } else {
+            mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
+        }
     }
 }

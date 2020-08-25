@@ -97,5 +97,7 @@ dependencies {
     api deps.SearchFilter.core
     //腾讯bugly崩溃日志收集
     api deps.bugly.core
+    //Setting UI
+    api deps.preference.core
 
 }
