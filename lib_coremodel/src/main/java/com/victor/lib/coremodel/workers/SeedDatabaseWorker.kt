@@ -39,8 +39,10 @@ class SeedDatabaseWorker(
 
 
                     val database = AppDatabase.getInstance(applicationContext)
-                    database.channelCategoryDao().insertAll(channelRes.categorys!!)
+                    database.channelCategoryDao().clearAll()
+                    database.channelDao().clearAll()
 
+                    database.channelCategoryDao().insertAll(channelRes.categorys!!)
                     for (category in channelRes.categorys!!) {
                         database.channelDao().insertAll(category.channels!!)
                     }

@@ -13,13 +13,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv1.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdcctv01/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://60.255.50.141:1935/live/cctv01gq/playlist.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225530/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-1?class=yangshi",
@@ -33,10 +27,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv2.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-2/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel13/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv2hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-2?class=yangshi",
@@ -50,10 +41,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv3.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-3/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel92/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-3?class=yangshi",
@@ -67,10 +55,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv4.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-4/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel32/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv4hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-4?class=yangshi",
@@ -84,10 +69,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv5.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-5/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://60.255.50.141:1935/live/cctv05/playlist.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv5phd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-5?class=yangshi",
@@ -99,9 +81,6 @@
 					"play_urls":[
 						{
 							"play_url":"http://116.77.73.77/otv/tw/live/channel20/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdcctv05plus/dujuejiami.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv5+?class=yangshi",
@@ -115,13 +94,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv6.m3u8"
 						},
 						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225548/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-6/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel98/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-6?class=yangshi",
@@ -135,10 +108,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv7.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-7/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225546/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv7hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-7?class=yangshi",
@@ -152,10 +122,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv8.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-8/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel88/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv8hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-8?class=yangshi",
@@ -169,13 +136,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv9.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-news/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-9/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel38/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv9hd.m3u88"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-9?class=yangshi",
@@ -189,10 +150,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv10.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-10/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel87/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv10hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-10?class=yangshi",
@@ -204,15 +162,6 @@
 					"play_urls":[
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv11.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225552/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-11/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel23/800.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-11?class=yangshi",
@@ -226,10 +175,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv12.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-12/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel41/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv12hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-12?class=yangshi",
@@ -241,15 +187,6 @@
 					"play_urls":[
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv13.m3u8"
-						},
-						{
-							"play_url":"http://60.255.50.141:1935/live/cctv13/playlist.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-13/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel31/800.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-13?class=yangshi",
@@ -263,10 +200,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv14.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-14/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel28/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv14hd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-14?class=yangshi",
@@ -278,12 +212,6 @@
 					"play_urls":[
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv15.m3u8"
-						},
-						{
-							"play_url":"http://183.232.54.210:8935/live/hcctv_115/chunklist.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/cctv-15/dujuejiami.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-15?class=yangshi",
@@ -291,19 +219,52 @@
 				},
 				{
 					"category_id": 101,
-					"channel_name":"CCTVNEWS",
+					"channel_name":"CCTV-16hd",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv16.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":"https://i.loli.net/2020/07/24/ZQse7d2vnS5wJom.png"
+				},
+				{
+					"category_id": 101,
+					"channel_name":"CCTV-17HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv17.m3u8"
+						},
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/cctv17hd.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":"https://i.loli.net/2020/08/26/k8TJVXZDKycd7BL.jpg"
+				},
+				{
+					"category_id": 101,
+					"channel_name":"CGTN-HD",
 					"play_urls":[
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/cctv16.m3u8"
 						},
 						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001123/index.m3u8?ispcode=3"
-						},
-						{
-							"play_url":"http://125.88.92.166:30001/PLTV/88888956/224/3221227704/1.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cgtnhd.m3u8"
 						}
 					],
-					"epg":"http://www.tvsou.com/epg/cctv-news?class=yangshi",
+					"epg":"",
+					"icon":"https://i.loli.net/2020/07/24/ZQse7d2vnS5wJom.png"
+				},
+				{
+					"category_id": 101,
+					"channel_name":"CGTN-DOCHD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/cgtndochd.m3u8"
+						}
+					],
+					"epg":"",
 					"icon":"https://i.loli.net/2020/07/24/ZQse7d2vnS5wJom.png"
 				},
 				{
@@ -311,10 +272,10 @@
 					"channel_name":"CETV-1",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel48/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cetv1hd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/jiaoyutv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cetv1.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cctv-news?class=yangshi",
@@ -322,24 +283,24 @@
 				},
 				{
 					"category_id": 101,
-					"channel_name":"央视文化",
+					"channel_name":"CETV-3",
 					"play_urls":[
 						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001209/index.m3u8?ispcode=3"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cetv3.m3u8"
 						}
 					],
-					"epg":"",
+					"epg":"http://www.tvsou.com/epg/cctv-news?class=yangshi",
 					"icon":"https://i.loli.net/2020/07/24/ZQse7d2vnS5wJom.png"
 				},
 				{
 					"category_id": 101,
-					"channel_name":"新闻综合",
+					"channel_name":"CETV-4",
 					"play_urls":[
 						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001196/index.m3u8?ispcode=3"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cetv4.m3u8"
 						}
 					],
-					"epg":"",
+					"epg":"http://www.tvsou.com/epg/cctv-news?class=yangshi",
 					"icon":"https://i.loli.net/2020/07/24/ZQse7d2vnS5wJom.png"
 				}
 			]
@@ -357,12 +318,6 @@
 						},
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/hbtv.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdhubeistv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel29/800.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/hubeidianshitai-hbws?class=weishi",
@@ -376,13 +331,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"
 						},
 						{
-							"play_url":"http://60.255.50.141:1935/live/JS/playlist.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdhunanstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel89/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/hunantv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/hunandianshitai-hnws?class=weishi",
@@ -399,10 +348,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/btv2.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdbeijingstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel91/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv1.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/BTV-1?class=weishi",
@@ -416,10 +362,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/tjhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdtianjinstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel24/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/tjtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/tianjindianshitai-tjws?class=weishi",
@@ -433,7 +376,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/jshd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdjiangsustv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/jstv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/jiangsudianshitai-jsws?class=weishi",
@@ -447,10 +390,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/hljhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdheilongjiangstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel39/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/hljtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/hljws?class=weishi",
@@ -464,10 +404,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/lnhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/liaoningstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel16/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/lntv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/lnws-hd?class=weishi",
@@ -481,13 +418,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/dfhd.m3u8"
 						},
 						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225558/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hddongfangstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel93/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/dftv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/dfws?class=weishi",
@@ -501,7 +432,7 @@
 							"play_url":"http://v.btzx.com.cn:1935/live/weishi.stream/playlist.m3u8"
 						},
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel47/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/bttv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/btws?class=weishi",
@@ -515,10 +446,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/jltv.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/jilinstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel25/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/jlhd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/jlws?class=weishi",
@@ -533,12 +461,6 @@
 						},
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/sdtv.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdshandongstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel26/800.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/sdws?class=weishi",
@@ -549,7 +471,7 @@
 					"channel_name":"山西卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel21/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/sxrtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/shanxidianshitai-sxws?class=weishi",
@@ -563,7 +485,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/cqhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/chongqingstv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/cqtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/cqws?class=weishi",
@@ -574,16 +496,10 @@
 					"channel_name":"四川卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel18/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/schd.m3u8"
 						},
 						{
-							"play_url":"http://60.255.50.141:1935/live/sctv/playlist.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/sichuanstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225570/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/sctv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/scws?class=weishi",
@@ -594,7 +510,7 @@
 					"channel_name":"青海卫视HD",
 					"play_urls":[
 						{
-							"play_url":""
+							"play_url":"http://ivi.bupt.edu.cn/hls/qhtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/qhws?class=weishi",
@@ -609,15 +525,6 @@
 						},
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/ahtv.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225634/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/anhuistv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel17/800.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/ahws?class=weishi",
@@ -629,12 +536,6 @@
 					"play_urls":[
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/sxtv.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/shanxi1stv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"https://i.loli.net/2020/07/24/g61Ytfj4QKJ3mqU.png"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/shanxidianshitai-sxws_xian?class=weishi",
@@ -645,10 +546,7 @@
 					"channel_name":"甘肃卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel45/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/gansustv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/gstv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/gsws?class=weishi",
@@ -659,13 +557,10 @@
 					"channel_name":"贵州卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel43/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/gzhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/guizhoustv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225540/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/gztv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/gzws?class=weishi",
@@ -676,10 +571,10 @@
 					"channel_name":"河北卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel40/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/hebhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hebeistv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/hebtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/hbws-hd?class=weishi",
@@ -693,10 +588,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/hntv.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/henanstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel37/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/hnhd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/henandianshitai-hnws?class=weishi",
@@ -711,9 +603,6 @@
 						},
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/gdtv.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdzhejiangstv/dujuejiami.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/gdws?class=weishi",
@@ -727,7 +616,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/gxtv.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/guangxistv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/gxhd.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/gxws?class=weishi",
@@ -742,15 +631,6 @@
 						},
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/sztv.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel12/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdshenzhenstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel97/800.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/szws?class=weishi",
@@ -761,10 +641,7 @@
 					"channel_name":"内蒙古卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225624/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/neimenggustv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/nmtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/nmgws?class=weishi",
@@ -775,13 +652,7 @@
 					"channel_name":"新疆卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel49/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/xinjiangstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225523/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/xjtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/xjws?class=weishi",
@@ -792,13 +663,7 @@
 					"channel_name":"西藏卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel44/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/xizangstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225579/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/xztv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/xzws?class=weishi",
@@ -809,10 +674,10 @@
 					"channel_name":"东南卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel27/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/dnhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/dongnanstv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/dntv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/dnws?class=weishi",
@@ -826,13 +691,7 @@
 							"play_url":"http://ivi.bupt.edu.cn/hls/zjhd.m3u8"
 						},
 						{
-							"play_url":"http://60.255.50.141:1935/live/zjws/playlist.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/hdzhejiangstv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel90/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/zjtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/zhejiangdianshitai-zjws?class=weishi",
@@ -843,13 +702,10 @@
 					"channel_name":"江西卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel22/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/jxhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/jiangxistv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225537/index.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/jxtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/jxws?class=weishi",
@@ -860,10 +716,7 @@
 					"channel_name":"云南卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel15/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/yunnanstv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/yntv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/ynws?class=weishi",
@@ -871,27 +724,24 @@
 				},
 				{
 					"category_id": 102,
-					"channel_name":"旅游卫视HD",
+					"channel_name":"海南卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel33/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/lyhd.m3u8"
 						},
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/lvyoustv/dujuejiami.m3u8"
-						},
-						{
-							"play_url":"http://stream1.hnntv.cn/lyws/sd/live.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/lytv.m3u8"
 						}
 					],
-					"epg":"http://www.tvsou.com/epg/lyws?class=weishi",
-					"icon":"https://i.loli.net/2020/07/24/5B3Wl6fEt8L1aIM.jpg"
+					"epg":"http://www.tvsou.com/epg/ynws?class=weishi",
+					"icon":"https://i.loli.net/2020/08/26/5jdq7iFnTG8yHVI.png"
 				},
 				{
 					"category_id": 102,
 					"channel_name":"厦门卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://61.58.60.247:9000/live/234.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/xmtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/xmws?class=weishi",
@@ -902,10 +752,7 @@
 					"channel_name":"宁夏卫视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel46/800.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/ningxiastv/dujuejiami.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/nxtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/nxws?class=weishi",
@@ -927,11 +774,22 @@
 					"channel_name":"延边卫视",
 					"play_urls":[
 						{
-							"play_url":"http://mlive.iybtv.com:8012/kmZk2fv/500/live.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/ybtv.m3u8"
 						}
 					],
 					"epg":"http://www.tvsou.com/epg/nfws?class=weishi",
 					"icon":"https://i.loli.net/2020/07/24/248IubSTELMqnkY.jpg"
+				},
+				{
+					"category_id": 102,
+					"channel_name":"三沙卫视",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/sstv.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":"https://i.loli.net/2020/08/26/24tSY3f1ismhge8.jpg"
 				},
 				{
 					"category_id": 102,
@@ -969,109 +827,76 @@
 			]
 		},
 		{
-			"id": 103,
-			"channel_category":"体育生活",
-			"channels":[
-				{
-					"category_id": 103,
-					"channel_name":"风云足球HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001200/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"http://www.tvsou.com/epg/fengyunzuqiu?class=shuzi",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"欧洲足球HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001136/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"高尔夫网球HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001201/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"世界地理HD",
-					"play_urls":[
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel34/800.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"国防军事HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001205/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"纪录频道HD",
-					"play_urls":[
-						{
-							"play_url":"http://122.227.101.159:80/livehls1-cnc.wasu.cn/hd_qsjl/z.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"生活频道HD",
-					"play_urls":[
-						{
-							"play_url":"http://122.227.101.159:80/livehls1-cnc.wasu.cn/hd_qssh/z.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 103,
-					"channel_name":"动物频道HD",
-					"play_urls":[
-						{
-							"play_url":"http://122.227.101.159:80/livehls1-cnc.wasu.cn/hd_qsdw/z.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				}
-			]
-		},
-		{
 			"id": 104,
 			"channel_category":"省级市级",
 			"channels":[
 				{
 					"category_id": 104,
-					"channel_name":"广东公共HD",
+					"channel_name":"北京影视HD",
 					"play_urls":[
 						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel51/800.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv4hd.m3u8"
+						},
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv4.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":""
+				},
+				{
+					"category_id": 104,
+					"channel_name":"北京文艺HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv2hd.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":""
+				},
+				{
+					"category_id": 104,
+					"channel_name":"北京新闻HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv9hd.m3u8"
+						},
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv9.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":""
+				},
+				{
+					"category_id": 104,
+					"channel_name":"北京科教HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv3.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":""
+				},
+				{
+					"category_id": 104,
+					"channel_name":"北京财经HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv5.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":""
+				},
+				{
+					"category_id": 104,
+					"channel_name":"北京生活HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv7.m3u8"
 						}
 					],
 					"epg":"",
@@ -1082,7 +907,7 @@
 					"channel_name":"北京青年HD",
 					"play_urls":[
 						{
-							"play_url":"http://106.120.175.80:55336/tslive/c4_ct_btv8_bjqn_smooth_t10/c4_ct_btv8_bjqn_smooth_t10.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv8.m3u8"
 						}
 					],
 					"epg":"",
@@ -1090,10 +915,13 @@
 				},
 				{
 					"category_id": 104,
-					"channel_name":"山东齐鲁HD",
+					"channel_name":"北京冬奥纪实HD",
 					"play_urls":[
 						{
-							"play_url":"http://106.120.175.80:55336/tslive/c22_ct_sdtv2_sdql_smooth_t10/c22_ct_sdtv2_sdql_smooth_t10.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv11hd.m3u8"
+						},
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv11.m3u8"
 						}
 					],
 					"epg":"",
@@ -1101,10 +929,10 @@
 				},
 				{
 					"category_id": 104,
-					"channel_name":"章丘农科民生HD",
+					"channel_name":"上海纪实HD",
 					"play_urls":[
 						{
-							"play_url":"http://live.zhihuizq.com:1935/live/4_channel-1_output-0_live/playlist.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/docuchina.m3u8"
 						}
 					],
 					"epg":"",
@@ -1112,10 +940,21 @@
 				},
 				{
 					"category_id": 104,
-					"channel_name":"韶关综合HD",
+					"channel_name":"金鹰纪实HD",
 					"play_urls":[
 						{
-							"play_url":"http://live.sgmsw.cn:8134/hls-live/livepkgr/_definst_/liveevent/livestream4.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/gedocu.m3u8"
+						}
+					],
+					"epg":"",
+					"icon":""
+				},
+				{
+					"category_id": 104,
+					"channel_name":"山东教育HD",
+					"play_urls":[
+						{
+							"play_url":"http://ivi.bupt.edu.cn/hls/sdetv.m3u8"
 						}
 					],
 					"epg":"",
@@ -1156,72 +995,6 @@
 				},
 				{
 					"category_id": 104,
-					"channel_name":"晴彩重庆HD",
-					"play_urls":[
-						{
-							"play_url":"http://pili-live-hls.live.cqcbc.com/jczb/jccq.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"辽宁公共HD",
-					"play_urls":[
-						{
-							"play_url":"http://lms.csytv.com/Live/124/live/livestream.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"晴彩沈阳HD",
-					"play_urls":[
-						{
-							"play_url":"http://lms.csytv.com/Live/125/live/livestream.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"江苏城市HD",
-					"play_urls":[
-						{
-							"play_url":"http://116.77.73.77/otv/tw/live/channel94/800.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"江苏综艺HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001304/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"淮安公共HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001216/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
 					"channel_name":"农民频道HD",
 					"play_urls":[
 						{
@@ -1229,53 +1002,6 @@
 						}
 					],
 					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"无锡教育",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001314/index.m3u8?ispcode=3"
-						},
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001293/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"淮安公共",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001216/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"东方财经",
-					"play_urls":[
-						{
-							"play_url":"http://110.77.0.182:1935/dvr/1011.stream/playlist.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 104,
-					"channel_name":"凤凰中文",
-					"play_urls":[
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/fhchinese/dujuejiami.m3u8"
-						}
-					],
-					"epg":"http://www.tvsou.com/epg/xianggangyouxiandianshitai-fenghuangweishizhongwentai?class=jingwai",
 					"icon":""
 				}
 			]
@@ -1286,35 +1012,10 @@
 			"channels":[
 				{
 					"category_id": 105,
-					"channel_name":"广东新闻HD",
-					"play_urls":[
-						{
-							"play_url":"http://125.88.92.166:30001/PLTV/88888956/224/3221227674/1.m3u8"
-						},
-						{
-							"play_url":"http://stream1.grtn.cn/xwpd/sd/live.m3u8?_upt=?ts"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 105,
 					"channel_name":"德州新闻HD",
 					"play_urls":[
 						{
 							"play_url":"http://video.dztv.tv:1935/live/xwpd_gq/playlist.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 105,
-					"channel_name":"章丘新闻综合HD",
-					"play_urls":[
-						{
-							"play_url":"http://live.zhihuizq.com:1935/live/4_channel-0_output-0_live/playlist.m3u8"
 						}
 					],
 					"epg":"",
@@ -1330,64 +1031,6 @@
 					],
 					"epg":"",
 					"icon":""
-				},
-				{
-					"category_id": 105,
-					"channel_name":"绵阳新闻综合HD",
-					"play_urls":[
-						{
-							"play_url":"http://cdn1.myntv.cn/myntv1/MYNTV1.flv/playlist.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 105,
-					"channel_name":"沈阳新闻HD",
-					"play_urls":[
-						{
-							"play_url":"http://lms.csytv.com/Live/122/live/livestream.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 105,
-					"channel_name":"苏州新闻综合HD",
-					"play_urls":[
-						{
-							"play_url":"http://livetv.2500city.com/live/livetvsztv1-720/index.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 105,
-					"channel_name":"淮安新闻综合HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001198/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 105,
-					"channel_name":"凤凰资讯",
-					"play_urls":[
-						{
-							"play_url":"http://223.110.245.139:80/PLTV/3/224/3221226980/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/fhzixun/dujuejiami.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":"https://i.loli.net/2020/07/24/pQ8dFoVg2Mlx1vi.png"
 				},
 				{
 					"category_id": 105,
@@ -1408,132 +1051,8 @@
 			"channels":[
 				{
 					"category_id": 106,
-					"channel_name":"HOT欧美HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001237/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"HOT精品HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001227/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"HOT",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001231/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"HOT探索记录HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001243/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"HOT风尚音乐HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001258/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"MTV",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001154/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"电影HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001166/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"风云剧场HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001208/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"http://www.tvsou.com/epg/fengyunjuchang?class=shuzi",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"风云音乐HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001214/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"怀旧剧场",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001211/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
-					"channel_name":"TVB8",
-					"play_urls":[
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/tvb8/dujuejiami.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 106,
 					"channel_name":"CHC高清电影",
 					"play_urls":[
-						{
-							"play_url":"http://ivi.bupt.edu.cn/hls/chchd.m3u8"
-						},
 						{
 							"play_url":"http://ivi.bupt.edu.cn/hls/chchd.m3u8"
 						}
@@ -1549,113 +1068,10 @@
 			"channels":[
 				{
 					"category_id": 107,
-					"channel_name":"炫动卡通HD",
+					"channel_name":"北京卡酷少儿HD",
 					"play_urls":[
 						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/xuandongkaton/dujuejiami.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 107,
-					"channel_name":"嘉佳卡通HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001235/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 107,
-					"channel_name":"金鹰卡通",
-					"play_urls":[
-						{
-							"play_url":"http://183.207.249.15/PLTV/3/224/3221225620/index.m3u8"
-						},
-						{
-							"play_url":"http://117.169.120.142:8080/wh7f454c46tw1875988299_1988371409/ysten-businessmobile/live/jinyingkaton/dujuejiami.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 107,
-					"channel_name":"BTV卡通HD",
-					"play_urls":[
-						{
-							"play_url":"http://222.191.24.5:6610/2/2/ch00000090990000001148/index.m3u8?ispcode=3"
-						}
-					],
-					"epg":"",
-					"icon":""
-				}
-			]
-		},
-		{
-			"id": 108,
-			"channel_category":"电视剧频道",
-			"channels":[
-				{
-					"category_id": 108,
-					"channel_name":"火猫5剧场",
-					"play_urls":[
-						{
-							"play_url":"http://live-tx-hdl.huomaotv.cn/live/2epqPZ24085.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 108,
-					"channel_name":"火猫6剧场",
-					"play_urls":[
-						{
-							"play_url":"http://live-tx-hdl.huomaotv.cn/live/gEFTWY23105.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				}
-			]
-		},
-		{
-			"id": 109,
-			"channel_category":"搞笑娱乐",
-			"channels":[
-				{
-					"category_id": 109,
-					"channel_name":"搞笑综合",
-					"play_urls":[
-						{
-							"play_url":"http://61.218.59.193:80/live/ch121/playlist.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 109,
-					"channel_name":"芒果-德云社",
-					"play_urls":[
-						{
-							"play_url":"http://rotation.vod.zlive.cc/channel/1926.m3u8"
-						}
-					],
-					"epg":"",
-					"icon":""
-				},
-				{
-					"category_id": 109,
-					"channel_name":"芒果-欢乐喜剧人",
-					"play_urls":[
-						{
-							"play_url":"http://rotation.vod.zlive.cc/channel/1925.m3u8"
+							"play_url":"http://ivi.bupt.edu.cn/hls/btv10.m3u8"
 						}
 					],
 					"epg":"",

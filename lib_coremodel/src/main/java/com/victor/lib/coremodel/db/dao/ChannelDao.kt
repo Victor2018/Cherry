@@ -23,6 +23,9 @@ interface ChannelDao {
     @Delete
     fun delete(data: ChannelInfo)
 
+    @Query("DELETE FROM channelinfo")
+    suspend fun clearAll()
+
     @Update
     fun update(data: ChannelInfo)
 
