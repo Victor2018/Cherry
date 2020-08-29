@@ -1,5 +1,5 @@
 <resources>
-    <string name="module_wechat">module_wechat</string>
+    <string name="wechat_module_wechat">module_wechat</string>
 
     <string name="wechat_fragment">WeChatFragment</string>
 

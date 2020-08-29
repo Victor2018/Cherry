@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="@string/module_wechat"
+        android:label="@string/wechat_module_wechat"
         android:name="com.victor.lib.common.app.App"
         android:icon="@drawable/module_wechat_logo"
         android:theme="@style/AppTheme.NoActionBar"

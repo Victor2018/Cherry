@@ -5,7 +5,7 @@
     <application>
 
         <activity android:name=".view.GirlsActivity"
-            android:label="@string/module_girls">
+            android:label="@string/girls_module_girls">
         </activity>
         <activity
             android:name=".view.GirlsDetailActivity"

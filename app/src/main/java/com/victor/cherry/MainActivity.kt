@@ -67,8 +67,6 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
         homeFragmentAdapter?.fragmetList = fragmentList
         mVpHome.adapter = homeFragmentAdapter
 
-        mVpHome.offscreenPageLimit = fragmentList.size
-
         mNavBar.setOnItemSelectListener(this)
 
       /*  var textView: TextView  = toolbar.getChildAt(0) as TextView;//主标题

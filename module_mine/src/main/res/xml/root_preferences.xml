@@ -1,11 +1,14 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="ResourceName">
 
     <PreferenceCategory app:title="@string/basic_setting">
 
         <SwitchPreferenceCompat
             app:key="@string/show_thumbnail"
-            app:title="show_thumbnail_title" />
+            app:title="show_thumbnail_title"
+            app:defaultValue="true"/>
 
     </PreferenceCategory>
 

@@ -30,7 +30,7 @@
                 android:background="@color/transparent"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
-                app:title="@string/module_tv">
+                app:title="@string/tv_module_tv">
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

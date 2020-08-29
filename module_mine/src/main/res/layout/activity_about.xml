@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:alpha="0.8"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:ignore="ResourceName">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"

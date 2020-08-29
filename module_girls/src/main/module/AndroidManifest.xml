@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
-        android:label="@string/module_girls"
+        android:label="@string/girls_module_girls"
         android:name="com.victor.lib.common.app.App"
         android:icon="@drawable/module_girls_logo"
         android:theme="@style/AppTheme.NoActionBar"

@@ -2,11 +2,13 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dp_375"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/dp_5"
     app:cardCornerRadius="@dimen/dp_10"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    tools:ignore="ResourceName">
 
     <LinearLayout
         android:layout_width="match_parent"

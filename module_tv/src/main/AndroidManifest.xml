@@ -5,6 +5,6 @@
     <application>
 
         <activity android:name=".view.TvActivity"
-            android:label="@string/module_tv"/>
+            android:label="@string/tv_module_tv"/>
     </application>
 </manifest>

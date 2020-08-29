@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="@string/module_home"
+        android:label="@string/home_module_home"
         android:name="com.victor.lib.common.app.App"
         android:icon="@drawable/module_home_logo"
         android:theme="@style/AppTheme.NoActionBar"

@@ -2,7 +2,8 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ResourceName">
 
     <data>
         <variable
@@ -66,7 +67,7 @@
                         android:background="@color/transparent"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                         app:layout_collapseMode="pin"
-                        app:title="@string/module_home"
+                        app:title="@string/home_module_home"
                         app:titleTextAppearance="@style/Toolbar.TitleText">
                     </androidx.appcompat.widget.Toolbar>
                 </com.google.android.material.appbar.CollapsingToolbarLayout>

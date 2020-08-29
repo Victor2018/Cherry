@@ -2,9 +2,11 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mSrlRefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ResourceName">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -29,7 +31,7 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginStart="@dimen/dp_50"
                 app:expandedTitleMarginEnd="@dimen/dp_65"
-                app:title="@string/module_girls">
+                app:title="@string/girls_module_girls">
 
                 <ImageView
                     android:id="@+id/mIvRandomGirl"
@@ -48,7 +50,7 @@
                     android:background="@color/transparent"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:layout_collapseMode="pin"
-                    app:title="@string/module_girls"
+                    app:title="@string/girls_module_girls"
                     android:fitsSystemWindows="true"
                     app:titleTextAppearance="@style/Toolbar.TitleText">
                 </androidx.appcompat.widget.Toolbar>

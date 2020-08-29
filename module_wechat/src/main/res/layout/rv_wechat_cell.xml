@@ -13,7 +13,8 @@
     card_view:contentPaddingRight="@dimen/dp_50"
     card_view:cardCornerRadius="0dp"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    tools:ignore="ResourceName">
     <TextView
         android:id="@+id/mTvTitle"
         android:layout_width="match_parent"

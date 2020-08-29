@@ -5,7 +5,7 @@
     <application>
 
         <activity android:name=".view.HomeActivity"
-            android:label="@string/module_home"/>
+            android:label="@string/home_module_home"/>
         <activity
             android:name=".view.GankActivity"
             android:launchMode="singleTask"/>

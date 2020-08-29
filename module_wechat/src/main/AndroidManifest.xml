@@ -5,7 +5,7 @@
     <application>
 
         <activity android:name=".view.WeChatActivity"
-            android:label="@string/module_wechat"/>
+            android:label="@string/wechat_module_wechat"/>
         <activity
             android:name="com.victor.lib.common.view.activity.WebActivity"
             android:launchMode="singleTask"/>

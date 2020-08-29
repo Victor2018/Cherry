@@ -1,5 +1,5 @@
 <resources>
-    <string name="module_mine">module_mine</string>
+    <string name="mine_module_mine">module_mine</string>
 
     <string name="mine_fragment">MineFragment</string>
 

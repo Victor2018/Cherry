@@ -34,7 +34,7 @@ class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
     init {
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        showThumbnail = sharedPref.getBoolean(ResUtils.getStringRes(R.string.show_thumbnail), false)
+        showThumbnail = sharedPref.getBoolean(ResUtils.getStringRes(R.string.show_thumbnail), true)
     }
 
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {

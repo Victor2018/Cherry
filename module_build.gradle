@@ -10,6 +10,9 @@ if (isModule.toBoolean()) {
 apply from: "../config_build.gradle"
 
 android {
+    //给 Module 内的资源名增加前缀, 避免资源名冲突
+    resourcePrefix "${project.name.toLowerCase().replaceAll("module_", "")}_"
+
     //这里进行设置使用单独运行还是合并运行的Manifest.xml
     sourceSets {
         main {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource,ResourceName">
 
     <TextView
         android:id="@+id/mTvCategoryTitle"
