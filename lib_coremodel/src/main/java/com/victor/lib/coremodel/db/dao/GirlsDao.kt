@@ -25,22 +25,14 @@ interface GirlsDao {
     @Delete
     fun delete(data: GankDetailInfo)
 
-    @Query("DELETE FROM girls")
+    @Query("DELETE FROM gank")
     suspend fun clearAll()
 
     @Update
     suspend fun update(data: GankDetailInfo)
 
-    @Query("SELECT * FROM girls ORDER BY publishedAt DESC")
+    @Query("SELECT * FROM gank ORDER BY publishedAt DESC")
     fun getAll(): LiveData<List<GankDetailInfo>>
 
-    @Query("SELECT * FROM girls WHERE isFavorited = 1 ORDER BY publishedAt ASC LIMIT 5")
-    fun getFavGirls(): LiveData<List<GankDetailInfo>>
-
-    @Query("SELECT count(1) FROM girls WHERE isFavorited = 1")
-    fun getFavGirlsCount(): LiveData<Int>
-
-    @Query("SELECT EXISTS(SELECT 1 FROM girls WHERE _id = :id LIMIT 1)")
-    fun isFavorited(id: String): LiveData<Boolean>
 
 }

@@ -1,25 +1,23 @@
 package com.victor.lib.coremodel.http.repository
 
-import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.db.AppDatabase
+import com.victor.lib.coremodel.db.dao.CategoryDao
+import com.victor.lib.coremodel.db.dao.FavGankDao
 import com.victor.lib.coremodel.db.entity.FavGankInfo
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: LocalGirlsRepository
+ * File: GankRepository
  * Author: Victor
  * Date: 2020/8/14 下午 05:55
  * Description: 
  * -----------------------------------------------------------------
  */
 
-class LocalGirlsRepository internal constructor(private val db: AppDatabase) {
-    val girlsDao = db.girlsDao()
+class GankRepository private constructor(private val db: AppDatabase) {
     val favGankDao = db.favGankDao()
-
-    fun getLocalGirls() = girlsDao.getAll()
 
     suspend fun addFavGank(favId: String,type:String,category: String) {
         val favGank = FavGankInfo(favId,type,category)
@@ -39,11 +37,11 @@ class LocalGirlsRepository internal constructor(private val db: AppDatabase) {
     companion object {
 
         // For Singleton instantiation
-        @Volatile private var instance: LocalGirlsRepository? = null
+        @Volatile private var instance: GankRepository? = null
 
         fun getInstance(db: AppDatabase) =
             instance ?: synchronized(this) {
-                instance ?: LocalGirlsRepository(db).also { instance = it }
+                instance ?: GankRepository(db).also { instance = it }
             }
     }
 }

@@ -96,7 +96,7 @@
             android:id="@+id/mNsvAbout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:behavior_overlapTop="@dimen/dp_90"
+            app:behavior_overlapTop="@dimen/dp_45"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -126,30 +126,6 @@
                         android:text="@string/favorite"/>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/dp_0"
-                    app:cardElevation="@dimen/dp_5">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_90"
-                        android:paddingLeft="@dimen/dp_20"
-                        android:paddingRight="@dimen/dp_20"
-                        android:gravity="center|right"
-                        android:drawableLeft="@drawable/ic_gank_black_24"
-                        android:drawableRight="@drawable/ic_arrow_black_right_24"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:textSize="@dimen/dp_36"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/zuo_an_lian_ren"
-                        android:text="18"/>
-                </androidx.cardview.widget.CardView>
 
                 <View
                     style="@style/base_line_horizontal"

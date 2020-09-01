@@ -13,7 +13,9 @@ import com.victor.lib.coremodel.data.Category
 import com.victor.lib.coremodel.data.ChannelInfo
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.db.dao.CategoryDao
+import com.victor.lib.coremodel.db.dao.FavGankDao
 import com.victor.lib.coremodel.db.dao.GirlsDao
+import com.victor.lib.coremodel.db.entity.FavGankInfo
 import com.victor.lib.coremodel.workers.SeedDatabaseWorker
 
 /*
@@ -30,13 +32,15 @@ import com.victor.lib.coremodel.workers.SeedDatabaseWorker
 @Database(entities = arrayOf(
     Category::class,
     ChannelInfo::class,
-    GankDetailInfo:: class
+    GankDetailInfo:: class,
+    FavGankInfo:: class
 ),
-    version = 2, exportSchema = false)
+    version = 3, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun channelCategoryDao(): CategoryDao
     abstract fun channelDao(): ChannelDao
     abstract fun girlsDao(): GirlsDao
+    abstract fun favGankDao(): FavGankDao
 
     companion object {
         // For Singleton instantiation

@@ -17,7 +17,7 @@ import com.victor.lib.coremodel.data.GankDetailInfo
  * -----------------------------------------------------------------
  */
 
-class GirlsUrlConverters {
+class GankImageUrlConverters {
     @TypeConverter
     fun stringToObject(value: String): List<String> {
         val listType = object : TypeToken<List<String>>() {

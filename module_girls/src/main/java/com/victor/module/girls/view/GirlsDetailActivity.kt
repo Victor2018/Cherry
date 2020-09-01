@@ -50,8 +50,9 @@ import kotlin.collections.ArrayList
 class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener,
     ViewPager.OnPageChangeListener{
     var girlDetailAdapter: GirlDetailAdapter? = null
-    var gankDetailList: ArrayList<GankDetailInfo>? = ArrayList()
+    var gankDetailList = ArrayList<GankDetailInfo>()
     var position: Int = 0
+    var isFavoried: Boolean = false
 
     var mWallpaperManager: WallpaperManager? = null
 
@@ -174,15 +175,22 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
 
     fun initArgs (intent: Intent?) {
         position = intent?.getIntExtra(NavigationUtils.POSITION_KEY,0)!!
+
+        if (intent?.getSerializableExtra(NavigationUtils.GANK_DATA_KEY) != null) {
+            gankDetailList = intent?.getSerializableExtra(NavigationUtils.GANK_DATA_KEY) as ArrayList<GankDetailInfo>
+        }
     }
     fun initLocalGirlsData () {
-        localGirlsViewModel.girls.observe(this, androidx.lifecycle.Observer {
-            gankDetailList?.clear()
-            gankDetailList?.addAll(it)
-            girlDetailAdapter?.notifyDataSetChanged()
+        if (gankDetailList != null && gankDetailList?.size!! > 0) {
             mVpGirls.currentItem = position!!
-        })
-
+        } else {
+            localGirlsViewModel.girls.observe(this, androidx.lifecycle.Observer {
+                gankDetailList?.clear()
+                gankDetailList?.addAll(it)
+                girlDetailAdapter?.notifyDataSetChanged()
+                mVpGirls.currentItem = position!!
+            })
+        }
     }
 
     fun downImage () {
@@ -215,6 +223,19 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
         }
     }
 
+    fun setFavoriteStatus (position: Int) {
+        localGirlsViewModel.isGankFavoreted(gankDetailList?.get(position)?._id!!).observe(this,
+            androidx.lifecycle.Observer {
+                if (it) {
+                    mFabFavGirl.setImageResource(R.drawable.ic_favorite)
+                    isFavoried = true
+                } else {
+                    mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
+                    isFavoried = false
+                }
+            })
+    }
+
     override fun onPermissionGranted(permissionName: Array<out String>) {
         super.onPermissionGranted(permissionName)
         Loger.e(TAG, "onPermissionGranted-Permission(s) " + Arrays.toString(permissionName) + " Granted")
@@ -237,18 +258,15 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.mFabFavGirl -> {
-                var favorited = gankDetailList?.get(position)?.isFavorited
-
-                if (favorited == 1) {
-                    gankDetailList?.get(position)?.isFavorited = 0
+                if (isFavoried) {
+                    localGirlsViewModel.removeFavGank(gankDetailList?.get(position)!!)
                     mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
+                    isFavoried = false
                 } else {
-                    gankDetailList?.get(position)?.isFavorited = 1
+                    localGirlsViewModel.addFavGank(gankDetailList?.get(position)!!)
                     mFabFavGirl.setImageResource(R.drawable.ic_favorite)
+                    isFavoried = true
                 }
-                localGirlsViewModel.updateGirl(gankDetailList?.get(position)!!)
-                girlDetailAdapter?.notifyDataSetChanged()
-
             }
         }
     }
@@ -263,11 +281,6 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
         Loger.e(TAG,"onPageSelected-gankDetailList = " + gankDetailList)
         Loger.e(TAG,"onPageSelected-gankDetailList-size = " + gankDetailList?.size)
         this.position = position
-        var favorited = gankDetailList?.get(position)?.isFavorited
-        if (favorited == 1) {
-            mFabFavGirl.setImageResource(R.drawable.ic_favorite)
-        } else {
-            mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
-        }
+        setFavoriteStatus(position)
     }
 }

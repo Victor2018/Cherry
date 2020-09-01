@@ -2,6 +2,7 @@ package com.victor.lib.common.util
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.lib.common.base.ARouterPath
+import com.victor.lib.coremodel.data.GankDetailInfo
 
 /*
  * -----------------------------------------------------------------
@@ -55,5 +56,22 @@ object NavigationUtils {
      */
     fun goSearchGankActivity() {
         ARouter.getInstance().build(ARouterPath.SearchGankAct).navigation()
+    }
+
+    /**
+     * 去往妹子详情页面
+     */
+    fun goGirlsDetailActivity(position: Int,datas: ArrayList<GankDetailInfo>) {
+        ARouter.getInstance().build(ARouterPath.GirlsDetailAct)
+            .withInt(POSITION_KEY,position)
+            .withSerializable(GANK_DATA_KEY,datas)
+            .navigation()
+    }
+    /**
+     * 去往妹子详情页面
+     */
+    fun goGirlsDetailActivity() {
+        ARouter.getInstance().build(ARouterPath.GirlsDetailAct)
+            .navigation()
     }
 }

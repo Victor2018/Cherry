@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
+import com.victor.lib.coremodel.data.GankAndFavGankInfo
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.mine.R
 import kotlinx.android.synthetic.main.rv_fav_girl_cell.view.*
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.rv_fav_girl_cell.view.*
  */
 
 class FavGirlsAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
-    BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener) {
+    BaseRecycleAdapter<GankAndFavGankInfo, RecyclerView.ViewHolder>(context, listener) {
     val BIG_ITEM = 3
     val NORMAL_ITEM = 4
 
@@ -32,7 +33,7 @@ class FavGirlsAdapter(context: Context, listener: AdapterView.OnItemClickListene
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -42,9 +43,9 @@ class FavGirlsAdapter(context: Context, listener: AdapterView.OnItemClickListene
         return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_fav_girl_cell ,parent, false))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.iv_img,data.url)
+        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.iv_img,data.plant.images[0])
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 

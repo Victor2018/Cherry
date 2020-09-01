@@ -34,7 +34,7 @@ class GankGirlPagingSource (
 
             db.withTransaction {
                 if (items.page == 1) {
-                    db.girlsDao().clearAll()
+//                    db.girlsDao().clearAll()
                 }
                 db.girlsDao().insertAll(items.data!!)
             }

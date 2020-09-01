@@ -14,6 +14,7 @@ import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.module.home.R
+import com.victor.module.home.view.holder.GankContentViewHolder
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 import org.victor.funny.util.ResUtils
 
@@ -45,37 +46,15 @@ class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_gank_cell ,parent, false))
+        return GankContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_gank_cell ,parent, false))
     }
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
-        val contentViewHolder = viewHolder as ContentViewHolder
-
+        val contentViewHolder = viewHolder as GankContentViewHolder
         contentViewHolder.itemView.mTvTitle.typeface = fontStyle
         contentViewHolder.itemView.mTvTime.typeface = fontStyle
 
-        contentViewHolder.itemView.mTvTitle.setText(
-            Html.fromHtml(
-                ("<a href=\""
-                        + data?.url) + "\">"
-                        + data?.desc + "</a>" + "[" + data?.author
-                    .toString() + "]"
-            )
-        )
-
-        if (data.images?.size!! > 0) {
-            contentViewHolder.itemView.mIvPoster.visibility = View.VISIBLE
-            ImageUtils.instance.loadImage(App.get(),contentViewHolder.itemView.mIvPoster,data.images?.get(0))
-        } else {
-            contentViewHolder.itemView.mIvPoster.visibility = View.GONE
-        }
-
-        if (showThumbnail) {
-            contentViewHolder.itemView.mIvPoster.visibility = View.VISIBLE
-        } else {
-            contentViewHolder.itemView.mIvPoster.visibility = View.GONE
-        }
-        contentViewHolder.itemView.mTvTime.text = data?.publishedAt
+        contentViewHolder.bindData(data,showThumbnail)
 
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.victor.lib.coremodel.db.GirlsUrlConverters
+import com.victor.lib.coremodel.db.GankImageUrlConverters
 import java.io.Serializable
 
 /*
@@ -17,8 +17,8 @@ import java.io.Serializable
  * Description: 
  * -----------------------------------------------------------------
  */
-@Entity(tableName = "girls")
-@TypeConverters(GirlsUrlConverters::class)
+@Entity(tableName = "gank")
+@TypeConverters(GankImageUrlConverters::class)
 class GankDetailInfo (
     @PrimaryKey @ColumnInfo(name = "_id") val _id: String,
     @ColumnInfo(name = "author") val author: String,

@@ -23,14 +23,25 @@ import kotlinx.coroutines.withContext
 class LocalGirlsViewModel internal constructor(var repository: LocalGirlsRepository) : ViewModel() {
 
     val girls = repository.getLocalGirls()
-    val favGirls = repository.getFavGirls()
-    val favGirlsCount = repository.getFavGirlsCount()
 
-    fun updateGirl(data: GankDetailInfo) {
+    fun addFavGank(data:GankDetailInfo) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.updateGirl(data)
+                repository.addFavGank(data._id,data.type,data.category)
             }
         }
     }
+    fun removeFavGank(data:GankDetailInfo) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.removeFavGank(data._id,data.type)
+            }
+        }
+    }
+
+    fun isGankFavoreted(favId: String) = repository.isGankFavoreted(favId)
+
+    val favGirls = repository.getFavGanks("Girl")
+
+    val favGanks = repository.getFavGanks("Android")
 }

@@ -15,6 +15,7 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.CacheCleanUtils
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.util.SnackbarUtil
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.LocalGirlsViewModel
 import com.victor.module.mine.R
@@ -95,6 +96,7 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
         toolbar.inflateMenu(R.menu.menu_mine)
         toolbar.setOnMenuItemClickListener(this)
 
+        mTvFavGirlsCount.setOnClickListener(this)
         mTvClearCache.setOnClickListener(this)
 
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
@@ -120,11 +122,8 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     }
 
     fun initData () {
-        localGirlsViewModel.favGirlsCount.observe(this, androidx.lifecycle.Observer {
-            mTvFavGirlsCount.text = it.toString()
-
-        })
         localGirlsViewModel.favGirls.observe(this, androidx.lifecycle.Observer {
+            mTvFavGirlsCount.text = it.size.toString()
             favGirlsAdapter?.clear()
             favGirlsAdapter?.add(it)
             favGirlsAdapter?.notifyDataSetChanged()
@@ -143,9 +142,9 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
 
     override fun onClick(v: View?) {
         when(v?.id) {
-//            R.id.mFabGitHub -> {
-//                AboutActivity.intentStart(activity!! as AppCompatActivity)
-//            }
+            R.id.mTvFavGirlsCount -> {
+                toGirlsDetail(0)
+            }
             R.id.mTvClearCache -> {
                 CacheCleanUtils.clearAllCache(activity!!)
                 mTvClearCache.setText("0KB")
@@ -169,7 +168,15 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        toGirlsDetail(position)
+    }
 
+    fun toGirlsDetail (position: Int) {
+        var datas = ArrayList<GankDetailInfo>()
+
+        favGirlsAdapter?.getDatas()?.map {datas.add(it.plant) }
+
+        NavigationUtils.goGirlsDetailActivity(position, datas)
     }
 
 }

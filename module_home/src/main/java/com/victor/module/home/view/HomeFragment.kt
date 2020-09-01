@@ -25,15 +25,18 @@ import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.common.view.widget.banner.BannerViewFlipper
 import com.victor.lib.common.view.widget.banner.DescriptionViewSwitcherFactory
+import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.data.GankInfo
-import com.victor.lib.coremodel.viewmodel.HomeLiveDataVMFactory
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
+import com.victor.module.home.view.holder.GankContentViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.toolbar
 import org.victor.funny.util.ResUtils
+import org.victor.funny.util.ToastUtils
 
 
 /*
@@ -51,7 +54,10 @@ import org.victor.funny.util.ResUtils
 class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener,
     AppBarLayout.OnOffsetChangedListener,SwipeRefreshLayout.OnRefreshListener {
-    private val viewmodel: HomeViewModel by viewModels { HomeLiveDataVMFactory }
+
+    private val viewmodel: HomeViewModel by viewModels {
+        InjectorUtils.provideGankViewModelFactory(this)
+    }
 
     var homeAdapter: HomeAdapter? = null
     var currentPage = 1
@@ -152,7 +158,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
                         homeAdapter?.setLoadState(homeAdapter?.LOADING_END!!)
                     }
 
-                    homeAdapter?.add(it.data)
+                    homeAdapter?.add(it2)
                     homeAdapter?.notifyDataSetChanged()
                 }
             }
@@ -171,7 +177,6 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         })
     }
 
-
     fun initGankData () {
         var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
         if (!TextUtils.isEmpty(categoryRes)) {
@@ -186,14 +191,18 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if (id == BannerViewFlipper.ON_BANNER_ITEM_CLICK) {
-            WebActivity.intentStart(activity!!,mBsvBanner?.messages?.get(position)?.title!!,
-                mBsvBanner?.messages?.get(position)?.url!!)
-        } else if (id == BannerViewFlipper.ON_BANNER_ITEM_SELECT) {
-            mTsDescription.setText(mBsvBanner?.messages?.get(position)?.title)
-        } else {
-            WebActivity.intentStart(activity!!,homeAdapter?.getItem(position)?.title!!,
-                homeAdapter?.getItem(position)?.url!!)
+        when (id) {
+            BannerViewFlipper.ON_BANNER_ITEM_CLICK -> {
+                WebActivity.intentStart(activity!!,mBsvBanner?.messages?.get(position)?.title!!,
+                    mBsvBanner?.messages?.get(position)?.url!!)
+            }
+            BannerViewFlipper.ON_BANNER_ITEM_SELECT -> {
+                mTsDescription.setText(mBsvBanner?.messages?.get(position)?.title)
+            }
+            else -> {
+                WebActivity.intentStart(activity!!,homeAdapter?.getItem(position)?.title!!,
+                    homeAdapter?.getItem(position)?.url!!)
+            }
         }
     }
 
@@ -204,12 +213,12 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
                 return true
             }
             R.id.action_share -> {
-                var intentshare = Intent(Intent.ACTION_SEND);
+                var intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
                     .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
-                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app));
-                Intent.createChooser(intentshare, getString(R.string.share));
-                startActivity(intentshare);
+                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app))
+                Intent.createChooser(intentshare, getString(R.string.share))
+                startActivity(intentshare)
                 return true
             }
         }
