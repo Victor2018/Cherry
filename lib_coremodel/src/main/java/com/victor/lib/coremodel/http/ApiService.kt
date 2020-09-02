@@ -1,15 +1,17 @@
 package com.victor.lib.coremodel.http
 
 import android.util.Log
+import com.alibaba.fastjson.JSON
 import com.victor.lib.coremodel.data.*
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import java.util.concurrent.TimeUnit
+
 
 /*
  * -----------------------------------------------------------------
@@ -73,7 +75,7 @@ interface ApiService {
             val client = OkHttpClient.Builder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(initLogInterceptor())
+                .addInterceptor(LogInterceptor())
                 .build()
             return Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -83,18 +85,28 @@ interface ApiService {
                 .create(ApiService::class.java)
         }
 
-        private fun initLogInterceptor(): HttpLoggingInterceptor {
+        class LogInterceptor : Interceptor {
 
-            val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-                override fun log(message: String) {
-                    Log.e(TAG, message)
-                }
-            })
+            override fun intercept(chain: Interceptor.Chain): Response {
 
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
+                var request = chain.request()
 
-            return interceptor
+                Log.e(TAG, "request url = " + request.url)
+                Log.e(TAG, "request parm = " + request.body)
+                Log.e(TAG, "request requestMethod = " + request.method)
+
+                var response = chain.proceed(request)
+
+                Log.e(TAG,"repsonse url = " + request.url)
+                Log.e(TAG,"repsonse code = " + response.code)
+                //response.peekBody不会关闭流
+                Log.e(TAG,"responseData = " + response.peekBody(1024)?.string())
+
+                return response
+            }
+
         }
+
     }
 
 

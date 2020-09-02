@@ -1,12 +1,9 @@
 package com.victor.module.girls.view
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.LinearInterpolator
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,16 +17,16 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
+import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
-import com.victor.lib.common.util.AnimUtil
-import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.common.util.Loger
+import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.GankDetailInfo
+import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlsAdapter
@@ -130,13 +127,26 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         viewmodel.randomGirlDataValue.observe(viewLifecycleOwner, Observer {
             hideFreshGirlAnim()
             it.let {
-                mCtlTitle.title = it.data?.get(0)?.title
-                ImageUtils.instance.loadImage(context!!,mIvRandomGirl,it.data?.get(0)?.images?.get(0))
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        mCtlTitle.title = it.data?.get(0)?.title
+                        ImageUtils.instance.loadImage(context!!,mIvRandomGirl,it.data?.get(0)?.images?.get(0))
+                    }
+                    else -> {
+                        mCtlTitle.title = ""
+                    }
+                }
             }
         })
     }
 
     private fun fetchRandomGirlData() {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mIvRandomGirl,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         showFreshGirlAnim()
         viewmodel.fetchRandomGirlData()
     }
@@ -160,6 +170,12 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
+            if (!HttpUtil.isNetEnable(App.get())) {
+                SnackbarUtil.ShortSnackbar(mIvRandomGirl,ResUtils.getStringRes(R.string.network_error),
+                    SnackbarUtil.ALERT
+                )
+                return@launchWhenCreated
+            }
             viewmodel.datas.collectLatest {
                 it.let {
                     girlsAdapter.submitData(it as PagingData<GankDetailInfo>)

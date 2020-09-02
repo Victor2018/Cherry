@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.os.Message
 import android.text.TextUtils
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.victor.lib.common.app.App
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.MainHandler
+import com.victor.lib.common.util.SnackbarUtil
+import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.Dispatchers
@@ -71,13 +73,28 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun subscribeUi() {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mIvGirl,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         viewmodel.randomGirlDataValue.observe(this, Observer {
             it.let {
-                ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
 
-                if (!TextUtils.isEmpty(it.data?.get(0)?.images?.get(0))) {
-                    MainHandler.get().sendEmptyMessageDelayed(Constant.Action.GO_MAIN,3000)
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
+
+                        it.data?.get(0)?.images?.get(0).let {
+                            MainHandler.get().sendEmptyMessageDelayed(Constant.Action.GO_MAIN,3000)
+                        }
+                    }
+                    else -> {
+                        MainHandler.get().sendEmptyMessage(Constant.Action.GO_MAIN)
+                    }
                 }
+
             }
         })
     }

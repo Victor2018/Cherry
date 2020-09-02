@@ -10,18 +10,20 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
-import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.common.util.JsonUtils
-import com.victor.lib.common.util.SharePreferencesUtil
+import com.victor.lib.common.util.*
+import com.victor.lib.coremodel.data.HttpStatus
+import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.viewmodel.GankCategoryLiveDataVMFactory
 import com.victor.lib.coremodel.viewmodel.GankCategoryViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.ActivityGankCategoryBinding
 import com.victor.module.home.view.adapter.GankCategoryAdapter
 import kotlinx.android.synthetic.main.activity_gank_category.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import org.victor.funny.util.ResUtils
 
 /*
  * -----------------------------------------------------------------
@@ -86,16 +88,36 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
     }
 
     fun initData () {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mIvGirl, ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         viewmodel.girlData.observe(this, Observer {
             it.let {
-                ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
+                    }
+                    else -> {
+                    }
+                }
             }
         })
         viewmodel.gankData.observe(this, Observer {
             it.let {
-                gankCategoryAdapter?.clear()
-                gankCategoryAdapter?.add(it.data)
-                gankCategoryAdapter?.notifyDataSetChanged()
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        gankCategoryAdapter?.clear()
+                        gankCategoryAdapter?.add(it.data)
+                        gankCategoryAdapter?.notifyDataSetChanged()
+                    }
+                    else -> {
+                        gankCategoryAdapter?.clear()
+                        gankCategoryAdapter?.notifyDataSetChanged()
+                    }
+                }
             }
         })
     }

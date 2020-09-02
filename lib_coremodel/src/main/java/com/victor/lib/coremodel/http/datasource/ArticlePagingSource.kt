@@ -29,7 +29,7 @@ class ArticlePagingSource (
             val items = requestApi.getArticles(id = id,page = params.key ?: 1)
 
             LoadResult.Page(
-                data = items.data?.datas!!,
+                data = items?.data?.datas!!,
                 prevKey = if (items?.data!!.curPage == 1) null else items?.data!!.curPage - 1,
                 nextKey = if (items?.data!!.curPage == items?.data!!.pageCount) null else items?.data!!.curPage + 1
             )

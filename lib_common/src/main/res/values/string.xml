@@ -65,5 +65,6 @@
     <string name="random_girl_on">Why do gay guys need girls</string>
     <string name="more">More</string>
     <string name="about">about</string>
+    <string name="network_error">Network error, please check network connection</string>
 
 </resources>

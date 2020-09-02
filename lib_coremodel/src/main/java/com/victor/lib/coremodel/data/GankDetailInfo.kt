@@ -19,20 +19,20 @@ import java.io.Serializable
  */
 @Entity(tableName = "gank")
 @TypeConverters(GankImageUrlConverters::class)
-class GankDetailInfo (
-    @PrimaryKey @ColumnInfo(name = "_id") val _id: String,
-    @ColumnInfo(name = "author") val author: String,
-    @ColumnInfo(name = "category") val category: String,
-    @ColumnInfo(name = "createdAt") val createdAt: String,
-    @ColumnInfo(name = "publishedAt") val publishedAt: String,
-    @ColumnInfo(name = "desc") val desc: String,
-    @ColumnInfo(name = "likeCounts") val likeCounts:Int,
-    @ColumnInfo(name = "stars") val stars:Int,
-    @ColumnInfo(name = "views") val views:Int,
-    @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "type") val type: String,
-    @ColumnInfo(name = "url") val url: String,
-    @ColumnInfo(name = "isFavorited") var isFavorited: Int,
+data class GankDetailInfo (
+    @PrimaryKey @ColumnInfo(name = "_id") val _id: String = "",
+    @ColumnInfo(name = "author") val author: String = "",
+    @ColumnInfo(name = "category") val category: String = "",
+    @ColumnInfo(name = "createdAt") val createdAt: String = "",
+    @ColumnInfo(name = "publishedAt") val publishedAt: String = "",
+    @ColumnInfo(name = "desc") val desc: String = "",
+    @ColumnInfo(name = "likeCounts") val likeCounts:Int = 0,
+    @ColumnInfo(name = "stars") val stars:Int = 0,
+    @ColumnInfo(name = "views") val views:Int = 0,
+    @ColumnInfo(name = "title") val title: String = "",
+    @ColumnInfo(name = "type") val type: String = "",
+    @ColumnInfo(name = "url") val url: String = "",
+    @ColumnInfo(name = "isFavorited") var isFavorited: Int = 0,
 
-    @ColumnInfo(name = "images") val images: List<String>
+    @ColumnInfo(name = "images") val images: List<String>? = null
 ): Serializable

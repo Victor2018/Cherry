@@ -12,16 +12,21 @@ import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
+import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.common.util.SnackbarUtil
+import com.victor.lib.coremodel.data.HttpStatus
+import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel.WechatLiveDataVMFactory
 import com.victor.module.wechat.R
 import com.victor.module.wechat.databinding.FragmentWechatBinding
 import com.victor.module.wechat.view.adapter.WeChatAdapter
 import kotlinx.android.synthetic.main.fragment_wechat.*
+import org.victor.funny.util.ResUtils
 
 /*
  * -----------------------------------------------------------------
@@ -102,12 +107,27 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
     }
 
     fun initData () {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mCtlTitle,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         viewmodel.weChatData.observe(viewLifecycleOwner, Observer {
             mSrlRefresh.isRefreshing = false
             it.let {
-                weChatAdapter?.clear()
-                weChatAdapter?.add(it.data)
-                weChatAdapter?.notifyDataSetChanged()
+                when (it.errorCode) {
+                    HttpStatus.WAN_ANDROID_SUCCESS -> {
+                        weChatAdapter?.clear()
+                        weChatAdapter?.add(it.data)
+                        weChatAdapter?.notifyDataSetChanged()
+                    }
+                    else -> {
+                        weChatAdapter?.clear()
+                        weChatAdapter?.notifyDataSetChanged()
+                    }
+                }
+
             }
         })
     }

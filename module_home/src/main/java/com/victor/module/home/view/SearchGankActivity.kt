@@ -15,13 +15,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
+import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.util.Loger
 import com.victor.lib.common.util.NavigationUtils
+import com.victor.lib.common.util.SnackbarUtil
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.data.HotKeyInfo
+import com.victor.lib.coremodel.data.HttpStatus
+import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.viewmodel.SearchGankViewModel
 import com.victor.lib.coremodel.viewmodel.SearchGankViewModel.SearchGankLiveDataVMFactory
 import com.victor.module.home.R
@@ -31,6 +36,7 @@ import com.victor.module.home.view.adapter.SearchGankAdapter
 import com.yalantis.filter.listener.FilterListener
 import com.yalantis.filter.widget.Filter
 import kotlinx.android.synthetic.main.activity_gank.toolbar
+import kotlinx.android.synthetic.main.activity_gank_category.*
 import kotlinx.android.synthetic.main.activity_search_gank.*
 import org.victor.funny.util.ResUtils
 import java.util.ArrayList
@@ -107,34 +113,53 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
 
     fun initData () {
         Loger.e(TAG,"initData......")
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mIvGirl,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         viewmodel.hotKeyData.observe(this, Observer {
             if (it == null) return@Observer
             if (it.data == null) return@Observer
 
-            if (it?.data?.size!! > 0) {
-                val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
-                mTitles = it?.data
-                mFilter?.adapter = SearchFilterAdapter(this,it?.data,colors)
-                mFilter?.expand()
-                mFilter?.build()
+            when (it.errorCode) {
+                HttpStatus.WAN_ANDROID_SUCCESS -> {
+                    if (it?.data?.size!! > 0) {
+                        val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
+                        mTitles = it?.data
+                        mFilter?.adapter = SearchFilterAdapter(this,it?.data,colors)
+                        mFilter?.expand()
+                        mFilter?.build()
+                    }
+                }
+                else -> {
+                }
             }
         })
         viewmodel.seachGankValue.observe(this, Observer {
             it.let {it1 ->
-                it.data.let {it2 ->
-                    if (currentPage == 1) {
-                        searchGankAdapter?.clear()
-                    }
-                    searchGankAdapter?.setFooterVisible(it.page < it.page_count)
-                    if (it.page < it.page_count) {
-                        searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING!!)
-                    } else {
-                        searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING_END!!)
-                    }
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        it.data.let {it2 ->
+                            if (currentPage == 1) {
+                                searchGankAdapter?.clear()
+                            }
+                            searchGankAdapter?.setFooterVisible(it.page < it.page_count)
+                            if (it.page < it.page_count) {
+                                searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING!!)
+                            } else {
+                                searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING_END!!)
+                            }
 
-                    searchGankAdapter?.add(it.data)
-                    searchGankAdapter?.notifyDataSetChanged()
+                            searchGankAdapter?.add(it.data)
+                            searchGankAdapter?.notifyDataSetChanged()
+                        }
+                    }
+                    else -> {
+                    }
                 }
+
             }
 
         })

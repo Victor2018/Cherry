@@ -45,7 +45,7 @@ class FavGirlsAdapter(context: Context, listener: AdapterView.OnItemClickListene
 
     override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.iv_img,data.plant.images[0])
+        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.iv_img,data.plant.images?.get(0))
         contentViewHolder.setOnItemClickListener(mOnItemClickListener)
     }
 

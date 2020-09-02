@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
+import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
@@ -25,18 +26,17 @@ import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.common.view.widget.banner.BannerViewFlipper
 import com.victor.lib.common.view.widget.banner.DescriptionViewSwitcherFactory
-import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.data.GankInfo
+import com.victor.lib.coremodel.data.HttpStatus
+import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
-import com.victor.module.home.view.holder.GankContentViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.toolbar
 import org.victor.funny.util.ResUtils
-import org.victor.funny.util.ToastUtils
 
 
 /*
@@ -147,19 +147,33 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     }
 
     fun subscribeUi() {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         viewmodel.gankDetailValue.observe(viewLifecycleOwner, Observer {
             mSrlRefresh.isRefreshing = false
             it.let {it1 ->
-                it.data.let {it2 ->
-                    homeAdapter?.setFooterVisible(it.page < it.page_count)
-                    if (it.page < it.page_count) {
-                        homeAdapter?.setLoadState(homeAdapter?.LOADING!!)
-                    } else {
-                        homeAdapter?.setLoadState(homeAdapter?.LOADING_END!!)
-                    }
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        it.data.let {it2 ->
+                            homeAdapter?.setFooterVisible(it.page < it.page_count)
+                            if (it.page < it.page_count) {
+                                homeAdapter?.setLoadState(homeAdapter?.LOADING!!)
+                            } else {
+                                homeAdapter?.setLoadState(homeAdapter?.LOADING_END!!)
+                            }
 
-                    homeAdapter?.add(it2)
-                    homeAdapter?.notifyDataSetChanged()
+                            homeAdapter?.add(it2)
+                            homeAdapter?.notifyDataSetChanged()
+                        }
+                    }
+                    else -> {
+                        homeAdapter?.clear()
+                        homeAdapter?.notifyDataSetChanged()
+                    }
                 }
             }
 
@@ -167,17 +181,35 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     }
 
     fun initBannerData() {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
             mSrlRefresh.isRefreshing = false
             it.let {
-                it.data.let {
-                    mBsvBanner.startWithList(it)
+                when (it.status) {
+                    HttpStatus.GANK_SUCCESS -> {
+                        it.data.let {
+                            mBsvBanner.startWithList(it)
+                        }
+                    }
+                    else -> {
+                    }
                 }
             }
         })
     }
 
     fun initGankData () {
+        if (!HttpUtil.isNetEnable(App.get())) {
+            SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ALERT
+            )
+            return
+        }
         var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
         if (!TextUtils.isEmpty(categoryRes)) {
             var gankInfo: GankInfo? = JsonUtils.parseObject(categoryRes!!,GankInfo::class.java)
