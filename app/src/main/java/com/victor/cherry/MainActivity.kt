@@ -1,5 +1,8 @@
 package com.victor.cherry
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,8 +17,7 @@ import com.victor.cherry.adapter.HomeFragmentAdapter
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.base.BaseFragment
-import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.MainHandler
+import com.victor.lib.common.util.*
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
 import com.victor.module.mine.view.AboutActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -73,6 +75,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
         textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选*/
 
+        handleNetworkChanges()
     }
 
     fun initData () {
@@ -134,6 +137,40 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
                 }
             }
         }
+    }
+
+    /**
+     * Observe network changes i.e. Internet Connectivity
+     */
+    private fun handleNetworkChanges() {
+        NetworkUtils.getNetworkLiveData(applicationContext).observe(
+            this,
+            androidx.lifecycle.Observer{ isConnected ->
+                if (!isConnected) {
+                    mTvNetworkStatus.text = ResUtils.getStringRes(R.string.no_connectivity)
+                    mTvNetworkStatus.apply {
+                        show()
+                        setBackgroundColor(ResUtils.getColorRes(R.color.color_D32F2F))
+                    }
+                } else {
+                    mTvNetworkStatus.text = ResUtils.getStringRes(R.string.connectivity)
+                    mTvNetworkStatus.apply {
+                        setBackgroundColor(ResUtils.getColorRes(R.color.color_43A047))
+
+                        animate()
+                            .alpha(1f)
+                            .setStartDelay(1000)
+                            .setDuration(1000)
+                            .setListener(object : AnimatorListenerAdapter() {
+                                override fun onAnimationEnd(animation: Animator) {
+                                    hide()
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        )
     }
 
     override fun onBackPressed() {

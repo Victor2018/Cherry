@@ -65,7 +65,7 @@ versions.preference = '1.1.0'
 ext.versions = versions
 
 def build_versions = [:]
-build_versions.min_sdk = 18
+build_versions.min_sdk = 21
 build_versions.compile_sdk = 29
 build_versions.target_sdk = 29
 build_versions.build_tools = "29.0.3"

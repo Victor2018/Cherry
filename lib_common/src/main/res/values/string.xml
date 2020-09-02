@@ -66,5 +66,7 @@
     <string name="more">More</string>
     <string name="about">about</string>
     <string name="network_error">Network error, please check network connection</string>
+    <string name="no_connectivity">No Connection</string>
+    <string name="connectivity">Back Online</string>
 
 </resources>
