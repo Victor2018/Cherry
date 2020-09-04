@@ -10,6 +10,8 @@
             android:label="@string/mine_module_mine"/>
         <activity android:name=".view.SettingActivity"
             android:label="@string/mine_module_mine"/>
+        <activity android:name=".view.EditUserActivity"
+            android:label="@string/mine_module_mine"/>
         <!-- Scheme代理跳转 -->
         <activity
             android:name="com.victor.lib.common.view.activity.SchemaProxyActivity"

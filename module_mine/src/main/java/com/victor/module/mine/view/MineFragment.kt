@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
@@ -23,6 +24,7 @@ import com.victor.module.mine.databinding.FragmentMineBinding
 import com.victor.module.mine.view.adapter.FavGirlsAdapter
 import com.victor.player.library.util.AppUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.victor.funny.util.ResUtils
 import org.victor.funny.util.ToastUtils
 
 /*
@@ -78,7 +80,6 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
 
         initialize()
     }
-
 
 
     fun initialize () {
@@ -140,6 +141,19 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
+        val nickName = sharedPref.getString(ResUtils.getStringRes(R.string.nickname),
+            ResUtils.getStringRes(R.string.default_nickname))
+        val signature = sharedPref.getString(ResUtils.getStringRes(R.string.signature),
+            ResUtils.getStringRes(R.string.default_signature))
+
+        mTvNickName.text = nickName
+        mTvSignature.text = signature
+
+    }
+
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.mTvFavGirlsCount -> {
@@ -156,7 +170,7 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.action_edit -> {
-                ToastUtils.showDebug("developing...")
+                EditUserActivity.intentStart(activity!! as AppCompatActivity)
                 return true
             }
             R.id.action_setting -> {

@@ -159,6 +159,10 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
                 when (it.status) {
                     HttpStatus.GANK_SUCCESS -> {
                         it.data.let {it2 ->
+                            if (currentPage == 1) {
+                                homeAdapter?.clear()
+                                homeAdapter?.notifyDataSetChanged()
+                            }
                             homeAdapter?.setFooterVisible(it.page < it.page_count)
                             if (it.page < it.page_count) {
                                 homeAdapter?.setLoadState(homeAdapter?.LOADING!!)
@@ -218,6 +222,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             currentPage = 1
         }
 
+        Loger.e(TAG,"initGankData-type = " + type)
         viewmodel.searchGankDetail(type,currentPage)
         subscribeUi()
     }

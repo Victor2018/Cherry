@@ -49,6 +49,11 @@
     <string name="transition_fab">transition_fab</string>
     <string name="transition_tv_poster">transition_tv_poster</string>
     <string name="setting">Setting</string>
+    <string name="edit_information">Edit information</string>
+    <string name="nickname">nickname</string>
+    <string name="signature">signature</string>
+    <string name="default_nickname">Victor</string>
+    <string name="default_signature">We are serious about seeing gank</string>
     <string name="favorite">Favorite</string>
     <string name="clear_cache">Clear cache</string>
     <string name="cache_cleared">Cache cleared</string>

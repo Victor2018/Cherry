@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="ResourceName">
+
+    <PreferenceCategory app:title="@string/edit_information">
+
+        <EditTextPreference
+            app:key="@string/nickname"
+            app:title="@string/nickname"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:key="@string/signature"
+            app:title="@string/signature"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

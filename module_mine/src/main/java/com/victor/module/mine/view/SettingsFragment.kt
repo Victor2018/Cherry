@@ -2,7 +2,6 @@ package com.victor.module.mine.view
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
-import com.victor.lib.common.base.BaseFragment
 import com.victor.module.mine.R
 
 /*
@@ -25,6 +24,6 @@ class SettingsFragment: PreferenceFragmentCompat() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        setPreferencesFromResource(R.xml.setting_preferences, rootKey)
     }
 }
