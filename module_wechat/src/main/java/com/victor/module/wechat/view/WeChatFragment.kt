@@ -20,6 +20,8 @@ import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.util.SnackbarUtil
 import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
+import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel.WechatLiveDataVMFactory
 import com.victor.module.wechat.R
@@ -41,7 +43,12 @@ import org.victor.funny.util.ResUtils
 @Route(path = ARouterPath.WeChatFgt)
 class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.OnMenuItemClickListener,
     AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener {
-    private val viewmodel: WeChatViewModel by viewModels { WechatLiveDataVMFactory }
+//    private val viewmodel: WeChatViewModel by viewModels {
+//        WechatLiveDataVMFactory
+//    }
+    private val viewmodel: WeChatViewModel by viewModels {
+        InjectorUtils.provideWechatViewModelFactory(this)
+    }
     var weChatAdapter: WeChatAdapter? = null
 
     companion object {

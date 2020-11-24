@@ -15,7 +15,7 @@ import com.victor.lib.common.base.BaseFragment
  * Description: 
  * -----------------------------------------------------------------
  */
-class HomeFragmentAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
+class HomeFragmentAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     var fragmetList: List<BaseFragment>? = null
     override fun getItem(position: Int): Fragment {
         return fragmetList?.get(position)!!
@@ -27,5 +27,6 @@ class HomeFragmentAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
 
     override fun getItemPosition(`object`: Any): Int {
         return super.getItemPosition(`object`)
+//        return POSITION_NONE
     }
 }

@@ -27,6 +27,7 @@ import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.util.HttpUtil
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlsAdapter
@@ -50,17 +51,9 @@ import org.victor.funny.util.ResUtils
 @Route(path = ARouterPath.GirlsFgt)
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
     View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
-//    private val viewmodel: GirlsViewModel by viewModels { GirlsLiveDataVMFactory }
 
     private val viewmodel: GirlsViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                @Suppress("UNCHECKED_CAST")
-                return GirlsViewModel(
-                    ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL,activity!!),
-                    RandomGirlDataSource(Dispatchers.IO)) as T
-            }
-        }
+        InjectorUtils.provideGirlViewModelFactory(this)
     }
 
     private lateinit var girlsAdapter: GirlsAdapter

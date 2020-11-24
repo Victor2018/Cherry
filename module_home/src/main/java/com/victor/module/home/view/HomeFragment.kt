@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -208,6 +209,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     }
 
     fun initGankData () {
+        Log.e(TAG,"initGankData()......")
         if (!HttpUtil.isNetEnable(App.get())) {
             SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
                 SnackbarUtil.ALERT
@@ -215,6 +217,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             return
         }
         var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
+        Log.e(TAG,"initGankData()......categoryRes = $categoryRes")
         if (!TextUtils.isEmpty(categoryRes)) {
             var gankInfo: GankInfo? = JsonUtils.parseObject(categoryRes!!,GankInfo::class.java)
             type = gankInfo?.type
