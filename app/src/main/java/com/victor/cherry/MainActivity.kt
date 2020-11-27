@@ -36,7 +36,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
     }
 
     var homeFragmentAdapter: HomeFragmentAdapter? = null
-    var fragmentList: MutableList<BaseFragment> = ArrayList();
+    var fragmentList: MutableList<BaseFragment> = ArrayList()
     var navTitles: Array<String> ? = null
 
     override fun getLayoutResource(): Int {
