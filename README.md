@@ -9,6 +9,10 @@ is only for learning and use.Please do not use it!
 - https://gank.io/api
 - https://www.wanandroid.com/blog/show/2
 
+# Reference
+- https://github.com/Dawish/GoogleArchitectureDemoi
+- https://github.com/iceCola7/AndroidModuleSamples
+
 # Rendering:
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/rendering.gif)
 

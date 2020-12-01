@@ -9,7 +9,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation project(':lib_coremodel')
+    api project(':lib_coremodel')
 
 
 }
