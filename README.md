@@ -12,6 +12,7 @@ is only for learning and use.Please do not use it!
 # Reference
 - https://github.com/Dawish/GoogleArchitectureDemoi
 - https://github.com/iceCola7/AndroidModuleSamples
+- https://github.com/mouxuefei/MvvmModulePatternSample
 
 # Rendering:
 ![image](https://github.com/Victor2018/Cherry/raw/master/SrceenShot/rendering.gif)
