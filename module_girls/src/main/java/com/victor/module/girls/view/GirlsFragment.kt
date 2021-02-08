@@ -28,6 +28,7 @@ import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.viewmodel.GirlViewModelFactory
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlsAdapter
@@ -52,9 +53,7 @@ import org.victor.funny.util.ResUtils
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
     View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
 
-    private val viewmodel: GirlsViewModel by viewModels {
-        InjectorUtils.provideGirlViewModelFactory(this)
-    }
+    private lateinit var viewmodel: GirlsViewModel
 
     private lateinit var girlsAdapter: GirlsAdapter
 
@@ -98,6 +97,9 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 //        toolbar.menu.clear()
 //        toolbar.inflateMenu(R.menu.menu_girls)
 //        toolbar.setOnMenuItemClickListener(this)
+
+        viewmodel = ViewModelProvider(this, GirlViewModelFactory(
+            InjectorUtils.getGirlRepository(context!!), this)).get(GirlsViewModel::class.java)
 
         //设置 进度条的颜色变化，最多可以设置4种颜色
         mSrlRefresh.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,

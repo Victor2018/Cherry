@@ -101,7 +101,7 @@ class SplashActivity : BaseActivity() {
 
     fun toMain () {
         MainActivity.intentStart(this)
-        finish()
+        onBackPressed()
     }
 
     override fun handleMainMessage(message: Message?) {

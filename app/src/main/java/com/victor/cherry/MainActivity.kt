@@ -71,8 +71,6 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         mNavBar.setOnItemSelectListener(this)
 
-        mVpHome.offscreenPageLimit = 5
-
       /*  var textView: TextView  = toolbar.getChildAt(0) as TextView;//主标题
         textView.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;//填充父类
         textView.setGravity(Gravity.CENTER_HORIZONTAL);//水平居中，CENTER，即水平也垂直，自选*/

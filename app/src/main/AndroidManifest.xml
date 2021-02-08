@@ -31,7 +31,8 @@
         </activity>
 
         <activity android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"/>
 
         <!-- 配置APP ID -->
         <meta-data

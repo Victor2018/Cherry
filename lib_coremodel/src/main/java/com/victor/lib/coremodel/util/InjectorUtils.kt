@@ -3,6 +3,7 @@ package com.victor.lib.coremodel.util
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.savedstate.SavedStateRegistryOwner
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.db.AppDatabase
 import com.victor.lib.coremodel.http.locator.ServiceLocator
@@ -24,7 +25,7 @@ import com.victor.lib.coremodel.viewmodel.*
  */
 
 object InjectorUtils {
-    private fun getLocalGirlsRepository(context: Context): LocalGirlsRepository {
+    fun getLocalGirlsRepository(context: Context): LocalGirlsRepository {
         return LocalGirlsRepository.getInstance(
             AppDatabase.getInstance(context.applicationContext))
     }
@@ -51,15 +52,15 @@ object InjectorUtils {
         return GankViewModelFactory(getGankRepository(fragment.requireContext()), fragment)
     }
 
-    private fun getGirlRepository(context: Context): IRepository {
+    fun getGirlRepository(context: Context): IRepository {
         return ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL,context!!)
     }
     fun provideGirlViewModelFactory(fragment: Fragment): GirlViewModelFactory {
         return GirlViewModelFactory(getGirlRepository(fragment.requireContext()), fragment)
     }
 
-    fun provideWechatViewModelFactory(fragment: Fragment): WechatViewModelFactory {
-        return WechatViewModelFactory(fragment)
+    fun provideWechatViewModelFactory(owner: SavedStateRegistryOwner): WechatViewModelFactory {
+        return WechatViewModelFactory(owner)
     }
 
 }

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
@@ -24,6 +25,7 @@ import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel.WechatLiveDataVMFactory
+import com.victor.lib.coremodel.viewmodel.WechatViewModelFactory
 import com.victor.module.wechat.R
 import com.victor.module.wechat.databinding.FragmentWechatBinding
 import com.victor.module.wechat.view.adapter.WeChatAdapter
@@ -46,9 +48,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
 //    private val viewmodel: WeChatViewModel by viewModels {
 //        WechatLiveDataVMFactory
 //    }
-    private val viewmodel: WeChatViewModel by viewModels {
-        InjectorUtils.provideWechatViewModelFactory(this)
-    }
+    private lateinit var viewmodel: WeChatViewModel
     var weChatAdapter: WeChatAdapter? = null
 
     companion object {
@@ -91,6 +91,9 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
         toolbar.menu.clear()
         toolbar.inflateMenu(R.menu.menu_wechat)
         toolbar.setOnMenuItemClickListener(this)
+
+        viewmodel = ViewModelProvider(this,WechatViewModelFactory(this))
+            .get(WeChatViewModel::class.java)
 
         val binding = viewDataBinding as FragmentWechatBinding?
 

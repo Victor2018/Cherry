@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
@@ -29,8 +30,11 @@ import com.victor.lib.common.view.widget.banner.BannerViewFlipper
 import com.victor.lib.common.view.widget.banner.DescriptionViewSwitcherFactory
 import com.victor.lib.coremodel.data.GankInfo
 import com.victor.lib.coremodel.data.HttpStatus
+import com.victor.lib.coremodel.db.AppDatabase
+import com.victor.lib.coremodel.http.repository.GankRepository
 import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.viewmodel.GankViewModelFactory
 import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
@@ -56,9 +60,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener,
     AppBarLayout.OnOffsetChangedListener,SwipeRefreshLayout.OnRefreshListener {
 
-    private val viewmodel: HomeViewModel by viewModels {
-        InjectorUtils.provideGankViewModelFactory(this)
-    }
+    private lateinit var viewmodel: HomeViewModel
 
     var homeAdapter: HomeAdapter? = null
     var currentPage = 1
@@ -111,6 +113,10 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         toolbar.inflateMenu(R.menu.menu_home)
         toolbar.setOnMenuItemClickListener(this)
 
+        viewmodel = ViewModelProvider(
+            this,
+            GankViewModelFactory(GankRepository.getInstance(AppDatabase.getInstance(App.get())),this))
+            .get(HomeViewModel::class.java)
 
         val binding = viewDataBinding as FragmentHomeBinding?
 
@@ -300,6 +306,5 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         initBannerData()
         initGankData()
     }
-
 
 }
