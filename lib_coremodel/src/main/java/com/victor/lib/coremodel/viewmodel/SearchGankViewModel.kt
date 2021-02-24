@@ -31,16 +31,4 @@ class SearchGankViewModel(private val dataSource: ISearchGankDataSource) : ViewM
         emitSource(dataSource.fetchHotKey())
     }
 
-    /**
-     * Factory for [LiveDataViewModel].
-     */
-    object SearchGankLiveDataVMFactory : ViewModelProvider.Factory {
-
-        private val dataSource = SearchGankDataSource(Dispatchers.IO)
-
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            @Suppress("UNCHECKED_CAST")
-            return SearchGankViewModel(dataSource) as T
-        }
-    }
 }

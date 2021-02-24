@@ -19,13 +19,18 @@ import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.coremodel.data.ArticleInfo
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.ArticleViewModel
 import com.victor.module.wechat.R
 import com.victor.module.wechat.view.adapter.ArticleAdapter
 import com.victor.module.wechat.view.adapter.ArticleLoadStateAdapter
 import kotlinx.android.synthetic.main.activity_article.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 
 /*
  * -----------------------------------------------------------------
@@ -52,13 +57,7 @@ class ArticleActivity: BaseActivity() {
     var id: Int = 0
 
     private val viewmodel: ArticleViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                @Suppress("UNCHECKED_CAST")
-                return ArticleViewModel(id!!,
-                    ServiceLocator.instance().getRepository(RepositoryType.ARTICLE,this@ArticleActivity)) as T
-            }
-        }
+        InjectorUtils.provideArticleVMFactory(id,this,this)
     }
 
     override fun getLayoutResource(): Int {

@@ -21,17 +21,4 @@ class WeChatViewModel(private val dataSource: IWeChatDataSource): ViewModel() {
     val weChatData: LiveData<WeChatRes> = liveData {
         emitSource(dataSource.fetchWeChatData())
     }
-
-    /**
-     * Factory for [LiveDataViewModel].
-     */
-    object WechatLiveDataVMFactory : ViewModelProvider.Factory {
-
-        private val weChatDataSource = WeChatDataSource(Dispatchers.IO)
-
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            @Suppress("UNCHECKED_CAST")
-            return WeChatViewModel(weChatDataSource) as T
-        }
-    }
 }

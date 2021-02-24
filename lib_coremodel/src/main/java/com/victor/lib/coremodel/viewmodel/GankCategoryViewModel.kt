@@ -25,16 +25,3 @@ class GankCategoryViewModel(private val dataSource: IGankCategoryDataSource) : V
         emitSource(dataSource.fetchGirlData())
     }
 }
-
-/**
- * Factory for [LiveDataViewModel].
- */
-object GankCategoryLiveDataVMFactory : ViewModelProvider.Factory {
-
-    private val homeDataSource = GankCategoryDataSource(Dispatchers.IO)
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST")
-        return GankCategoryViewModel(homeDataSource) as T
-    }
-}

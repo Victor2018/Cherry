@@ -14,7 +14,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -33,8 +32,7 @@ import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.db.AppDatabase
 import com.victor.lib.coremodel.http.repository.GankRepository
 import com.victor.lib.coremodel.util.HttpUtil
-import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.GankViewModelFactory
+import com.victor.lib.coremodel.viewmodel.factory.GankViewModelFactory
 import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.FragmentHomeBinding
@@ -115,7 +113,11 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
         viewmodel = ViewModelProvider(
             this,
-            GankViewModelFactory(GankRepository.getInstance(AppDatabase.getInstance(App.get())),this))
+            GankViewModelFactory(
+                GankRepository.getInstance(AppDatabase.getInstance(App.get())),
+                this
+            )
+        )
             .get(HomeViewModel::class.java)
 
         val binding = viewDataBinding as FragmentHomeBinding?

@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,14 +19,13 @@ import com.victor.lib.common.util.SnackbarUtil
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.LocalGirlsViewModel
-import com.victor.lib.coremodel.viewmodel.LocalGirlsViewModelFactory
+import com.victor.lib.coremodel.viewmodel.factory.LocalGirlsViewModelFactory
 import com.victor.module.mine.R
 import com.victor.module.mine.databinding.FragmentMineBinding
 import com.victor.module.mine.view.adapter.FavGirlsAdapter
 import com.victor.player.library.util.AppUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 import org.victor.funny.util.ResUtils
-import org.victor.funny.util.ToastUtils
 
 /*
  * -----------------------------------------------------------------
@@ -85,7 +83,9 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     fun initialize () {
         localGirlsViewModel = ViewModelProvider(this,
             LocalGirlsViewModelFactory(
-                InjectorUtils.getLocalGirlsRepository(context!!), this))
+                InjectorUtils.getLocalGirlsRepository(context!!), this
+            )
+        )
             .get(LocalGirlsViewModel::class.java)
 
         val binding = viewDataBinding as FragmentMineBinding

@@ -1,5 +1,6 @@
 package com.victor.lib.coremodel.http.datasource
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import com.victor.lib.coremodel.http.ApiService
 
@@ -21,16 +22,26 @@ import java.io.IOException
  * -----------------------------------------------------------------
  */
 class SearchGankPagingSource (
-    private val type: String,
+    private val type: String?,
     private val requestApi: ApiService
 ) : PagingSource<Int, Any>() {
+    val TAG = "SearchGankPagingSource"
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         return try {
-            val items = requestApi.searchGank(key = type,page = params.key ?: 0,count = params.loadSize)
+            var page = params.key ?: 0
+            if (params is LoadParams.Refresh) {
+                page = 0
+                Log.e(TAG,"load-params is Refresh")
+            } else if (params is LoadParams.Prepend) {
+                Log.e(TAG,"load-params is Prependy")
+            } else if (params is LoadParams.Append) {
+                Log.e(TAG,"load-params is Append")
+            }
+            val items = requestApi.searchGank(key = type,page = page,count = params.loadSize)
 
             LoadResult.Page(
                 data = items.data!!,
-                prevKey = if (items.page == 1) null else items.page - 1,
+                prevKey = if (items.page == 0) null else items.page - 1,
                 nextKey = if (items.page == items.page_count) null else items.page + 1
             )
 

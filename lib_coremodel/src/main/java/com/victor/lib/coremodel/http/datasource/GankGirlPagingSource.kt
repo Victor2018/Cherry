@@ -7,6 +7,7 @@ import com.victor.lib.coremodel.http.ApiService
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.room.withTransaction
+import com.alibaba.fastjson.JSON
 import com.victor.lib.coremodel.db.AppDatabase
 import retrofit2.HttpException
 import java.io.IOException
@@ -30,7 +31,21 @@ class GankGirlPagingSource (
     val TAG = "GankGirlPagingSource"
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         return try {
-            val items = requestApi.getFuliList(page = params.key ?: 0,count = params.loadSize)
+            Log.e(TAG,"load-params = " + JSON.toJSONString(params))
+
+            Log.e(TAG,"load-params.key = " + params.key)
+            var page = params.key ?: 0
+
+            if (params is LoadParams.Refresh) {
+                page = 0
+                Log.e(TAG,"load-params is Refresh")
+            } else if (params is LoadParams.Prepend) {
+                Log.e(TAG,"load-params is Prependy")
+            } else if (params is LoadParams.Append) {
+                Log.e(TAG,"load-params is Append")
+            }
+
+            val items = requestApi.getFuliList(page = page,count = params.loadSize)
 
             db.withTransaction {
                 if (items.page == 1) {
@@ -39,16 +54,21 @@ class GankGirlPagingSource (
                 db.girlsDao().insertAll(items.data!!)
             }
 
+
+            val prevKey = if (page == 0) null else page - 1
+            val nextKey = if (items.page == items.page_count) null else page + 1
+
             LoadResult.Page(
                 data = items.data!!,
-                prevKey = if (items.page == 1) null else items.page - 1,
-                nextKey = if (items.page == items.page_count) null else items.page + 1
+                prevKey = null,
+                nextKey = nextKey
             )
 
-
         } catch (e: IOException) {
+            e.printStackTrace()
             LoadResult.Error(e)
         } catch (e: HttpException) {
+            e.printStackTrace()
             LoadResult.Error(e)
         }
     }

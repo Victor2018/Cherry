@@ -27,8 +27,8 @@ import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.coremodel.data.HotKeyInfo
 import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.SearchGankViewModel
-import com.victor.lib.coremodel.viewmodel.SearchGankViewModel.SearchGankLiveDataVMFactory
 import com.victor.module.home.R
 import com.victor.module.home.databinding.ActivitySearchGankBinding
 import com.victor.module.home.view.adapter.SearchFilterAdapter
@@ -55,7 +55,9 @@ import java.util.ArrayList
 class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnClickListener,
     AdapterView.OnItemClickListener, LMRecyclerView.OnLoadMoreListener,
     FilterListener<HotKeyInfo> {
-    private val viewmodel: SearchGankViewModel by viewModels { SearchGankLiveDataVMFactory }
+    private val viewmodel: SearchGankViewModel by viewModels {
+        InjectorUtils.provideSearchGankVMFactory(this)
+    }
 
     var searchGankAdapter: SearchGankAdapter? = null
     var currentPage = 1
@@ -66,7 +68,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
 
     companion object {
         fun  intentStart (activity: AppCompatActivity, type: String) {
-            var intent = Intent(activity, GankActivity::class.java)
+            var intent = Intent(activity, SearchGankActivity::class.java)
             intent.putExtra(NavigationUtils.TYPE_KEY, type)
             activity.startActivity(intent)
         }

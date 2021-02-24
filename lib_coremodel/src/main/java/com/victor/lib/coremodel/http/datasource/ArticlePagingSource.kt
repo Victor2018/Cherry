@@ -1,5 +1,6 @@
 package com.victor.lib.coremodel.http.datasource
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import com.victor.lib.coremodel.http.ApiService
 
@@ -24,13 +25,23 @@ class ArticlePagingSource (
     private val id: Int,
     private val requestApi: ApiService
 ) : PagingSource<Int, Any>() {
+    val TAG = "ArticlePagingSource"
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         return try {
-            val items = requestApi.getArticles(id = id,page = params.key ?: 1)
+            var page = params.key ?: 0
+            if (params is LoadParams.Refresh) {
+                page = 0
+                Log.e(TAG,"load-params is Refresh")
+            } else if (params is LoadParams.Prepend) {
+                Log.e(TAG,"load-params is Prependy")
+            } else if (params is LoadParams.Append) {
+                Log.e(TAG,"load-params is Append")
+            }
+            val items = requestApi.getArticles(id = id,page = page)
 
             LoadResult.Page(
                 data = items?.data?.datas!!,
-                prevKey = if (items?.data!!.curPage == 1) null else items?.data!!.curPage - 1,
+                prevKey = if (items?.data!!.curPage == 0) null else items?.data!!.curPage - 1,
                 nextKey = if (items?.data!!.curPage == items?.data!!.pageCount) null else items?.data!!.curPage + 1
             )
 

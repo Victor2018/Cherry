@@ -1,15 +1,13 @@
-package com.victor.lib.coremodel.viewmodel
+package com.victor.lib.coremodel.viewmodel.factory
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.victor.lib.coremodel.http.datasource.HomeDataSource
 import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
-import com.victor.lib.coremodel.http.datasource.WeChatDataSource
 import com.victor.lib.coremodel.http.repository.*
+import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import kotlinx.coroutines.Dispatchers
 
 /*
@@ -23,7 +21,8 @@ import kotlinx.coroutines.Dispatchers
  * -----------------------------------------------------------------
  */
 
-class WechatViewModelFactory(
+class GirlViewModelFactory(
+    private val repository: IRepository,
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
@@ -34,6 +33,9 @@ class WechatViewModelFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return WeChatViewModel(WeChatDataSource(Dispatchers.IO)) as T
+        return GirlsViewModel(
+            repository,
+            RandomGirlDataSource(Dispatchers.IO)
+        ) as T
     }
 }

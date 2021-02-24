@@ -7,9 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
@@ -23,18 +21,14 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.data.HttpStatus
-import com.victor.lib.coremodel.data.RepositoryType
-import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
-import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.GirlViewModelFactory
+import com.victor.lib.coremodel.viewmodel.factory.GirlViewModelFactory
 import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlsAdapter
 import com.victor.module.girls.view.adapter.GirlsLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_girls.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import org.victor.funny.util.ResUtils
@@ -98,8 +92,11 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 //        toolbar.inflateMenu(R.menu.menu_girls)
 //        toolbar.setOnMenuItemClickListener(this)
 
-        viewmodel = ViewModelProvider(this, GirlViewModelFactory(
-            InjectorUtils.getGirlRepository(context!!), this)).get(GirlsViewModel::class.java)
+        viewmodel = ViewModelProvider(this,
+            GirlViewModelFactory(
+                InjectorUtils.getGirlRepository(context!!), this
+            )
+        ).get(GirlsViewModel::class.java)
 
         //设置 进度条的颜色变化，最多可以设置4种颜色
         mSrlRefresh.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
@@ -198,12 +195,12 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.action_share -> {
-                var intentshare = Intent(Intent.ACTION_SEND);
+                var intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
                     .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
-                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app));
-                Intent.createChooser(intentshare, getString(R.string.share));
-                startActivity(intentshare);
+                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app))
+                Intent.createChooser(intentshare, getString(R.string.share))
+                startActivity(intentshare)
                 return true
             }
         }

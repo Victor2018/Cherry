@@ -31,15 +31,4 @@ class GirlsViewModel(val repository: IRepository,private val dataSource: IRandom
             dataSource.fetchRandomGirl()
         }
     }
-
-    /**
-     * Factory for [LiveDataViewModel].
-     */
-    /*object GirlsLiveDataVMFactory : ViewModelProvider.Factory {
-
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            @Suppress("UNCHECKED_CAST")
-            return GirlsViewModel(ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL)) as T
-        }
-    }*/
 }

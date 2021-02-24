@@ -1,28 +1,26 @@
-package com.victor.lib.coremodel.viewmodel
+package com.victor.lib.coremodel.viewmodel.factory
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.victor.lib.coremodel.http.repository.GankGirlRepository
-import com.victor.lib.coremodel.http.repository.LocalGirlsRepository
-import com.victor.lib.coremodel.http.repository.TvRepository
+import com.victor.lib.coremodel.http.datasource.WeChatDataSource
+import com.victor.lib.coremodel.viewmodel.WeChatViewModel
+import kotlinx.coroutines.Dispatchers
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GirlsViewModelFactory
+ * File: GankViewModelFactory
  * Author: Victor
  * Date: 2020/8/14 下午 05:55
  * Description: 
  * -----------------------------------------------------------------
  */
 
-class LocalGirlsViewModelFactory(
-    private val repository: LocalGirlsRepository,
+class WechatViewModelFactory(
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
@@ -33,6 +31,8 @@ class LocalGirlsViewModelFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return LocalGirlsViewModel(repository) as T
+        return WeChatViewModel(
+            WeChatDataSource(Dispatchers.IO)
+        ) as T
     }
 }

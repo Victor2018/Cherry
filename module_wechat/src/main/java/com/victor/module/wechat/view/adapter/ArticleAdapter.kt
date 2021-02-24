@@ -46,32 +46,13 @@ class ArticleAdapter(context: Context?) : PagingDataAdapter<ArticleInfo, Article
     }
 
     companion object {
-        private val PAYLOAD_SCORE = Any()
         val POST_COMPARATOR = object : DiffUtil.ItemCallback<ArticleInfo>() {
             override fun areContentsTheSame(oldItem: ArticleInfo, newItem: ArticleInfo): Boolean =
-                oldItem.id == newItem.id
+                oldItem.hashCode() == newItem.hashCode()
 
             override fun areItemsTheSame(oldItem: ArticleInfo, newItem: ArticleInfo): Boolean =
-                oldItem.publishTime == newItem.publishTime
+                oldItem.id == newItem.id
 
-            override fun getChangePayload(oldItem: ArticleInfo, newItem: ArticleInfo): Any? {
-                return if (sameExceptScore(
-                        oldItem,
-                        newItem
-                    )
-                ) {
-                    PAYLOAD_SCORE
-                } else {
-                    null
-                }
-            }
-        }
-
-        private fun sameExceptScore(oldItem: ArticleInfo, newItem: ArticleInfo): Boolean {
-            // DON'T do this copy in a real app, it is just convenient here for the demo :)
-            // because reddit randomizes scores, we want to pass it as a payload to minimize
-            // UI updates between refreshes
-            return oldItem.publishTime == newItem.publishTime
         }
     }
 }

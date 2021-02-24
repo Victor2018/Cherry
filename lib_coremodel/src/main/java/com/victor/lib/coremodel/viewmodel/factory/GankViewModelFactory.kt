@@ -1,14 +1,13 @@
-package com.victor.lib.coremodel.viewmodel
+package com.victor.lib.coremodel.viewmodel.factory
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.victor.lib.coremodel.http.datasource.HomeDataSource
-import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
-import com.victor.lib.coremodel.http.repository.*
+import com.victor.lib.coremodel.http.repository.GankRepository
+import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import kotlinx.coroutines.Dispatchers
 
 /*
@@ -22,8 +21,8 @@ import kotlinx.coroutines.Dispatchers
  * -----------------------------------------------------------------
  */
 
-class GirlViewModelFactory(
-    private val repository: IRepository,
+class GankViewModelFactory(
+    private val repository: GankRepository,
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
@@ -34,6 +33,10 @@ class GirlViewModelFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return GirlsViewModel(repository,RandomGirlDataSource(Dispatchers.IO)) as T
+        return HomeViewModel(
+            HomeDataSource(
+                Dispatchers.IO
+            ), repository
+        ) as T
     }
 }

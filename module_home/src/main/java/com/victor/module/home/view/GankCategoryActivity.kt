@@ -16,13 +16,12 @@ import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
-import com.victor.lib.coremodel.viewmodel.GankCategoryLiveDataVMFactory
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.GankCategoryViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.ActivityGankCategoryBinding
 import com.victor.module.home.view.adapter.GankCategoryAdapter
 import kotlinx.android.synthetic.main.activity_gank_category.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.victor.funny.util.ResUtils
 
 /*
@@ -37,7 +36,10 @@ import org.victor.funny.util.ResUtils
  */
 @Route(path = ARouterPath.GankCategoryAct)
 class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener {
-    private val viewmodel: GankCategoryViewModel by viewModels { GankCategoryLiveDataVMFactory }
+    private val viewmodel: GankCategoryViewModel by viewModels {
+        InjectorUtils.provideGankCategoryLiveDataVMFactory(this)
+    }
+
     var gankCategoryAdapter: GankCategoryAdapter? = null
 
     companion object {

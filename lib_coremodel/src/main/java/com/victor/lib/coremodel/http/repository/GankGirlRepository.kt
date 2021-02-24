@@ -20,7 +20,7 @@ class GankGirlRepository (
     private val pageConfig: PagingConfig,
     private val requestApi: ApiService,
     private val db: AppDatabase) : IRepository {
-    override fun postsOfSubreddit(type: String,pageSize: Int) = Pager(
+    override fun postsOfSubreddit(type: String?,pageSize: Int) = Pager(
         config = pageConfig
     ) {
         GankGirlPagingSource(

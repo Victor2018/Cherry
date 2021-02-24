@@ -17,6 +17,7 @@ import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.http.locator.ServiceLocator
+import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.GankViewModel
 import com.victor.module.home.R
 import com.victor.module.home.view.adapter.GankAdapter
@@ -51,13 +52,7 @@ class GankActivity: BaseActivity() {
     var type: String? = null
 
     private val viewmodel: GankViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                @Suppress("UNCHECKED_CAST")
-                return GankViewModel(type!!,
-                    ServiceLocator.instance().getRepository(RepositoryType.GANK_DETAIL,this@GankActivity)) as T
-            }
-        }
+        InjectorUtils.provideGankVMFactory(type,this,this)
     }
 
     override fun getLayoutResource(): Int {

@@ -7,7 +7,6 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -21,11 +20,8 @@ import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.util.SnackbarUtil
 import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
-import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.HomeViewModel
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel
-import com.victor.lib.coremodel.viewmodel.WeChatViewModel.WechatLiveDataVMFactory
-import com.victor.lib.coremodel.viewmodel.WechatViewModelFactory
+import com.victor.lib.coremodel.viewmodel.factory.WechatViewModelFactory
 import com.victor.module.wechat.R
 import com.victor.module.wechat.databinding.FragmentWechatBinding
 import com.victor.module.wechat.view.adapter.WeChatAdapter
@@ -92,7 +88,11 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
         toolbar.inflateMenu(R.menu.menu_wechat)
         toolbar.setOnMenuItemClickListener(this)
 
-        viewmodel = ViewModelProvider(this,WechatViewModelFactory(this))
+        viewmodel = ViewModelProvider(this,
+            WechatViewModelFactory(
+                this
+            )
+        )
             .get(WeChatViewModel::class.java)
 
         val binding = viewDataBinding as FragmentWechatBinding?

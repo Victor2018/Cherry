@@ -19,7 +19,7 @@ import com.victor.lib.coremodel.http.datasource.SearchGankPagingSource
 class SearchGankRepository (
     val pageConfig: PagingConfig,
     private val requestApi: ApiService) : IRepository {
-    override fun postsOfSubreddit(type: String,pageSize: Int) = Pager(
+    override fun postsOfSubreddit(type: String?,pageSize: Int) = Pager(
         config = pageConfig
     ) {
         SearchGankPagingSource(

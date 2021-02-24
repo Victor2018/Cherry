@@ -52,17 +52,3 @@ class HomeViewModel(private val dataSource: IHomeDataSource,private var reposito
 
     val favGanks = repository.getFavGanks("Android")
 }
-
-
-/**
- * Factory for [LiveDataViewModel].
- */
-//object HomeLiveDataVMFactory : ViewModelProvider.Factory {
-//
-//    private val homeDataSource = HomeDataSource(Dispatchers.IO)
-//
-//    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//        @Suppress("UNCHECKED_CAST")
-//        return HomeViewModel(homeDataSource) as T
-//    }
-//}
