@@ -10,7 +10,7 @@ is only for learning and use.Please do not use it!
 - https://www.wanandroid.com/blog/show/2
 
 # Reference
-- https://github.com/Dawish/GoogleArchitectureDemoi
+- https://github.com/Dawish/GoogleArchitectureDemo
 - https://github.com/iceCola7/AndroidModuleSamples
 - https://github.com/mouxuefei/MvvmModulePatternSample
 

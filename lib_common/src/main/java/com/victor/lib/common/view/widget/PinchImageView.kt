@@ -556,14 +556,14 @@ class PinchImageView: AppCompatImageView {
     }
 
     ////////////////////////////////初始化////////////////////////////////
-    constructor(context: Context?) :super(context) {
+    constructor(context: Context) :super(context) {
         initView()
     }
-    constructor(context: Context?,attrs: AttributeSet?) :super(context,attrs) {
+    constructor(context: Context,attrs: AttributeSet?) :super(context,attrs) {
         initView()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int): super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int): super(context, attrs, defStyle) {
         initView()
     }
 

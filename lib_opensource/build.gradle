@@ -63,6 +63,8 @@ dependencies {
     api deps.victor.permissions
     //播放器
     api deps.victor.player
+    //kotlin网络请求库
+    api deps.victor.khttp
 
     //搜索筛选view
     api deps.SearchFilter.core
