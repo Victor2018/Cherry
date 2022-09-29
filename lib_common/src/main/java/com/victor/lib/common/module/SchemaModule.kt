@@ -1,13 +1,12 @@
 package com.victor.lib.common.module
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
 import com.victor.lib.common.R
 import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.view.activity.WebActivity
 
 /*

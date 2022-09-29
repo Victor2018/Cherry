@@ -1,6 +1,7 @@
 package com.victor.lib.common.util
 
 import com.google.gson.Gson
+import com.victor.lib.coremodel.util.Loger
 import org.json.JSONException
 import java.lang.reflect.Type
 

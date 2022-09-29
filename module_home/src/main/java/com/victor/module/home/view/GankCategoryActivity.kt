@@ -17,7 +17,6 @@ import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.GankCategoryViewModel
 import com.victor.module.home.R
 import com.victor.module.home.databinding.ActivityGankCategoryBinding
 import com.victor.module.home.view.adapter.GankCategoryAdapter
@@ -36,9 +35,6 @@ import org.victor.funny.util.ResUtils
  */
 @Route(path = ARouterPath.GankCategoryAct)
 class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener {
-    private val viewmodel: GankCategoryViewModel by viewModels {
-        InjectorUtils.provideGankCategoryLiveDataVMFactory(this)
-    }
 
     var gankCategoryAdapter: GankCategoryAdapter? = null
 
@@ -73,14 +69,6 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
     }
 
     fun initialize () {
-        val binding = viewDataBinding as ActivityGankCategoryBinding
-
-        // Set the LifecycleOwner to be able to observe LiveData objects
-        binding?.lifecycleOwner = this
-
-        // Bind ViewModel
-        binding?.viewmodel = viewmodel
-
         gankCategoryAdapter = GankCategoryAdapter(this,this)
         mRvGankCategory.setHasFixedSize(true)
         mRvGankCategory.adapter = gankCategoryAdapter
@@ -96,32 +84,6 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
             )
             return
         }
-        viewmodel.girlData.observe(this, Observer {
-            it.let {
-                when (it.status) {
-                    HttpStatus.GANK_SUCCESS -> {
-                        ImageUtils.instance.loadImage(this,mIvGirl,it.data?.get(0)?.images?.get(0))
-                    }
-                    else -> {
-                    }
-                }
-            }
-        })
-        viewmodel.gankData.observe(this, Observer {
-            it.let {
-                when (it.status) {
-                    HttpStatus.GANK_SUCCESS -> {
-                        gankCategoryAdapter?.clear()
-                        gankCategoryAdapter?.add(it.data)
-                        gankCategoryAdapter?.notifyDataSetChanged()
-                    }
-                    else -> {
-                        gankCategoryAdapter?.clear()
-                        gankCategoryAdapter?.notifyDataSetChanged()
-                    }
-                }
-            }
-        })
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

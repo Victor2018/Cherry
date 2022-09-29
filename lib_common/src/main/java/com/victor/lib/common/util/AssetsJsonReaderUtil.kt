@@ -2,6 +2,7 @@ package com.victor.lib.common.util
 
 import android.content.res.AssetManager
 import com.victor.lib.common.app.App
+import com.victor.lib.coremodel.util.Loger
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 

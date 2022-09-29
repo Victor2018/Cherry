@@ -1,24 +1,23 @@
 package com.victor.lib.coremodel.data
 
-import com.yalantis.filter.model.FilterModel
-
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: HotKeyInfo
+ * File: HomeBannerInfo
  * Author: Victor
- * Date: 2020/7/29 下午 03:53
+ * Date: 2022/9/29 12:05
  * Description: 
  * -----------------------------------------------------------------
  */
-class HotKeyInfo: FilterModel {
+
+class HomeBannerInfo {
+    var desc: String? = null
+    var title: String? = null
+    var imagePath: String? = null
+    var url: String? = null
     var id: Int = 0
+    var isVisible: Int = 0
     var order: Int = 0
-    var visible: Int = 0
-    var link: String? = null
-    var name: String? = null
-    override fun getText(): String {
-        return name!!
-    }
+    var type: Int = 0
 }

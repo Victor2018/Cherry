@@ -12,13 +12,10 @@ import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.coremodel.data.GankDetailInfo
-import com.victor.lib.coremodel.data.RepositoryType
-import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.GankViewModel
 import com.victor.module.home.R
 import com.victor.module.home.view.adapter.GankAdapter
 import com.victor.module.home.view.adapter.GankLoadStateAdapter
@@ -50,10 +47,6 @@ class GankActivity: BaseActivity() {
 
     var title: String? = null
     var type: String? = null
-
-    private val viewmodel: GankViewModel by viewModels {
-        InjectorUtils.provideGankVMFactory(type,this,this)
-    }
 
     override fun getLayoutResource(): Int {
         return R.layout.activity_gank
@@ -100,13 +93,6 @@ class GankActivity: BaseActivity() {
             @OptIn(ExperimentalCoroutinesApi::class)
             adapter.loadStateFlow.collectLatest { loadStates ->
                 mSrlGank.isRefreshing = loadStates.refresh is LoadState.Loading
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            @OptIn(ExperimentalCoroutinesApi::class)
-            viewmodel.datas.collectLatest {
-                adapter.submitData(it as PagingData<GankDetailInfo>)
             }
         }
 

@@ -14,14 +14,14 @@ import android.net.Uri
  * -----------------------------------------------------------------
  */
 object WebConfig {
-    const val DEBUG_BASE_URL = "http://192.168.2.100:9025/ms-app/"
-    const val ONLINE_BASE_URL = "http://39.97.220.151:9025/ms-app/"
+    const val DEBUG_BASE_URL = "https://www.wanandroid.com/"
+    const val ONLINE_BASE_URL = "https://www.wanandroid.com/"
 
-    const val PAGE_SIZE = 20
+    const val PAGE_SIZE = 19
 
     const val SEND_SMS = "auth/sendSms"
 
-    fun getBaseUrl(): String? {
+    fun getBaseUrl(): String {
         if (AppConfig.MODEL_DEBUG) {
             return DEBUG_BASE_URL
         }

@@ -13,6 +13,7 @@ import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.data.GankDetailInfo
+import com.victor.lib.coremodel.data.HomeSquareInfo
 import com.victor.module.home.R
 import com.victor.module.home.view.holder.GankContentViewHolder
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
@@ -29,9 +30,10 @@ import org.victor.funny.util.ResUtils
  * -----------------------------------------------------------------
  */
 class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
-    BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener)  {
+    BaseRecycleAdapter<HomeSquareInfo, RecyclerView.ViewHolder>(context, listener)  {
     var fontStyle: Typeface? = null
     var showThumbnail: Boolean = true
+
     init {
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
@@ -42,20 +44,20 @@ class HomeAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: HomeSquareInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return GankContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_gank_cell ,parent, false))
+        return GankContentViewHolder(inflate(R.layout.rv_gank_cell, parent))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: HomeSquareInfo?, position: Int) {
         val contentViewHolder = viewHolder as GankContentViewHolder
         contentViewHolder.itemView.mTvTitle.typeface = fontStyle
         contentViewHolder.itemView.mTvTime.typeface = fontStyle
 
         contentViewHolder.bindData(data,showThumbnail)
 
-        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
+        contentViewHolder.mOnItemClickListener = listener
     }
 }

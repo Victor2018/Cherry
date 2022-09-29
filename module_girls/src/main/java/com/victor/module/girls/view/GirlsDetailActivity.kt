@@ -23,11 +23,11 @@ import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.coremodel.viewmodel.LocalGirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.databinding.ActivityGirlsDetailBinding
 import com.victor.module.girls.view.adapter.GirlDetailAdapter
-import com.victor.module.girls.view.adapter.GirlsViewAdapter
 import kotlinx.android.synthetic.main.activity_girls_detail.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

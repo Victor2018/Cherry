@@ -92,16 +92,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
             WechatViewModelFactory(
                 this
             )
-        )
-            .get(WeChatViewModel::class.java)
-
-        val binding = viewDataBinding as FragmentWechatBinding?
-
-        // Set the LifecycleOwner to be able to observe LiveData objects
-        binding?.lifecycleOwner = this
-
-        // Bind ViewModel
-        binding?.viewmodel = viewmodel
+        ).get(WeChatViewModel::class.java)
 
         appbar.addOnOffsetChangedListener(this)
 

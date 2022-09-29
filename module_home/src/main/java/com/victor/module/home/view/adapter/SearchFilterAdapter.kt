@@ -26,7 +26,7 @@ class SearchFilterAdapter(var context: Context,
         val filterItem = FilterItem(context)
         filterItem.strokeColor = mColors?.get(0)
         filterItem.textColor = mColors?.get(0)
-        filterItem.cornerRadius = 50f
+        filterItem.cornerRadius = 70f
         filterItem.checkedTextColor =
             ContextCompat.getColor(context, R.color.white)
         filterItem.color = ContextCompat.getColor(context, R.color.white)

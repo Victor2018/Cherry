@@ -1,6 +1,7 @@
 package com.victor.lib.common.view.holder
 
 import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 
 /*
@@ -13,5 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
  * Description: 
  * -----------------------------------------------------------------
  */
-class HeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+open class HeaderViewHolder: RecyclerView.ViewHolder,View.OnClickListener {
+    var mOnItemClickListener: AdapterView.OnItemClickListener? = null
+
+    constructor(itemView: View) : super(itemView) {
+        itemView.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        mOnItemClickListener?.onItemClick(null, v, bindingAdapterPosition, 0)
+    }
 }

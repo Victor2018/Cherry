@@ -51,13 +51,6 @@ class GankViewHolder (var view: View)
         //使用WebActivity显示网页，屏蔽使用系统浏览器
 //        mTvTitle.setMovementMethod(LinkMovementMethod.getInstance())
 
-        if (post.images?.size!! > 0) {
-            view.mIvPoster.visibility = View.VISIBLE
-            ImageUtils.instance.loadImage(App.get(),view.mIvPoster,post.images?.get(0))
-        } else {
-            view.mIvPoster.visibility = View.GONE
-        }
-
         view.mTvTime.text = post?.publishedAt
 
     }

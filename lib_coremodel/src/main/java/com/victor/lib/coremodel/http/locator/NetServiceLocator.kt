@@ -18,31 +18,17 @@ import com.victor.lib.coremodel.http.repository.*
  * -----------------------------------------------------------------
  */
 class NetServiceLocator : ServiceLocator {
-    private val api by lazy {
-        ApiService.create(ApiService.GANK_HOST)
-    }
     private val wanAndroidApi by lazy {
         ApiService.create(ApiService.WAN_ANDROID_HOST)
     }
 
     override fun getRepository(type: RepositoryType,context: Context): IRepository {
         when (type) {
-            RepositoryType.GANK_GIRL -> {
-                return GankGirlRepository(requestApi = getRequestApi(type),
-                    pageConfig = getPagingConfigs(),
-                db = AppDatabase.getInstance(context.applicationContext))
-            }
-            RepositoryType.GANK_DETAIL -> {
-                return GankDetailRepository(requestApi = getRequestApi(type),pageConfig = getPagingConfigs())
-            }
             RepositoryType.ARTICLE -> {
                 return ArticleRepository(requestApi = getRequestApi(type),pageConfig = getPagingConfigs())
             }
-            RepositoryType.SEARCH_GANK -> {
-                return SearchGankRepository(requestApi = getRequestApi(type),pageConfig = getPagingConfigs())
-            }
         }
-        return GankDetailRepository(requestApi = getRequestApi(type),pageConfig = getPagingConfigs())
+        return ArticleRepository(requestApi = getRequestApi(type),pageConfig = getPagingConfigs())
     }
 
     override fun getRequestApi(type: RepositoryType): ApiService {
@@ -57,7 +43,7 @@ class NetServiceLocator : ServiceLocator {
                 return wanAndroidApi
             }
         }
-        return return api
+        return wanAndroidApi
     }
 
     override fun getPagingConfigs(): PagingConfig {

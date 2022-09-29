@@ -1,19 +1,22 @@
-package com.victor.lib.coremodel.http.interfaces
-
-import androidx.lifecycle.LiveData
-import com.victor.lib.coremodel.data.GankDetailEntity
+package com.victor.lib.coremodel.data
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: IGirlsDataSource
+ * File: ListData
  * Author: Victor
- * Date: 2020/8/5 上午 11:02
+ * Date: 2022/9/29 12:02
  * Description: 
  * -----------------------------------------------------------------
  */
-interface IGirlsDataSource {
-    val girlsData: LiveData<GankDetailEntity>
-    suspend fun fetchGirls(page: Int)
+
+open class ListData<T> {
+    var curPage: Int = 0
+    var offset: Int = 0
+    var pageCount: Int = 0
+    var size: Int = 0
+    var total: Int = 0
+    var over: Boolean = false
+    var datas: List<T>? = null
 }

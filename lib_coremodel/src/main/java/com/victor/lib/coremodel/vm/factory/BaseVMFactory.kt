@@ -1,28 +1,23 @@
-package com.victor.lib.coremodel.viewmodel.factory
+package com.victor.lib.coremodel.vm.factory
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.victor.lib.coremodel.http.datasource.RandomGirlDataSource
-import com.victor.lib.coremodel.http.repository.*
-import com.victor.lib.coremodel.viewmodel.GirlsViewModel
-import kotlinx.coroutines.Dispatchers
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: GankViewModelFactory
+ * File: BaseVMFactory
  * Author: Victor
- * Date: 2020/8/14 下午 05:55
+ * Date: 2022/9/29 12:19
  * Description: 
  * -----------------------------------------------------------------
  */
 
-class GirlViewModelFactory(
-    private val repository: IRepository,
+abstract class BaseVMFactory(
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
@@ -33,9 +28,8 @@ class GirlViewModelFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return GirlsViewModel(
-            repository,
-            RandomGirlDataSource(Dispatchers.IO)
-        ) as T
+        return getVM() as T
     }
+
+    abstract fun getVM(): ViewModel
 }

@@ -2,6 +2,7 @@ package com.victor.lib.common.util
 
 import android.text.TextUtils
 import android.text.format.Time
+import com.victor.lib.coremodel.util.Loger
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat

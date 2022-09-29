@@ -3,8 +3,6 @@ package com.victor.module.home.view
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -19,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
-import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
@@ -27,20 +24,15 @@ import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
 import com.victor.lib.common.view.widget.banner.BannerViewFlipper
 import com.victor.lib.common.view.widget.banner.DescriptionViewSwitcherFactory
-import com.victor.lib.coremodel.data.GankInfo
-import com.victor.lib.coremodel.data.HttpStatus
-import com.victor.lib.coremodel.db.AppDatabase
-import com.victor.lib.coremodel.http.repository.GankRepository
-import com.victor.lib.coremodel.util.HttpUtil
-import com.victor.lib.coremodel.viewmodel.factory.GankViewModelFactory
-import com.victor.lib.coremodel.viewmodel.HomeViewModel
+import com.victor.lib.coremodel.data.*
+import com.victor.lib.coremodel.vm.HomeVM
+import com.victor.lib.coremodel.vm.factory.HomeVMFactory
 import com.victor.module.home.R
-import com.victor.module.home.databinding.FragmentHomeBinding
 import com.victor.module.home.view.adapter.HomeAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.toolbar
 import org.victor.funny.util.ResUtils
-
+import org.victor.funny.util.ToastUtils
 
 /*
  * -----------------------------------------------------------------
@@ -58,10 +50,10 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener,
     AppBarLayout.OnOffsetChangedListener,SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var viewmodel: HomeViewModel
+    private lateinit var homeVM: HomeVM
 
     var homeAdapter: HomeAdapter? = null
-    var currentPage = 1
+    var currentPage = 0
     var type: String? = "Android"
 
     companion object {
@@ -91,12 +83,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initialize()
-        initBannerData()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        initGankData()
+        initData()
     }
 
     fun initialize () {
@@ -111,22 +98,9 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         toolbar.inflateMenu(R.menu.menu_home)
         toolbar.setOnMenuItemClickListener(this)
 
-        viewmodel = ViewModelProvider(
-            this,
-            GankViewModelFactory(
-                GankRepository.getInstance(AppDatabase.getInstance(App.get())),
-                this
-            )
-        )
-            .get(HomeViewModel::class.java)
+        homeVM = ViewModelProvider(this, HomeVMFactory(this))[HomeVM::class.java]
 
-        val binding = viewDataBinding as FragmentHomeBinding?
-
-        // Set the LifecycleOwner to be able to observe LiveData objects
-        binding?.lifecycleOwner = this
-
-        // Bind ViewModel
-        binding?.viewmodel = viewmodel
+        subscribeUi()
 
         if (mTsDescription.childCount < 2) {
             mTsDescription.setFactory(DescriptionViewSwitcherFactory(context!!))
@@ -136,8 +110,6 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         mTsDescription.setOutAnimation(context!!, android.R.anim.fade_out)
 
         homeAdapter = HomeAdapter(context!!,this)
-        homeAdapter?.setHeaderVisible(false)
-        homeAdapter?.setFooterVisible(false)
         mRvGank.setHasFixedSize(true)
         mRvGank.adapter = homeAdapter
         mRvGank.setLoadMoreListener(this)
@@ -155,87 +127,51 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         SharePreferencesUtil.putString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
     }
 
+    fun initData () {
+        sendHomeBannerRequest()
+        sendHomeSquareRequest()
+    }
+
+    fun sendHomeBannerRequest () {
+        homeVM.fetchHomeBanner()
+    }
+
+    fun sendHomeSquareRequest () {
+        homeVM.fetchHomeSquare(currentPage)
+    }
+
     fun subscribeUi() {
-        if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
-                SnackbarUtil.ALERT
-            )
-            return
-        }
-        viewmodel.gankDetailValue.observe(viewLifecycleOwner, Observer {
+        homeVM.homeBannerData.observe(viewLifecycleOwner, Observer {
             mSrlRefresh.isRefreshing = false
-            it.let {it1 ->
-                when (it.status) {
-                    HttpStatus.GANK_SUCCESS -> {
-                        it.data.let {it2 ->
-                            if (currentPage == 1) {
-                                homeAdapter?.clear()
-                                homeAdapter?.notifyDataSetChanged()
-                            }
-                            homeAdapter?.setFooterVisible(it.page < it.page_count)
-                            if (it.page < it.page_count) {
-                                homeAdapter?.setLoadState(homeAdapter?.LOADING!!)
-                            } else {
-                                homeAdapter?.setLoadState(homeAdapter?.LOADING_END!!)
-                            }
-
-                            homeAdapter?.add(it2)
-                            homeAdapter?.notifyDataSetChanged()
-                        }
-                    }
-                    else -> {
-                        homeAdapter?.clear()
-                        homeAdapter?.notifyDataSetChanged()
-                    }
+            when (it) {
+                is HttpResult.Success -> {
+                    showBannerData(it.value)
+                }
+                is HttpResult.Error -> {
+                    ToastUtils.showShort(it.message.toString())
                 }
             }
-
         })
-    }
 
-    fun initBannerData() {
-        if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
-                SnackbarUtil.ALERT
-            )
-            return
-        }
-        viewmodel.bannerData.observe(viewLifecycleOwner, Observer {
+        homeVM.homeSquareData.observe(viewLifecycleOwner, Observer {
             mSrlRefresh.isRefreshing = false
-            it.let {
-                when (it.status) {
-                    HttpStatus.GANK_SUCCESS -> {
-                        it.data.let {
-                            mBsvBanner.startWithList(it)
-                        }
-                    }
-                    else -> {
-                    }
+            when (it) {
+                is HttpResult.Success -> {
+                    showSquareData(it.value)
+                }
+                is HttpResult.Error -> {
+                    ToastUtils.showShort(it.message.toString())
                 }
             }
         })
     }
 
-    fun initGankData () {
-        Log.e(TAG,"initGankData()......")
-        if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mBsvBanner,ResUtils.getStringRes(R.string.network_error),
-                SnackbarUtil.ALERT
-            )
-            return
-        }
-        var categoryRes =  SharePreferencesUtil.getString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
-        Log.e(TAG,"initGankData()......categoryRes = $categoryRes")
-        if (!TextUtils.isEmpty(categoryRes)) {
-            var gankInfo: GankInfo? = JsonUtils.parseObject(categoryRes!!,GankInfo::class.java)
-            type = gankInfo?.type
-            mCtlTitle.title = gankInfo?.title
-            currentPage = 1
-        }
+    fun showBannerData (data: BaseReq<List<HomeBannerInfo>>) {
+        mBsvBanner.startWithList(data.data as ArrayList<HomeBannerInfo>?)
+    }
 
-        Loger.e(TAG,"initGankData-type = " + type)
-        viewmodel.searchGankDetail(type,currentPage)
-        subscribeUi()
+    fun showSquareData (data: BaseReq<ListData<HomeSquareInfo>>) {
+        homeAdapter?.showData(data.data?.datas,null,mRvGank,currentPage)
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -249,7 +185,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             }
             else -> {
                 WebActivity.intentStart(activity!!,homeAdapter?.getItem(position)?.title!!,
-                    homeAdapter?.getItem(position)?.url!!)
+                    homeAdapter?.getItem(position)?.link!!)
             }
         }
     }
@@ -284,7 +220,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
     override fun OnLoadMore() {
         currentPage++
-        viewmodel.searchGankDetail(type,currentPage)
+        sendHomeSquareRequest()
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
@@ -301,12 +237,11 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
     override fun onRefresh() {
         mSrlRefresh.isRefreshing = true
-        currentPage = 1
+        currentPage = 0
         homeAdapter?.clear()
         homeAdapter?.notifyDataSetChanged()
 
-        initBannerData()
-        initGankData()
+        initData()
     }
 
 }

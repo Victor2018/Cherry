@@ -7,8 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.R
+import com.victor.lib.common.util.hide
+import com.victor.lib.common.util.show
 import com.victor.lib.common.view.holder.BottomViewHolder
 import com.victor.lib.common.view.holder.HeaderViewHolder
+import com.victor.lib.common.view.widget.LMRecyclerView
+import com.victor.lib.coremodel.data.ListData
+import com.victor.lib.coremodel.util.WebConfig
 import java.util.ArrayList
 
 /*
@@ -21,15 +26,17 @@ import java.util.ArrayList
  * Description: 
  * -----------------------------------------------------------------
  */
-abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Context, listener:AdapterView.OnItemClickListener?): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var TAG = "BaseRecycleAdapter"
-    val LOADING = 0x0001//正在加载
-    val LOADING_COMPLETE = 0x0002//加载完毕
-    val LOADING_END = 0x0003
-    var mLayoutInflater: LayoutInflater? = null
-    var mOnItemClickListener: AdapterView.OnItemClickListener? = null
-    var mContext: Context? = null
-    private var datas: MutableList<T>? = ArrayList()
+abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(
+    var context: Context, var listener:AdapterView.OnItemClickListener?):
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    var TAG = javaClass.simpleName
+
+    companion object {
+        val LOADING = 0x0001//正在加载
+        val LOADING_COMPLETE = 0x0002//加载完毕
+        val LOADING_END = 0x0003
+    }
+    var mDatas: ArrayList<T> = ArrayList()
     var mHeaderCount = 0//头部View个数
     var mBottomCount = 0//底部View个数
     var ITEM_TYPE_HEADER = 0
@@ -41,16 +48,10 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
     private var isFooterVisible = false
 
     abstract fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder?
-    abstract fun onBindHeadVHolder(viewHolder: VH, data: T, position: Int)
+    abstract fun onBindHeadVHolder(viewHolder: VH, data: T?, position: Int)
 
     abstract fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): VH
-    abstract fun onBindContentVHolder(viewHolder: VH, data: T, position: Int)
-
-    init {
-        mContext = context
-        mOnItemClickListener = listener
-        mLayoutInflater = LayoutInflater.from(context)
-    }
+    abstract fun onBindContentVHolder(viewHolder: VH, data: T?, position: Int)
 
     fun setHeaderVisible(visible: Boolean) {
         isHeaderVisible = visible
@@ -58,7 +59,6 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
         if (!isHeaderVisible) {
             mHeaderCount = 0
         }
-        notifyDataSetChanged()
     }
 
     fun setFooterVisible(visible: Boolean) {
@@ -67,7 +67,11 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
         if (!isFooterVisible) {
             mBottomCount = 0
         }
-        notifyDataSetChanged()
+    }
+
+    fun inflate(layoutId: Int,parent: ViewGroup): View {
+        var inflater = LayoutInflater.from(context)
+        return inflater.inflate(layoutId,parent, false)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -76,19 +80,24 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
         } else if (viewType == ITEM_TYPE_CONTENT) {
             return onCreateContentVHolder(parent, viewType)
         } else if (viewType == ITEM_TYPE_BOTTOM) {
-            return BottomViewHolder(mLayoutInflater!!.inflate(R.layout.recyclerview_foot, parent, false))
+            return BottomViewHolder(inflate(R.layout.recyclerview_foot, parent))
         }
         return onCreateContentVHolder(parent, viewType)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = getItem(position)
+        var item = getItem(position)
         if (holder is HeaderViewHolder) {
-            onBindHeadVHolder(holder as VH, item!!, position)
+            onBindHeadVHolder(holder as VH, item, position)
         } else if (holder is BottomViewHolder) {
             setFooterViewState(holder)
         } else {
-            onBindContentVHolder(holder as VH, item!!, position)
+            if (isHeaderVisible) {
+                item = getItem(position - 1)
+                onBindContentVHolder(holder as VH, item, position - 1)
+            } else {
+                onBindContentVHolder(holder as VH, item, position)
+            }
         }
     }
 
@@ -112,7 +121,7 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
     }
 
     fun getContentItemCount(): Int {
-        return if (datas == null) 0 else datas!!.size
+        return if (mDatas == null) 0 else mDatas.size
     }
 
     override fun getItemCount(): Int {
@@ -122,19 +131,19 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
     private fun setFooterViewState(bottomViewHolder: BottomViewHolder) {
         when (loadState) {
             LOADING -> {
-                bottomViewHolder.progressBar!!.setVisibility(View.VISIBLE)
-                bottomViewHolder.mTvTitle!!.setVisibility(View.VISIBLE)
-                bottomViewHolder.mLayoutEnd!!.setVisibility(View.GONE)
+                bottomViewHolder.progressBar?.visibility = View.VISIBLE
+                bottomViewHolder.mTvTitle?.visibility = View.VISIBLE
+                bottomViewHolder.mLayoutEnd?.visibility = View.GONE
             }
             LOADING_COMPLETE -> {
-                bottomViewHolder.progressBar!!.setVisibility(View.GONE)
-                bottomViewHolder.mTvTitle!!.setVisibility(View.GONE)
-                bottomViewHolder.mLayoutEnd!!.setVisibility(View.GONE)
+                bottomViewHolder.progressBar?.visibility = View.GONE
+                bottomViewHolder.mTvTitle?.visibility = View.GONE
+                bottomViewHolder.mLayoutEnd?.visibility = View.GONE
             }
             LOADING_END -> {
-                bottomViewHolder.progressBar!!.setVisibility(View.GONE)
-                bottomViewHolder.mTvTitle!!.setVisibility(View.GONE)
-                bottomViewHolder.mLayoutEnd!!.setVisibility(View.VISIBLE)
+                bottomViewHolder.progressBar?.visibility = View.GONE
+                bottomViewHolder.mTvTitle?.visibility = View.GONE
+                bottomViewHolder.mLayoutEnd?.visibility = View.VISIBLE
             }
         }
     }
@@ -146,7 +155,6 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
      */
     fun setLoadState(loadState: Int) {
         this.loadState = loadState
-        notifyDataSetChanged()
     }
 
     /**
@@ -157,10 +165,10 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
      */
     fun getItem(position: Int): T? {
         //防止越界
-        val index = if (position >= 0 && position < datas!!.size) position else 0
-        return if (datas == null || datas!!.size == 0) {
+        val index = if (position >= 0 && position < mDatas.size) position else 0
+        return if (mDatas == null || mDatas.size == 0) {
             null
-        } else datas!!.get(index)
+        } else mDatas.get(index)
     }
 
     /**
@@ -170,7 +178,7 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
      */
     fun add(item: T?) {
         if (item != null) {
-            datas!!.add(item)
+            mDatas.add(item)
         }
     }
 
@@ -181,13 +189,13 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
      */
     fun add(index: Int, item: T?) {
         if (item != null) {
-            datas!!.add(index, item)
+            mDatas.add(index, item)
         }
     }
 
     fun add(items: List<T>?) {
         if (items != null) {
-            datas!!.addAll(items)
+            mDatas.addAll(items)
         }
     }
 
@@ -197,7 +205,7 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
      * @param items
      */
     fun setDatas(items: List<T>) {
-        datas!!.clear()
+        mDatas.clear()
         add(items)
     }
 
@@ -207,16 +215,309 @@ abstract class BaseRecycleAdapter<T,VH: RecyclerView.ViewHolder>(context: Contex
      * @param index
      */
     fun removeItem(index: Int) {
-        if (index >= 0 && index < datas!!.size) {
-            datas!!.removeAt(index)
+        if (index >= 0 && index < mDatas.size) {
+            mDatas.removeAt(index)
         }
     }
 
     fun getDatas(): List<T>? {
-        return datas
+        return mDatas
     }
 
     fun clear() {
-        datas!!.clear()
+        mDatas.clear()
+    }
+
+    fun showData(list: List<T>?) {
+        clear()
+        add(list)
+        notifyDataSetChanged()
+    }
+
+    fun showData(list: List<T>?,mEmptyView: View?, rv: LMRecyclerView?) {
+        if (list == null || list?.size == 0) {
+            mEmptyView?.show()
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        mEmptyView?.hide()
+        rv?.show()
+        clear()
+        add(list)
+        notifyDataSetChanged()
+    }
+
+    fun showData(list: List<T>?,mEmptyView: List<View>?, rv: LMRecyclerView?) {
+        if (list == null || list?.size == 0) {
+            mEmptyView?.forEach { it?.show() }
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        mEmptyView?.forEach { it?.hide() }
+        rv?.show()
+        clear()
+        add(list)
+        notifyDataSetChanged()
+    }
+
+    fun showData (data: ListData<T>?, mEmptyView: View?, rv: LMRecyclerView?, currentPage: Int) {
+        if (data == null) {
+            mEmptyView?.show()
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data.datas == null) {
+            mEmptyView?.show()
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data.datas?.size == 0) {
+            if (currentPage == 0) {
+                mEmptyView?.show()
+                if (!isHeaderVisible) {
+                    rv?.hide()
+                }
+                setFooterVisible(false)
+                clear()
+                notifyDataSetChanged()
+                rv?.setHasMore(false)
+                return
+            }
+        }
+        mEmptyView?.hide()
+        rv?.show()
+        if (currentPage == 0) {
+            clear()
+        }
+        setFooterVisible(true)
+        add(data?.datas)
+
+        var size = data?.datas?.size ?: 0
+        if (size < WebConfig.PAGE_SIZE) {
+            rv?.setHasMore(false)
+            setLoadState(LOADING_END)
+        } else {
+            rv?.setHasMore(true)
+            setLoadState(LOADING)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun showData (data: ListData<T>?, rv: LMRecyclerView?, currentPage: Int) {
+        if (data == null) {
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data.datas == null) {
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data.datas?.size == 0) {
+            if (currentPage == 0) {
+                if (!isHeaderVisible) {
+                    rv?.hide()
+                }
+                setFooterVisible(false)
+                clear()
+                notifyDataSetChanged()
+                rv?.setHasMore(false)
+                return
+            }
+        }
+        rv?.show()
+        if (currentPage == 0) {
+            clear()
+        }
+        setFooterVisible(true)
+        add(data?.datas)
+
+        var size = data?.datas?.size ?: 0
+        if (size < WebConfig.PAGE_SIZE) {
+            rv?.setHasMore(false)
+            setLoadState(LOADING_END)
+        } else {
+            rv?.setHasMore(true)
+            setLoadState(LOADING)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun showData (data: ListData<T>?, mEmptyView: List<View>?, rv: LMRecyclerView?, currentPage: Int) {
+        if (data == null) {
+            mEmptyView?.forEach { it?.show() }
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data.datas == null) {
+            mEmptyView?.forEach { it?.show() }
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data.datas?.size == 0) {
+            if (currentPage == 0) {
+                mEmptyView?.forEach { it?.show() }
+                if (!isHeaderVisible) {
+                    rv?.hide()
+                }
+                setFooterVisible(false)
+                clear()
+                notifyDataSetChanged()
+                rv?.setHasMore(false)
+                return
+            }
+        }
+        mEmptyView?.forEach { it?.hide() }
+        rv?.show()
+        if (currentPage == 0) {
+            clear()
+        }
+        setFooterVisible(true)
+        add(data?.datas)
+
+        var size = data?.datas?.size ?: 0
+        if (size < WebConfig.PAGE_SIZE) {
+            rv?.setHasMore(false)
+            setLoadState(LOADING_END)
+        } else {
+            rv?.setHasMore(true)
+            setLoadState(LOADING)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun showData (data: List<T>?, mEmptyView: View?, rv: LMRecyclerView?, currentPage: Int) {
+        if (data == null) {
+            mEmptyView?.show()
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data?.size == 0) {
+            if (currentPage == 0) {
+                mEmptyView?.show()
+                if (!isHeaderVisible) {
+                    rv?.hide()
+                }
+                setFooterVisible(false)
+                clear()
+                notifyDataSetChanged()
+                rv?.setHasMore(false)
+                return
+            }
+        }
+        mEmptyView?.hide()
+        rv?.show()
+        if (currentPage == 0) {
+            clear()
+        }
+        setFooterVisible(true)
+        add(data)
+
+        var size = data?.size ?: 0
+        if (size <= 0) {
+            rv?.setHasMore(false)
+            setLoadState(LOADING_END)
+        } else {
+            rv?.setHasMore(true)
+            setLoadState(LOADING)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun showData (data: List<T>?, mEmptyView: List<View>?, rv: LMRecyclerView?, currentPage: Int, pageSize: Int) {
+        if (data == null) {
+            mEmptyView?.forEach { it?.show() }
+            if (!isHeaderVisible) {
+                rv?.hide()
+            }
+            setFooterVisible(false)
+            clear()
+            notifyDataSetChanged()
+            rv?.setHasMore(false)
+            return
+        }
+        if (data?.size == 0) {
+            if (currentPage == 0) {
+                mEmptyView?.forEach { it?.show() }
+                if (!isHeaderVisible) {
+                    rv?.hide()
+                }
+                setFooterVisible(false)
+                clear()
+                notifyDataSetChanged()
+                rv?.setHasMore(false)
+                return
+            }
+        }
+        mEmptyView?.forEach { it?.hide() }
+        rv?.show()
+        if (currentPage == 0) {
+            clear()
+        }
+        setFooterVisible(true)
+        add(data)
+
+        var size = data?.size ?: 0
+        if (size < pageSize) {
+            rv?.setHasMore(false)
+            setLoadState(LOADING_END)
+        } else {
+            rv?.setHasMore(true)
+            setLoadState(LOADING)
+        }
+        notifyDataSetChanged()
     }
 }

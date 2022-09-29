@@ -15,30 +15,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
-import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.common.util.Loger
+import com.victor.lib.common.util.JsonUtils
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.NavigationUtils
-import com.victor.lib.common.util.SnackbarUtil
 import com.victor.lib.common.view.activity.WebActivity
 import com.victor.lib.common.view.widget.LMRecyclerView
-import com.victor.lib.coremodel.data.HotKeyInfo
-import com.victor.lib.coremodel.data.HttpStatus
-import com.victor.lib.coremodel.util.HttpUtil
+import com.victor.lib.coremodel.data.*
 import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.SearchGankViewModel
+import com.victor.lib.coremodel.vm.HomeVM
 import com.victor.module.home.R
-import com.victor.module.home.databinding.ActivitySearchGankBinding
 import com.victor.module.home.view.adapter.SearchFilterAdapter
 import com.victor.module.home.view.adapter.SearchGankAdapter
 import com.yalantis.filter.listener.FilterListener
 import com.yalantis.filter.widget.Filter
 import kotlinx.android.synthetic.main.activity_gank.toolbar
-import kotlinx.android.synthetic.main.activity_gank_category.*
 import kotlinx.android.synthetic.main.activity_search_gank.*
 import org.victor.funny.util.ResUtils
+import org.victor.funny.util.ToastUtils
 import java.util.ArrayList
 
 /*
@@ -55,12 +50,13 @@ import java.util.ArrayList
 class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnClickListener,
     AdapterView.OnItemClickListener, LMRecyclerView.OnLoadMoreListener,
     FilterListener<HotKeyInfo> {
-    private val viewmodel: SearchGankViewModel by viewModels {
-        InjectorUtils.provideSearchGankVMFactory(this)
+
+    private val homeVM by viewModels<HomeVM> {
+        InjectorUtils.provideHomeVMFactory(this)
     }
 
     var searchGankAdapter: SearchGankAdapter? = null
-    var currentPage = 1
+    var currentPage = 0
     var query: String? = null
 
     var mTitles: List<HotKeyInfo>? = null
@@ -86,20 +82,12 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     fun initialize () {
+        subscribeUi()
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val binding = viewDataBinding as ActivitySearchGankBinding?
-
-        // Set the LifecycleOwner to be able to observe LiveData objects
-        binding?.lifecycleOwner = this
-
-        // Bind ViewModel
-        binding?.viewmodel = viewmodel
-
         searchGankAdapter = SearchGankAdapter(this,this)
-        searchGankAdapter?.setHeaderVisible(false)
-        searchGankAdapter?.setFooterVisible(false)
         mRvSearchGank.setHasFixedSize(true)
         mRvSearchGank.adapter = searchGankAdapter
 
@@ -114,59 +102,52 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     fun initData () {
-        Loger.e(TAG,"initData......")
-        if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mIvGirl,ResUtils.getStringRes(R.string.network_error),
-                SnackbarUtil.ALERT
-            )
-            return
-        }
-        viewmodel.hotKeyData.observe(this, Observer {
-            if (it == null) return@Observer
-            if (it.data == null) return@Observer
+        sendHotKeyRequest()
+    }
 
-            when (it.errorCode) {
-                HttpStatus.WAN_ANDROID_SUCCESS -> {
-                    if (it?.data?.size!! > 0) {
-                        val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
-                        mTitles = it?.data
-                        mFilter?.adapter = SearchFilterAdapter(this,it?.data,colors)
-                        mFilter?.expand()
-                        mFilter?.build()
-                    }
+    fun subscribeUi() {
+        homeVM.hotKeyData.observe(this, Observer {
+            when (it) {
+                is HttpResult.Success -> {
+                    showHotKeyData(it.value)
                 }
-                else -> {
+                is HttpResult.Error -> {
+                    ToastUtils.showShort(it.message.toString())
                 }
             }
         })
-        viewmodel.seachGankValue.observe(this, Observer {
-            it.let {it1 ->
-                when (it.status) {
-                    HttpStatus.GANK_SUCCESS -> {
-                        it.data.let {it2 ->
-                            if (currentPage == 1) {
-                                searchGankAdapter?.clear()
-                            }
-                            searchGankAdapter?.setFooterVisible(it.page < it.page_count)
-                            if (it.page < it.page_count) {
-                                searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING!!)
-                            } else {
-                                searchGankAdapter?.setLoadState(searchGankAdapter?.LOADING_END!!)
-                            }
 
-                            searchGankAdapter?.add(it.data)
-                            searchGankAdapter?.notifyDataSetChanged()
-                        }
-                    }
-                    else -> {
-                    }
+        homeVM.queryData.observe(this, Observer {
+            when (it) {
+                is HttpResult.Success -> {
+                    showQueryData(it.value)
                 }
-
+                is HttpResult.Error -> {
+                    ToastUtils.showShort(it.message.toString())
+                }
             }
-
         })
     }
 
+    fun sendHotKeyRequest () {
+        homeVM.fetchHotKey()
+    }
+
+    fun sendQueryRequest (key: String?) {
+        homeVM.fetchQuery(currentPage,key)
+    }
+
+    fun showHotKeyData (data: BaseReq<List<HotKeyInfo>>) {
+        val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
+        mTitles = data?.data
+        mFilter?.adapter = SearchFilterAdapter(this,data?.data,colors)
+        mFilter?.expand()
+        mFilter?.build()
+    }
+
+    fun showQueryData (data: BaseReq<ListData<HomeSquareInfo>>) {
+        searchGankAdapter?.showData(data.data?.datas,null,mRvSearchGank,currentPage)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
@@ -193,6 +174,8 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
                 }
                 searchMenuItem.collapseActionView()
                 searchView.setQuery("", false)
+
+                sendQueryRequest(query)
             }
         }
 
@@ -221,7 +204,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     override fun onQueryTextSubmit(query: String?): Boolean {
         this.query = query
         currentPage = 1
-        viewmodel.searchGank(query,currentPage)
+        sendQueryRequest(query)
         return false
     }
 
@@ -239,38 +222,40 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         WebActivity.intentStart(this,searchGankAdapter?.getItem(position)?.title!!,
-            searchGankAdapter?.getItem(position)?.url!!)
+            searchGankAdapter?.getItem(position)?.link!!)
     }
 
     override fun OnLoadMore() {
         currentPage++
-        viewmodel.searchGank(query,currentPage)
+        sendQueryRequest(query)
     }
 
     override fun onFilterDeselected(item: HotKeyInfo) {
-        Loger.e(TAG,"onFilterDeselected()......")
+        Loger.e(TAG,"onFilterDeselected()......item = ${JsonUtils.toJSONString(item)}")
     }
 
     override fun onFilterSelected(item: HotKeyInfo) {
-        Loger.e(TAG,"onFilterSelected()......")
+        Loger.e(TAG,"onFilterSelected()......item = ${JsonUtils.toJSONString(item)}")
+        mFilter?.collapse()
         if (item.getText().equals(mTitles?.get(0))) {
-            mFilter?.deselectAll();
-            mFilter?.collapse();
+            mFilter?.deselectAll()
         }
     }
 
     override fun onFiltersSelected(filters: ArrayList<HotKeyInfo>) {
-        Loger.e(TAG,"onFiltersSelected()......")
+        Loger.e(TAG,"onFiltersSelected()......filters = ${JsonUtils.toJSONString(filters)}")
 
         var querySb = StringBuffer()
         for (item in filters) {
             querySb.append(item.name + " ")
         }
+        Loger.e(TAG,"onFiltersSelected()......querySb = ${querySb}")
+        ToastUtils.showDebug(querySb.toString())
         if (querySb.length <= 0) return
 
         query = querySb.substring(0,querySb.length-1)
         currentPage = 1
-        viewmodel.searchGank(query,currentPage)
+        sendQueryRequest(query)
     }
 
     override fun onNothingSelected() {

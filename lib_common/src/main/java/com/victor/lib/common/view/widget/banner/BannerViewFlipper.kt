@@ -16,9 +16,10 @@ import androidx.core.content.res.ResourcesCompat
 import com.victor.lib.common.R
 import com.victor.lib.common.util.DensityUtil
 import com.victor.lib.common.util.ImageUtils
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.view.widget.kenburnsview.KenBurnsView
 import com.victor.lib.coremodel.data.BannerInfo
+import com.victor.lib.coremodel.data.HomeBannerInfo
 
 /*
  * -----------------------------------------------------------------
@@ -66,7 +67,7 @@ class BannerViewFlipper: ViewFlipper {
     var outAnimResId: Int = R.anim.anim_top_out
 
     var position = 0
-    var messages: ArrayList<BannerInfo> = ArrayList()
+    var messages: ArrayList<HomeBannerInfo> = ArrayList()
     var onItemClickListener: AdapterView.OnItemClickListener? = null
 
     constructor(context: Context) : this(context, null)
@@ -141,7 +142,7 @@ class BannerViewFlipper: ViewFlipper {
      *
      * @param messages 字符串列表
      */
-    fun startWithList(messages: ArrayList<BannerInfo>?) {
+    fun startWithList(messages: ArrayList<HomeBannerInfo>?) {
         startWithList(messages, inAnimResId, outAnimResId)
     }
 
@@ -153,7 +154,7 @@ class BannerViewFlipper: ViewFlipper {
      * @param outAnimResID 离开动画的resID
      */
     fun startWithList(
-        messages: ArrayList<BannerInfo>?,
+        messages: ArrayList<HomeBannerInfo>?,
         @AnimRes inAnimResId: Int,
         @AnimRes outAnimResID: Int
     ) {
@@ -209,7 +210,7 @@ class BannerViewFlipper: ViewFlipper {
         }
     }
 
-    private fun createImageView(marqueeItem: BannerInfo): KenBurnsView? {
+    private fun createImageView(marqueeItem: HomeBannerInfo): KenBurnsView? {
         var imageView: KenBurnsView? = null
 
         if (childCount >= 3) {
@@ -228,7 +229,7 @@ class BannerViewFlipper: ViewFlipper {
             })
         }
 //        imageView.setTag(position);
-        ImageUtils.instance.loadImage(context!!,imageView,marqueeItem.image)
+        ImageUtils.instance.loadImage(context!!,imageView,marqueeItem.imagePath)
         return imageView
     }
 

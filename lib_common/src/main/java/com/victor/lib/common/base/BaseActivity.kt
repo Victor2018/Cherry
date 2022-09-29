@@ -1,7 +1,6 @@
 package com.victor.lib.common.base
 
 import android.Manifest
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.victor.lib.common.R
 import com.victor.lib.common.module.DataObservable
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.MainHandler
 import com.victor.lib.common.util.StatusBarUtil
 import permission.victor.com.library.OnPermissionCallback

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 
 /*
  * -----------------------------------------------------------------

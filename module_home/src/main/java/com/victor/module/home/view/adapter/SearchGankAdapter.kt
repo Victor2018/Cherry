@@ -12,7 +12,9 @@ import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.data.GankDetailInfo
+import com.victor.lib.coremodel.data.HomeSquareInfo
 import com.victor.module.home.R
+import com.victor.module.home.view.holder.GankContentViewHolder
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 
 /*
@@ -26,7 +28,7 @@ import kotlinx.android.synthetic.main.rv_gank_cell.view.*
  * -----------------------------------------------------------------
  */
 class SearchGankAdapter(context: Context, listener: AdapterView.OnItemClickListener) :
-    BaseRecycleAdapter<GankDetailInfo, RecyclerView.ViewHolder>(context, listener)  {
+    BaseRecycleAdapter<HomeSquareInfo, RecyclerView.ViewHolder>(context, listener)  {
     var fontStyle: Typeface? = null
     init {
         fontStyle = Typeface.createFromAsset(context?.assets, "fonts/zuo_an_lian_ren.ttf")
@@ -36,14 +38,14 @@ class SearchGankAdapter(context: Context, listener: AdapterView.OnItemClickListe
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: HomeSquareInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_gank_cell ,parent, false))
+        return ContentViewHolder(inflate(R.layout.rv_gank_cell, parent))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankDetailInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: HomeSquareInfo?, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
 
         contentViewHolder.itemView.mTvTitle.typeface = fontStyle
@@ -52,21 +54,13 @@ class SearchGankAdapter(context: Context, listener: AdapterView.OnItemClickListe
         contentViewHolder.itemView.mTvTitle.setText(
             Html.fromHtml(
                 ("<a href=\""
-                        + data?.url) + "\">"
-                        + data?.desc + "</a>" + "[" + data?.author
+                        + data?.link) + "\">"
+                        + data?.title + "</a>" + "[" + data?.niceShareDate
                     .toString() + "]"
             )
         )
 
-        if (data.images?.size!! > 0) {
-            contentViewHolder.itemView.mIvPoster.visibility = View.VISIBLE
-            ImageUtils.instance.loadImage(App.get(),contentViewHolder.itemView.mIvPoster,data.images?.get(0))
-        } else {
-            contentViewHolder.itemView.mIvPoster.visibility = View.GONE
-        }
-
-        contentViewHolder.itemView.mTvTime.text = data?.publishedAt
-
-        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
+        contentViewHolder.itemView.mTvTime.text = data?.shareUser
+        contentViewHolder.mOnItemClickListener = listener
     }
 }

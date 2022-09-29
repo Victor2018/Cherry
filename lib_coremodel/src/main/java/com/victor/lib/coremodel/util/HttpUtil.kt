@@ -3,8 +3,6 @@ package com.victor.lib.coremodel.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
-import com.tencent.bugly.Bugly.applicationContext
-
 
 /*
  * -----------------------------------------------------------------

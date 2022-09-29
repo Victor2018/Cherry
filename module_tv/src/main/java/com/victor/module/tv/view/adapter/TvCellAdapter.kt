@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.coremodel.data.ChannelInfo
+import com.victor.lib.coremodel.data.HomeSquareInfo
 import com.victor.module.tv.R
 import com.victor.module.tv.view.holder.TvCellContentViewHolder
 import kotlinx.android.synthetic.main.rv_tv_channel_cell.view.*
@@ -35,26 +36,28 @@ class TvCellAdapter (context: Context, listener: AdapterView.OnItemClickListener
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return TvCellContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_tv_channel_cell ,parent, false),parentPosition)
+        return TvCellContentViewHolder(inflate(R.layout.rv_tv_channel_cell, parent),parentPosition)
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: ChannelInfo?, position: Int) {
         val contentViewHolder = viewHolder as TvCellContentViewHolder
         contentViewHolder.itemView.mTvChannelName.typeface = fontStyle
 
-        contentViewHolder.itemView.mTvChannelName.text = data.channel_name
+        contentViewHolder.itemView.mTvChannelName.text = data?.channel_name
 
-        if (TextUtils.isEmpty(data.icon)) {
-            ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
+        if (TextUtils.isEmpty(data?.icon)) {
+            ImageUtils.instance.loadImage(context,contentViewHolder.itemView.mIvTvLogo,
                 R.drawable.ic_baseline_live_tv_24dp)
         } else {
-            ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.mIvTvLogo,
-                data.icon)
+            ImageUtils.instance.loadImage(context,contentViewHolder.itemView.mIvTvLogo,
+                data?.icon)
         }
-        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
+
+        contentViewHolder.mOnItemClickListener = listener
     }
+
 }

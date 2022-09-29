@@ -16,6 +16,7 @@ import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.util.InjectorUtils
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.coremodel.viewmodel.TvViewModel
 import com.victor.module.tv.R
 import com.victor.module.tv.databinding.FragmentTvBinding

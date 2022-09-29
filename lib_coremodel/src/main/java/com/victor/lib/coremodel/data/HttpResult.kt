@@ -15,5 +15,5 @@ sealed class HttpResult<out T : Any> {
 
     class Success<out T : Any>(val value: T) : HttpResult<T>()
 
-    class Error(val code: String?,val message: String?) : HttpResult<Nothing>()
+    class Error(val code: Int,val message: String?) : HttpResult<Nothing>()
 }

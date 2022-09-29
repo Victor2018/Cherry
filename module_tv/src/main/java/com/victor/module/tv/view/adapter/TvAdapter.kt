@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.victor.lib.common.view.adapter.BaseRecycleAdapter
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.data.Category
+import com.victor.lib.coremodel.data.HomeSquareInfo
 import com.victor.lib.coremodel.db.entity.CategoryInfo
 import com.victor.module.tv.R
 import kotlinx.android.synthetic.main.rv_tv_cell.view.*
@@ -35,19 +36,19 @@ class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: CategoryInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: CategoryInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_tv_cell ,parent, false))
+        return ContentViewHolder(inflate(R.layout.rv_tv_cell, parent))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: CategoryInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: CategoryInfo?, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
 
         contentViewHolder.itemView.mTvCategoryTitle.typeface = fontStyle
 
-        contentViewHolder.itemView.mTvCategoryTitle.text = data.category.channel_category
+        contentViewHolder.itemView.mTvCategoryTitle.text = data?.category?.channel_category
 
         contentViewHolder.itemView.recyclerView.layoutManager = LinearLayoutManager(
             contentViewHolder.itemView.context,
@@ -55,8 +56,8 @@ class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
         contentViewHolder.itemView.recyclerView.setOnFlingListener(null)
         LinearSnapHelper().attachToRecyclerView(contentViewHolder.itemView.recyclerView)
 
-        var cellAdapter = TvCellAdapter(mContext!!,mOnItemClickListener!!,position)
-        cellAdapter.add(data.categoryChannels)
+        var cellAdapter = TvCellAdapter(context,listener!!,position)
+        cellAdapter.add(data?.categoryChannels)
 
         contentViewHolder.itemView.recyclerView.adapter = cellAdapter
 
@@ -67,5 +68,7 @@ class TvAdapter (context: Context, listener: AdapterView.OnItemClickListener) :
         //链接：简书https://www.jianshu.com/p/ddbe6a4095d3
         contentViewHolder.itemView.recyclerView.setNestedScrollingEnabled(false);
 
+        contentViewHolder.mOnItemClickListener = listener
     }
+
 }

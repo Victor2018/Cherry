@@ -33,20 +33,20 @@ class FavGirlsAdapter(context: Context, listener: AdapterView.OnItemClickListene
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == NORMAL_ITEM) {
-            return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_fav_girl_normal_cell ,parent, false))
+            return ContentViewHolder(inflate(R.layout.rv_fav_girl_normal_cell, parent))
         }
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_fav_girl_cell ,parent, false))
+        return ContentViewHolder(inflate(R.layout.rv_fav_girl_cell, parent))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankAndFavGankInfo?, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
-        ImageUtils.instance.loadImage(mContext!!,contentViewHolder.itemView.iv_img,data.plant.images?.get(0))
-        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
+        ImageUtils.instance.loadImage(context,contentViewHolder.itemView.iv_img,data?.plant?.images?.get(0))
+        contentViewHolder.mOnItemClickListener = listener
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -56,9 +56,9 @@ class FavGirlsAdapter(context: Context, listener: AdapterView.OnItemClickListene
     fun getViewType(position: Int): Int {
         return if (position == 0) {
                 BIG_ITEM
-            } else {
-                NORMAL_ITEM
-            }
+        } else {
+            NORMAL_ITEM
         }
+    }
 
 }

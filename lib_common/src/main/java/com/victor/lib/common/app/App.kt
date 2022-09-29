@@ -4,6 +4,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.bugly.crashreport.CrashReport
 import com.victor.lib.common.base.AppConfig
 import com.victor.lib.common.base.BaseApplication
+import com.victor.lib.coremodel.util.WebConfig
+import org.victor.http.lib.ApiClient
 
 /*
  * -----------------------------------------------------------------
@@ -24,7 +26,8 @@ class App: BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        CrashReport.initCrashReport(getApplicationContext());
+        CrashReport.initCrashReport(this)
+        ApiClient.BASE_URL = WebConfig.getBaseUrl()
     }
 
 }

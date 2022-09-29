@@ -7,11 +7,11 @@ import androidx.savedstate.SavedStateRegistryOwner
 import com.victor.lib.coremodel.data.RepositoryType
 import com.victor.lib.coremodel.db.AppDatabase
 import com.victor.lib.coremodel.http.locator.ServiceLocator
-import com.victor.lib.coremodel.http.repository.GankRepository
 import com.victor.lib.coremodel.http.repository.IRepository
 import com.victor.lib.coremodel.http.repository.LocalGirlsRepository
 import com.victor.lib.coremodel.http.repository.TvRepository
 import com.victor.lib.coremodel.viewmodel.factory.*
+import com.victor.lib.coremodel.vm.factory.HomeVMFactory
 
 /*
  * -----------------------------------------------------------------
@@ -53,25 +53,10 @@ object InjectorUtils {
             fragment
         )
     }
-    private fun getGankRepository(context: Context): GankRepository {
-        return GankRepository.getInstance(AppDatabase.getInstance(context.applicationContext))
-    }
 
-    fun provideGankViewModelFactory(fragment: Fragment): GankViewModelFactory {
-        return GankViewModelFactory(
-            getGankRepository(fragment.requireContext()),
-            fragment
-        )
-    }
 
     fun getGirlRepository(context: Context): IRepository {
         return ServiceLocator.instance().getRepository(RepositoryType.GANK_GIRL,context!!)
-    }
-    fun provideGirlViewModelFactory(fragment: Fragment): GirlViewModelFactory {
-        return GirlViewModelFactory(
-            getGirlRepository(fragment.requireContext()),
-            fragment
-        )
     }
 
     fun provideWechatViewModelFactory(owner: SavedStateRegistryOwner): WechatViewModelFactory {
@@ -80,20 +65,12 @@ object InjectorUtils {
         )
     }
 
-    fun provideGankCategoryLiveDataVMFactory(owner: SavedStateRegistryOwner): GankCategoryVMFactory {
-        return GankCategoryVMFactory(owner)
-    }
-
-    fun provideSearchGankVMFactory(owner: SavedStateRegistryOwner): SearchGankVMFactory {
-        return SearchGankVMFactory(owner)
-    }
-
     fun provideArticleVMFactory( id: Int, context: Context,owner: SavedStateRegistryOwner): ArticleVMFactory {
         return ArticleVMFactory(id,context,owner)
     }
 
-    fun provideGankVMFactory(type: String?, context: Context,owner: SavedStateRegistryOwner): GankVMFactory {
-        return GankVMFactory(type,context,owner)
+    fun provideHomeVMFactory(owner: SavedStateRegistryOwner): HomeVMFactory {
+        return HomeVMFactory(owner)
     }
 
 }

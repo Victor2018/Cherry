@@ -3,9 +3,11 @@ package com.victor.module.home.view.holder
 import android.text.Html
 import android.view.View
 import com.victor.lib.common.app.App
+import com.victor.lib.common.util.DateUtil
 import com.victor.lib.common.util.ImageUtils
 import com.victor.lib.common.view.holder.ContentViewHolder
 import com.victor.lib.coremodel.data.GankDetailInfo
+import com.victor.lib.coremodel.data.HomeSquareInfo
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.rv_gank_cell.view.*
 import org.victor.funny.util.ResUtils
@@ -34,32 +36,20 @@ class GankContentViewHolder: ContentViewHolder {
         itemView.setOnLongClickListener(this)
     }
 
-    fun bindData (data: GankDetailInfo,showThumbnail: Boolean) {
+    fun bindData (data: HomeSquareInfo?, showThumbnail: Boolean) {
 
         itemView.mTvTitle.setText(
             Html.fromHtml(
                 ("<a href=\""
-                        + data?.url) + "\">"
-                        + data?.desc + "</a>" + "[" + data?.author
+                        + data?.link) + "\">"
+                        + data?.title + "</a>" + "[" + data?.niceShareDate
                     .toString() + "]"
             )
         )
 
-        if (data.images?.size!! > 0) {
-            itemView.mIvPoster.visibility = View.VISIBLE
-            ImageUtils.instance.loadImage(App.get(),itemView.mIvPoster,data.images?.get(0))
-        } else {
-            itemView.mIvPoster.visibility = View.GONE
-        }
+        itemView.mTvTime.text = data?.shareUser
 
-        if (showThumbnail) {
-            itemView.mIvPoster.visibility = View.VISIBLE
-        } else {
-            itemView.mIvPoster.visibility = View.GONE
-        }
-        itemView.mTvTime.text = data?.publishedAt
-
-        itemView.mIvFavStatus.setImageResource(if (data.isFavorited == 1)
+        itemView.mIvFavStatus.setImageResource(if (data?.collect == true)
             R.drawable.ic_favorite else R.drawable.ic_unfavorite)
 
         itemView.mIvFavStatus.setColorFilter(ResUtils.getColorRes(R.color.colorAccent))

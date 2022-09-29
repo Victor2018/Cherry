@@ -1,7 +1,6 @@
-package com.victor.lib.common.util
+package com.victor.lib.coremodel.util
 
 import android.util.Log
-import com.victor.lib.common.base.AppConfig
 
 /*
  * -----------------------------------------------------------------

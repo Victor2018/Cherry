@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/victor/github/Cherry/app/src/main/res/layout/activity_main.xml" value="0.3296875" />
+        <entry key="..\:/victor/github/Cherry/app/src/main/res/layout/activity_splash.xml" value="0.3296875" />
+        <entry key="..\:/victor/github/Cherry/module_girls/src/main/res/layout/activity_girls.xml" value="0.24583333333333332" />
+        <entry key="..\:/victor/github/Cherry/module_girls/src/main/res/layout/fragment_girls.xml" value="0.24583333333333332" />
+        <entry key="..\:/victor/github/Cherry/module_home/src/main/res/layout/activity_gank.xml" value="0.15572916666666667" />
+        <entry key="..\:/victor/github/Cherry/module_home/src/main/res/layout/activity_gank_category.xml" value="0.15572916666666667" />
+        <entry key="..\:/victor/github/Cherry/module_home/src/main/res/layout/activity_home.xml" value="0.24583333333333332" />
+        <entry key="..\:/victor/github/Cherry/module_home/src/main/res/layout/activity_search_gank.xml" value="0.15572916666666667" />
+        <entry key="..\:/victor/github/Cherry/module_home/src/main/res/layout/fragment_home.xml" value="0.3296875" />
+        <entry key="..\:/victor/github/Cherry/module_home/src/main/res/layout/rv_gank_cell.xml" value="0.22" />
+        <entry key="..\:/victor/github/Cherry/module_wechat/src/main/res/layout/fragment_wechat.xml" value="0.2971014492753623" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

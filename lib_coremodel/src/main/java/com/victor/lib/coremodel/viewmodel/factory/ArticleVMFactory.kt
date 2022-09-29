@@ -7,12 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.victor.lib.coremodel.data.RepositoryType
-import com.victor.lib.coremodel.http.datasource.GankCategoryDataSource
 import com.victor.lib.coremodel.http.locator.ServiceLocator
-import com.victor.lib.coremodel.http.repository.IRepository
 import com.victor.lib.coremodel.viewmodel.ArticleViewModel
-import com.victor.lib.coremodel.viewmodel.GankCategoryViewModel
-import kotlinx.coroutines.Dispatchers
 
 
 /*

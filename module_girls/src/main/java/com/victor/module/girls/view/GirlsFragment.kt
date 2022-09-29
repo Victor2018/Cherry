@@ -7,24 +7,16 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.app.App
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
-import com.victor.lib.coremodel.data.GankDetailInfo
-import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
-import com.victor.lib.coremodel.util.InjectorUtils
-import com.victor.lib.coremodel.viewmodel.factory.GirlViewModelFactory
-import com.victor.lib.coremodel.viewmodel.GirlsViewModel
 import com.victor.module.girls.R
 import com.victor.module.girls.view.adapter.GirlsAdapter
 import com.victor.module.girls.view.adapter.GirlsLoadStateAdapter
@@ -46,8 +38,6 @@ import org.victor.funny.util.ResUtils
 @Route(path = ARouterPath.GirlsFgt)
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
     View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
-
-    private lateinit var viewmodel: GirlsViewModel
 
     private lateinit var girlsAdapter: GirlsAdapter
 
@@ -78,7 +68,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         initialize()
     }
 
@@ -91,12 +80,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 //        toolbar.menu.clear()
 //        toolbar.inflateMenu(R.menu.menu_girls)
 //        toolbar.setOnMenuItemClickListener(this)
-
-        viewmodel = ViewModelProvider(this,
-            GirlViewModelFactory(
-                InjectorUtils.getGirlRepository(context!!), this
-            )
-        ).get(GirlsViewModel::class.java)
 
         //设置 进度条的颜色变化，最多可以设置4种颜色
         mSrlRefresh.setColorSchemeResources(android.R.color.holo_purple, android.R.color.holo_blue_bright,
@@ -116,20 +99,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     private fun subscribeUi() {
-        viewmodel.randomGirlDataValue.observe(viewLifecycleOwner, Observer {
-            hideFreshGirlAnim()
-            it.let {
-                when (it.status) {
-                    HttpStatus.GANK_SUCCESS -> {
-                        mCtlTitle.title = it.data?.get(0)?.title
-                        ImageUtils.instance.loadImage(context!!,mIvRandomGirl,it.data?.get(0)?.images?.get(0))
-                    }
-                    else -> {
-                        mCtlTitle.title = ""
-                    }
-                }
-            }
-        })
     }
 
     private fun fetchRandomGirlData() {
@@ -140,7 +109,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
             return
         }
         showFreshGirlAnim()
-        viewmodel.fetchRandomGirlData()
     }
 
     private fun initAdapter() {
@@ -167,11 +135,6 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
                     SnackbarUtil.ALERT
                 )
                 return@launchWhenCreated
-            }
-            viewmodel.datas.collectLatest {
-                it.let {
-                    girlsAdapter.submitData(it as PagingData<GankDetailInfo>)
-                }
             }
         }
 

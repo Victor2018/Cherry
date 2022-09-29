@@ -15,6 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
  * -----------------------------------------------------------------
  */
 open class ContentViewHolder: RecyclerView.ViewHolder,View.OnClickListener,View.OnLongClickListener {
+    val TAG = javaClass.simpleName
+
+    companion object {
+        const val ONITEM_LONG_CLICK: Long = -1
+        const val ONITEM_CLICK: Long = 0
+    }
+
     var mOnItemClickListener: AdapterView.OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: AdapterView.OnItemClickListener?) {
@@ -27,11 +34,11 @@ open class ContentViewHolder: RecyclerView.ViewHolder,View.OnClickListener,View.
     }
 
     override fun onClick(view: View) {
-        mOnItemClickListener?.onItemClick(null, view, getAdapterPosition(), 0)
+        mOnItemClickListener?.onItemClick(null, view, bindingAdapterPosition, ONITEM_CLICK)
     }
 
     override fun onLongClick(v: View): Boolean {
-        mOnItemClickListener?.onItemClick(null, v, getAdapterPosition(), -1)
+        mOnItemClickListener?.onItemClick(null, v, bindingAdapterPosition, ONITEM_LONG_CLICK)
         return false
     }
 }

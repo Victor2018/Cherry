@@ -31,20 +31,20 @@ class WeChatAdapter(context: Context, listener: AdapterView.OnItemClickListener)
     override fun onCreateHeadVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
         return null
     }
-
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: WeChatInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: WeChatInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_wechat_cell ,parent, false))
+        return ContentViewHolder(inflate(R.layout.rv_wechat_cell, parent))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: WeChatInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: WeChatInfo?, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
         contentViewHolder.itemView.mTvTitle.typeface = fontStyle
-        contentViewHolder.itemView.mTvTitle.text = data.name
-        contentViewHolder.itemView.mCavAvatar.setAvatarText(data.name)
+        contentViewHolder.itemView.mTvTitle.text = data?.name
+        contentViewHolder.itemView.mCavAvatar.setAvatarText(data?.name)
 
-        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
+        contentViewHolder.mOnItemClickListener = listener
     }
+
 }

@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
@@ -14,11 +12,9 @@ import androidx.paging.PagingData
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.coremodel.data.ArticleInfo
-import com.victor.lib.coremodel.data.RepositoryType
-import com.victor.lib.coremodel.http.locator.ServiceLocator
 import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.lib.coremodel.viewmodel.ArticleViewModel
 import com.victor.module.wechat.R
@@ -26,11 +22,7 @@ import com.victor.module.wechat.view.adapter.ArticleAdapter
 import com.victor.module.wechat.view.adapter.ArticleLoadStateAdapter
 import kotlinx.android.synthetic.main.activity_article.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
 
 /*
  * -----------------------------------------------------------------

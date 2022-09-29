@@ -22,7 +22,6 @@ class BottomViewHolder : RecyclerView.ViewHolder {
     var mTvTitle: TextView? = null
     var mLayoutEnd: LinearLayout? = null
 
-
     constructor(itemView: View) : super(itemView) {
         progressBar = itemView.findViewById(R.id.progressBar)
         mTvTitle = itemView.findViewById(R.id.tv_title)

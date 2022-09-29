@@ -15,7 +15,7 @@ import android.webkit.*
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.victor.lib.common.R
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 
 /*
  * -----------------------------------------------------------------

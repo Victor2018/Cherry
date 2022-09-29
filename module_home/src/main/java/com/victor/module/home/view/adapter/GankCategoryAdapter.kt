@@ -33,19 +33,20 @@ class GankCategoryAdapter (context: Context, listener: AdapterView.OnItemClickLi
         return null
     }
 
-    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo, position: Int) {
+    override fun onBindHeadVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo?, position: Int) {
     }
 
     override fun onCreateContentVHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ContentViewHolder(mLayoutInflater!!.inflate(R.layout.rv_gank_category_cell ,parent, false))
+        return ContentViewHolder(inflate(R.layout.rv_gank_category_cell, parent))
     }
 
-    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo, position: Int) {
+    override fun onBindContentVHolder(viewHolder: RecyclerView.ViewHolder, data: GankInfo?, position: Int) {
         val contentViewHolder = viewHolder as ContentViewHolder
         contentViewHolder.itemView.mTvTitle.typeface = fontStyle
-        contentViewHolder.itemView.mTvTitle.text = data.title
+        contentViewHolder.itemView.mTvTitle.text = data?.title
         contentViewHolder.itemView.mIvCategoryDot.setColorFilter(ColorUtil.getColorByHashCode(position.hashCode()))
 
-        contentViewHolder.setOnItemClickListener(mOnItemClickListener)
+        contentViewHolder.mOnItemClickListener = listener
     }
+
 }

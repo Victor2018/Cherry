@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.victor.lib.common.R
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.Constant
-import com.victor.lib.common.util.Loger
+import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.SnackbarUtil
 import kotlinx.android.synthetic.main.activity_web.*
 
