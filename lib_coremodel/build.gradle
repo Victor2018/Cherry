@@ -1,14 +1,14 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
 
 apply from: "../config_build.gradle"
 
 android {
-
-
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api project(':lib_opensource')
-
 }

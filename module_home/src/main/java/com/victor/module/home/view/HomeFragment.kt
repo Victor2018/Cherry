@@ -199,9 +199,9 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
             R.id.action_share -> {
                 var intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
-                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
-                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app))
-                Intent.createChooser(intentshare, getString(R.string.share))
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(com.victor.lib.common.R.string.share))
+                    .putExtra(Intent.EXTRA_TEXT,getString(com.victor.lib.common.R.string.share_app))
+                Intent.createChooser(intentshare, getString(com.victor.lib.common.R.string.share))
                 startActivity(intentshare)
                 return true
             }
@@ -213,7 +213,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         when(v?.id) {
             R.id.mFabGankCategory -> {
                 GankCategoryActivity.intentStart(activity as AppCompatActivity,
-                    mFabGankCategory,ResUtils.getStringRes(R.string.transition_fab))
+                    mFabGankCategory,ResUtils.getStringRes(com.victor.lib.common.R.string.transition_fab))
             }
         }
     }

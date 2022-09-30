@@ -50,9 +50,12 @@ class GankContentViewHolder: ContentViewHolder {
         itemView.mTvTime.text = data?.shareUser
 
         itemView.mIvFavStatus.setImageResource(if (data?.collect == true)
-            R.drawable.ic_favorite else R.drawable.ic_unfavorite)
+            com.victor.lib.common.R.drawable.ic_favorite else com.victor.lib.common.R.drawable.ic_unfavorite)
 
-        itemView.mIvFavStatus.setColorFilter(ResUtils.getColorRes(R.color.colorAccent))
+        itemView.mIvFavStatus.setColorFilter(ResUtils.getColorRes(com.victor.lib.common.R.color.colorAccent))
+
+        var imgUrl = "https://v.api.aa1.cn/api/pc-girl_bz/index.php?wpon=ro38d57y8rhuwur3788y3rd"
+        ImageUtils.instance.loadImage(App.get(),itemView.mIvPoster,imgUrl)
     }
 
     override fun onClick(view: View) {

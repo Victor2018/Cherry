@@ -22,16 +22,3 @@ class TvViewModel(private val dataSource: ITVDataSource) : ViewModel() {
         emitSource(dataSource.fetchTvData())
     }
 }
-
-/**
- * Factory for [LiveDataViewModel].
- */
-object LiveDataVMFactory : ViewModelProvider.Factory {
-
-    private val tvDataSource = TvDataSource(Dispatchers.IO)
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST")
-        return TvViewModel(tvDataSource) as T
-    }
-}

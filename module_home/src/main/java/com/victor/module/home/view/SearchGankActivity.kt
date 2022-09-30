@@ -98,7 +98,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
         mFilter?.listener = this
 
         //the text to show when there's no selected items
-        mFilter?.noSelectedItemText = ResUtils.getStringRes(R.string.hot_search_keywords)
+        mFilter?.noSelectedItemText = ResUtils.getStringRes(com.victor.lib.common.R.string.hot_search_keywords)
     }
 
     fun initData () {
@@ -138,7 +138,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
     }
 
     fun showHotKeyData (data: BaseReq<List<HotKeyInfo>>) {
-        val colors = ResUtils.getIntArrayRes(R.array.search_filter_colors)
+        val colors = ResUtils.getIntArrayRes(com.victor.lib.common.R.array.search_filter_colors)
         mTitles = data?.data
         mFilter?.adapter = SearchFilterAdapter(this,data?.data,colors)
         mFilter?.expand()
@@ -149,18 +149,18 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
         searchGankAdapter?.showData(data.data?.datas,null,mRvSearchGank,currentPage)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
         val searchMenuItem = menu?.findItem(R.id.action_search)
         val searchView = searchMenuItem?.actionView as SearchView
-        val textView = searchView.findViewById(R.id.search_src_text) as TextView
+        val textView = searchView.findViewById(androidx.appcompat.R.id.search_src_text) as TextView
         textView.setTextColor(Color.WHITE)
-        textView.setHighlightColor(getResources().getColor(R.color.colorAccent))
+        textView.setHighlightColor(getResources().getColor(com.victor.lib.common.R.color.colorAccent))
         textView.setCursorVisible(true)
 
         searchView.setMaxWidth(Integer.MAX_VALUE)
         searchView.onActionViewExpanded()
-        searchView.setQueryHint(getString(R.string.search_tip))
+        searchView.setQueryHint(getString(com.victor.lib.common.R.string.search_tip))
         searchView.setOnQueryTextListener(this)
         searchView.setSubmitButtonEnabled(true)
         searchView.setFocusable(false)
@@ -183,7 +183,7 @@ class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnC
             val field = searchView.javaClass.getDeclaredField("mGoButton")
             field.setAccessible(true)
             val mGoButton = field.get(searchView) as ImageView
-            mGoButton.setImageResource(R.drawable.ic_search_white_24dp)
+            mGoButton.setImageResource(com.victor.lib.common.R.drawable.ic_search_white_24dp)
         } catch (e: Exception) {
             e.printStackTrace()
         }

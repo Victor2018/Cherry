@@ -103,7 +103,8 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 
     private fun fetchRandomGirlData() {
         if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mIvRandomGirl,ResUtils.getStringRes(R.string.network_error),
+            SnackbarUtil.ShortSnackbar(mIvRandomGirl,
+                ResUtils.getStringRes(com.victor.lib.common.R.string.network_error),
                 SnackbarUtil.ALERT
             )
             return
@@ -131,7 +132,8 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
         lifecycleScope.launchWhenCreated {
             @OptIn(ExperimentalCoroutinesApi::class)
             if (!HttpUtil.isNetEnable(App.get())) {
-                SnackbarUtil.ShortSnackbar(mIvRandomGirl,ResUtils.getStringRes(R.string.network_error),
+                SnackbarUtil.ShortSnackbar(mIvRandomGirl,
+                    ResUtils.getStringRes(com.victor.lib.common.R.string.network_error),
                     SnackbarUtil.ALERT
                 )
                 return@launchWhenCreated
@@ -152,7 +154,8 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         GirlsDetailActivity.intentStart(activity!! as AppCompatActivity, position,
-        view?.findViewById(R.id.iv_img),ResUtils.getStringRes(R.string.transition_girl_img))
+        view?.findViewById(R.id.iv_img),
+            ResUtils.getStringRes(com.victor.lib.common.R.string.transition_girl_img))
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -160,9 +163,9 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
             R.id.action_share -> {
                 var intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
-                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
-                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app))
-                Intent.createChooser(intentshare, getString(R.string.share))
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(com.victor.lib.common.R.string.share))
+                    .putExtra(Intent.EXTRA_TEXT,getString(com.victor.lib.common.R.string.share_app))
+                Intent.createChooser(intentshare, getString(com.victor.lib.common.R.string.share))
                 startActivity(intentshare)
                 return true
             }

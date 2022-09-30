@@ -92,7 +92,8 @@ class AboutActivity: BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.mFabGitHub -> {
-                WebActivity.intentStart(this, getString(R.string.github), getString(R.string.github_url), false)
+                WebActivity.intentStart(this, getString(com.victor.lib.common.R.string.github),
+                    getString(com.victor.lib.common.R.string.github_url), false)
             }
         }
     }

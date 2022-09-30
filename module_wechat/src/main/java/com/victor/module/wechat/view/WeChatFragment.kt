@@ -109,7 +109,8 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
 
     fun initData () {
         if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mCtlTitle,ResUtils.getStringRes(R.string.network_error),
+            SnackbarUtil.ShortSnackbar(mCtlTitle,ResUtils.getStringRes(
+                com.victor.lib.common.R.string.network_error),
                 SnackbarUtil.ALERT
             )
             return
@@ -143,9 +144,9 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
             R.id.action_share -> {
                 var intentshare = Intent(Intent.ACTION_SEND);
                 intentshare.setType(Constant.SHARE_TYPE)
-                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
-                    .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_app));
-                Intent.createChooser(intentshare, getString(R.string.share));
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(com.victor.lib.common.R.string.share))
+                    .putExtra(Intent.EXTRA_TEXT,getString(com.victor.lib.common.R.string.share_app))
+                Intent.createChooser(intentshare, getString(com.victor.lib.common.R.string.share))
                 startActivity(intentshare);
                 return true
             }

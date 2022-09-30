@@ -79,7 +79,8 @@ class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.
 
     fun initData () {
         if (!HttpUtil.isNetEnable(App.get())) {
-            SnackbarUtil.ShortSnackbar(mIvGirl, ResUtils.getStringRes(R.string.network_error),
+            SnackbarUtil.ShortSnackbar(mIvGirl,
+                ResUtils.getStringRes(com.victor.lib.common.R.string.network_error),
                 SnackbarUtil.ALERT
             )
             return

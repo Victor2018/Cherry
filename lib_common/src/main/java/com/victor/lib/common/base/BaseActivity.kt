@@ -5,16 +5,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Message
-import android.view.View
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import com.victor.lib.common.R
-import com.victor.lib.common.module.DataObservable
-import com.victor.lib.coremodel.util.Loger
-import com.victor.lib.common.util.MainHandler
+import com.alibaba.android.arouter.launcher.ARouter
+import com.hok.lib.common.util.*
+import com.victor.lib.common.util.NavAdaptationUtil
 import com.victor.lib.common.util.StatusBarUtil
+import com.victor.lib.coremodel.util.Loger
 import permission.victor.com.library.OnPermissionCallback
 import permission.victor.com.library.PermissionHelper
 import java.util.*
@@ -25,60 +23,49 @@ import java.util.*
  * -----------------------------------------------------------------
  * File: BaseActivity
  * Author: Victor
- * Date: 2020/7/3 下午 06:17
- * Description: 
+ * Date: 2022/3/1 18:28
+ * Description:
  * -----------------------------------------------------------------
  */
-abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer,
-    MainHandler.OnMainHandlerImpl {
+
+abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,
+    MainHandler.OnMainHandlerImpl,Observer {
+    /**
+     * 是否需要使用DataBinding 供子类BaseVmDbActivity修改，用户请慎动
+     */
     protected var TAG = javaClass.simpleName
-    var statusBarTextColorBlack: Boolean = false
-    var viewDataBinding : ViewDataBinding? = null;
+    var statusBarTextColorBlack: Boolean = true
+    var setNavigationBarBottomPading: Boolean = true
     var permissionHelper: PermissionHelper? = null
     private var neededPermission: Array<String>? = null
     private var builder: AlertDialog? = null
-    private val MULTI_PERMISSIONS = arrayOf(
-        Manifest.permission.ACCESS_NETWORK_STATE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-        Manifest.permission.ACCESS_WIFI_STATE)
+
+    val MULTI_PERMISSIONS = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     abstract fun getLayoutResource(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewDataBinding = DataBindingUtil.setContentView(this,getLayoutResource())
+        ARouter.getInstance().inject(this)
+
+        setContentView(getLayoutResource())
         initializeSuper()
     }
 
     fun initializeSuper () {
-        DataObservable.instance.addObserver(this)
-        MainHandler.get().register(this)
-
+        Log.e(TAG,"initializeSuper......")
         //状态栏背景及字体颜色适配
-        StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
-
-        //状态栏背景及字体颜色适配
-        StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,true)
-        if (StatusBarUtil.hasNavigationBarShow(this)) {
-            window.decorView.findViewById<View>(android.R.id.content).setPadding(0, 0, 0, StatusBarUtil.getNavigationBarHeight(this))
-        }
-
-        //Android全面屏虚拟导航栏适配
-//        StatusBarUtil.adaptationNav(this)
+        StatusBarUtil.translucentStatusBar(this, true,statusBarTextColorBlack,false)
 
         permissionHelper = PermissionHelper.getInstance(this,this)
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-
-    }
-
     fun isPermissionGranted (permissionName: String): Boolean {
-        var isPermissionGranted = permissionHelper?.isPermissionGranted(permissionName)
-        Loger.e(TAG,"isPermissionGranted = " + isPermissionGranted!!)
-        return isPermissionGranted!!
+        var isPermissionGranted = permissionHelper?.isPermissionGranted(permissionName) ?: false
+        Loger.e(TAG,"isPermissionGranted = $isPermissionGranted")
+        return isPermissionGranted
     }
 
     fun requestPermission (permission: String) {
@@ -92,45 +79,36 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer,
             ?.request(permissions)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        DataObservable.instance.deleteObserver(this)
-        MainHandler.get().unregister(this)
-    }
-
     override fun startActivity(intent: Intent?) {
         super.startActivity(intent)
-        overridePendingTransition(R.anim.anim_activity_enter, R.anim.anim_activity_exit);
+        overridePendingTransition(com.victor.lib.common.R.anim.anim_activity_enter,
+            com.victor.lib.common.R.anim.anim_activity_exit)
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.anim_activity_enter_back, R.anim.anim_activity_exit_back);
+        overridePendingTransition(com.victor.lib.common.R.anim.anim_activity_enter_back,
+            com.victor.lib.common.R.anim.anim_activity_exit_back)
     }
 
     override fun onPermissionPreGranted(permissionsName: String) {
-        Loger.d(TAG, "onPermissionPreGranted-Permission( " + permissionsName + " ) preGranted");
+        Loger.d(TAG, "onPermissionPreGranted-Permission( " + permissionsName + " ) preGranted")
     }
 
     override fun onPermissionGranted(permissionName: Array<out String>) {
-        Loger.d(TAG, "onPermissionGranted-Permission(s) " + Arrays.toString(permissionName) + " Granted");
+        Loger.d(TAG, "onPermissionGranted-Permission(s) " + Arrays.toString(permissionName) + " Granted")
     }
 
     override fun onNoPermissionNeeded() {
-        Loger.d(TAG, "onNoPermissionNeeded-Permission(s) not needed");
+        Loger.d(TAG, "onNoPermissionNeeded-Permission(s) not needed")
     }
 
     override fun onPermissionReallyDeclined(permissionName: String) {
-        Loger.d(TAG, "ReallyDeclined-Permission " + permissionName + " can only be granted from settingsScreen");
+        Loger.d(TAG, "ReallyDeclined-Permission " + permissionName + " can only be granted from settingsScreen")
     }
 
     override fun onPermissionDeclined(permissionName: Array<out String>) {
-        Loger.d(TAG, "onPermissionDeclined-Permission(s) " + Arrays.toString(permissionName) + " Declined");
+        Loger.d(TAG, "onPermissionDeclined-Permission(s) " + Arrays.toString(permissionName) + " Declined")
     }
 
     override fun onPermissionNeedExplanation(p0: String) {
@@ -142,7 +120,7 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer,
             }
         }
         val alert = getAlertDialog(neededPermission!!, builder.toString())
-        if (!alert.isShowing()) {
+        if (!alert.isShowing) {
             alert.show()
         }
     }
@@ -172,11 +150,16 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,Observer,
         permissionHelper?.onRequestPermissionsResult(requestCode,permissions,grantResults)
     }
 
+    override fun handleMainMessage(message: Message?) {
+
+    }
+
     override fun update(observable: Observable?, data: Any?) {
 
     }
 
-    override fun handleMainMessage(message: Message?) {
-
+    override fun onDestroy() {
+        super.onDestroy()
     }
+
 }

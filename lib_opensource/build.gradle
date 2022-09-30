@@ -1,7 +1,9 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
 
 apply from: "../config_build.gradle"
-
 
 android {
 
@@ -65,6 +67,8 @@ dependencies {
     api deps.victor.player
     //kotlin网络请求库
     api deps.victor.khttp
+    //NRouter
+    api deps.victor.nrouter
 
     //搜索筛选view
     api deps.SearchFilter.core

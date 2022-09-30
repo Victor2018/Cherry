@@ -18,6 +18,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.hok.lib.coremodel.util.AppUtil
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
@@ -114,9 +115,9 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
                 val url: String = gankDetailList?.get(mVpGirls.currentItem)?.images?.get(0)!!
                 val intentshare = Intent(Intent.ACTION_SEND)
                 intentshare.setType(Constant.SHARE_TYPE)
-                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share))
-                    .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_beauty) + url)
-                Intent.createChooser(intentshare, getString(R.string.share))
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(com.victor.lib.common.R.string.share))
+                    .putExtra(Intent.EXTRA_TEXT, getString(com.victor.lib.common.R.string.share_beauty) + url)
+                Intent.createChooser(intentshare, getString(com.victor.lib.common.R.string.share))
                 startActivity(intentshare)
                 return true
             }
@@ -138,7 +139,7 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
                     //lifecycleScope使协程的生命周期随着activity的生命周期变化
                     setWallpaper()
                     mPbLoading.visibility = View.GONE
-                    SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.set_wallpaper_success)).show();
+                    SnackbarUtil.ShortSnackbar(mVpGirls,getString(com.victor.lib.common.R.string.set_wallpaper_success)).show()
                 }
                 return true
             }
@@ -154,14 +155,6 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
     }
 
     fun initialize () {
-        val binding = viewDataBinding as ActivityGirlsDetailBinding
-
-        // Set the LifecycleOwner to be able to observe LiveData objects
-        binding?.lifecycleOwner = this
-
-        // Bind ViewModel
-        binding?.viewmodel = localGirlsViewModel
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mWallpaperManager = WallpaperManager.getInstance(this);
@@ -199,7 +192,7 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
             //lifecycleScope使协程的生命周期随着activity的生命周期变化
             saveImage()
             mPbLoading.visibility = View.GONE
-            SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_picture_success)).show();
+            SnackbarUtil.ShortSnackbar(mVpGirls,getString(com.victor.lib.common.R.string.save_picture_success)).show()
         }
     }
 
@@ -227,10 +220,10 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
         localGirlsViewModel.isGankFavoreted(gankDetailList?.get(position)?._id!!).observe(this,
             androidx.lifecycle.Observer {
                 if (it) {
-                    mFabFavGirl.setImageResource(R.drawable.ic_favorite)
+                    mFabFavGirl.setImageResource(com.victor.lib.common.R.drawable.ic_favorite)
                     isFavoried = true
                 } else {
-                    mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
+                    mFabFavGirl.setImageResource(com.victor.lib.common.R.drawable.ic_unfavorite)
                     isFavoried = false
                 }
             })
@@ -248,7 +241,8 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
         super.onPermissionDeclined(permissionName)
         Loger.e(TAG, "onPermissionDeclined-Permission(s) " + Arrays.toString(permissionName) + " Declined")
         if (permissionName.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            SnackbarUtil.ShortSnackbar(mVpGirls,getString(R.string.save_pic_faild)).show();
+            SnackbarUtil.ShortSnackbar(mVpGirls,
+                getString(com.victor.lib.common.R.string.save_pic_faild)).show()
         }
     }
 
@@ -260,11 +254,11 @@ class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.O
             R.id.mFabFavGirl -> {
                 if (isFavoried) {
                     localGirlsViewModel.removeFavGank(gankDetailList?.get(position)!!)
-                    mFabFavGirl.setImageResource(R.drawable.ic_unfavorite)
+                    mFabFavGirl.setImageResource(com.victor.lib.common.R.drawable.ic_unfavorite)
                     isFavoried = false
                 } else {
                     localGirlsViewModel.addFavGank(gankDetailList?.get(position)!!)
-                    mFabFavGirl.setImageResource(R.drawable.ic_favorite)
+                    mFabFavGirl.setImageResource(com.victor.lib.common.R.drawable.ic_favorite)
                     isFavoried = true
                 }
             }

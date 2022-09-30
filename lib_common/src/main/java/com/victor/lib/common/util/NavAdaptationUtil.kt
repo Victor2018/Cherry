@@ -35,7 +35,6 @@ object NavAdaptationUtil {
                     contentView?.setPadding(0,0,0,navHeight)
                 }
             }
-
         })
     }
 

@@ -35,16 +35,22 @@
                 android:textColor="@color/color_333333"
                 android:text="Gradle 插件，做自动测试过程中的截屏。"/>
 
+            <ImageView
+                android:id="@+id/mIvPoster"
+                android:layout_width="@dimen/dp_168"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_height="@dimen/dp_220"/>
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/mTvTime"
+            android:layout_below="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear"
             android:text="代码家"
             android:textColor="@color/color_8D9193"
-            android:textSize="@dimen/dp_36" />
+            android:textSize="@dimen/dp_36"/>
 
         <ImageView
             android:id="@+id/mIvFavStatus"

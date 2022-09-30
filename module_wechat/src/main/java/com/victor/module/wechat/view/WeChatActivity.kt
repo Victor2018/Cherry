@@ -50,7 +50,8 @@ class WeChatActivity: BaseActivity() {
         currentFragment = toFragment
 
         val ft = supportFragmentManager.beginTransaction()
-        ft.setCustomAnimations(R.anim.anim_fragment_enter, R.anim.anim_fragment_exit)
+        ft.setCustomAnimations(com.victor.lib.common.R.anim.anim_fragment_enter,
+            com.victor.lib.common.R.anim.anim_fragment_exit)
         if (toFragment?.isAdded()!!) {
             ft.show(toFragment)
         } else {

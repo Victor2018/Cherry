@@ -11,6 +11,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.hok.lib.common.util.MainHandler
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
@@ -35,7 +36,7 @@ import kotlinx.android.synthetic.main.fragment_tv.*
  * -----------------------------------------------------------------
  */
 @Route(path = ARouterPath.TvFgt)
-class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.OnMainHandlerImpl,
+class TvFragment: BaseFragment(), AdapterView.OnItemClickListener, MainHandler.OnMainHandlerImpl,
     View.OnClickListener {
 
     private val tvViewModel: TvViewModel by viewModels {
@@ -95,7 +96,7 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
         // Bind ViewModel
         binding?.viewmodel = tvViewModel
 
-        tvAdapter = TvAdapter(activity!!,this)
+        tvAdapter = TvAdapter(requireContext(),this)
         mRvChannels.setHasFixedSize(true)
         mRvChannels.adapter = tvAdapter
 
@@ -149,7 +150,7 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
     fun fullScreen () {
         Loger.e(TAG,"fullScreen()......")
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        StatusBarUtil.hideStatusBar(activity!!)
+        StatusBarUtil.hideStatusBar(requireContext())
         val layoutParams = appbar.getLayoutParams() as CoordinatorLayout.LayoutParams
         layoutParams.height = CoordinatorLayout.LayoutParams.MATCH_PARENT
         layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
@@ -171,11 +172,11 @@ class TvFragment: BaseFragment(), AdapterView.OnItemClickListener,MainHandler.On
         if (ori == Configuration.ORIENTATION_LANDSCAPE) {
             //横屏
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT//强制为竖屏
-            StatusBarUtil.showStatusBar(activity!!)
+            StatusBarUtil.showStatusBar(requireContext())
 
             val layoutParams = appbar.getLayoutParams() as CoordinatorLayout.LayoutParams
             layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-            layoutParams.height = resources.getDimension(R.dimen.dp_456).toInt()
+            layoutParams.height = resources.getDimension(com.victor.screen.match.library.R.dimen.dp_456).toInt()
             appbar.layoutParams = layoutParams
 
             removePlayViewFormParent()

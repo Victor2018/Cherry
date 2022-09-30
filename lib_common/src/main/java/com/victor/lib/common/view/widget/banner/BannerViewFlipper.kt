@@ -220,7 +220,7 @@ class BannerViewFlipper: ViewFlipper {
         if (imageView == null) {
             imageView = KenBurnsView(context)
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP)
-            val padding = context.resources.getDimension(R.dimen.dp_4).toInt()
+            val padding = context.resources.getDimension(com.victor.screen.match.library.R.dimen.dp_4).toInt()
             imageView.setPadding(padding, padding, padding, padding)
             imageView.setOnClickListener(OnClickListener { v ->
                 if (onItemClickListener != null) {

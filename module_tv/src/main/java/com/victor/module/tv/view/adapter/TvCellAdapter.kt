@@ -51,7 +51,7 @@ class TvCellAdapter (context: Context, listener: AdapterView.OnItemClickListener
 
         if (TextUtils.isEmpty(data?.icon)) {
             ImageUtils.instance.loadImage(context,contentViewHolder.itemView.mIvTvLogo,
-                R.drawable.ic_baseline_live_tv_24dp)
+                com.victor.lib.common.R.drawable.ic_baseline_live_tv_24dp)
         } else {
             ImageUtils.instance.loadImage(context,contentViewHolder.itemView.mIvTvLogo,
                 data?.icon)

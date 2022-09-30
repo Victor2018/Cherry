@@ -1,5 +1,6 @@
-package com.victor.lib.common.util
+package com.hok.lib.coremodel.util
 
+import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
@@ -11,39 +12,42 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings
 import android.text.TextUtils
-import com.victor.lib.common.app.App
+import androidx.appcompat.app.AppCompatActivity
+import com.victor.lib.common.base.AppConfig
+import java.lang.reflect.Method
 import java.util.*
 
 /*
  * -----------------------------------------------------------------
  * Copyright (C) 2018-2028, by Victor, All rights reserved.
  * -----------------------------------------------------------------
- * File: AppUtil.java
+ * File: AppUtil
  * Author: Victor
- * Date: 2019/4/2 16:06
+ * Date: 2022/3/1 12:03
  * Description:
  * -----------------------------------------------------------------
  */
+
 object AppUtil {
     // 应用版本
     fun getAppVersionCode(context: Context): Int {
         val packageName = context.packageName
         try {
             return context.packageManager.getPackageInfo(
-                    packageName, 0).versionCode
+                packageName, 0).versionCode
         } catch (e: PackageManager.NameNotFoundException) {
-            throw RuntimeException("System fault!!!", e)
+            throw RuntimeException("System fault", e)
         }
 
     }
 
-    fun getAppVersionName(context: Context): String {
-        val packageName = context.packageName
+    fun getAppVersionName(context: Context?): String {
+        val packageName = context?.packageName ?: ""
         try {
-            return context.packageManager.getPackageInfo(
-                    packageName, 0).versionName
+            return context?.packageManager?.getPackageInfo(
+                packageName, 0)?.versionName ?: ""
         } catch (e: PackageManager.NameNotFoundException) {
-            throw RuntimeException("System fault!!!", e)
+            throw RuntimeException("System fault", e)
         }
 
     }
@@ -62,7 +66,7 @@ object AppUtil {
             appName = packageManager.getApplicationLabel(applicationInfo).toString()
             return appName
         } catch (e: PackageManager.NameNotFoundException) {
-            throw RuntimeException("System fault!!!", e)
+            throw RuntimeException("System fault", e)
         }
 
     }
@@ -94,12 +98,12 @@ object AppUtil {
      * 判断某一个Activity是否存在任务栈里面
      * @return
      */
-    fun isActivityInTask(cls: Class<*>): Boolean {
-        val intent = Intent(App.get(), cls)
-        val cmpName = intent.resolveActivity(App.get().getPackageManager())
+    fun isActivityInTask(context: Context,cls: Class<*>): Boolean {
+        val intent = Intent(context, cls)
+        val cmpName = intent.resolveActivity(context.getPackageManager())
         var flag = false
         if (cmpName != null) { // 说明系统中存在这个activity
-            val am = App.get().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             val taskInfoList = am.getRunningTasks(10)
             for (taskInfo in taskInfoList) {
                 if (taskInfo.baseActivity == cmpName) { // 说明它已经启动了
@@ -159,7 +163,12 @@ object AppUtil {
      * @return
      */
     fun launchAppWithAnim(ctx: Context, intent: Intent): Boolean {
-        return launchAppWithAnim(ctx, intent, android.R.anim.fade_in, android.R.anim.fade_out)
+        return launchAppWithAnim(
+            ctx,
+            intent,
+            R.anim.fade_in,
+            R.anim.fade_out
+        )
     }
 
     /**
@@ -272,7 +281,7 @@ object AppUtil {
         if (ctx == null || packageUri == null)
             throw NullPointerException("the parameter is null")
         val uninstallIntent = Intent(Intent.ACTION_DELETE, packageUri)
-        launchApp(ctx, uninstallIntent)
+        launchApp(ctx,uninstallIntent)
     }
 
     /**
@@ -308,7 +317,7 @@ object AppUtil {
         if (null != browserUri) {
             val browserIntent = Intent(Intent.ACTION_VIEW, browserUri)
             browserIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            launchApp(ctx, browserIntent)
+            launchApp(ctx,browserIntent)
         }
     }
 
@@ -384,8 +393,8 @@ object AppUtil {
      * @param packageName
      * @return
      */
-    fun getVersionCode(packageName: String): Int {
-        val packageManager = App.get().getPackageManager()
+    fun getVersionCode(context: Context,packageName: String): Int {
+        val packageManager = context.packageManager
         try {
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
             return packageInfo.versionCode
@@ -402,8 +411,8 @@ object AppUtil {
      * @param packageName
      * @return
      */
-    fun getVersionName(packageName: String): String {
-        val packageManager = App.get().getPackageManager()
+    fun getVersionName(context: Context,packageName: String): String {
+        val packageManager = context.packageManager
         try {
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
             return packageInfo.versionName
@@ -419,8 +428,8 @@ object AppUtil {
      *
      * @return
      */
-    fun getPackageName(): String {
-        return App.get().getPackageName()
+    fun getPackageName(context: Context): String {
+        return context.packageName
     }
 
     /**
@@ -429,8 +438,8 @@ object AppUtil {
      * @param packageName
      * @return
      */
-    fun isAppExist(packageName: String): Boolean {
-        val packageManager = App.get().getPackageManager()
+    fun isAppExist(context: Context,packageName: String): Boolean {
+        val packageManager = context.packageManager
         val applicationInfos = packageManager.getInstalledApplications(0)
         for (info in applicationInfos) {
             if (TextUtils.equals(info.packageName, packageName)) {
@@ -446,16 +455,16 @@ object AppUtil {
      *
      * @return
      */
-    fun inMainProcess(): Boolean {
-        val packageName = App.get().getPackageName()
-        val processName = getProcessName()
+    fun inMainProcess(context: Context): Boolean {
+        val packageName = context.packageName
+        val processName = getProcessName(context)
         return packageName == processName
     }
 
-    fun getProcessName(): String? {
+    fun getProcessName(context: Context): String? {
         var processName: String? = null
-        val am = App.get().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-                ?: return null
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            ?: return null
         while (true) {
             for (info in am.runningAppProcesses) {
                 if (info.pid == android.os.Process.myPid()) {
@@ -509,6 +518,20 @@ object AppUtil {
         return false
     }
 
+    fun <T> isForeground(context: Context?,cls: Class<T>?): Boolean {
+        if (context == null) return false
+        if (cls == null) return false
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val list = am.getRunningTasks(1)
+        if (list != null && list.size > 0) {
+            val cpn = list[0].topActivity
+            if (cls.javaClass.name == cpn?.className) {
+                return true
+            }
+        }
+        return false
+    }
+
     /**
      * 获取系统语言
      * @return
@@ -530,14 +553,47 @@ object AppUtil {
         return version
     }
 
-    fun scanForActivity(context: Context?): Activity? {
+    fun scanForActivity(context: Context?): AppCompatActivity? {
         if (context == null) return null
-        if (context is Activity) {
+        if (context is AppCompatActivity) {
             return context
         } else if (context is ContextWrapper) {
-            return scanForActivity(context.baseContext)
+            return scanForActivity(
+                context.baseContext
+            )
         }
         return null
     }
+
+    fun getAllActivitys(): ArrayList<Activity> {
+        val list: ArrayList<Activity> = ArrayList()
+        try {
+            val activityThread = Class.forName("android.app.ActivityThread")
+            val currentActivityThread: Method = activityThread.getDeclaredMethod("currentActivityThread")
+            currentActivityThread.setAccessible(true)
+            //获取主线程对象
+            val activityThreadObject: Any = currentActivityThread.invoke(null)
+            val mActivitiesField = activityThread.getDeclaredField("mActivities")
+            mActivitiesField.isAccessible = true
+            val mActivities = mActivitiesField[activityThreadObject] as Map<Any, Any>
+            for ((_, value) in mActivities) {
+                val activityClientRecordClass: Class<*> = value.javaClass
+                val activityField = activityClientRecordClass.getDeclaredField("activity")
+                activityField.isAccessible = true
+                val o = activityField[value]
+                list.add(o as Activity)
+            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return list
+    }
+
+    fun goAppDetailSetting(context: Context) {
+        var intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.parse("package:${AppUtil.getPackageName(context)}")
+        context.startActivity(intent)
+    }
+
 }
  

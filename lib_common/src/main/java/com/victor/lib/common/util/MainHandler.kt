@@ -1,9 +1,8 @@
-package com.victor.lib.common.util
+package com.hok.lib.common.util
 
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-
 
 /*
  * -----------------------------------------------------------------
@@ -11,10 +10,11 @@ import android.os.Message
  * -----------------------------------------------------------------
  * File: MainHandler
  * Author: Victor
- * Date: 2020/7/29 下午 02:29
+ * Date: 2022/3/1 18:28
  * Description: 主线程Handler
  * -----------------------------------------------------------------
  */
+
 class MainHandler: Handler(Looper.getMainLooper()) {
     companion object {
         private var sMainHandler: MainHandler? = null
@@ -29,10 +29,12 @@ class MainHandler: Handler(Looper.getMainLooper()) {
 
     private val mainHandlers: LinkedHashSet<OnMainHandlerImpl> = LinkedHashSet()
 
-    override fun handleMessage(message: Message?) {
-        super.handleMessage(message)
+
+    override fun handleMessage(msg: Message) {
+        super.handleMessage(msg)
+
         for (onMainHandlerImpl in mainHandlers) {
-            onMainHandlerImpl?.handleMainMessage(message)
+            onMainHandlerImpl.handleMainMessage(msg)
         }
     }
 
@@ -61,7 +63,7 @@ class MainHandler: Handler(Looper.getMainLooper()) {
      *
      * @param runnable
      */
-    fun runMainThread(runnable: Runnable?) {
+    fun runMainThread(runnable: Runnable) {
         get().post(runnable)
     }
 

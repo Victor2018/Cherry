@@ -13,13 +13,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.hok.lib.common.util.MainHandler
 import com.victor.cherry.adapter.HomeFragmentAdapter
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
+import com.victor.lib.coremodel.util.Loger
+import com.victor.module.home.view.HomeFragment
 import com.victor.module.mine.view.AboutActivity
+import com.victor.neuro.router.core.Dendrite
+import com.victor.neuro.router.core.plugin.IRoute
+import com.victor.neuro.router.core.plugin.PluginConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import org.victor.funny.util.ResUtils
 import java.util.*
@@ -55,7 +61,10 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         homeFragmentAdapter = HomeFragmentAdapter(supportFragmentManager)
 
-        val homeFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.HomeFgt).navigation() as BaseFragment
+        var homeCls = Dendrite.instance.getNavigation(PluginConfig.ROUTE_BASE_URI + "home/module/HomeFragment")
+        val homeFrag: BaseFragment = homeCls?.newInstance() as BaseFragment
+
+//        val homeFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.HomeFgt).navigation() as BaseFragment
         val girlsFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.GirlsFgt).navigation() as BaseFragment
         val weChatFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.WeChatFgt).navigation() as BaseFragment
         val tvFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.TvFgt).navigation() as BaseFragment
@@ -107,7 +116,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
     fun showNavBar () {
         val layoutParams = mNavBar.getLayoutParams() as LinearLayout.LayoutParams
         layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-        layoutParams.height = resources.getDimension(R.dimen.dp_100).toInt()
+        layoutParams.height = resources.getDimension(com.victor.screen.match.library.R.dimen.dp_100).toInt()
         mNavBar.layoutParams = layoutParams
 
 //        mNavBar.startAnimation(AnimUtil.bottomEnter())
@@ -117,7 +126,7 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         val layoutParams = mNavBar.getLayoutParams() as LinearLayout.LayoutParams
         layoutParams.width = CoordinatorLayout.LayoutParams.MATCH_PARENT
-        layoutParams.height = resources.getDimension(R.dimen.dp_0).toInt()
+        layoutParams.height = resources.getDimension(com.victor.screen.match.library.R.dimen.dp_0).toInt()
         mNavBar.layoutParams = layoutParams
     }
 
@@ -147,15 +156,15 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
             this,
             androidx.lifecycle.Observer{ isConnected ->
                 if (!isConnected) {
-                    mTvNetworkStatus.text = ResUtils.getStringRes(R.string.no_connectivity)
+                    mTvNetworkStatus.text = ResUtils.getStringRes(com.victor.lib.common.R.string.no_connectivity)
                     mTvNetworkStatus.apply {
                         show()
-                        setBackgroundColor(ResUtils.getColorRes(R.color.color_D32F2F))
+                        setBackgroundColor(ResUtils.getColorRes(com.victor.lib.common.R.color.color_D32F2F))
                     }
                 } else {
-                    mTvNetworkStatus.text = ResUtils.getStringRes(R.string.connectivity)
+                    mTvNetworkStatus.text = ResUtils.getStringRes(com.victor.lib.common.R.string.connectivity)
                     mTvNetworkStatus.apply {
-                        setBackgroundColor(ResUtils.getColorRes(R.color.color_43A047))
+                        setBackgroundColor(ResUtils.getColorRes(com.victor.lib.common.R.color.color_43A047))
 
                         animate()
                             .alpha(1f)

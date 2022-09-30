@@ -12,23 +12,6 @@
             android:label="@string/mine_module_mine"/>
         <activity android:name=".view.EditUserActivity"
             android:label="@string/mine_module_mine"/>
-        <!-- Scheme代理跳转 -->
-        <activity
-            android:name="com.victor.lib.common.view.activity.SchemaProxyActivity"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="cherry" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.victor.cherry.scheme" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
 </manifest>

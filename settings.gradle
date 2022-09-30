@@ -1,3 +1,24 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
+
+        flatDir {
+            dirs 'lib_opensource/libs'
+        }
+    }
+}
+rootProject.name = "Cherry"
 include ':module_tv'
 include ':module_wechat'
 include ':module_girls'

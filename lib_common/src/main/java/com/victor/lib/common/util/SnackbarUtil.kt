@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
-import com.victor.lib.common.R
 
 /*
  * -----------------------------------------------------------------
@@ -146,7 +145,7 @@ object SnackbarUtil {
         val view = snackbar.view
         if (view != null) {
             view.setBackgroundColor(backgroundColor)
-            (view.findViewById(R.id.snackbar_text) as TextView).setTextColor(messageColor)
+            (view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView).setTextColor(messageColor)
         }
     }
 

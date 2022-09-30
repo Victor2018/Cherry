@@ -19,7 +19,6 @@ def String mBuildCode = String.valueOf(mVersionProps['BUILD_CODE'])
 
 android {
     compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
 
     //这个是ARouter需要配置的kapt
     kapt {

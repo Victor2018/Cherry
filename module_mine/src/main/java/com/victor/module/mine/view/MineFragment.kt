@@ -149,10 +149,10 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     override fun onResume() {
         super.onResume()
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(activity)
-        val nickName = sharedPref.getString(ResUtils.getStringRes(R.string.nickname),
-            ResUtils.getStringRes(R.string.default_nickname))
-        val signature = sharedPref.getString(ResUtils.getStringRes(R.string.signature),
-            ResUtils.getStringRes(R.string.default_signature))
+        val nickName = sharedPref.getString(ResUtils.getStringRes(com.victor.lib.common.R.string.nickname),
+            ResUtils.getStringRes(com.victor.lib.common.R.string.default_nickname))
+        val signature = sharedPref.getString(ResUtils.getStringRes(com.victor.lib.common.R.string.signature),
+            ResUtils.getStringRes(com.victor.lib.common.R.string.default_signature))
 
         mTvNickName.text = nickName
         mTvSignature.text = signature
@@ -167,7 +167,8 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
             R.id.mTvClearCache -> {
                 CacheCleanUtils.clearAllCache(activity!!)
                 mTvClearCache.setText("0KB")
-                SnackbarUtil.ShortSnackbar(mTvClearCache,getString(R.string.cache_cleared)).show()
+                SnackbarUtil.ShortSnackbar(mTvClearCache,
+                    getString(com.victor.lib.common.R.string.cache_cleared)).show()
             }
         }
     }

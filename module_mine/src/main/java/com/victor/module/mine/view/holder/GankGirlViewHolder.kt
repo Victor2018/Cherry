@@ -42,7 +42,7 @@ class GankGirlViewHolder (view: View)
     fun bind(post: GankDetailInfo?) {
         this.post = post!!
         title.text = post?.title ?: "loading"
-        subtitle.text = itemView.context.resources.getString(R.string.post_subtitle,
+        subtitle.text = itemView.context.resources.getString(com.victor.lib.common.R.string.post_subtitle,
             post?.author ?: "unknown")
         score.text = "${post?.views ?: 0}"
         if (post?.url?.startsWith("http") == true) {

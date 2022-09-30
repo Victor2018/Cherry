@@ -17,50 +17,48 @@
         app:minParticleRadius="3"
         app:maxParticleRadius="10"/>
 
-    <LinearLayout
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/mVpHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mNavBar"
+        android:overScrollMode="never"/>
 
-        <TextView
-            android:id="@+id/mTvNetworkStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_D32F2F"
-            android:gravity="center"
-            android:fontFamily="@font/zuo_an_lian_ren"
-            android:padding="@dimen/dp_8"
-            android:textSize="@dimen/dp_28"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:text="@string/no_connectivity" />
+    <TextView
+        android:id="@+id/mTvNetworkStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/mVpHome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/color_D32F2F"
+        android:gravity="center"
+        android:fontFamily="@font/zuo_an_lian_ren"
+        android:padding="@dimen/dp_8"
+        android:textSize="@dimen/dp_28"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="@string/no_connectivity" />
 
-        <com.victor.clips.ui.widget.NoTouchViewPager
-            android:id="@+id/mVpHome"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
-            android:id="@+id/mNavBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_100"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:alpha="0.7"
-            app:rbb_activeItemType="text"
-            app:rbb_tabs="@xml/nav_bottom_bar"
-            app:rbb_backgroundColor="@color/white"
-            app:rbb_textColor="@color/colorPrimaryDark"
-            app:rbb_iconColor="@color/colorPrimaryDark"
-            app:rbb_indicatorColor="@color/colorPrimaryDark"
-            app:rbb_indicatorHeight="@dimen/dp_5" />
-    </LinearLayout>
-
+    <com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
+        android:id="@+id/mNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0.7"
+        app:rbb_activeItemType="text"
+        app:rbb_tabs="@xml/nav_bottom_bar"
+        app:rbb_backgroundColor="@color/white"
+        app:rbb_textColor="@color/colorPrimaryDark"
+        app:rbb_iconColor="@color/colorPrimaryDark"
+        app:rbb_indicatorColor="@color/colorPrimaryDark"
+        app:rbb_indicatorHeight="@dimen/dp_5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
