@@ -1,8 +1,11 @@
 package com.victor.lib.common.util
 
+import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.coremodel.data.GankDetailInfo
+import com.victor.neuro.router.core.NeuroRouter
+import com.victor.neuro.router.core.plugin.PluginConfig
 
 /*
  * -----------------------------------------------------------------
@@ -54,8 +57,9 @@ object NavigationUtils {
     /**
      * 去往搜索干货页面
      */
-    fun goSearchGankActivity() {
-        ARouter.getInstance().build(ARouterPath.SearchGankAct).navigation()
+    fun goSearchGankActivity(context: Context) {
+//        ARouter.getInstance().build(ARouterPath.SearchGankAct).navigation()
+        NeuroRouter.instance.navigation(PluginConfig.ROUTE_BASE_URI + ARouterPath.SearchGankAct,context)
     }
 
     /**

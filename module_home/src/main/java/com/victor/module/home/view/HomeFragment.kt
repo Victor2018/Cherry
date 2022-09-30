@@ -103,13 +103,13 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
         subscribeUi()
 
         if (mTsDescription.childCount < 2) {
-            mTsDescription.setFactory(DescriptionViewSwitcherFactory(context!!))
+            mTsDescription.setFactory(DescriptionViewSwitcherFactory(requireActivity()))
         }
 
-        mTsDescription.setInAnimation(context!!, android.R.anim.fade_in)
-        mTsDescription.setOutAnimation(context!!, android.R.anim.fade_out)
+        mTsDescription.setInAnimation(requireActivity(), android.R.anim.fade_in)
+        mTsDescription.setOutAnimation(requireActivity(), android.R.anim.fade_out)
 
-        homeAdapter = HomeAdapter(context!!,this)
+        homeAdapter = HomeAdapter(requireActivity(),this)
         mRvGank.setHasFixedSize(true)
         mRvGank.adapter = homeAdapter
         mRvGank.setLoadMoreListener(this)
@@ -124,7 +124,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
 
         mSrlRefresh.setOnRefreshListener(this)
 
-        SharePreferencesUtil.putString(activity!!,Constant.CATEGORY_TYPE_KEY,"")
+        SharePreferencesUtil.putString(requireActivity(),Constant.CATEGORY_TYPE_KEY,"")
     }
 
     fun initData () {
@@ -177,14 +177,14 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (id) {
             BannerViewFlipper.ON_BANNER_ITEM_CLICK -> {
-                WebActivity.intentStart(activity!!,mBsvBanner?.messages?.get(position)?.title!!,
+                WebActivity.intentStart(requireActivity(),mBsvBanner?.messages?.get(position)?.title!!,
                     mBsvBanner?.messages?.get(position)?.url!!)
             }
             BannerViewFlipper.ON_BANNER_ITEM_SELECT -> {
                 mTsDescription.setText(mBsvBanner?.messages?.get(position)?.title)
             }
             else -> {
-                WebActivity.intentStart(activity!!,homeAdapter?.getItem(position)?.title!!,
+                WebActivity.intentStart(requireActivity(),homeAdapter?.getItem(position)?.title!!,
                     homeAdapter?.getItem(position)?.link!!)
             }
         }
@@ -193,7 +193,7 @@ class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.action_search -> {
-                NavigationUtils.goSearchGankActivity()
+                NavigationUtils.goSearchGankActivity(requireContext())
                 return true
             }
             R.id.action_share -> {

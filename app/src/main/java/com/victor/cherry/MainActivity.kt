@@ -2,17 +2,13 @@ package com.victor.cherry
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityOptionsCompat
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hok.lib.common.util.MainHandler
 import com.victor.cherry.adapter.HomeFragmentAdapter
 import com.victor.lib.common.base.ARouterPath
@@ -20,12 +16,7 @@ import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
 import com.victor.lib.common.view.widget.bottombar.ReadableBottomBar
-import com.victor.lib.coremodel.util.Loger
-import com.victor.module.home.view.HomeFragment
-import com.victor.module.mine.view.AboutActivity
-import com.victor.neuro.router.core.Dendrite
-import com.victor.neuro.router.core.plugin.IRoute
-import com.victor.neuro.router.core.plugin.PluginConfig
+import com.victor.neuro.router.core.NeuroRouter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.victor.funny.util.ResUtils
 import java.util.*
@@ -61,14 +52,12 @@ class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.Item
 
         homeFragmentAdapter = HomeFragmentAdapter(supportFragmentManager)
 
-        var homeCls = Dendrite.instance.getNavigation(PluginConfig.ROUTE_BASE_URI + "home/module/HomeFragment")
-        val homeFrag: BaseFragment = homeCls?.newInstance() as BaseFragment
+        var homeFrag = NeuroRouter.instance.getNavigation(ARouterPath.HomeFgt) as BaseFragment
+        var girlsFrag = NeuroRouter.instance.getNavigation(ARouterPath.GirlsFgt) as BaseFragment
+        var weChatFrag = NeuroRouter.instance.getNavigation(ARouterPath.WeChatFgt) as BaseFragment
+        var tvFrag = NeuroRouter.instance.getNavigation(ARouterPath.TvFgt) as BaseFragment
+        var mineFrag = NeuroRouter.instance.getNavigation(ARouterPath.MineFgt) as BaseFragment
 
-//        val homeFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.HomeFgt).navigation() as BaseFragment
-        val girlsFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.GirlsFgt).navigation() as BaseFragment
-        val weChatFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.WeChatFgt).navigation() as BaseFragment
-        val tvFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.TvFgt).navigation() as BaseFragment
-        val mineFrag: BaseFragment = ARouter.getInstance().build(ARouterPath.MineFgt).navigation() as BaseFragment
         fragmentList.add(homeFrag)
         fragmentList.add(girlsFrag)
         fragmentList.add(weChatFrag)

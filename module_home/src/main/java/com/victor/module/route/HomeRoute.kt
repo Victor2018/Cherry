@@ -2,6 +2,7 @@ package com.victor.module.route
 
 import com.victor.lib.common.base.ARouterPath
 import com.victor.module.home.view.HomeFragment
+import com.victor.module.home.view.SearchGankActivity
 import com.victor.neuro.router.core.NeuroRouter
 import com.victor.neuro.router.core.plugin.IRoute
 
@@ -18,7 +19,7 @@ import com.victor.neuro.router.core.plugin.IRoute
 
 class HomeRoute: IRoute {
     override fun register() {
-//        NeuroRouter.instance.registerRoute(ARouterPath.HomeFgt, HomeFragment::class.java)
-        NeuroRouter.instance.registerRoute("home/module/HomeFragment", HomeFragment::class.java)
+        NeuroRouter.instance.registerRoute(ARouterPath.HomeFgt, HomeFragment::class.java)
+        NeuroRouter.instance.registerRoute(ARouterPath.SearchGankAct, SearchGankActivity::class.java)
     }
 }
