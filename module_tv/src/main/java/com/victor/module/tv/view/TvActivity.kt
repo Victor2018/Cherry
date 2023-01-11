@@ -3,8 +3,6 @@ package com.victor.module.tv.view
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.module.tv.R
 import kotlinx.android.synthetic.main.activity_tv.*
@@ -19,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_tv.*
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.TvAct)
 class TvActivity: BaseActivity() {
     var currentFragment: Fragment? = null
     override fun getLayoutResource(): Int {

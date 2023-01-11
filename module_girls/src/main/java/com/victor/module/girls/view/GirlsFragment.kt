@@ -10,10 +10,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.app.App
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.util.HttpUtil
@@ -35,7 +33,6 @@ import org.victor.funny.util.ResUtils
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.GirlsFgt)
 class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMenuItemClickListener,
     View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
 
@@ -153,7 +150,7 @@ class GirlsFragment: BaseFragment(),AdapterView.OnItemClickListener,Toolbar.OnMe
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        GirlsDetailActivity.intentStart(activity!! as AppCompatActivity, position,
+        GirlsDetailActivity.intentStart(activity as AppCompatActivity, position,
         view?.findViewById(R.id.iv_img),
             ResUtils.getStringRes(com.victor.lib.common.R.string.transition_girl_img))
     }

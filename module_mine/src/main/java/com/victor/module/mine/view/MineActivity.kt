@@ -3,8 +3,6 @@ package com.victor.module.mine.view
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.module.mine.R
 import kotlinx.android.synthetic.main.activity_mine.*
@@ -19,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_mine.*
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.MineAct)
 class MineActivity: BaseActivity() {
     var currentFragment: Fragment? = null
 

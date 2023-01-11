@@ -10,9 +10,7 @@ import android.widget.AdapterView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.hok.lib.common.util.MainHandler
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.module.DataObservable
 import com.victor.lib.common.util.*
@@ -35,7 +33,6 @@ import kotlinx.android.synthetic.main.fragment_tv.*
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.TvFgt)
 class TvFragment: BaseFragment(), AdapterView.OnItemClickListener, MainHandler.OnMainHandlerImpl,
     View.OnClickListener {
 

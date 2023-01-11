@@ -4,21 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
-import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.victor.lib.common.app.App
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
-import com.victor.lib.coremodel.data.HttpStatus
 import com.victor.lib.coremodel.util.HttpUtil
-import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.module.home.R
-import com.victor.module.home.databinding.ActivityGankCategoryBinding
 import com.victor.module.home.view.adapter.GankCategoryAdapter
 import kotlinx.android.synthetic.main.activity_gank_category.*
 import org.victor.funny.util.ResUtils
@@ -33,7 +26,6 @@ import org.victor.funny.util.ResUtils
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.GankCategoryAct)
 class GankCategoryActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener {
 
     var gankCategoryAdapter: GankCategoryAdapter? = null

@@ -14,8 +14,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.JsonUtils
 import com.victor.lib.coremodel.util.Loger
@@ -46,7 +44,6 @@ import java.util.ArrayList
  * Description:
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.SearchGankAct)
 class SearchGankActivity: BaseActivity(),SearchView.OnQueryTextListener,View.OnClickListener,
     AdapterView.OnItemClickListener, LMRecyclerView.OnLoadMoreListener,
     FilterListener<HotKeyInfo> {

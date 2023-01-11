@@ -3,19 +3,13 @@ package com.victor.module.home.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.PagingData
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.NavigationUtils
-import com.victor.lib.coremodel.data.GankDetailInfo
-import com.victor.lib.coremodel.util.InjectorUtils
 import com.victor.module.home.R
 import com.victor.module.home.view.adapter.GankAdapter
 import com.victor.module.home.view.adapter.GankLoadStateAdapter
@@ -33,7 +27,6 @@ import kotlinx.coroutines.flow.collectLatest
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.GankAct)
 class GankActivity: BaseActivity() {
 
     companion object {

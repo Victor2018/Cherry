@@ -18,6 +18,7 @@ dependencies {
     api deps.basic.material
     api deps.basic.recyclerview
     api deps.basic.cardview
+    api deps.basic.swiperefreshlayout
 
     testApi deps.basic.junit
 

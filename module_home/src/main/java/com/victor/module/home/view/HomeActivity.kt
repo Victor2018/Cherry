@@ -3,8 +3,6 @@ package com.victor.module.home.view
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.module.home.R
 import kotlinx.android.synthetic.main.activity_gank.*
@@ -19,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_gank.*
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.HomeAct)
 class HomeActivity: BaseActivity() {
     var currentFragment: Fragment? = null
 

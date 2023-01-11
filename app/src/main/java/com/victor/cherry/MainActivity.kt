@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.hok.lib.common.util.MainHandler
 import com.victor.cherry.adapter.HomeFragmentAdapter
 import com.victor.lib.common.base.ARouterPath
@@ -21,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.victor.funny.util.ResUtils
 import java.util.*
 
-@Route(path = ARouterPath.MainAct)
 class MainActivity : BaseActivity(),View.OnClickListener, ReadableBottomBar.ItemSelectListener {
 
     companion object {

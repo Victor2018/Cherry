@@ -8,9 +8,7 @@ import android.os.Message
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hok.lib.common.util.*
-import com.victor.lib.common.util.NavAdaptationUtil
 import com.victor.lib.common.util.StatusBarUtil
 import com.victor.lib.coremodel.util.Loger
 import permission.victor.com.library.OnPermissionCallback
@@ -48,7 +46,6 @@ abstract class BaseActivity: AppCompatActivity(), OnPermissionCallback,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ARouter.getInstance().inject(this)
 
         setContentView(getLayoutResource())
         initializeSuper()

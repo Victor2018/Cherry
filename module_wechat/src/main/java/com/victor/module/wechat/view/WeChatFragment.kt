@@ -10,10 +10,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
 import com.victor.lib.common.app.App
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.Constant
 import com.victor.lib.common.util.NavigationUtils
@@ -23,7 +21,6 @@ import com.victor.lib.coremodel.util.HttpUtil
 import com.victor.lib.coremodel.viewmodel.WeChatViewModel
 import com.victor.lib.coremodel.viewmodel.factory.WechatViewModelFactory
 import com.victor.module.wechat.R
-import com.victor.module.wechat.databinding.FragmentWechatBinding
 import com.victor.module.wechat.view.adapter.WeChatAdapter
 import kotlinx.android.synthetic.main.fragment_wechat.*
 import org.victor.funny.util.ResUtils
@@ -38,7 +35,6 @@ import org.victor.funny.util.ResUtils
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.WeChatFgt)
 class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.OnMenuItemClickListener,
     AppBarLayout.OnOffsetChangedListener, SwipeRefreshLayout.OnRefreshListener {
 //    private val viewmodel: WeChatViewModel by viewModels {
@@ -102,7 +98,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
 
         mSrlRefresh.setOnRefreshListener(this)
 
-        weChatAdapter = WeChatAdapter(context!!,this)
+        weChatAdapter = WeChatAdapter(requireContext(),this)
         mRvWechat.setHasFixedSize(true)
         mRvWechat.adapter = weChatAdapter
     }
@@ -135,7 +131,7 @@ class WeChatFragment: BaseFragment(), AdapterView.OnItemClickListener, Toolbar.O
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        NavigationUtils.goArticleActivity(weChatAdapter?.getItem(position)?.name!!,
+        NavigationUtils.goArticleActivity(requireContext(),weChatAdapter?.getItem(position)?.name!!,
             weChatAdapter?.getItem(position)?.id!!)
     }
 

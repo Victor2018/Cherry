@@ -17,9 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.hok.lib.coremodel.util.AppUtil
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.common.util.*
 import com.victor.lib.coremodel.data.GankDetailInfo
@@ -47,7 +45,6 @@ import kotlin.collections.ArrayList
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.GirlsDetailAct)
 class GirlsDetailActivity: BaseActivity(),AdapterView.OnItemClickListener,View.OnClickListener,
     ViewPager.OnPageChangeListener{
     var girlDetailAdapter: GirlDetailAdapter? = null

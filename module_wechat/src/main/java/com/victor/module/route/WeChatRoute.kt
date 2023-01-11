@@ -1,6 +1,7 @@
 package com.victor.module.route
 
 import com.victor.lib.common.base.ARouterPath
+import com.victor.module.wechat.view.ArticleActivity
 import com.victor.module.wechat.view.WeChatFragment
 import com.victor.neuro.router.core.NeuroRouter
 import com.victor.neuro.router.core.plugin.IRoute
@@ -19,5 +20,6 @@ import com.victor.neuro.router.core.plugin.IRoute
 class WeChatRoute : IRoute {
     override fun register() {
         NeuroRouter.instance.registerRoute(ARouterPath.WeChatFgt, WeChatFragment::class.java)
+        NeuroRouter.instance.registerRoute(ARouterPath.ArticleAct, ArticleActivity::class.java)
     }
 }

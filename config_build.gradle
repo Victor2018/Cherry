@@ -121,10 +121,6 @@ def getProperty() {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    //Arouter
-    implementation deps.arouter.runtime
-    kapt deps.arouter.compiler
-
     //room
     kapt deps.room.compiler
     implementation deps.room.runtime

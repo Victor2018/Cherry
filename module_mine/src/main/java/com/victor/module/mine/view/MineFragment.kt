@@ -10,11 +10,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.CacheCleanUtils
-import com.victor.lib.common.util.NavigationUtils
 import com.victor.lib.common.util.SnackbarUtil
 import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.lib.coremodel.util.InjectorUtils
@@ -37,7 +34,6 @@ import org.victor.funny.util.ResUtils
  * Description:
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.MineFgt)
 class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClickListener,
     AdapterView.OnItemClickListener {
     var fontStyle: Typeface? = null
@@ -83,7 +79,7 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     fun initialize () {
         localGirlsViewModel = ViewModelProvider(this,
             LocalGirlsViewModelFactory(
-                InjectorUtils.getLocalGirlsRepository(context!!), this
+                InjectorUtils.getLocalGirlsRepository(requireContext()), this
             )
         )
             .get(LocalGirlsViewModel::class.java)
@@ -120,7 +116,7 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
         })
         mRvFavGirls.layoutManager = gridLayoutManager
 
-        favGirlsAdapter = FavGirlsAdapter(activity!!,this)
+        favGirlsAdapter = FavGirlsAdapter(requireContext(),this)
         favGirlsAdapter?.setHeaderVisible(false)
         favGirlsAdapter?.setFooterVisible(false)
         mRvFavGirls.setHasFixedSize(true)
@@ -135,10 +131,10 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
             favGirlsAdapter?.notifyDataSetChanged()
         })
 
-        mTvVersion.text = String.format("v%s", AppUtil.getAppVersionName(activity!!))
+        mTvVersion.text = String.format("v%s", AppUtil.getAppVersionName(requireContext()))
 
         try {
-            var text: String? = CacheCleanUtils.getTotalCacheSize(activity!!)
+            var text: String? = CacheCleanUtils.getTotalCacheSize(requireContext())
             mTvClearCache.setText(text)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -165,7 +161,7 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
                 toGirlsDetail(0)
             }
             R.id.mTvClearCache -> {
-                CacheCleanUtils.clearAllCache(activity!!)
+                CacheCleanUtils.clearAllCache(requireContext())
                 mTvClearCache.setText("0KB")
                 SnackbarUtil.ShortSnackbar(mTvClearCache,
                     getString(com.victor.lib.common.R.string.cache_cleared)).show()
@@ -176,11 +172,11 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.action_edit -> {
-                EditUserActivity.intentStart(activity!! as AppCompatActivity)
+                EditUserActivity.intentStart(activity as AppCompatActivity)
                 return true
             }
             R.id.action_setting -> {
-                SettingActivity.intentStart(activity!! as AppCompatActivity)
+                SettingActivity.intentStart(activity as AppCompatActivity)
                 return true
             }
         }
@@ -195,8 +191,6 @@ class MineFragment: BaseFragment(),View.OnClickListener, Toolbar.OnMenuItemClick
         var datas = ArrayList<GankDetailInfo>()
 
         favGirlsAdapter?.getDatas()?.map {datas.add(it.plant) }
-
-        NavigationUtils.goGirlsDetailActivity(position, datas)
     }
 
 }

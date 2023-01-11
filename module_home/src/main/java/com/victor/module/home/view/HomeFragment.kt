@@ -1,7 +1,6 @@
 package com.victor.module.home.view
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
@@ -9,15 +8,12 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.appbar.AppBarLayout
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseFragment
 import com.victor.lib.common.util.*
 import com.victor.lib.common.view.activity.WebActivity
@@ -44,8 +40,6 @@ import org.victor.funny.util.ToastUtils
  * Description: 
  * -----------------------------------------------------------------
  */
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-@Route(path = ARouterPath.HomeFgt)
 class HomeFragment: BaseFragment(),AdapterView.OnItemClickListener,
     Toolbar.OnMenuItemClickListener,View.OnClickListener, LMRecyclerView.OnLoadMoreListener,
     AppBarLayout.OnOffsetChangedListener,SwipeRefreshLayout.OnRefreshListener {

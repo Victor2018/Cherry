@@ -1,11 +1,9 @@
 package com.victor.lib.common.util
 
 import android.content.Context
-import com.alibaba.android.arouter.launcher.ARouter
 import com.victor.lib.common.base.ARouterPath
-import com.victor.lib.coremodel.data.GankDetailInfo
 import com.victor.neuro.router.core.NeuroRouter
-import com.victor.neuro.router.core.plugin.PluginConfig
+import org.json.JSONObject
 
 /*
  * -----------------------------------------------------------------
@@ -25,57 +23,22 @@ object NavigationUtils {
     val ID_KEY = "ID_KEY"
 
     /**
-     * 去往首页
-     */
-    fun goHomeActivity() {
-        ARouter.getInstance().build(ARouterPath.HomeAct).navigation()
-    }
-    /**
-     * 去往个人页面
-     */
-    fun goMineActivity() {
-        ARouter.getInstance().build(ARouterPath.MineAct).navigation()
-    }
-    /**
      * 去往干货详情页面
      */
-    fun goGankActivity(title: String,type: String) {
-        ARouter.getInstance().build(ARouterPath.GankAct)
-            .withString(TITLE_KEY,title)
-            .withString(TYPE_KEY,type)
-            .navigation()
-    }
-    /**
-     * 去往干货详情页面
-     */
-    fun goArticleActivity(title: String,id: Int) {
-        ARouter.getInstance().build(ARouterPath.ArticleAct)
-            .withString(TITLE_KEY,title)
-            .withInt(ID_KEY,id)
-            .navigation()
+    fun goArticleActivity(context: Context,title: String,id: Int) {
+        var json = JSONObject()
+        json.put(TITLE_KEY,title)
+        json.put(ID_KEY,id)
+
+        var data = json.toString()
+
+        NeuroRouter.instance.navigation(ARouterPath.ArticleAct,data,context)
     }
     /**
      * 去往搜索干货页面
      */
     fun goSearchGankActivity(context: Context) {
-//        ARouter.getInstance().build(ARouterPath.SearchGankAct).navigation()
-        NeuroRouter.instance.navigation(PluginConfig.ROUTE_BASE_URI + ARouterPath.SearchGankAct,context)
+        NeuroRouter.instance.navigation(ARouterPath.SearchGankAct,context)
     }
 
-    /**
-     * 去往妹子详情页面
-     */
-    fun goGirlsDetailActivity(position: Int,datas: ArrayList<GankDetailInfo>) {
-        ARouter.getInstance().build(ARouterPath.GirlsDetailAct)
-            .withInt(POSITION_KEY,position)
-            .withSerializable(GANK_DATA_KEY,datas)
-            .navigation()
-    }
-    /**
-     * 去往妹子详情页面
-     */
-    fun goGirlsDetailActivity() {
-        ARouter.getInstance().build(ARouterPath.GirlsDetailAct)
-            .navigation()
-    }
 }

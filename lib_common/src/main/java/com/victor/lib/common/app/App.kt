@@ -1,8 +1,6 @@
 package com.victor.lib.common.app
 
-import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.bugly.crashreport.CrashReport
-import com.victor.lib.common.base.AppConfig
 import com.victor.lib.common.base.BaseApplication
 import com.victor.lib.coremodel.util.WebConfig
 import com.victor.neuro.router.core.NeuroRouter

@@ -9,8 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.victor.lib.common.base.ARouterPath
 import com.victor.lib.common.base.BaseActivity
 import com.victor.lib.coremodel.util.Loger
 import com.victor.lib.common.util.NavigationUtils
@@ -20,9 +18,11 @@ import com.victor.lib.coremodel.viewmodel.ArticleViewModel
 import com.victor.module.wechat.R
 import com.victor.module.wechat.view.adapter.ArticleAdapter
 import com.victor.module.wechat.view.adapter.ArticleLoadStateAdapter
+import com.victor.neuro.router.core.util.Constant
 import kotlinx.android.synthetic.main.activity_article.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
+import org.json.JSONObject
 
 /*
  * -----------------------------------------------------------------
@@ -34,7 +34,6 @@ import kotlinx.coroutines.flow.collectLatest
  * Description: 
  * -----------------------------------------------------------------
  */
-@Route(path = ARouterPath.ArticleAct)
 class ArticleActivity: BaseActivity() {
     companion object {
         fun  intentStart (activity: AppCompatActivity, type: String) {
@@ -77,9 +76,11 @@ class ArticleActivity: BaseActivity() {
     }
 
     fun initData (intent: Intent?) {
-        title = intent?.getStringExtra(NavigationUtils.TITLE_KEY)
-        id = intent?.getIntExtra(NavigationUtils.ID_KEY,0)!!;
-        Loger.e(TAG,"id = " + id)
+        var data = intent?.getStringExtra(Constant.SCHEMA_QUERIES_KEY)
+        var json = JSONObject(data)
+        title = json.optString(NavigationUtils.TITLE_KEY)
+        id = json.optInt(NavigationUtils.ID_KEY,0)!!
+        Loger.e(TAG,"id = $id")
     }
 
     private fun initAdapter() {
